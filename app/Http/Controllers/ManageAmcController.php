@@ -58,7 +58,7 @@ class ManageAmcController extends Controller
             $products += [$data->id => $data->product_code.','.$data->product_name.','.$data->brand.','.$data->model];
         }
 
-        $day = [];
+        $day = ['Auto' => 'Auto'];
         for($i=1;$i<=31;$i++)
         {
             $day +=[$i => $i];
@@ -103,6 +103,8 @@ class ManageAmcController extends Controller
             'note' => $request->note,
             'contract_amount' => $request->total_amount,
             'tax' => $request->tax_id,
+            'service_day' => $request->service_day,
+            'no_of_service' => $request->no_of_service
         ];
         $manageAmcCreate = ManageAmc::create($manageAmc);
         $amc_id = $manageAmcCreate->id;
@@ -193,7 +195,41 @@ class ManageAmcController extends Controller
     public function edit($id)
     {
         $manageAmc = ManageAmc::find($id);
+        $admin_id = admin_id();
+        if($manageAmc->admin_id == $admin_id)
+        {
+            $party = ManageParty::select('id','party_name','city')->where('admin_id',$admin_id)->get();
+            $tax = ManageTax::where('admin_id',$admin_id)->get()->pluck('profile_name','id')->toArray();
+            $product = ContractType::where('contract_types.admin_id',$admin_id)
+                    ->join('brands','contract_types.brand','brands.id')
+                    ->join('contract_models','contract_types.model','contract_models.id')
+                    ->select('contract_types.id','contract_types.product_code as product_code','contract_types.product_name as product_name','brands.name as brand','contract_models.name as model')
+                    ->get();
 
+            $partyName = [];
+            foreach($party as $data)
+            {
+                $partyName += [$data->id => $data->party_name.','.$data->city];
+            }
+
+            $products = [];
+            foreach($product as $data)
+            {
+                $products += [$data->id => $data->product_code.','.$data->product_name.','.$data->brand.','.$data->model];
+            }
+
+            $day = ['Auto' => 'Auto'];
+            for($i=1;$i<=31;$i++)
+            {
+                $day +=[$i => $i];
+            }
+
+            return view('manage_amc.edit',compact('manageAmc','partyName','tax','products','day'));
+        }
+        else
+        {
+            return redirect()->back()->with('success','Somthing wrong');
+        }
     }
 
     /**

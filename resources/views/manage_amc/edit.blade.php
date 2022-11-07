@@ -25,7 +25,7 @@ th {
 @if (count($errors) > 0)
 
 @endif
-{!! Form::open(array('route' => 'manage_amc.store','method'=>'POST','enctype'=>'multipart/form-data')) !!}
+{!! Form::model($manageAmc, ['method' => 'PATCH','route' => ['manage_amc.update', $manageAmc->id]]) !!}
 @csrf
 <div class="container">
     <div id="accordion">
@@ -126,7 +126,7 @@ th {
                     <div class="row ">
                         <div class="col-xs-3 col-sm-3 col-md-3">
                             <strong class="lab_space">Service Day</strong>
-                            {!! Form::select('service_day', $day , null, ['class' => 'form-select','placeholder' =>'Auto', 'id'=>'service_day' ]) !!}
+                            {!! Form::select('service_day', $day , null, ['class' => 'form-select', 'id'=>'service_day' ]) !!}
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-4">
                             <strong class="lab_space">No Of Service <em class="text-danger">*</em></strong>

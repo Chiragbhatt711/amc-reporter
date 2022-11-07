@@ -126,7 +126,7 @@ th {
                     <div class="row ">
                         <div class="col-xs-3 col-sm-3 col-md-3">
                             <strong class="lab_space">Service Day</strong>
-                            {!! Form::select('service_day', $day , null, ['class' => 'form-select','placeholder' =>'Auto', 'id'=>'service_day' ]) !!}
+                            {!! Form::select('service_day', $day , null, ['class' => 'form-select','id'=>'service_day' ]) !!}
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-4">
                             <strong class="lab_space">No Of Service <em class="text-danger">*</em></strong>

@@ -174,7 +174,7 @@ function setService()
         $('#serviceE').html('Please enter no of service');
         return false;
     }
-    if(serviceDay == '')
+    if(serviceDay == '' || serviceDay == 'Auto')
     {
         if(noOFService > 363)
         {

@@ -29,5 +29,7 @@ class ManageAmc extends Model
         'extf8',
         'extf9',
         'extf10',
+        'service_day',
+        'no_of_service',
     ];
 }
