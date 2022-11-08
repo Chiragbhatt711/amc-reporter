@@ -31,5 +31,6 @@ class ManageAmc extends Model
         'extf10',
         'service_day',
         'no_of_service',
+        'total_amount',
     ];
 }

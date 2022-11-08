@@ -49,14 +49,14 @@ th {
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3">
                 <strong class="lab_space">Start Date<em class="text-danger">*</em></strong>
-                {!! Form::text('start_date', date('Y-m-d'), array('placeholder' => 'Start date','class' => 'form-control datepicker')) !!}
+                {!! Form::text('start_date', null, array('placeholder' => 'Start date','class' => 'form-control datepicker')) !!}
                 @error('start_date')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3">
                 <strong class="lab_space">End Date<em class="text-danger">*</em></strong>
-                {!! Form::text('end_date', date('Y-m-d', strtotime(now()." +364 day")), array('placeholder' => 'End date','class' => 'form-control datepicker')) !!}
+                {!! Form::text('end_date', null, array('placeholder' => 'End date','class' => 'form-control datepicker')) !!}
                 @error('end_date')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -114,6 +114,39 @@ th {
                         </tr>
                     </thead>
                     <tbody id="product_body">
+                        @php
+                            $product = getAmcProductDetails($manageAmc->id);
+                        @endphp
+                        @if(isset($product) && $product)
+                            @foreach ($product as $data)
+                            @php $uniqId = uniqid(); @endphp
+                            <tr id="row_{{ $uniqId }}">
+                                <td>{{ $data->product_code }}
+                                    <input type="hidden" value="{{ $data->product_code }}" name="product_code_{{ $uniqId }}" id="product_code_{{ $uniqId }}">
+                                </td>
+                                <td> {{ $data->product_name }}
+                                    <input type="hidden" value="{{ $data->id }}" name="product_id_{{$uniqId}}" id="product_id_{{$uniqId}}">
+                                </td>
+                                <td>{{$data->model}}
+                                    <input type="hidden" value="{{$data->model_id}}" name="model_id_{{$uniqId}}" id="model_id_{{$uniqId}}">
+                                </td>
+                                <td>{{$data->brand}}
+                                    <input type="hidden" value="{{$data->brand_id}}" name="brand_id_{{$uniqId}}" id="brand_id_{{$uniqId}}">
+                                </td>
+                                <td>{{$data->qty}}
+                                    <input type="hidden" value="{{$data->qty}}" name="qty_{{$uniqId}}" id="qty_{{$uniqId}}">
+                                </td>
+                                <td>{{$data->note}}
+                                    <input type="hidden" value="{{$data->note}}" name="note_{{$uniqId}}" id="note_{{$uniqId}}">
+                                </td>
+
+                                <td>
+                                    <a href="javascript:void(0)" onclick="productRemove(`{{$uniqId}}`)"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
+                                    <input type="hidden" name="get_ids[]" value="{{$uniqId}}">
+                                </td>
+                            </tr>
+                            @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
@@ -147,6 +180,24 @@ th {
                                     </tr>
                                 </thead>
                                 <tbody id="service_body">
+                                    @if (isset($service) && $service)
+                                        @php $count = 0; @endphp
+                                        @foreach ($service as $data)
+                                        @php $count++; @endphp
+                                            <tr>
+                                                <td>
+                                                    {{$count}}
+                                                </td>
+                                                <td>
+                                                    {{ $data->service_date }}
+                                                    <input type="hidden" name="service_{{$count}}" value="{{ $data->service_date }}">
+                                                </td>
+                                                <td>
+                                                    {{$count.' Free Service'}}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
@@ -201,6 +252,28 @@ th {
                                     </tr>
                                 </thead>
                                 <tbody id="schedule_payment_body">
+                                    @if (isset($payment) && $payment)
+                                        @php $count = 0; @endphp
+                                        @foreach ($payment as $data)
+                                        @php $count++; @endphp
+                                            <tr>
+                                                <td>
+                                                    {{$count}}
+                                                </td>
+                                                <td>
+                                                    {{ $data->installment_date }}
+                                                    <input type="hidden" name="installmetn_{{$count}}" value="{{ $data->installment_date }}">
+                                                </td>
+                                                <td>
+                                                    {{ $data->installment_amount }}
+                                                    <input type="hidden" name="amount_{{$count}}" value="{{ $data->installment_amount }}">
+                                                </td>
+                                                <td>
+                                                    {{$count.' Installment'}}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

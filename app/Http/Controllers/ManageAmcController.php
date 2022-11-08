@@ -101,10 +101,11 @@ class ManageAmcController extends Controller
             'product_id' => $request->product_id,
             'qty' => $request->qty,
             'note' => $request->note,
-            'contract_amount' => $request->total_amount,
+            'contract_amount' => $request->contract_amount,
             'tax' => $request->tax_id,
             'service_day' => $request->service_day,
-            'no_of_service' => $request->no_of_service
+            'no_of_service' => $request->no_of_service,
+            'total_amount' => $request->total_amount,
         ];
         $manageAmcCreate = ManageAmc::create($manageAmc);
         $amc_id = $manageAmcCreate->id;
@@ -223,8 +224,9 @@ class ManageAmcController extends Controller
             {
                 $day +=[$i => $i];
             }
-
-            return view('manage_amc.edit',compact('manageAmc','partyName','tax','products','day'));
+            $service = AmcScheduleServiceDetail::where('amc_id',$id)->get();
+            $payment = AmcSchedulePaymentDetail::where('amc_id',$id)->get();
+            return view('manage_amc.edit',compact('manageAmc','partyName','tax','products','day','service','payment'));
         }
         else
         {
