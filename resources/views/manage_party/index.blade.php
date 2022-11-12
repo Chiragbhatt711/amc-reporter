@@ -1,17 +1,18 @@
 @extends('layouts.adminapp')
 @section('content')
+<div class="container">
 @if ($message = Session::get('success'))
     <div class="alert alert_msg">
         <p>{{ $message }}</p>
     </div>
 @endif
-<div class="card-header">
-    <span>Manage Party</span>
-    <div class="pull-right">
+<div class="title">
+    <h3>Manage Party</h3>
+    <!-- <div class="pull-right"> -->
         <a class="btn add_btn" href="{{ route('manage_party.create') }}">
             <i class="fa fa-plus" aria-hidden="true"></i>
         </a>
-    </div>
+    <!-- </div> -->
 </div>
 <table class="table dynamic-data-table">
     <thead  class="">
@@ -91,6 +92,7 @@
         </div>
       </div>
     </div>
+</div>
 @endsection
 
 @section('js-script')

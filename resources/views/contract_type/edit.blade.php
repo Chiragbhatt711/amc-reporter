@@ -9,43 +9,49 @@
 <div class="container">
     <div id="accordion">
         <div class="row mt-1">
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Group<em class="text-danger">*</em></strong>
                     <div class="d-flex">
                         {!! Form::select('group', $group , null, ['class' => 'form-select','placeholder' =>'Please Select','id'=>'group' ]) !!}
-                        <i title="add group" class="ml-1 btn btn_tile fa fa-plus plus_btn" aria-hidden="true" id="addGroup" data-bs-toggle="modal" data-bs-target="#groupModal"></i>
+                        <span class="form_sub_btn">
+                          <i title="add group" class="fa fa-plus" aria-hidden="true" id="addGroup" data-bs-toggle="modal" data-bs-target="#groupModal"></i>
+                        </span>
                     </div>
                     @error('group')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Brand</strong>
                     <div class="d-flex">
                         {!! Form::select('brand', $brand , null, ['class' => 'form-select','placeholder' =>'Please Select','id'=>'brand' ]) !!}
-                        <i title="add brand" class="ml-1 btn btn_tile fa fa-plus plus_btn" aria-hidden="true" id="addBrand" data-bs-toggle="modal" data-bs-target="#brandModal"></i>
+                        <span class="form_sub_btn">
+                          <i title="add brand" class="fa fa-plus" aria-hidden="true" id="addBrand" data-bs-toggle="modal" data-bs-target="#brandModal"></i>
+                        </span>
                     </div>
                     @error('brand')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Model</strong>
                     <div class="d-flex">
                         {!! Form::select('model', $model , null, ['class' => 'form-select','placeholder' =>'Please Select','id'=>'model' ]) !!}
-                        <i title="add model" class="ml-1 btn btn_tile fa fa-plus plus_btn" aria-hidden="true" id="addModel" data-bs-toggle="modal" data-bs-target="#modelModal"></i>
+                        <span class="form_sub_btn">
+                          <i title="add model" class="fa fa-plus" aria-hidden="true" id="addModel" data-bs-toggle="modal" data-bs-target="#modelModal"></i>
+                        </span>
                     </div>
                     @error('model')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Product Code  <em class="text-danger">*</em></strong>
                     {!! Form::text('product_code', null, array('placeholder' => 'Product Code' ,'class' => 'form-control')) !!}
@@ -54,7 +60,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Product Name  <em class="text-danger">*</em></strong>
                     {!! Form::text('product_name', null, array('placeholder' => 'Product Name' ,'class' => 'form-control')) !!}
@@ -63,7 +69,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Product Description <em class="text-danger">*</em></strong>
                     {!! Form::textarea('product_description', null, array('placeholder' => 'Product Description' ,'class' => 'form-control','rows'=>'5','maxlength' => "400")) !!}

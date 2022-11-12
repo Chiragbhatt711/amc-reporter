@@ -409,3 +409,6 @@ function productDitailsHide(id)
     $('#productHide_'+id).hide();
     $('.child_row_'+id).hide();
 }
+$('.table').DataTable( {
+    responsive: true,
+} );

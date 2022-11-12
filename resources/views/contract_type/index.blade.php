@@ -1,19 +1,20 @@
 @extends('layouts.adminapp')
 @section('content')
+<div class="container">
 @if ($message = Session::get('success'))
     <div class="alert alert_msg">
         <p>{{ $message }}</p>
     </div>
 @endif
-<div class="card-header">
-    <span>Manage AMC Contract Type</span>
-    <div class="pull-right">
+<div class="title">
+    <h3>Manage AMC Contract Type</h3>
+    <!-- <div class="pull-right"> -->
         @can('contract-type-create')
             <a class="btn add_btn" href="{{ route('contract_type.create') }}">
                 <i class="fa fa-plus" aria-hidden="true"></i>
             </a>
         @endcan
-    </div>
+    <!-- </div> -->
 </div>
 <table class="table  dynamic-data-table">
     <thead  class="">
@@ -77,6 +78,7 @@
         </div>
       </div>
     </div>
+</div>
 @endsection
 
 @section('js-script')

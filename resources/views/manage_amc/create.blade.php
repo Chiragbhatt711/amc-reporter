@@ -30,7 +30,7 @@ th {
 <div class="container">
     <div id="accordion">
         <div class="row mt-1">
-            <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                 <strong class="lab_space">party name  <em class="text-danger">*</em></strong>
                 <div class="d-flex">
                     {!! Form::select('party_id', $partyName , null, ['class' => 'form-select','placeholder' =>'Please Select','id'=>'party_id' ]) !!}
@@ -40,21 +40,21 @@ th {
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                 <strong class="lab_space">AMC Type<em class="text-danger">*</em></strong>
                     {!! Form::select('amc_type', array('New'=>'New','AMC'=>'AMC','No AMC'=>'No AMC','CMC'=>'CMC','Warranty'=>'Warranty','Free'=>'Free') , null, ['class' => 'form-select','placeholder' =>'Please Select','id'=>'amc_type' ]) !!}
                 @error('amc_type')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                 <strong class="lab_space">Start Date<em class="text-danger">*</em></strong>
                 {!! Form::text('start_date', date('Y-m-d'), array('placeholder' => 'Start date','class' => 'form-control datepicker')) !!}
                 @error('start_date')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                 <strong class="lab_space">End Date<em class="text-danger">*</em></strong>
                 {!! Form::text('end_date', date('Y-m-d', strtotime(now()." +364 day")), array('placeholder' => 'End date','class' => 'form-control datepicker')) !!}
                 @error('end_date')
@@ -63,11 +63,11 @@ th {
             </div>
         </div>
         <hr>
-        <div class="row mt-2 ">
-            <div class="col-xs-12 col-sm-12 col-md-12 px-md-5">
-                <strong class="lab_space">AMC Product detail</strong>
+        <div class="row mt-2">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <h4 class="form_sub_title">AMC Product detail</h4>
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                 <strong class="lab_space">Product  <em class="text-danger">*</em></strong>
                 <div class="d-flex">
                     {!! Form::select('product_id', $products , null, ['class' => 'form-select','placeholder' =>'Please Select', 'id'=>'product_id' ]) !!}
@@ -77,7 +77,7 @@ th {
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                 <strong class="lab_space">Qty  <em class="text-danger">*</em></strong>
                 <div class="d-flex">
                     {!! Form::text('qty', null, ['class' => 'form-control','placeholder' =>'Qty', 'id'=> 'qty' ]) !!}
@@ -86,20 +86,20 @@ th {
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="col-xs-1 col-sm-3 col-md-3">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                 <strong class="lab_space">Note</strong>
                 <div class="d-flex">
                     {!! Form::textarea('note', null, ['class' => 'form-control','placeholder' =>'Note','id' => 'note' ]) !!}
                 </div>
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3">
-                <div class="d-flex">
-                    <input type="button" class="" name="add" value="Add" onclick="product_add();" style="position:relative; top:27px;">
-                </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                <strong class="lab_space"> </strong>
+                <a href=""class="form_btn" name="add" value="Add" onclick="product_add();">ADD</a>
+                <!-- <input type="" class="form_btn" name="add" value="Add" onclick="product_add();"> -->
             </div>
         </div>
         <hr>
-        <div class="row mt-2 ">
+        <div class="row my-3">
             <div class="fixTableHead">
                 <table class="table">
                     <thead  class="text-uppercase table-light">
@@ -119,25 +119,26 @@ th {
             </div>
         </div>
         <hr>
-        <div class="row mt-2 ">
-            <div class="col-xs-5 col-sm-5 col-md-5">
-                    <strong class="lab_space">Schedule Service Detail</strong>
-                    <hr>
-                    <div class="row ">
-                        <div class="col-xs-3 col-sm-3 col-md-3">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <h4 class="form_sub_title">Schedule Service Detail</h4>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <strong class="lab_space">Service Day</strong>
                             {!! Form::select('service_day', $day , null, ['class' => 'form-select','id'=>'service_day' ]) !!}
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-4">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <strong class="lab_space">No Of Service <em class="text-danger">*</em></strong>
                             {!! Form::text('no_of_service', null, ['class' => 'form-control','placeholder' =>'No Of Service', 'id'=> 'no_of_service' ]) !!}
                             <span id="serviceE" class="text-danger"></span>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-4">
-                                <input type="button" class="" name="set_service" value="Set Service" onclick="setService();">
-                                <input type="button" class="mt-1" name="cleare_service" value="Cleare All" onclick="cleareService();">
-                        </div>
-                        <div class="fixTableHead mt-2">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                <a href="" class="form_btn mt-3" name="set_service" value="Set Service" onclick="setService();">Set Service</a>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                <a href="" class="form_btn mt-3" name="cleare_service" value="Clear All" onclick="cleareService();">Clear All</a>
+                            </div>
+                        <div class="fixTableHead mt-3">
                             <table class="table">
                                 <thead  class="text-uppercase table-light">
                                     <tr>
@@ -152,45 +153,44 @@ th {
                         </div>
                     </div>
             </div>
-            <div class="col-xs-7 col-sm-7 col-md-7">
-                    <strong class="lab_space">Schedule Payment Detail</strong>
-                    <hr>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <h4 class="form_sub_title">Schedule Payment Detail</h4>
                     <div class="row ">
-                        <div class="col-xs-3 col-sm-3 col-md-3">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <strong class="lab_space">Contract Amount <em class="text-danger">*</em></strong>
                             {!! Form::text('contract_amount', null, ['class' => 'form-control','placeholder' =>'Contract Amount', 'id'=> 'contract_amount','onkeyup'=>'amcTotalPrice();' ]) !!}
                             <span id="contract_amountE" class="text-danger"></span>
                         </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <strong class="lab_space">Tax profile <em class="text-danger">*</em></strong>
                             {!! Form::select('tax_id', $tax , null, ['class' => 'form-select','placeholder' =>'Please Select', 'id'=>'tax_id','onchange'=>'amcTotalPrice();' ]) !!}
                             <span id="tax_idE" class="text-danger"></span>
                         </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <strong class="lab_space">No.of Installment <em class="text-danger">*</em></strong>
                             {!! Form::text('no_of_installment', 1, ['class' => 'form-control','placeholder' =>'No. of Installment', 'id'=> 'no_of_installment' ]) !!}
                             <span id="no_of_installmentE" class="text-danger"></span>
                         </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3 mt-4">
-                                <input type="button" class="" name="set_service" value="Set Service" onclick="setSchedulePayment();">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <a href="" class="form_btn" name="set_service" value="Set Service" onclick="setSchedulePayment();">Set Service</a>
                         </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <strong class="lab_space">Tax (%)</strong>
                             {!! Form::text('tax', 0, ['class' => 'form-control','placeholder' =>'Tax (%)', 'id'=> 'tax','disabled' ]) !!}
                         </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <strong class="lab_space">Tax Amount</strong>
                             {!! Form::text('tax_amount', 0, ['class' => 'form-control','placeholder' =>'Tax Amount', 'id'=> 'tax_amount','disabled' ]) !!}
                         </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <strong class="lab_space">Total Amount</strong>
                             {!! Form::text('total', 0, ['class' => 'form-control','placeholder' =>'Total Amount', 'id'=> 'total','disabled' ]) !!}
                             {{ Form::hidden('total_amount', 'secret', array('id' => 'total_amount')) }}
                         </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3">
-                            <input type="button" class="mt-1" name="schedule_payment" value="Cleare All" onclick="cleareSchedulePayment();">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <a href="" class="form_btn" name="schedule_payment" value="Clear All" onclick="cleareSchedulePayment();">Clear All</a>
                         </div>
-                        <div class="fixTableHead mt-2">
+                        <div class="fixTableHead mt-3">
                             <table class="table">
                                 <thead  class="text-uppercase table-light">
                                     <tr>
@@ -207,11 +207,9 @@ th {
                     </div>
             </div>
         </div>
-
-
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-3">
-                <button type="submit" class="btn btn_tile">Submit</button>
-            </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-4">
+            <button type="submit" class="btn btn_tile">SUBMIT</button>
+        </div>
     </div>
 </div>
   {!! Form::close() !!}

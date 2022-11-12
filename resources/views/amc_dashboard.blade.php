@@ -1,67 +1,84 @@
 @extends('layouts.adminapp')
 @section('content')
-
-<div class="card-header">AMC Dashboard</div>
-<div class="col-xs-6">
-    <h2 class="sub-header">Subtitle</h2>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th class="col-md-1">#</th>
-                    <th class="col-md-2">Header</th>
-                    <th class="col-md-3">Header</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="col-md-1">1,001</td>
-                    <td class="col-md-2">1,001</td>
-                    <td class="col-md-3">1,001</td>
-                </tr>
-                <tr>
-                    <td class="col-md-1">1,001</td>
-                    <td class="col-md-2">1,001</td>
-                    <td class="col-md-3">1,001</td>
-                </tr>
-                    <tr>
-                    <td class="col-md-1">1,001</td>
-                    <td class="col-md-2">1,001</td>
-                    <td class="col-md-3">1,001</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-<div class="col-xs-6">
-    <h2 class="sub-header">Latest Incidents</h2>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th class="col-md-1">#</th>
-                    <th class="col-md-2">Header</th>
-                    <th class="col-md-3">Header</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="col-md-1">1,001</td>
-                    <td class="col-md-2">1,001</td>
-                    <td class="col-md-3">1,001</td>
-                </tr>
-                <tr>
-                    <td class="col-md-1">1,001</td>
-                    <td class="col-md-2">1,001</td>
-                    <td class="col-md-3">1,001</td>
-                </tr>
-                    <tr>
-                    <td class="col-md-1">1,001</td>
-                    <td class="col-md-2">1,001</td>
-                    <td class="col-md-3">1,001</td>
-                </tr>
-            </tbody>
-        </table>
+<div class="dashboard">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-xs-12">
+                <div class="dash_table">
+                    <h2>AMC Dashboard</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-xs-12">
+                <h2 class="sub-header">Subtitle</h2>
+            </div>
+            <div class="col-lg-12 col-xs-12">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="col-lg-4 col-sm-12 col-md-4">#</th>
+                                <th class="col-lg-4 col-sm-12 col-md-4">Header</th>
+                                <th class="col-lg-4 col-sm-12 col-md-4">Header</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="col-lg-4 col-sm-12 col-md-4">1,001</td>
+                                <td class="col-lg-4 col-sm-12 col-md-4">1,001</td>
+                                <td class="col-lg-4 col-sm-12 col-md-4">1,001</td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-4 col-sm-12 col-md-4">1,001</td>
+                                <td class="col-lg-4 col-sm-12 col-md-4">1,001</td>
+                                <td class="col-lg-4 col-sm-12 col-md-4">1,001</td>
+                            </tr>
+                                <tr>
+                                <td class="col-lg-4 col-sm-12 col-md-4">1,001</td>
+                                <td class="col-lg-4 col-sm-12 col-md-4">1,001</td>
+                                <td class="col-lg-4 col-sm-12 col-md-4">1,001</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-xs-12">
+                <h2 class="sub-header">Latest Incidents</h2>
+            </div>
+            <div class="col-lg-12 col-xs-12">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="col-lg-4 col-sm-12 col-md-4">#</th>
+                                <th class="col-lg-4 col-sm-12 col-md-4">Header</th>
+                                <th class="col-lg-4 col-sm-12 col-md-4">Header</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="col-lg-4 col-sm-12 col-md-4">1,001</td>
+                                <td class="col-lg-4 col-sm-12 col-md-4">1,001</td>
+                                <td class="col-lg-4 col-sm-12 col-md-4">1,001</td>
+                            </tr>
+                            <tr>
+                                <td class="col-lg-4 col-sm-12 col-md-4">1,001</td>
+                                <td class="col-lg-4 col-sm-12 col-md-4">1,001</td>
+                                <td class="col-lg-4 col-sm-12 col-md-4">1,001</td>
+                            </tr>
+                                <tr>
+                                <td class="col-lg-4 col-sm-12 col-md-4">1,001</td>
+                                <td class="col-lg-4 col-sm-12 col-md-4">1,001</td>
+                                <td class="col-lg-4 col-sm-12 col-md-4">1,001</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

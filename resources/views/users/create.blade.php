@@ -9,7 +9,7 @@
 <div class="container">
     <div id="accordion">
             <div class="row mt-1">
-                <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                     <div class="form-group">
                         <strong class="first_name">First Name<em class="text-danger">*</em></strong>
                         {!! Form::text('first_name', null, array('placeholder' => 'First Name' ,'class' => 'form-control')) !!}
@@ -18,7 +18,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                     <div class="form-group">
                         <strong class="last_name">Last Name<em class="text-danger">*</em></strong>
                         {!! Form::text('last_name', null, array('placeholder' => 'Last Name' ,'class' => 'form-control')) !!}
@@ -27,7 +27,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                     <div class="form-group">
                         <strong class="email">Email<em class="text-danger">*</em></strong>
                         {!! Form::text('email', null, array('placeholder' => 'Email' ,'class' => 'form-control')) !!}
@@ -36,7 +36,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                     <div class="form-group">
                         <strong class="mobile_number">Mobile No<em class="text-danger">*</em></strong>
                         {!! Form::text('mobile_number', null, array('placeholder' => 'Mobile No' ,'class' => 'form-control')) !!}
@@ -45,7 +45,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                     <div class="form-group">
                     <strong class="role_id">Role<em class="text-danger">*</em></strong>
                     {!! Form::select('role_id', $roles , null, ['class' => 'form-select','placeholder' =>
@@ -55,7 +55,7 @@
                     @enderror
                     </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                     <div class="form-group">
                         <strong class="password">Password<em class="text-danger">*</em></strong>
                         {!! Form::text('password', null, array('placeholder' => 'Password' ,'class' => 'form-control')) !!}

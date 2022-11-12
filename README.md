@@ -15,4 +15,4 @@ Steps are below:
 
     php artisan db:seed --class=PermissionTableSeeder
     php artisan db:seed --class=RoleSeeder
-    php artisan db:seed --class=CreateAdminUserSeeder
+    php artisan db:seed --class=CreateAdminSeedereder

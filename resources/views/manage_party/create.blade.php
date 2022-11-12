@@ -9,7 +9,7 @@
 <div class="container">
     <div id="accordion">
         <div class="row mt-1">
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">party name  <em class="text-danger">*</em></strong>
                     {!! Form::text('party_name', null, array('placeholder' => 'Party name' ,'class' => 'form-control')) !!}
@@ -18,7 +18,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Contact person name  <em class="text-danger">*</em></strong>
                     {!! Form::text('contact_person_name', null, array('placeholder' => 'Contact person name' ,'class' => 'form-control')) !!}
@@ -27,7 +27,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Address  <em class="text-danger">*</em></strong>
                     {!! Form::textarea('address', null, array('placeholder' => 'Address' ,'class' => 'form-control','rows'=>'5','maxlength' => "400")) !!}
@@ -36,7 +36,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">City  <em class="text-danger">*</em></strong>
                     {!! Form::text('city', null, array('placeholder' => 'City' ,'class' => 'form-control')) !!}
@@ -45,7 +45,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">State  <em class="text-danger">*</em></strong>
                     {!! Form::text('state', null, array('placeholder' => 'State' ,'class' => 'form-control')) !!}
@@ -54,7 +54,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Country  <em class="text-danger">*</em></strong>
                     {!! Form::text('country', null, array('placeholder' => 'Country' ,'class' => 'form-control')) !!}
@@ -63,7 +63,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Pincode  <em class="text-danger">*</em></strong>
                     {!! Form::text('pincode', null, array('placeholder' => 'Pincode' ,'class' => 'form-control')) !!}
@@ -72,7 +72,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Mobile no  <em class="text-danger">*</em></strong>
                     {!! Form::text('mobile_no', null, array('placeholder' => 'Mobile no' ,'class' => 'form-control')) !!}
@@ -81,7 +81,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Phone no </strong>
                     {!! Form::text('phone_no', null, array('placeholder' => 'Phone no' ,'class' => 'form-control')) !!}
@@ -90,7 +90,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">E-mail  <em class="text-danger">*</em></strong>
                     {!! Form::text('email', null, array('placeholder' => 'E-mail' ,'class' => 'form-control')) !!}
@@ -99,7 +99,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Opening Balance</strong>
                     {!! Form::text('opening_balance', null, array('placeholder' => 'Opening Balance' ,'class' => 'form-control')) !!}
@@ -108,7 +108,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">extf1</strong>
                     {!! Form::text('extf_1', null, array('placeholder' => 'extf1' ,'class' => 'form-control')) !!}
@@ -117,7 +117,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">extf2</strong>
                     {!! Form::text('extf_2', null, array('placeholder' => 'extf2' ,'class' => 'form-control')) !!}
@@ -126,7 +126,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">extf3</strong>
                     {!! Form::text('extf_3', null, array('placeholder' => 'extf3' ,'class' => 'form-control')) !!}
@@ -135,7 +135,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">extf4</strong>
                     {!! Form::text('extf_4', null, array('placeholder' => 'extf4' ,'class' => 'form-control')) !!}
@@ -144,7 +144,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">extf5</strong>
                     {!! Form::text('extf_5', null, array('placeholder' => 'extf5' ,'class' => 'form-control')) !!}
@@ -153,7 +153,6 @@
                     @enderror
                 </div>
             </div>
-
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn_tile">Submit</button>
             </div>
