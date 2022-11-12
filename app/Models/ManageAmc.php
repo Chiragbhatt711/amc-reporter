@@ -32,5 +32,6 @@ class ManageAmc extends Model
         'service_day',
         'no_of_service',
         'total_amount',
+        'no_of_installment',
     ];
 }

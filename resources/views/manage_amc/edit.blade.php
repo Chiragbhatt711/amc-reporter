@@ -125,7 +125,7 @@ th {
                                     <input type="hidden" value="{{ $data->product_code }}" name="product_code_{{ $uniqId }}" id="product_code_{{ $uniqId }}">
                                 </td>
                                 <td> {{ $data->product_name }}
-                                    <input type="hidden" value="{{ $data->id }}" name="product_id_{{$uniqId}}" id="product_id_{{$uniqId}}">
+                                    <input type="hidden" value="{{ $data->product_id }}" name="product_id_{{$uniqId}}" id="product_id_{{$uniqId}}">
                                 </td>
                                 <td>{{$data->model}}
                                     <input type="hidden" value="{{$data->model_id}}" name="model_id_{{$uniqId}}" id="model_id_{{$uniqId}}">
@@ -214,12 +214,12 @@ th {
                         </div>
                         <div class="col-xs-3 col-sm-3 col-md-3">
                             <strong class="lab_space">Tax profile <em class="text-danger">*</em></strong>
-                            {!! Form::select('tax_id', $tax , null, ['class' => 'form-select','placeholder' =>'Please Select', 'id'=>'tax_id','onchange'=>'amcTotalPrice();' ]) !!}
+                            {!! Form::select('tax_id', $tax , $manageAmc->tax, ['class' => 'form-select','placeholder' =>'Please Select', 'id'=>'tax_id','onchange'=>'amcTotalPrice();' ]) !!}
                             <span id="tax_idE" class="text-danger"></span>
                         </div>
                         <div class="col-xs-3 col-sm-3 col-md-3">
                             <strong class="lab_space">No.of Installment <em class="text-danger">*</em></strong>
-                            {!! Form::text('no_of_installment', 1, ['class' => 'form-control','placeholder' =>'No. of Installment', 'id'=> 'no_of_installment' ]) !!}
+                            {!! Form::text('no_of_installment',$manageAmc->no_of_installment, ['class' => 'form-control','placeholder' =>'No. of Installment', 'id'=> 'no_of_installment' ]) !!}
                             <span id="no_of_installmentE" class="text-danger"></span>
                         </div>
                         <div class="col-xs-3 col-sm-3 col-md-3 mt-4">
@@ -292,6 +292,8 @@ th {
 
 @section('js-script')
 <script>
-
+$(document).ready(function(){
+    $('#tax_id').trigger('change');
+});
 </script>
 @endsection

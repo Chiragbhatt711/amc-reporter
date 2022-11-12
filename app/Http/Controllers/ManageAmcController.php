@@ -206,7 +206,7 @@ class ManageAmcController extends Controller
                     ->join('contract_models','contract_types.model','contract_models.id')
                     ->select('contract_types.id','contract_types.product_code as product_code','contract_types.product_name as product_name','brands.name as brand','contract_models.name as model')
                     ->get();
-
+            
             $partyName = [];
             foreach($party as $data)
             {
@@ -218,7 +218,6 @@ class ManageAmcController extends Controller
             {
                 $products += [$data->id => $data->product_code.','.$data->product_name.','.$data->brand.','.$data->model];
             }
-
             $day = ['Auto' => 'Auto'];
             for($i=1;$i<=31;$i++)
             {
@@ -241,9 +240,104 @@ class ManageAmcController extends Controller
      * @param  \App\Models\ManageAmc  $manageAmc
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ManageAmc $manageAmc)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'party_id' => 'required',
+            'amc_type' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'product_id' => 'required',
+            'qty' => 'required',
+
+        ],[
+            'party_id.required' => 'Please select party name',
+            'amc_type.required' => 'Please select party name',
+            'start_date.required' => 'Please select start date',
+            'end_date.required' => 'Please select end date',
+            'product_id.required' => 'Please select product',
+            'qty.required' => 'Please enter qty',
+        ]);
+        $input = $request->all();
+        $admin_id = admin_id();
+        $manageAmc = ManageAmc::find($id);
+        if($admin_id == $manageAmc->admin_id)
+        {
+            $manageAmc->update($input);
+
+            $amc_id = $id;
+            AmcPeroductDetail::where('amc_id',$amc_id)->delete();
+            $amcProductDetails = [];
+            if(isset($request->get_ids) && $request->get_ids)
+            {
+                foreach($request->get_ids as $id)
+                {
+                    $amcProductDetails = [];
+                    $amcProductDetails=[
+                        'admin_id' => $admin_id,
+                        'amc_id' => $amc_id,
+                        'product_id' => $input['product_id_'.$id],
+                        'product_qty' => $input['qty_'.$id],
+                        'note' => $input['note_'.$id],
+                    ];
+                    if($amcProductDetails)
+                    {
+                        $amcProductCreate = AmcPeroductDetail::create($amcProductDetails);
+                    }
+                }
+            }
+            AmcScheduleServiceDetail::where('amc_id',$amc_id)->delete();
+            $scheduleServiceDetails = [];
+            if(isset($input['no_of_service']) && $input['no_of_service'])
+            {
+                $service = $input['no_of_service'];
+                for($i=1; $i <= $service; $i++)
+                {
+                    $scheduleServiceDetails = [];
+                    if(isset($input['service_'.$i]) && $input['service_'.$i])
+                    {
+                        $scheduleServiceDetails = [
+                            'admin_id' => $admin_id,
+                            'amc_id' => $amc_id,
+                            'service_date' => $input['service_'.$i],
+                        ];
+                    }
+                    if($scheduleServiceDetails)
+                    {
+                        $scheduleServiceCreate = AmcScheduleServiceDetail::create($scheduleServiceDetails);
+                    }
+                }
+            }
+
+            AmcSchedulePaymentDetail::where('amc_id',$amc_id)->delete();
+            $schedulePaymentDetails = [];
+            if(isset($input['no_of_installment']) && $input['no_of_installment'])
+            {
+                $schedulePayment = $input['no_of_installment'];
+                for($i=1; $i <= $schedulePayment; $i++)
+                {
+                    $schedulePaymentDetails = [];
+                    if(isset($input['installmetn_'.$i]) && $input['installmetn_'.$i])
+                    {
+                        $schedulePaymentDetails = [
+                            'admin_id' => $admin_id,
+                            'amc_id' => $amc_id,
+                            'installment_date' => $input['installmetn_'.$i],
+                            'installment_amount' => $input['amount_'.$i],
+                        ];
+                    }
+                    if($schedulePaymentDetails)
+                    {
+                        $amcSchedulePaymentCreate = AmcSchedulePaymentDetail::create($schedulePaymentDetails);
+                    }
+                }
+            }
+            return redirect()->route('manage_amc.index')->with('success','Manage amc update successfully');
+        }
+        else
+        {
+            return redirect()->route('manage_amc.index')->with('success','Somthing wrong');
+        }
     }
 
     /**
@@ -252,9 +346,23 @@ class ManageAmcController extends Controller
      * @param  \App\Models\ManageAmc  $manageAmc
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ManageAmc $manageAmc)
+    public function destroy($id)
     {
-        //
+        $manageAmc = ManageAmc::find($id);
+        $admin_id = admin_id();
+        if($manageAmc && $manageAmc->admin_id == $admin_id)
+        {
+            $manageAmc->delete();
+            AmcPeroductDetail::where('amc_id',$id)->delete();
+            AmcScheduleServiceDetail::where('amc_id',$id)->delete();
+            AmcSchedulePaymentDetail::where('amc_id',$id)->delete();
+
+            return redirect()->route('manage_amc.index')->with('success','Manage amc delete successfully');
+        }
+        else
+        {
+            return redirect()->route('manage_amc.index')->with('success','Somthing wrong');
+        }
     }
 
     public function product_add(Request $request)

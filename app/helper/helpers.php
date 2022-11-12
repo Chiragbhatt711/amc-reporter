@@ -32,7 +32,7 @@ function getAmcProductDetails($id)
         ->join('contract_types','amc_peroduct_details.product_id','=','contract_types.id','LEFT')
         ->join('brands','contract_types.brand','=','brands.id','LEFT')
         ->join('contract_models','contract_types.model','=','contract_models.id','LEFT')
-        ->select('amc_peroduct_details.product_qty as qty','amc_peroduct_details.note as note','contract_types.product_code as product_code','contract_types.product_name as product_name','brands.name as brand','contract_models.name as model')
+        ->select('amc_peroduct_details.product_id','amc_peroduct_details.product_qty as qty','amc_peroduct_details.note as note','contract_types.product_code as product_code','contract_types.product_name as product_name','brands.name as brand','contract_models.name as model')
         ->get();
 
     return $product;
