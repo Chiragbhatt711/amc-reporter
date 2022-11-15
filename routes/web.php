@@ -42,4 +42,5 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('manage_party', ManagePartyController::class);
     Route::resource('manage_amc', ManageAmcController::class);
     Route::resource('manage_tax', ManageTaxController::class);
+    Route::resource('manage_receipt',ManageReceiptController::class);
 });
