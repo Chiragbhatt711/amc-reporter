@@ -62,7 +62,7 @@
                                         </a>
                                     </li>
                                     <li class="dropdown-item">
-                                        <a class="nav-link" href="#">
+                                        <a class="nav-link" href="{{ route('manage_receipt.index') }}">
                                             <i class="fas fa-dollar-sign"></i>Manage Receipt
                                         </a>
                                     </li>

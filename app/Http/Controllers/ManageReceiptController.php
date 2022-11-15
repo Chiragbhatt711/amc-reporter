@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ManageReceipt;
 use Illuminate\Http\Request;
+use App\Models\ManageParty;
 
 class ManageReceiptController extends Controller
 {
@@ -24,7 +25,14 @@ class ManageReceiptController extends Controller
      */
     public function create()
     {
-        //
+        $admin_id = admin_id();
+        $party = ManageParty::select('id','party_name','city')->where('admin_id',$admin_id)->get();
+        $partyName = [];
+        foreach($party as $data)
+        {
+            $partyName += [$data->id => $data->party_name.','.$data->city];
+        }
+        return view('manage_receipt.create',compact('partyName'));
     }
 
     /**

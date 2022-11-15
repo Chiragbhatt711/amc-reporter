@@ -17,18 +17,17 @@
     <table class="table  dynamic-data-table">
         <thead  class="">
             <tr>
-            <th scope="col">Tax Profile Name</th>
-            <th scope="col">Tax Lable Name</th>
-            <th scope="col">Tax Caption 1</th>
-            <th scope="col">Tax 1(%)</th>
-            <th scope="col">Tax Caption 2</th>
-            <th scope="col">Tax 2(%)</th>
-            <th scope="col">Tax Caption 3</th>
-            <th scope="col">Tax 3(%)</th>
-            <th scope="col">Tax Caption 4</th>
-            <th scope="col">Tax 4(%)</th>
-            <th scope="col">Tax Caption 5</th>
-            <th scope="col">Tax 5(%)</th>
+            <th scope="col">Date</th>
+            <th scope="col">Party Name</th>
+            <th scope="col">Contact person name</th>
+            <th scope="col">City</th>
+            <th scope="col">AMC No.</th>
+            <th scope="col">AMC Type</th>
+            <th scope="col">Payment Mode</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Payment date</th>
+            <th scope="col">Reference No.</th>
+            <th scope="col">Note</th>
             <th scope="col">Action</th>
             </tr>
         </thead>
@@ -53,10 +52,9 @@
                         <td>{{ $value->tax_caption_4 }}</td>
                         <td>{{ $value->tax_percentage_4 }}</td>
                         <td>{{ $value->tax_caption_5 }}</td>
-                        <td>{{ $value->tax_percentage_5 }}</td>
                         <td>
                             @can('user-edit')
-                                <a href="{{Route('manage_tax.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
+                                <a href="{{Route('manage_receipt.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                             @endcan
                             @can('user-delete')
                                 <a onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
@@ -92,7 +90,7 @@
 @section('js-script')
 <script>
 function deleteFunction(id){
-    $('#deleteForm').attr('action','{{ url("manage_tax") }}'+ '/'+id);
+    $('#deleteForm').attr('action','{{ url("manage_receipt") }}'+ '/'+id);
     $('#deleteModal').modal('show');
 }
 </script>
