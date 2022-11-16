@@ -71,6 +71,26 @@
                                             <i class="fa fa-percent" aria-hidden="true"></i>Manage Tax
                                         </a>
                                     </li>
+                                    <li class="dropdown-item">
+                                        <a class="nav-link" href="{{ Route('amc_expiry_reminder') }}">
+                                        <i class="fa-solid fa-calendar-clock"></i>AMC Expiry Reminder
+                                        </a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a class="nav-link" href="#">
+                                        <i class=""></i>Party Leadger Summary Report
+                                        </a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a class="nav-link" href="#">
+                                        <i class=""></i>Party Leadger Detail Report
+                                        </a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a class="nav-link" href="#">
+                                        <i class=""></i>Payment Pending Report
+                                        </a>
+                                    </li>
     
                                 </ul>
                             </li>
@@ -80,7 +100,9 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="dropdown-item">
-                                        <a class="nav-link" href="#"> Dropdown item 1 </a>
+                                        <a class="nav-link" href="#">
+                                            <i class=""></i>Complant Template
+                                        </a>
                                     </li>
                                 </ul>
                             </li>
