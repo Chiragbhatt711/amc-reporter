@@ -15,6 +15,7 @@ class CreateManageReceiptsTable extends Migration
     {
         Schema::create('manage_receipts', function (Blueprint $table) {
             $table->id();
+            $table->integer('admin_id')->nullable();
             $table->integer('party_id')->nullable();
             $table->integer('amc_id')->nullable();
             $table->date('date')->nullable();

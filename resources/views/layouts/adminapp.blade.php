@@ -100,8 +100,13 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="dropdown-item">
-                                        <a class="nav-link" href="#">
+                                        <a class="nav-link" href="{{ route('manage_complaint_template.index') }}">
                                             <i class=""></i>Complant Template
+                                        </a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a class="nav-link" href="{{ route('manage_solution_template.index') }}">
+                                            <i class=""></i>Solution Template
                                         </a>
                                     </li>
                                 </ul>
