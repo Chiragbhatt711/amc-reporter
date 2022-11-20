@@ -13,9 +13,20 @@
                 <div class="form-group">
                     <strong class="lab_space">party name  <em class="text-danger">*</em></strong>
                     <div class="d-flex">
-                    {!! Form::select('party_id', $partyName , null, ['class' => 'form-select','placeholder' =>'Please Select', 'id'=>'product_id' ]) !!}
+                    {!! Form::select('party_id', $partyName , null, ['class' => 'form-select','placeholder' =>'Please Select', 'id'=>'party_id' ]) !!}
                 </div>
                     @error('party_id')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="form-group">
+                    <strong class="lab_space">AMC NO <em class="text-danger">*</em></strong>
+                    <div class="d-flex">
+                    {!! Form::select('amc_no', array() , null, ['class' => 'form-select','placeholder' =>'Please Select', 'id'=>'product_id' ]) !!}
+                </div>
+                    @error('amc_no')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>

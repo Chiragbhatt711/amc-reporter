@@ -206,7 +206,7 @@ class ManageAmcController extends Controller
                     ->join('contract_models','contract_types.model','contract_models.id')
                     ->select('contract_types.id','contract_types.product_code as product_code','contract_types.product_name as product_name','brands.name as brand','contract_models.name as model')
                     ->get();
-            
+
             $partyName = [];
             foreach($party as $data)
             {

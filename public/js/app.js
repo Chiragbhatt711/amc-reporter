@@ -169,6 +169,13 @@ function setService()
     $('#serviceE').html('');
     let noOFService = $('#no_of_service').val();
     let serviceDay = $('#service_day').val();
+    let startDate = new Date($('#start_date').val());
+    let lastDate = new Date($('#end_date').val());
+
+    var millisBetween = startDate.getTime() - lastDate.getTime();
+    var days = millisBetween / (1000 * 3600 * 24);
+
+    let totalDays =  Math.round(Math.abs(days));
     if(!noOFService)
     {
         $('#serviceE').html('Please enter no of service');
@@ -176,15 +183,15 @@ function setService()
     }
     if(serviceDay == '' || serviceDay == 'Auto')
     {
-        if(noOFService > 363)
+        if(noOFService > totalDays-1)
         {
-            $('#serviceE').html('Please enter Max 363');
+            $('#serviceE').html('Please enter Max '+ parseInt(otalDays-1));
             return false;
         }
 
-        let day = parseInt(365 / noOFService);
+        let day = parseInt(totalDays / noOFService);
 
-        let date = new Date();
+        let date = startDate;
         let html = '';
         html += '<tr>'+
                     '<td>'+
@@ -221,14 +228,17 @@ function setService()
     }
     else
     {
-        if(noOFService > 12)
+        let totalMonth = lastDate.getMonth() - startDate.getMonth() +
+        (12 * (lastDate.getFullYear() - startDate.getFullYear()))
+        console.log(totalMonth);
+        if(noOFService > totalMonth)
         {
-            $('#serviceE').html('Please enter Max 12');
+            $('#serviceE').html('Please enter Max '+totalMonth);
             return false;
         }
         else
         {
-            let date = new Date();
+            let date = startDate
             date.setDate(serviceDay);
             let curruntDay = new Date().getDate();
             let servicedate = '';
@@ -333,18 +343,24 @@ function setSchedulePayment()
 {
     let installment = $('#no_of_installment').val();
     let totalAmount = 0;
+    let startDate = new Date($('#start_date').val());
+    let lastDate = new Date($('#end_date').val());
+    var millisBetween = startDate.getTime() - lastDate.getTime();
+    var days = millisBetween / (1000 * 3600 * 24);
+    let totalDays =  Math.round(Math.abs(days));
     if(installment)
     {
-        if(installment > 363)
+        console.log(totalDays-1);
+        if(installment > totalDays-1)
         {
-            $('#no_of_installmentE').html('Please enter Max 363');
+            $('#no_of_installmentE').html('Please enter Max '+ parseInt(totalDays - 1));
             return false;
         }
 
-        let day = parseInt(365 / installment);
+        let day = parseInt(totalDays / installment);
         totalAmount = $('#total_amount').val();
         let perInstallmentAmount = totalAmount / installment;
-        let date = new Date();
+        let date = startDate;
         let html = '';
         html += '<tr>'+
                     '<td>'+

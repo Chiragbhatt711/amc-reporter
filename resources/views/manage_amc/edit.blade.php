@@ -49,14 +49,14 @@ th {
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                 <strong class="lab_space">Start Date<em class="text-danger">*</em></strong>
-                {!! Form::text('start_date', null, array('placeholder' => 'Start date','class' => 'form-control datepicker')) !!}
+                {!! Form::text('start_date', null, array('placeholder' => 'Start date','class' => 'form-control datepicker','id'=>'start_date')) !!}
                 @error('start_date')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                 <strong class="lab_space">End Date<em class="text-danger">*</em></strong>
-                {!! Form::text('end_date', null, array('placeholder' => 'End date','class' => 'form-control datepicker')) !!}
+                {!! Form::text('end_date', null, array('placeholder' => 'End date','class' => 'form-control datepicker','id'=>'end_date')) !!}
                 @error('end_date')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -221,9 +221,6 @@ th {
                             <span id="no_of_installmentE" class="text-danger"></span>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                            <a href="" class="form_btn" name="set_service" value="Set Service" onclick="setSchedulePayment();">Set Service</a>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <strong class="lab_space">Tax (%)</strong>
                             {!! Form::text('tax', 0, ['class' => 'form-control','placeholder' =>'Tax (%)', 'id'=> 'tax','disabled' ]) !!}
                         </div>
@@ -235,6 +232,9 @@ th {
                             <strong class="lab_space">Total Amount</strong>
                             {!! Form::text('total', 0, ['class' => 'form-control','placeholder' =>'Total Amount', 'id'=> 'total','disabled' ]) !!}
                             {{ Form::hidden('total_amount', 'secret', array('id' => 'total_amount')) }}
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <a href="" class="form_btn" name="set" value="Set" onclick="setSchedulePayment();">Set</a>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <a href="" class="form_btn" name="schedule_payment" value="Clear All" onclick="cleareSchedulePayment();">Clear All</a>

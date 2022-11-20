@@ -33,5 +33,6 @@ class ManageAmc extends Model
         'no_of_service',
         'total_amount',
         'no_of_installment',
+        'amount_recieve',
     ];
 }
