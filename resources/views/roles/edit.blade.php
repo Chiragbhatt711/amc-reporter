@@ -21,14 +21,13 @@
                                         <br/>
                                         @if($permissions)
                                             <div class="row">
-                                                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                                                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
                                                     <strong>Menu</strong>
                                                 </div>
-                                                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                                                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                                                     <strong>Permissions</strong>
                                                 </div>
                                             </div>
-                                            <hr/>
                                             @foreach ($permissions as $key => $permission)
                                             <div class="row">
                                                 @php

@@ -62,7 +62,6 @@ th {
                 @enderror
             </div>
         </div>
-        <hr>
         <div class="row mt-2">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <h4 class="form_sub_title">AMC Product detail</h4>
@@ -96,7 +95,6 @@ th {
                 <a href="" class="form_btn" name="add" value="Add" onclick="product_add();">Add</a>
             </div>
         </div>
-        <hr>
         <div class="row my-3">
             <div class="fixTableHead">
                 <table class="table">
@@ -149,9 +147,8 @@ th {
                 </table>
             </div>
         </div>
-        <hr>
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                     <h4 class="form_sub_title">Schedule Service Detail</h4>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -202,7 +199,7 @@ th {
                         </div>
                     </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                     <h4 class="form_sub_title">Schedule Payment Detail</h4>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -233,7 +230,7 @@ th {
                             {!! Form::text('total', 0, ['class' => 'form-control','placeholder' =>'Total Amount', 'id'=> 'total','disabled' ]) !!}
                             {{ Form::hidden('total_amount', 'secret', array('id' => 'total_amount')) }}
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-end">
                             <a href="" class="form_btn" name="set" value="Set" onclick="setSchedulePayment();">Set</a>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">

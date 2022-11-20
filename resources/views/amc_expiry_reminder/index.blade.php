@@ -9,19 +9,23 @@
 <div class="title">
     <h3>AMC Expiry Reminder Report</h3>
 </div>
+{!! Form::open(array('route' => 'amc_expiry_reminder','method'=>'GET')) !!}
 <div class="row mt-1">
-    {!! Form::open(array('route' => 'amc_expiry_reminder','method'=>'GET')) !!}
-    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
         <div class="form-group">
             <strong class="lab_space">Start Date</strong>
             {!! Form::text('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control datepicker')) !!}
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
+        <div class="form-group">
             <strong class="lab_space">End Date</strong>
             {!! Form::text('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control datepicker')) !!}
         </div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 mt-4">
-            <button type="submit" class="btn btn_tile">Search</button>
-        </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-4">
+        <button type="submit" class="btn btn_tile">Search</button>
+    </div>
     {!! Form::close() !!}
 </div>
 <table class="table dynamic-data-table">

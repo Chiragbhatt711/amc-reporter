@@ -28,19 +28,23 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-dark ">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                    <img src="{{ asset('assets/image/logo.png') }}" height="15" alt="Logo" loading="lazy" />
+    <div id="app"class="login_register_header">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand log_register_logo" href="#">
+                    <img src="{{ asset('assets/image/logo_amc.png') }}" alt="Logo" loading="lazy" />
                 </a>
-                <div class="collapse navbar-collapse nav justify-content-center" id="main_nav">
+                <div class="log_register_menus collapse navbar-collapse nav justify-content-center" id="main_nav">
                     <ul class="navbar-nav ">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                            <a class="nav-link" href="{{ route('login') }}">
+                                <i class="fa-solid fa-right-to-bracket"></i>Login
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">Register</a>
+                            <a class="nav-link" href="{{ route('register') }}">
+                                <i class="fa-solid fa-user-plus"></i>Register
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -48,9 +52,9 @@
             </div>
             <!-- container-fluid.// -->
         </nav>
-        <main class="py-4">
-            @yield('content')
-        </main>
     </div>
+    <main class="">
+        @yield('content')
+    </main>
 </body>
 </html>
