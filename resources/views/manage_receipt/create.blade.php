@@ -22,15 +22,83 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
-                    <strong class="lab_space">AMC NO <em class="text-danger">*</em></strong>
+                    <strong class="lab_space">AMC No <em class="text-danger">*</em></strong>
                     <div class="d-flex">
-                    {!! Form::select('amc_no', array() , null, ['class' => 'form-select','placeholder' =>'Please Select', 'id'=>'product_id' ]) !!}
+                    {!! Form::select('amc_no', array() , null, ['class' => 'form-select','placeholder' =>'Please Select', 'id'=>'amc_no' ]) !!}
                 </div>
                     @error('amc_no')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="form-group">
+                    <strong class="lab_space">Date <em class="text-danger">*</em></strong>
+                    {!! Form::text('date', date('Y-m-d'), array('placeholder' => 'Date' ,'class' => 'form-control datepicker')) !!}
+                    @error('date')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="form-group">
+                    <strong class="lab_space">Mode of payment <em class="text-danger">*</em></strong>
+                    <div class="d-flex">
+                    {!! Form::select('mode_of_payment', $paymentMode , null, ['class' => 'form-select','placeholder' =>'Please Select', 'id'=>'mode_of_payment' ]) !!}
+                </div>
+                    @error('mode_of_payment')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="form-group">
+                    <strong class="lab_space">Due Amount <em class="text-danger">*</em></strong>
+                    {!! Form::text('due_amount', null, array('placeholder' => 'Due Amount' ,'class' => 'form-control')) !!}
+                    @error('due_amount')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="form-group">
+                    <strong class="lab_space">Amount <em class="text-danger">*</em></strong>
+                    {!! Form::text('amount', null, array('placeholder' => 'Amount' ,'class' => 'form-control')) !!}
+                    @error('amount')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="form-group">
+                    <strong class="lab_space">Payment Date <em class="text-danger">*</em></strong>
+                    {!! Form::text('payment_date', date('Y-m-d'), array('placeholder' => 'Payment Date' ,'class' => 'form-control datepicker')) !!}
+                    @error('payment_date')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="form-group">
+                    <strong class="lab_space">Reference No</strong>
+                    {!! Form::text('reference_no', null, array('placeholder' => 'Reference No' ,'class' => 'form-control')) !!}
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                <strong class="lab_space">Note</strong>
+                <div class="d-flex">
+                    {!! Form::textarea('note', null, ['class' => 'form-control','placeholder' =>'Note','id' => 'note' ]) !!}
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                <div class="d-flex flex-row checkboxes">
+                    <div class="check d-flex flex-row align-items-center gap-2">
+                        {{ Form::checkbox('print', 1, false, ['class' => 'print',]) }}
+                        Print Receipt
+                    </div>
+                </div>
+            </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn_tile">Submit</button>
             </div>
@@ -42,6 +110,28 @@
 
 @section('js-script')
 <script>
+
+$('#party_id').change(function(){
+    var party_id = $('#party_id').val();
+    $.ajax({
+        url:'{{ route('get_amc_number') }}',
+        type:'POST',
+        data:{
+            '_token' : $('meta[name="csrf-token"]').attr('content'),
+            party_id:party_id,
+        },
+        success:function(data) {
+            data = JSON.parse(data);
+            var html = "<option value=''>Please select</option>";
+            $.each(data, function (key, value) {
+                html += "<option value='"+key+"'>"+value+"</option>";
+            });
+            $('#amc_no').html(html);
+        }
+    });
+
+});
+
 
 </script>
 @endsection

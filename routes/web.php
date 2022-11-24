@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/product-add','ManageAmcController@product_add');
     Route::post('/get-tex','ManageTaxController@getTex');
     Route::get('/amc-expiry-reminder','AmcExpiryReminderController@index')->name('amc_expiry_reminder');
+    Route::post('/get-amc-number','ManageReceiptController@getAmcNumber')->name('get_amc_number');
 
     Route::resource('amc', AmcController::class);
     Route::resource('roles', RoleController::class);
@@ -46,5 +47,5 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('manage_receipt',ManageReceiptController::class);
     Route::resource('manage_complaint_template',ManageComplaintTemplateController::class);
     Route::resource('manage_solution_template',ManageSolutionTemplateController::class);
-    
+
 });

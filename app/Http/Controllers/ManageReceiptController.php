@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ManageReceipt;
 use Illuminate\Http\Request;
 use App\Models\ManageParty;
+use App\Models\ManageAmc;
 
 class ManageReceiptController extends Controller
 {
@@ -32,7 +33,14 @@ class ManageReceiptController extends Controller
         {
             $partyName += [$data->id => $data->party_name.','.$data->city];
         }
-        return view('manage_receipt.create',compact('partyName'));
+        $paymentMode = [
+            'Cash' => 'Cash',
+            'Cheque' => 'Cheque',
+            'DD' => 'DD',
+            'Net Transfer/RTGS/NEFT',
+            'Other' => 'Other',
+        ];
+        return view('manage_receipt.create',compact('partyName','paymentMode'));
     }
 
     /**
@@ -89,5 +97,20 @@ class ManageReceiptController extends Controller
     public function destroy(ManageReceipt $manageReceipt)
     {
         //
+    }
+
+    public function getAmcNumber(Request $request)
+    {
+        $admin_id = admin_id();
+        $party_id = $request->party_id;
+
+        $amcData = ManageAmc::where(['admin_id' => $admin_id,'party_id' => $party_id])->get();
+        $data=[];
+        foreach ($amcData as $value)
+        {
+            $data += [$value['id'] => $value['id'].', '.$value['amc_type'].', '.$value['start_date'].' To '.$value['end_date']];
+        }
+
+        return json_encode($data);
     }
 }
