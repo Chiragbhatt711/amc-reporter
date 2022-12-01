@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/get-tex','ManageTaxController@getTex');
     Route::get('/amc-expiry-reminder','AmcExpiryReminderController@index')->name('amc_expiry_reminder');
     Route::post('/get-amc-number','ManageReceiptController@getAmcNumber')->name('get_amc_number');
+    Route::post('/get-due-amount','ManageReceiptController@getDueAmount')->name('get_due_amount');
 
     Route::resource('amc', AmcController::class);
     Route::resource('roles', RoleController::class);

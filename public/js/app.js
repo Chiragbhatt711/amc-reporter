@@ -425,6 +425,32 @@ function productDitailsHide(id)
     $('#productHide_'+id).hide();
     $('.child_row_'+id).hide();
 }
-// $('.table').DataTable( {
-//     responsive: true,
-// } );
+
+function dueAmount()
+{
+    let amc_no = $('#amc_no').val();
+    $('#due_amount').val(0.00);
+    $('#total_amount').val(0.00);
+    if(amc_no)
+    {
+        $.ajax({
+            url:'/get-due-amount',
+            type:'POST',
+            data:{
+                    '_token' : $('meta[name="csrf-token"]').attr('content'),
+                    amc_no:amc_no,
+            },
+            success:function(data) {
+                $('#due_amount').val(data);
+                $('#total_amount').val(data);
+            }
+        });
+    }
+}
+
+$('#amount').keyup(function(){
+    let total_amount = $('#total_amount').val();
+    let amount = $('#amount').val();
+    $('#due_amount').val(total_amount - amount);
+
+});

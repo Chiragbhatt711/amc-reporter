@@ -6,6 +6,7 @@ use App\Models\ManageReceipt;
 use Illuminate\Http\Request;
 use App\Models\ManageParty;
 use App\Models\ManageAmc;
+use Illuminate\Support\Facades\DB;
 
 class ManageReceiptController extends Controller
 {
@@ -112,5 +113,20 @@ class ManageReceiptController extends Controller
         }
 
         return json_encode($data);
+    }
+
+    public function getDueAmount(Request $request)
+    {
+        $amc_no = $request->amc_no;
+
+        $row = ManageAmc::where('manage_amcs.id',$amc_no)
+            ->join('manage_receipts','manage_amcs.id','=','manage_receipts.amc_id','LEFT')
+            ->select('manage_amcs.total_amount as total_amount',DB::raw('SUM(manage_receipts.amount) as amount'))
+            ->groupBy('manage_receipts.amc_id','total_amount')
+            ->get()->toArray();
+
+        $dueAmount = $row[0]['total_amount'] - $row[0]['amount'];
+
+        return $dueAmount;
     }
 }

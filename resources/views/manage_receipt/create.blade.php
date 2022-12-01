@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <strong class="lab_space">AMC No <em class="text-danger">*</em></strong>
                     <div class="d-flex">
-                    {!! Form::select('amc_no', array() , null, ['class' => 'form-select','placeholder' =>'Please Select', 'id'=>'amc_no' ]) !!}
+                    {!! Form::select('amc_no', array() , null, ['class' => 'form-select','placeholder' =>'Please Select', 'id'=>'amc_no','onchange' => 'dueAmount()' ]) !!}
                 </div>
                     @error('amc_no')
                     <div class="text-danger">{{ $message }}</div>
@@ -34,7 +34,7 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Date <em class="text-danger">*</em></strong>
-                    {!! Form::text('date', date('Y-m-d'), array('placeholder' => 'Date' ,'class' => 'form-control datepicker')) !!}
+                    {!! Form::text('date', date('Y-m-d'), array('placeholder' => 'Date' ,'class' => 'form-control datepicker','id' => 'date')) !!}
                     @error('date')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -54,7 +54,8 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Due Amount <em class="text-danger">*</em></strong>
-                    {!! Form::text('due_amount', null, array('placeholder' => 'Due Amount' ,'class' => 'form-control')) !!}
+                    {!! Form::text('due_amount', null, array('placeholder' => 'Due Amount' ,'class' => 'form-control','id' => 'due_amount')) !!}
+                    {!! Form::hidden('total_amount', null, array('id' => 'total_amount')) !!}
                     @error('due_amount')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -63,7 +64,7 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Amount <em class="text-danger">*</em></strong>
-                    {!! Form::text('amount', null, array('placeholder' => 'Amount' ,'class' => 'form-control')) !!}
+                    {!! Form::text('amount', null, array('placeholder' => 'Amount' ,'class' => 'form-control','id' => 'amount')) !!}
                     @error('amount')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
