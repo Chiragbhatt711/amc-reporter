@@ -10,11 +10,13 @@ class ManageReceipt extends Model
     use HasFactory;
     protected $fillable = [
         'admin_id',
+        'party_id',
         'amc_id',
         'date',
         'payment_mode',
         'amount',
         'reference_no',
         'note',
+        'payment_date',
     ];
 }

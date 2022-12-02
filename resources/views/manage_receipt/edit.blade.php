@@ -4,7 +4,7 @@
 @if (count($errors) > 0)
 
 @endif
-{!! Form::open(array('route' => 'manage_receipt.store','method'=>'POST','enctype'=>'multipart/form-data')) !!}
+{!! Form::model($receipt, ['method' => 'PATCH','route' => ['manage_receipt.update', $receipt->id]]) !!}
 @csrf
 <div class="container">
     <div id="accordion">
@@ -34,7 +34,7 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Date <em class="text-danger">*</em></strong>
-                    {!! Form::text('date', date('Y-m-d'), array('placeholder' => 'Date' ,'class' => 'form-control datepicker','id' => 'date')) !!}
+                    {!! Form::text('date', null, array('placeholder' => 'Date' ,'class' => 'form-control datepicker','id' => 'date')) !!}
                     @error('date')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -73,7 +73,7 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Payment Date <em class="text-danger">*</em></strong>
-                    {!! Form::text('payment_date', date('Y-m-d'), array('placeholder' => 'Payment Date' ,'class' => 'form-control datepicker')) !!}
+                    {!! Form::text('payment_date', null, array('placeholder' => 'Payment Date' ,'class' => 'form-control datepicker')) !!}
                     @error('payment_date')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -111,9 +111,13 @@
 
 @section('js-script')
 <script>
+$(document).ready(function(){
+    $('#party_id').trigger('change');
 
+});
 $('#party_id').change(function(){
     var party_id = $('#party_id').val();
+    var amc_no = "{{ $receipt->amc_id }}";
     $.ajax({
         url:'{{ route('get_amc_number') }}',
         type:'POST',
@@ -125,9 +129,15 @@ $('#party_id').change(function(){
             data = JSON.parse(data);
             var html = "<option value=''>Please select</option>";
             $.each(data, function (key, value) {
-                html += "<option value='"+key+"'>"+value+"</option>";
+                var select = "";
+                if(amc_no == key)
+                {
+                    select = "selected";
+                }
+                html += "<option value='"+key+"' "+select+">"+value+"</option>";
             });
             $('#amc_no').html(html);
+            $('#amc_no').trigger('change');
         }
     });
 
@@ -136,6 +146,7 @@ $('#party_id').change(function(){
 function dueAmount()
 {
     let amc_no = $('#amc_no').val();
+    let id = "{{ $receipt->id }}";
     $('#due_amount').val(0.00);
     $('#total_amount').val(0.00);
     if(amc_no)
@@ -146,10 +157,12 @@ function dueAmount()
             data:{
                     '_token' : $('meta[name="csrf-token"]').attr('content'),
                     amc_no:amc_no,
+                    id:id
             },
             success:function(data) {
                 $('#due_amount').val(data);
                 $('#total_amount').val(data);
+                $('#amount').trigger('keyup');
             }
         });
     }
@@ -161,7 +174,6 @@ $('#amount').keyup(function(){
     $('#due_amount').val(total_amount - amount);
 
 });
-
 
 </script>
 @endsection

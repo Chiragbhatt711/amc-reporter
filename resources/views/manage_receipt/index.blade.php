@@ -32,26 +32,26 @@
             </tr>
         </thead>
         <tbody>
-            @if(isset($tax) && $tax)
+            @if(isset($receipt) && $receipt)
                 @php
                     $i = 0;
                 @endphp
-                @foreach ($tax as $value)
+                @foreach ($receipt as $value)
                     @php
                         $i++;
                     @endphp
                     <tr>
-                        <td>{{ $value->profile_name }}</td>
-                        <td>{{ $value->tax_lable_name }}</td>
-                        <td>{{ $value->tax_caption_1 }}</td>
-                        <td>{{ $value->tax_percentage_1 }}</td>
-                        <td>{{ $value->tax_caption_2 }}</td>
-                        <td>{{ $value->tax_percentage_2 }}</td>
-                        <td>{{ $value->tax_caption_3 }}</td>
-                        <td>{{ $value->tax_percentage_3 }}</td>
-                        <td>{{ $value->tax_caption_4 }}</td>
-                        <td>{{ $value->tax_percentage_4 }}</td>
-                        <td>{{ $value->tax_caption_5 }}</td>
+                        <td>{{ $value->date }}</td>
+                        <td>{{ $value->party_name }}</td>
+                        <td>{{ $value->contact_person_name   }}</td>
+                        <td>{{ $value->city }}</td>
+                        <td>{{ $value->amc_no }}</td>
+                        <td>{{ $value->amc_type }}</td>
+                        <td>{{ $value->payment_mode }}</td>
+                        <td>{{ $value->amount }}</td>
+                        <td>{{ $value->payment_date }}</td>
+                        <td>{{ $value->reference_no }}</td>
+                        <td>{{ $value->note }}</td>
                         <td>
                             @can('user-edit')
                                 <a href="{{Route('manage_receipt.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>

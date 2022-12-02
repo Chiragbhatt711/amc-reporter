@@ -17,7 +17,14 @@ class ManageReceiptController extends Controller
      */
     public function index()
     {
-        return view('manage_receipt.index');
+        $admin_id = admin_id();
+        $receipt = ManageReceipt::where('manage_receipts.admin_id',$admin_id)
+            ->join('manage_parties','manage_receipts.party_id','manage_parties.id','LEFT')
+            ->join('manage_amcs','manage_receipts.amc_id','manage_amcs.id')
+            ->select('manage_receipts.*','manage_parties.party_name as party_name','manage_parties.contact_person_name as contact_person_name','manage_parties.city as city','manage_amcs.id as amc_no','manage_amcs.amc_type as amc_type')
+            ->get();
+
+        return view('manage_receipt.index',compact('receipt'));
     }
 
     /**
@@ -38,7 +45,7 @@ class ManageReceiptController extends Controller
             'Cash' => 'Cash',
             'Cheque' => 'Cheque',
             'DD' => 'DD',
-            'Net Transfer/RTGS/NEFT',
+            'Net Transfer/RTGS/NEFT' => 'Net Transfer/RTGS/NEFT',
             'Other' => 'Other',
         ];
         return view('manage_receipt.create',compact('partyName','paymentMode'));
@@ -52,7 +59,29 @@ class ManageReceiptController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'party_id' => 'required',
+            'amc_id' => 'required',
+            'date' => 'required',
+            'payment_mode' => 'required',
+            'amount' => 'required',
+            'payment_date' =>'required',
+
+        ],[
+            'party_id.required'=> 'Please select party',
+            'amc_id.required'=> 'Please select amc no',
+            'date.required' => 'Please enter date',
+            'payment_mode.required' => 'Please select mode of payment',
+            'amount.required' => 'Please enter amount',
+            'payment_date.required' => 'Please enter payment date',
+        ]);
+
+        $input = $request->all();
+        $admin_id = admin_id();
+        $input['admin_id'] = $admin_id;
+        $insert = ManageReceipt::create($input);
+
+        return redirect()->route('manage_receipt.index')->with('success','Manage receipt create successfully');
     }
 
     /**
@@ -72,9 +101,32 @@ class ManageReceiptController extends Controller
      * @param  \App\Models\ManageReceipt  $manageReceipt
      * @return \Illuminate\Http\Response
      */
-    public function edit(ManageReceipt $manageReceipt)
+    public function edit($id)
     {
-        //
+        $receipt = ManageReceipt::find($id);
+
+        $admin_id = admin_id();
+        if($receipt->admin_id == $admin_id)
+        {
+            $party = ManageParty::select('id','party_name','city')->where('admin_id',$admin_id)->get();
+            $partyName = [];
+            foreach($party as $data)
+            {
+                $partyName += [$data->id => $data->party_name.','.$data->city];
+            }
+            $paymentMode = [
+                'Cash' => 'Cash',
+                'Cheque' => 'Cheque',
+                'DD' => 'DD',
+                'Net Transfer/RTGS/NEFT' => 'Net Transfer/RTGS/NEFT',
+                'Other' => 'Other',
+            ];
+            return view('manage_receipt.edit',compact('receipt','partyName','paymentMode'));
+        }
+        else
+        {
+            return redirect()->route('manage_receipt.index')->with('success','Somthing with wrong');
+        }
     }
 
     /**
@@ -84,9 +136,38 @@ class ManageReceiptController extends Controller
      * @param  \App\Models\ManageReceipt  $manageReceipt
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ManageReceipt $manageReceipt)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'party_id' => 'required',
+            'amc_id' => 'required',
+            'date' => 'required',
+            'payment_mode' => 'required',
+            'amount' => 'required',
+            'payment_date' =>'required',
+
+        ],[
+            'party_id.required'=> 'Please select party',
+            'amc_id.required'=> 'Please select amc no',
+            'date.required' => 'Please enter date',
+            'payment_mode.required' => 'Please select mode of payment',
+            'amount.required' => 'Please enter amount',
+            'payment_date.required' => 'Please enter payment date',
+        ]);
+
+        $input = $request->all();
+        $admin_id = admin_id();
+        $receipt = ManageReceipt::find($id);
+
+        if($receipt->admin_id == $admin_id)
+        {
+            $receipt->update($input);
+            return redirect()->route('manage_receipt.index')->with('success','Manage receipt update successfully');
+        }
+        else
+        {
+            return redirect()->route('manage_receipt.index')->with('success','Somthing with wrong');
+        }
     }
 
     /**
@@ -95,9 +176,20 @@ class ManageReceiptController extends Controller
      * @param  \App\Models\ManageReceipt  $manageReceipt
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ManageReceipt $manageReceipt)
+    public function destroy($id)
     {
-        //
+        $admin_id = admin_id();
+        $receipt = ManageReceipt::find($id);
+
+        if($receipt->admin_id == $admin_id)
+        {
+            $receipt->delete();
+            return redirect()->route('manage_receipt.index')->with('success','Manage receipt delete successfully');
+        }
+        else
+        {
+            return redirect()->route('manage_receipt.index')->with('success','Somthing with wrong');
+        }
     }
 
     public function getAmcNumber(Request $request)
@@ -119,8 +211,18 @@ class ManageReceiptController extends Controller
     {
         $amc_no = $request->amc_no;
 
-        $row = ManageAmc::where('manage_amcs.id',$amc_no)
-            ->join('manage_receipts','manage_amcs.id','=','manage_receipts.amc_id','LEFT')
+        $id = "";
+        if(isset($request->id) && $request->id)
+        {
+            $id = $request->id;
+        }
+
+        $row = ManageAmc::where('manage_amcs.id',$amc_no);
+        if($id)
+        {
+            $row->where('manage_receipts.id','!=',$id);
+        }
+        $row = $row->join('manage_receipts','manage_amcs.id','=','manage_receipts.amc_id','LEFT')
             ->select('manage_amcs.total_amount as total_amount',DB::raw('SUM(manage_receipts.amount) as amount'))
             ->groupBy('manage_receipts.amc_id','total_amount')
             ->get()->toArray();
