@@ -40,6 +40,7 @@
           <th scope="col">AMC Type</th>
           <th scope="col">Start Date</th>
           <th scope="col">End Date</th>
+          <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -61,7 +62,12 @@
                     <td>{{ $value->amc_type }}</td>
                     <td>{{ $value->start_date }}</td>
                     <td>{{ $value->end_date }}</td>
-                    
+                    <td>
+                        @can('contract-type-edit')
+                            <a href="{{Route('amc_renew',$value->id)}}"> <i class="fas fa-sync"></i> </a>
+                        @endcan
+                    </td>
+
                 </tr>
             @endforeach
         @endif
