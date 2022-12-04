@@ -16,7 +16,7 @@
             @endcan
         <!-- </div> -->
     </div>
-    <table class="table table-striped">
+    <table class="table dynamic-data-table">
         <thead>
             <tr>
                 <th>No</th>

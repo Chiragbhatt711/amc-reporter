@@ -13,7 +13,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <div class="form-group">
                                         <strong>Name:</strong>
-                                        {!! Form::text( 'name', null, array('placeholder' =>'Name','class' => 'form-control')) !!}
+                                        {!! Form::text( 'name', null, array('placeholder' =>'Name','class' => 'form-control', $role->name == 'Executive' || $role->name == 'Admin' ? 'readonly' : '')) !!}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

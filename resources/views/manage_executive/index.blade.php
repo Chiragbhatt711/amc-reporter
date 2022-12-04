@@ -7,10 +7,10 @@
         </div>
     @endif
     <div class="title">
-        <h3>Users</h3>
+        <h3>Manage Executive</h3>
         <!-- <div class="pull-right"> -->
             @can('user-create')
-                <a class="btn add_btn" href="{{ Route('users.create') }}">
+                <a class="btn add_btn" href="{{ Route('manage_executive.create') }}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </a>
             @endcan
@@ -42,7 +42,7 @@
                         <td>{{ $value->role }}</td>
                         <td>
                             @can('user-edit')
-                                <a href="{{Route('users.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
+                                <a href="{{Route('manage_executive.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                             @endcan
                             @can('user-delete')
                                 <a onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
@@ -77,7 +77,7 @@
 @section('js-script')
 <script>
 function deleteFunction(id){
-    $('#deleteForm').attr('action','{{ url("users") }}'+ '/'+id);
+    $('#deleteForm').attr('action','{{ url("manage_executive") }}'+ '/'+id);
     $('#deleteModal').modal('show');
 }
 </script>

@@ -84,7 +84,7 @@ class ManageAmcController extends Controller
 
         ],[
             'party_id.required' => 'Please select party name',
-            'amc_type.required' => 'Please select party name',
+            'amc_type.required' => 'Please select amc type',
             'start_date.required' => 'Please select start date',
             'end_date.required' => 'Please select end date',
             'product_id.required' => 'Please select product',
@@ -105,6 +105,7 @@ class ManageAmcController extends Controller
             'tax' => $request->tax_id,
             'service_day' => $request->service_day,
             'no_of_service' => $request->no_of_service,
+            'no_of_installment' => $request->no_of_installment,
             'total_amount' => $request->total_amount,
         ];
         $manageAmcCreate = ManageAmc::create($manageAmc);
@@ -252,7 +253,7 @@ class ManageAmcController extends Controller
 
         ],[
             'party_id.required' => 'Please select party name',
-            'amc_type.required' => 'Please select party name',
+            'amc_type.required' => 'Please select amc type',
             'start_date.required' => 'Please select start date',
             'end_date.required' => 'Please select end date',
             'product_id.required' => 'Please select product',

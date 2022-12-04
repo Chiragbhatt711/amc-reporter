@@ -5,63 +5,52 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
-use DB;
 use Hash;
-use Arr;
 
-class UserController extends Controller
+class ExecutiveController extends Controller
 {
-    function __construct()
-    {
-         $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
-         $this->middleware('permission:user-create', ['only' => ['create','store']]);
-         $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
-    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-
-        $roleId = Role::where('name','=','Admin')->first();
-        $role_id = $roleId->id;
-        $userRole = auth()->user()->role_id;
-
-        if($userRole == $role_id)
+        $admin_id = admin_id();
+        $roles = Role::where('admin_id',$admin_id)->where('name','=','Executive')->get()->pluck('id')->toArray();
+        $roleId = '';
+        if($roles)
         {
-            $admin_id = auth()->user()->id;
-        }
-        else
-        {
-            $admin_id = auth()->user()->admin_id;
+            $roleId = $roles[0];
         }
 
         $users = User::orderBy('users.id','ASC')->where('users.admin_id',$admin_id)
             ->join('roles','users.role_id','=','roles.id')
+            ->where('role_id',$roleId)
             ->select('users.*','roles.name as role')
             ->get();
-
-        return view('users.index',compact('users'));
+        return view('manage_executive.index',compact('users'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        $roleId = Role::where('name','=','Admin')->first();
-        $role_id = $roleId->id;
-        $userRole = auth()->user()->role_id;
+        $admin_id = admin_id();
+        $roles = Role::orderBy('id','ASC')->where('admin_id',$admin_id)->where('name','=','Executive')->get()->pluck('name','id')->toArray();
 
-        if($userRole == $role_id)
-        {
-            $admin_id = auth()->user()->id;
-        }
-        else
-        {
-            $admin_id = auth()->user()->admin_id;
-        }
-        $roles = Role::orderBy('id','ASC')->where('admin_id',$admin_id)->get()->pluck('name','id')->toArray();
-
-        return view('users.create',compact('roles'));
+        return view('manage_executive.create',compact('roles'));
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -80,18 +69,7 @@ class UserController extends Controller
             'password.required' => 'Please enter password',
         ]);
 
-        $roleId = Role::where('name','=','Admin')->first();
-        $role_id = $roleId->id;
-        $userRole = auth()->user()->role_id;
-
-        if($userRole == $role_id)
-        {
-            $admin_id = auth()->user()->id;
-        }
-        else
-        {
-            $admin_id = auth()->user()->admin_id;
-        }
+        $admin_id = admin_id();
 
         $input = $request->all();
         if(isset($input['password']) && $input['password'])
@@ -106,9 +84,26 @@ class UserController extends Controller
         $role = Role::where('id', $request->input('role_id'))->select('name')->first()->toArray();
         $user->assignRole($role['name']);
 
-        return redirect()->route('users.index')->with('success','User create uccessfully');
+        return redirect()->route('manage_executive.index')->with('success','Executive create uccessfully');
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
         $user = User::find($id);
@@ -116,32 +111,28 @@ class UserController extends Controller
         {
             if($user->admin_id == auth()->user()->id || $user->admin_id = auth()->user()->admin_id)
             {
-                $roleId = Role::where('name','=','Admin')->first();
-                $role_id = $roleId->id;
-                $userRole = auth()->user()->role_id;
-
-                if($userRole == $role_id)
-                {
-                    $admin_id = auth()->user()->id;
-                }
-                else
-                {
-                    $admin_id = auth()->user()->admin_id;
-                }
-                $roles = Role::orderBy('id','ASC')->where('admin_id',$admin_id)->get()->pluck('name','id')->toArray();
-                return view('users.edit',compact('user','roles'));
+                $admin_id = admin_id();
+                $roles = Role::orderBy('id','ASC')->where('admin_id',$admin_id)->where('name','=','Executive')->get()->pluck('name','id')->toArray();
+                return view('manage_executive.edit',compact('user','roles'));
             }
             else
             {
-                return redirect()->route('users.index')->with('success','Somthing wrong');
+                return redirect()->route('manage_executive.index')->with('success','Somthing wrong');
             }
         }
         else
         {
-            return redirect()->route('users.index')->with('success','Somthing wrong');
+            return redirect()->route('manage_executive.index')->with('success','Somthing wrong');
         }
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -180,14 +171,29 @@ class UserController extends Controller
         $role = Role::where('id', $request->input('role_id'))->select('name')->first()->toArray();
         $user->assignRole($role['name']);
 
-        return redirect()->route('users.index')
-                        ->with('success','User update successfully');
+        return redirect()->route('manage_executive.index')
+                        ->with('success','Executive update successfully');
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
-        User::find($id)->delete();
-        return redirect()->route('users.index')
-                        ->with('success',__('User delete successfully'));
+        $user = User::find($id);
+        $admin_id = admin_id();
+        if($user->admin_id == $admin_id)
+        {
+            $user->delete();
+            return redirect()->route('manage_executive.index')
+                            ->with('success',__('Executive delete successfully'));
+        }
+        else
+        {
+            return redirect()->route('manage_executive.index')->with('success','Somthing wrong');
+        }
     }
 }

@@ -7,7 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'AMC Reporter') }}</title>
+    {{-- <title>{{ config('app.name', 'AMC Reporter') }}</title> --}}
+    <title>AMC Reporter</title>
     <!-- Styles -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -87,11 +88,11 @@
                                         </a>
                                     </li>
                                     <li class="dropdown-item">
-                                        <a class="nav-link" href="#">
+                                        <a class="nav-link" href="{{ route('payment_pending_report.index') }}">
                                         <i class=""></i>Payment Pending Report
                                         </a>
                                     </li>
-    
+
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
@@ -107,6 +108,11 @@
                                     <li class="dropdown-item">
                                         <a class="nav-link" href="{{ route('manage_solution_template.index') }}">
                                             <i class=""></i>Solution Template
+                                        </a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a class="nav-link" href="{{ route('manage_executive.index') }}">
+                                            <i class=""></i>Manage Executive
                                         </a>
                                     </li>
                                 </ul>

@@ -97,6 +97,18 @@ class RegisterController extends Controller
         $user = User::create($input);
         $user->assignRole([$role->id]);
 
+        $role = [
+                    'name' => 'Executive',
+                    'admin_id' => $user->id
+        ];
+
+        $role = Role::create($role);
+
+        if($request['permission'])
+        {
+            $role->syncPermissions($request->input('permission'));
+        }
+
         return redirect()->route('login.index');
     }
 }

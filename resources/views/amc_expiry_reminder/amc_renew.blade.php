@@ -25,15 +25,18 @@ th {
 @if (count($errors) > 0)
 
 @endif
-{!! Form::model($manageAmc, ['method' => 'PATCH','route' => ['manage_amc.update', $manageAmc->id]]) !!}
+{!! Form::model($manageAmc, ['method' => 'PATCH','route' => ['amc_renew_update', $manageAmc->id]]) !!}
 @csrf
 <div class="container">
     <div id="accordion">
         <div class="row mt-1">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <h4 class="form_sub_title">Last AMC detail</h4>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <strong class="lab_space">party name  <em class="text-danger">*</em></strong>
                 <div class="d-flex">
-                    {!! Form::select('party_id', $partyName , null, ['class' => 'form-select','placeholder' =>'Please Select','id'=>'party_id' ]) !!}
+                    {!! Form::select('party_id', $partyName , null, ['class' => 'form-select','placeholder' =>'Please Select','id'=>'party_id','disabled' ]) !!}
                     {{-- <i title="Add Party" class="ml-1 btn btn_tile fa fa-plus plus_btn" aria-hidden="true" id="addModel" data-bs-toggle="modal" data-bs-target="#modelModal"></i> --}}
                 </div>
                 @error('party_id')
@@ -41,27 +44,60 @@ th {
                 @enderror
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                <strong class="lab_space">AMC No</strong>
+                {!! Form::text('amc_no', $manageAmc->id, ['class' => 'form-control','placeholder' =>'AMC No','disabled' ]) !!}
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                 <strong class="lab_space">AMC Type<em class="text-danger">*</em></strong>
-                    {!! Form::select('amc_type', array('New'=>'New','AMC'=>'AMC','No AMC'=>'No AMC','CMC'=>'CMC','Warranty'=>'Warranty','Free'=>'Free') , null, ['class' => 'form-select','placeholder' =>'Please Select','id'=>'amc_type' ]) !!}
+                    {!! Form::select('amc_type', array('New'=>'New','AMC'=>'AMC','No AMC'=>'No AMC','CMC'=>'CMC','Warranty'=>'Warranty','Free'=>'Free') , null, ['class' => 'form-select','placeholder' =>'Please Select','id'=>'amc_type','disabled' ]) !!}
                 @error('amc_type')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                 <strong class="lab_space">Start Date<em class="text-danger">*</em></strong>
-                {!! Form::text('start_date', null, array('placeholder' => 'Start date','class' => 'form-control datepicker','id'=>'start_date')) !!}
+                {!! Form::text('start_date', null, array('placeholder' => 'Start date','class' => 'form-control datepicker','disabled')) !!}
                 @error('start_date')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                 <strong class="lab_space">End Date<em class="text-danger">*</em></strong>
-                {!! Form::text('end_date', null, array('placeholder' => 'End date','class' => 'form-control datepicker','id'=>'end_date')) !!}
+                {!! Form::text('end_date', null, array('placeholder' => 'End date','class' => 'form-control datepicker','disabled')) !!}
+                @error('end_date')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                <strong class="lab_space">Contract Amount <em class="text-danger">*</em></strong>
+                {!! Form::text('contract_amount', null, ['class' => 'form-control','placeholder' =>'Contract Amount','disabled' ]) !!}
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                <strong class="lab_space">Tax profile <em class="text-danger">*</em></strong>
+                {!! Form::select('tax_id', $tax , $manageAmc->tax, ['class' => 'form-select','placeholder' =>'Please Select','disabled' ]) !!}
+            </div>
+        </div>
+
+        <div class="row mt-1">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <h4 class="form_sub_title">New AMC detail</h4>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                <strong class="lab_space">Start Date<em class="text-danger">*</em></strong>
+                {!! Form::text('start_date', date('Y-m-d', strtotime($manageAmc->end_date." +1 day")), array('placeholder' => 'Start date','class' => 'form-control datepicker','id'=>'start_date')) !!}
+                @error('start_date')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                <strong class="lab_space">End Date<em class="text-danger">*</em></strong>
+                {!! Form::text('end_date', date('Y-m-d', strtotime($manageAmc->end_date." +366 day")), array('placeholder' => 'End date','class' => 'form-control datepicker','id'=>'end_date')) !!}
                 @error('end_date')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
         </div>
+
         <div class="row mt-2">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <h4 class="form_sub_title">AMC Product detail</h4>
@@ -161,10 +197,10 @@ th {
                             <span id="serviceE" class="text-danger"></span>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-end">
-                            <a href="" class="form_btn mt-3" name="set_service" value="Set Service" onclick="setService();">Set Service</a>
+                            <a href="javascript:void(0)" class="form_btn mt-3" name="set_service" value="Set Service" onclick="setService();" id="set_service">Set Service</a>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                            <a href="" class="form_btn mt-3" name="cleare_service" value="Clear All" onclick="cleareService();">Clear All</a>
+                            <a href="javascript:void(0)" class="form_btn mt-3" name="cleare_service" value="Clear All" onclick="cleareService();">Clear All</a>
                         </div>
                         <div class="fixTableHead mt-2">
                             <table class="table">
@@ -176,24 +212,7 @@ th {
                                     </tr>
                                 </thead>
                                 <tbody id="service_body">
-                                    @if (isset($service) && $service)
-                                        @php $count = 0; @endphp
-                                        @foreach ($service as $data)
-                                        @php $count++; @endphp
-                                            <tr>
-                                                <td>
-                                                    {{$count}}
-                                                </td>
-                                                <td>
-                                                    {{ $data->service_date }}
-                                                    <input type="hidden" name="service_{{$count}}" value="{{ $data->service_date }}">
-                                                </td>
-                                                <td>
-                                                    {{$count.' Free Service'}}
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @endif
+
                                 </tbody>
                             </table>
                         </div>
@@ -231,10 +250,10 @@ th {
                             {{ Form::hidden('total_amount', 'secret', array('id' => 'total_amount')) }}
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-end">
-                            <a href="" class="form_btn" name="set" value="Set" onclick="setSchedulePayment();">Set</a>
+                            <a href="javascript:void(0)" class="form_btn" name="set" value="Set" id="schedule_payment" onclick="setSchedulePayment();">Set</a>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                            <a href="" class="form_btn" name="schedule_payment" value="Clear All" onclick="cleareSchedulePayment();">Clear All</a>
+                            <a href="javascript:void(0)" class="form_btn" name="schedule_payment" value="Clear All" onclick="cleareSchedulePayment();">Clear All</a>
                         </div>
                         <div class="fixTableHead mt-3">
                             <table class="table">
@@ -247,28 +266,7 @@ th {
                                     </tr>
                                 </thead>
                                 <tbody id="schedule_payment_body">
-                                    @if (isset($payment) && $payment)
-                                        @php $count = 0; @endphp
-                                        @foreach ($payment as $data)
-                                        @php $count++; @endphp
-                                            <tr>
-                                                <td>
-                                                    {{$count}}
-                                                </td>
-                                                <td>
-                                                    {{ $data->installment_date }}
-                                                    <input type="hidden" name="installmetn_{{$count}}" value="{{ $data->installment_date }}">
-                                                </td>
-                                                <td>
-                                                    {{ $data->installment_amount }}
-                                                    <input type="hidden" name="amount_{{$count}}" value="{{ $data->installment_amount }}">
-                                                </td>
-                                                <td>
-                                                    {{$count.' Installment'}}
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @endif
+
                                 </tbody>
                             </table>
                         </div>
@@ -287,6 +285,10 @@ th {
 <script>
 $(document).ready(function(){
     $('#tax_id').trigger('change');
+    setTimeout(function () {
+        $('#set_service').trigger('click');
+        $('#schedule_payment').trigger('click');
+    },1000);
 });
 </script>
 @endsection
