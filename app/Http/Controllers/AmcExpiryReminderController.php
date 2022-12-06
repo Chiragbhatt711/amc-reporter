@@ -37,7 +37,7 @@ class AmcExpiryReminderController extends Controller
 
         $data = ManageAmc::where('manage_amcs.admin_id',$admin_id)
         ->whereBetween('manage_amcs.end_date',[$startDate,$endDate])
-        ->join('manage_parties','manage_amcs.party_id','manage_parties.id')
+        ->join('manage_parties','manage_amcs.party_id','manage_parties.id','LEFT')
         ->select('manage_amcs.id as id','manage_amcs.amc_type as amc_type','manage_amcs.start_date as start_date','manage_amcs.end_date as end_date','manage_parties.party_name as party_name','manage_parties.contact_person_name as person_name','manage_parties.city as city','manage_parties.mobile_no as mobile_no')
         ->get();
 

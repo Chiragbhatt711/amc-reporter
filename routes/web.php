@@ -53,5 +53,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('manage_solution_template',ManageSolutionTemplateController::class);
     Route::resource('payment_pending_report',PaymentPendingReportController::class);
     Route::resource('manage_executive',ExecutiveController::class);
+    Route::resource('service_tax_report',ServiceTaxReportController::class);
 
 });

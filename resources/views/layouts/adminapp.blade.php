@@ -92,6 +92,11 @@
                                         <i class=""></i>Payment Pending Report
                                         </a>
                                     </li>
+                                    <li class="dropdown-item">
+                                        <a class="nav-link" href="{{ route('service_tax_report.index') }}">
+                                        <i class=""></i>Service Tax Report
+                                        </a>
+                                    </li>
 
                                 </ul>
                             </li>

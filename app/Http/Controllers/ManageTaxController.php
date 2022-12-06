@@ -157,6 +157,4 @@ class ManageTaxController extends Controller
 
         return $totalTax;
     }
-
-
 }
