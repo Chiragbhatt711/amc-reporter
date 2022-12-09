@@ -120,6 +120,11 @@
                                             <i class=""></i>Manage Executive
                                         </a>
                                     </li>
+                                    <li class="dropdown-item">
+                                        <a class="nav-link" href="{{ route('manage_complaint.index') }}">
+                                            <i class=""></i>Manage Complaint
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown" >
