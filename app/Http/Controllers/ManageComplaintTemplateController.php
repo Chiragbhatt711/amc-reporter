@@ -49,7 +49,7 @@ class ManageComplaintTemplateController extends Controller
         $input['admin_id'] = admin_id();
         $create = ManageComplaintTemplate::create($input);
 
-        return redirect()->route('manage_complaint_template.index')->with('success','Complaint template create uccessfully');
+        return redirect()->route('manage_complaint_template.index')->with('success','Complaint template create successfully');
     }
 
     /**

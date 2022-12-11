@@ -58,18 +58,35 @@
             </tr>
         </thead>
         <tbody>
-            @if(isset($users) && $users)
+            @if(isset($data) && $data)
                 @php
                     $i = 0;
                 @endphp
-                @foreach ($users as $value)
+                @foreach ($data as $value)
                     @php $i++;  @endphp
                     <tr>
-                        <td>{{ $i }}</td>
-                        <td>{{ $value->name }}</td>
-                        <td>{{ $value->email }}</td>
-                        <td>{{ $value->mobile_number }}</td>
-                        <td>{{ $value->role }}</td>
+                        <td>{{ $value->id }}</td>
+                        <td>{{ $value->created_at }}</td>
+                        <td></td>
+                        <td>{{ $value->party_name }}</td>
+                        <td>{{ $value->contact_person_name }}</td>
+                        <td>{{ $value->city }}</td>
+                        <td>{{ $value->amc_no }}</td>
+                        <td>{{ $value->amc_type }}</td>
+                        <td>{{ $value->start_date }}</td>
+                        <td>{{ $value->end_date }}</td>
+                        <td>{{ $value->complait_by }}</td>
+                        <td>{{ $value->mobile }}</td>
+                        <td>{{ $value->priority }}</td>
+                        <td>
+                            @if ($value->handover == '')
+                                Pending
+                            @elseif ($value->handover)
+                                Under Process
+                            @endif
+                        </td>
+                        <td>{{ $value->handover }}</td>
+                        <td>{{ $value->handover_date.' '.$value->handover_time }}</td>
                         <td>
                             @can('user-edit')
                                 <a href="{{Route('manage_executive.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>

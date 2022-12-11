@@ -4,7 +4,7 @@
 @if (count($errors) > 0)
 
 @endif
-{!! Form::open(array('route' => 'manage_executive.store','method'=>'POST','enctype'=>'multipart/form-data')) !!}
+{!! Form::open(array('route' => 'manage_complaint.store','method'=>'POST','enctype'=>'multipart/form-data')) !!}
 @csrf
 <div class="container">
     <div id="accordion">
@@ -21,7 +21,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                     <div class="form-group">
                     <strong class="product_id">Product<em class="text-danger">*</em></strong>
-                    {!! Form::select('product_id', array() , null, ['class' => 'form-select','id'=>'product_id','placeholder'=>'Please Select' ]) !!}
+                    {!! Form::select('product_id', array() , null, ['class' => 'form-select','id'=>'product_id' ]) !!}
                     @error('product_id')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -80,7 +80,7 @@
                         </label>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4" style="display: none" id="handover_to_div">
                     <div class="form-group">
                     <strong class="handover_to">Handover To<em class="text-danger">*</em></strong>
                     {!! Form::select('handover_to', $executive , null, ['class' => 'form-select','id'=>'handover_to','placeholder'=>'Please Select' ]) !!}
@@ -102,6 +102,46 @@
 
   @section('js-script')
   <script>
+    $(document).ready(function(){
+        $('#handover').trigger('change');
+        $('#amc_no').trigger('change');
+    });
+    $('#handover').change(function(){
+        if($('#handover').prop('checked')==true)
+        {
+            $('#handover_to_div').show();
+        }
+        else
+        {
+            $('#handover_to_div').hide();
+        }
 
+    });
+
+    $('#amc_no').change(function(){
+        var amc_no = $('#amc_no').val();
+        var product_id = "{{ old('product_id') }}";
+        $.ajax({
+              url:"{{ route('get_amc_party') }}",
+              type:'POST',
+              data:{ '_token' : '<?php echo csrf_token() ?>',
+                      amc_no:amc_no,
+              },
+              success:function(data) {
+                // console.log(data);
+                data = JSON.parse(data);
+                  let html ="<option value=''>Please select</option>";
+                  $.each(data, function(key, value){
+                      var selected = "";
+                      if(product_id == value.id)
+                      {
+                        selected = 'selected';
+                      }
+                      html += "<option value='"+value.id+"' "+selected+" >"+value.product_name+"</option>";
+                  })
+                  $("#product_id").html(html);
+              }
+            });
+    });
   </script>
   @endsection
