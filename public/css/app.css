@@ -31,8 +31,9 @@ span.form_sub_btn i{line-height: 1.5;color: #000;}
 
 /* Login Resigter Page */
 #app.login_register_header{display: block;width: 100%;margin: 0;padding: 0;background:linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));}
-#app.login_register_header nav.navbar{display: block;width: 100%;margin: 0;padding: 0;}
+#app.login_register_header nav.navbar{display: block;width: 100%;margin: 0;padding:10px;}
 #app.login_register_header a.log_register_logo{text-decoration: none;padding: 0;}
+#app.login_register_header a.log_register_logo{display: block;width: 200px !important;height: auto;}
 #app.login_register_header a.log_register_logo img{max-width:100%;height: auto;}
 #app.login_register_header .log_register_menus{display: flex;justify-content: flex-end !important;align-items:flex-end;}
 #app.login_register_header .log_register_menus ul{gap:24px;list-style: none;}
