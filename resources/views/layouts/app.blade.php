@@ -32,7 +32,7 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand log_register_logo" href="#">
-                    <img src="{{ asset('assets/image/logo_amc.png') }}" alt="Logo" loading="lazy" />
+                    <img src="{{ asset('assets/image/happy_technology_logo.png') }}" alt="Logo" loading="lazy" />
                 </a>
                 <div class="log_register_menus collapse navbar-collapse nav justify-content-center" id="main_nav">
                     <ul class="navbar-nav ">
