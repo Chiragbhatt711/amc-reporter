@@ -89,11 +89,13 @@
                         <td>{{ $value->handover_date.' '.$value->handover_time }}</td>
                         <td>
                             @can('user-edit')
-                                <a href="{{Route('manage_executive.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
+                                <a href="{{Route('manage_complaint.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                             @endcan
                             @can('user-delete')
                                 <a onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
                             @endcan
+                                <a href="{{Route('call_update',$value->id)}}"> <i class="fa-solid fa-clipboard-check"></i> </a>
+
                         </td>
                     </tr>
                 @endforeach
@@ -124,7 +126,7 @@
 @section('js-script')
 <script>
 function deleteFunction(id){
-    $('#deleteForm').attr('action','{{ url("manage_executive") }}'+ '/'+id);
+    $('#deleteForm').attr('action','{{ url("manage_complaint") }}'+ '/'+id);
     $('#deleteModal').modal('show');
 }
 </script>

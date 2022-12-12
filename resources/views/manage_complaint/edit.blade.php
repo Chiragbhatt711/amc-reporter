@@ -4,7 +4,7 @@
 @if (count($errors) > 0)
 
 @endif
-{!! Form::open(array('route' => 'manage_complaint.store','method'=>'POST','enctype'=>'multipart/form-data')) !!}
+{!! Form::model($data, ['method' => 'PATCH','route' => ['manage_complaint.update', $data->id]]) !!}
 @csrf
 <div class="container">
     <div id="accordion">
@@ -131,7 +131,7 @@
 
     $('#amc_no').change(function(){
         var amc_no = $('#amc_no').val();
-        var product_id = "{{ old('product_id') }}";
+        var product_id = "{{ $data->product_id }}";
         $.ajax({
               url:"{{ route('get_amc_party') }}",
               type:'POST',

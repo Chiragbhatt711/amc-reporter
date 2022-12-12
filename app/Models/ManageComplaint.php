@@ -19,6 +19,7 @@ class ManageComplaint extends Model
         'handover',
         'handover_to',
         'handover_date',
-        'handover_time'
+        'handover_time',
+        'complaint_id'
     ];
 }
