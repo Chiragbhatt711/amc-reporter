@@ -9,6 +9,7 @@ use App\Models\ManageParty;
 use App\Models\ManageComplaintTemplate;
 use App\Models\User;
 use App\Models\AmcPeroductDetail;
+use App\Models\ManageSolutionTemplate;
 use Spatie\Permission\Models\Role;
 
 class ManageComplaintController extends Controller
@@ -225,6 +226,24 @@ class ManageComplaintController extends Controller
 
     public function callUpdate($id)
     {
-        dd($id);
+        $data = ManageComplaint::where('manage_complaints.id',$id)
+        ->join('manage_amcs','manage_complaints.amc_no','=','manage_amcs.id','LEFT')
+        ->join('manage_parties','manage_amcs.party_id','=','manage_parties.id','LEFT')
+        ->select('manage_complaints.id','manage_complaints.admin_id','manage_complaints.created_at','manage_amcs.id as amc_no','manage_amcs.amc_type','manage_amcs.start_date','manage_amcs.end_date','manage_parties.party_name')
+        ->first();
+
+        $admin_id = admin_id();
+        if($data->admin_id == $admin_id)
+        {
+            $parties = ManageParty::where('admin_id',$admin_id)->get()->pluck('party_name','id')->toArray();
+            $soluction = ManageSolutionTemplate::where('admin_id',$admin_id)->get()->pluck('title','id')->toArray();
+            $executiveRole =Role::where(['admin_id'=>$admin_id,'name'=>'Executive'])->pluck('id')->first();
+            $executive = User::where(['admin_id'=>$admin_id,'role_id'=>$executiveRole])->get()->pluck('name','id')->toArray();
+            return view('manage_complaint.call_update',compact('data','parties','executive','soluction'));
+        }
+        else
+        {
+            return redirect()->back()->with('success','Somthing wrong');
+        }
     }
 }
