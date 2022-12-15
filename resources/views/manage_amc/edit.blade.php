@@ -92,7 +92,7 @@ th {
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3">
-                <a href="" class="form_btn" name="add" value="Add" onclick="product_add();">Add</a>
+                <a href="javascript:void(0)" class="form_btn" name="add" value="Add" onclick="product_add();">Add</a>
             </div>
         </div>
         <div class="row my-3">

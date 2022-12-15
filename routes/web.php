@@ -42,6 +42,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/get-due-amount','ManageReceiptController@getDueAmount')->name('get_due_amount');
     Route::post('/get-amc-party','ManageComplaintController@amcParty')->name('get_amc_party');
     Route::get('/call-update/{id}','ManageComplaintController@callUpdate')->name('call_update');
+    Route::PATCH('/call-update/{id}','ManageComplaintController@callUpdatePost')->name('call_update_post');
+    Route::post('/item-add','ManageComplaintController@itemAdd')->name('item_add');
 
     Route::resource('amc', AmcController::class);
     Route::resource('roles', RoleController::class);

@@ -11,6 +11,8 @@ use App\Models\User;
 use App\Models\AmcPeroductDetail;
 use App\Models\ManageSolutionTemplate;
 use Spatie\Permission\Models\Role;
+use App\Models\CallUpdateItem;
+use Carbon\Carbon;
 
 class ManageComplaintController extends Controller
 {
@@ -19,18 +21,35 @@ class ManageComplaintController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if(isset($request->start_date) && $request->start_date)
+        {
+            $startDate = $request->start_date;
+        }
+        else
+        {
+            $startDate = Carbon::now()->format('Y-m-01');
+        }
+        if(isset($request->end_date) && $request->end_date)
+        {
+            $endDate = $request->end_date;
+        }
+        else
+        {
+            $endDate = Carbon::now()->format('Y-m-d');
+        }
         $admin_id = admin_id();
         $data = ManageComplaint::where('manage_complaints.admin_id',$admin_id)
+        ->whereBetween('manage_complaints.created_at',[$startDate,$endDate])
         ->join('manage_amcs','manage_complaints.amc_no','=','manage_amcs.id','LEFT')
         ->join('manage_parties','manage_amcs.party_id','=','manage_parties.id','LEFT')
         ->join('manage_complaint_templates','manage_complaints.complaint_id','=','manage_complaint_templates.id','LEFT')
         ->join('manage_parties as complaint_user','manage_complaints.complaint_by','=','complaint_user.id','LEFT')
         ->join('users as handover','manage_complaints.handover_to','=','handover.id','LEFT')
-        ->select('manage_complaints.id as id','manage_complaints.comp_by_mobile_number as mobile','manage_complaints.description as description','manage_complaints.priority as priority','manage_complaints.handover as handover','manage_complaints.handover_date as handover_date','manage_complaints.handover_time as handover_time','manage_complaints.created_at as created_at','manage_amcs.id as amc_no','manage_amcs.amc_type as amc_type','manage_amcs.start_date as start_date','manage_amcs.end_date as end_date','manage_parties.party_name','manage_parties.contact_person_name','manage_parties.city','manage_complaint_templates.title as complait_title','complaint_user.party_name as complait_by','handover.name as handover')
+        ->select('manage_complaints.id as id','manage_complaints.comp_by_mobile_number as mobile','manage_complaints.description as description','manage_complaints.priority as priority','manage_complaints.handover as handover','manage_complaints.handover_date as handover_date','manage_complaints.handover_time as handover_time','manage_complaints.created_at as created_at','manage_complaints.status as status','manage_amcs.id as amc_no','manage_amcs.amc_type as amc_type','manage_amcs.start_date as start_date','manage_amcs.end_date as end_date','manage_parties.party_name','manage_parties.contact_person_name','manage_parties.city','manage_complaint_templates.title as complait_title','complaint_user.party_name as complait_by','handover.name as handover')
         ->get();
-        return view('manage_complaint.index',compact('data'));
+        return view('manage_complaint.index',compact('data','startDate','endDate'));
     }
 
     /**
@@ -229,7 +248,7 @@ class ManageComplaintController extends Controller
         $data = ManageComplaint::where('manage_complaints.id',$id)
         ->join('manage_amcs','manage_complaints.amc_no','=','manage_amcs.id','LEFT')
         ->join('manage_parties','manage_amcs.party_id','=','manage_parties.id','LEFT')
-        ->select('manage_complaints.id','manage_complaints.admin_id','manage_complaints.created_at','manage_amcs.id as amc_no','manage_amcs.amc_type','manage_amcs.start_date','manage_amcs.end_date','manage_parties.party_name')
+        ->select('manage_complaints.id','manage_complaints.admin_id','manage_complaints.created_at','manage_complaints.update_date','manage_complaints.status','manage_complaints.attend_by','manage_complaints.solution_id','manage_complaints.call_description','manage_complaints.call_remark','manage_amcs.id as amc_no','manage_amcs.amc_type','manage_amcs.start_date','manage_amcs.end_date','manage_parties.party_name')
         ->first();
 
         $admin_id = admin_id();
@@ -245,5 +264,89 @@ class ManageComplaintController extends Controller
         {
             return redirect()->back()->with('success','Somthing wrong');
         }
+    }
+
+    public function callUpdatePost(Request $request,$id)
+    {
+        $this->validate($request, [
+            'update_date' => 'required',
+            'status' => 'required',
+            'attend_by' => 'required',
+            'solution_id' => 'required',
+            'call_description' => 'required',
+
+        ],[
+            'update_date.required' => 'Please select date',
+            'status.required' => 'Please select status',
+            'attend_by.required' => 'Please select attend by',
+            'solution_id.required' => 'Please select solution',
+            'call_description.required' => 'Please enter description',
+        ]);
+        $input = $request->all();
+        $admin_id = admin_id();
+        $manageComplaint = ManageComplaint::find($id);
+        if($admin_id == $manageComplaint->admin_id)
+        {
+            $manageComplaint->update($input);
+
+            $complaint_id = $id;
+            CallUpdateItem::where('complaint_id',$complaint_id)->delete();
+            $itemsDetails = [];
+            if(isset($request->get_ids) && $request->get_ids)
+            {
+                foreach($request->get_ids as $id)
+                {
+                    $itemsDetails = [];
+                    $itemsDetails=[
+                        'admin_id' => $admin_id,
+                        'complaint_id' => $complaint_id,
+                        'item_name' => $input['item_name_'.$id],
+                        'used_qty' => $input['used_qty_'.$id],
+                        'rate' => $input['rate_'.$id],
+                        'amount' => $input['amount_'.$id],
+                    ];
+                    if($itemsDetails)
+                    {
+                        $itemsCreate = CallUpdateItem::create($itemsDetails);
+                    }
+                }
+            }
+            return redirect()->route('manage_complaint.index')->with('success','Complaint call update successfully');
+        }
+        else
+        {
+            return redirect()->route('manage_complaint.index')->with('success','Somthing wrong');
+        }
+    }
+
+    public function itemAdd(Request $request)
+    {
+        $item_name = $request->item_name;
+        $used_qty = $request->used_qty;
+        $rate = $request->rate;
+        $amount = $request->amount;
+
+        $uniqId = uniqid();
+
+        $html = '<tr id="row_'.$uniqId.'">
+                    <td>'.$item_name.'
+                        <input type="hidden" value="'.$item_name.'" name="item_name_'.$uniqId.'" id="item_name_'.$uniqId.'">
+                    </td>
+                    <td>'.$used_qty.'
+                        <input type="hidden" value="'.$used_qty.'" name="used_qty_'.$uniqId.'" id="used_qty_'.$uniqId.'">
+                    </td>
+                    <td>'.$rate.'
+                        <input type="hidden" value="'.$rate.'" name="rate_'.$uniqId.'" id="rate_'.$uniqId.'">
+                    </td>
+                    <td>'.$amount.'
+                        <input type="hidden" value="'.$amount.'" name="amount_'.$uniqId.'" id="amount_'.$uniqId.'">
+                    </td>
+
+                    <td>
+                        <a href="javascript:void(0)" onclick="productRemove(`'.$uniqId.'`)"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
+                        <input type="hidden" name="get_ids[]" value="'.$uniqId.'">
+                    </td>
+                </tr>';
+                echo json_encode(['id'=>$uniqId,'html'=>$html]);
     }
 }

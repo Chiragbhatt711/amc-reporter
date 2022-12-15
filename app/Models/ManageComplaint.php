@@ -20,6 +20,11 @@ class ManageComplaint extends Model
         'handover_to',
         'handover_date',
         'handover_time',
-        'complaint_id'
+        'update_date',
+        'status',
+        'attend_by',
+        'solution_id',
+        'call_description',
+        'call_remark',
     ];
 }

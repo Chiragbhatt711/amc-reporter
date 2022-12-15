@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Role;
 use App\Models\ManageAmc;
 use App\Models\AmcPeroductDetail;
+use App\Models\CallUpdateItem;
 
 
 if(!function_exists('admin_id'))
@@ -37,6 +38,14 @@ function getAmcProductDetails($id)
 
     return $product;
 
+}
+
+function callUpdateItems($id)
+{
+    $items = CallUpdateItem::where('complaint_id',$id)
+        ->select('item_name','used_qty','rate','amount')
+        ->get();
+    return $items;
 }
 
 

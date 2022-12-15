@@ -25,7 +25,7 @@ th {
 @if (count($errors) > 0)
 
 @endif
-{!! Form::model($data, ['method' => 'PATCH','route' => ['manage_amc.update', $data->id]]) !!}
+{!! Form::model($data, ['method' => 'PATCH','route' => ['call_update_post', $data->id]]) !!}
 @csrf
 <div class="container">
     <div id="accordion">
@@ -62,9 +62,9 @@ th {
             <div class="col-xs-3 col-sm-3 col-md-3">
                 <strong class="lab_space">Date <em class="text-danger">*</em></strong>
                 <div class="d-flex">
-                    {!! Form::text('date', null, ['class' => 'form-control','placeholder datepicker' =>'date', 'id'=> 'qty' ]) !!}
+                    {!! Form::text('update_date', date('Y-m-d'), ['class' => 'form-control datepicker','placeholder' =>'date', 'id'=> 'qty' ]) !!}
                 </div>
-                @error('date')
+                @error('update_date')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
@@ -89,68 +89,60 @@ th {
             <div class="col-xs-3 col-sm-3 col-md-3">
                 <strong class="lab_space">Solution <em class="text-danger">*</em></strong>
                 <div class="d-flex">
-                    {!! Form::select('solution', $soluction , null, ['class' => 'form-select','placeholder' =>'Please Select', 'id'=>'solution' ]) !!}
+                    {!! Form::select('solution_id', $soluction , null, ['class' => 'form-select','placeholder' =>'Please Select', 'id'=>'solution' ]) !!}
                 </div>
-                @error('solution')
+                @error('solution_id')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="col-xs-1 col-sm-3 col-md-3">
                 <strong class="lab_space">Description <em class="text-danger">*</em></strong>
                 <div class="d-flex">
-                    {!! Form::textarea('description', null, ['class' => 'form-control','placeholder' =>'Note','id' => 'description' ]) !!}
+                    {!! Form::textarea('call_description', null, ['class' => 'form-control','placeholder' =>'Note','id' => 'description' ]) !!}
                 </div>
-                @error('description')
+                @error('call_description')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="col-xs-1 col-sm-3 col-md-3">
                 <strong class="lab_space">Remark</strong>
                 <div class="d-flex">
-                    {!! Form::textarea('remark', null, ['class' => 'form-control','placeholder' =>'Note','id' => 'remark' ]) !!}
+                    {!! Form::textarea('call_remark', null, ['class' => 'form-control','placeholder' =>'Note','id' => 'remark' ]) !!}
                 </div>
-                @error('remark')
-                <div class="text-danger">{{ $message }}</div>
-                @enderror
             </div>
         </div>
         <div class="row my-3">
             <h4 class="form_sub_title">Used Parts Details</h4>
             <div class="col-xs-1 col-sm-3 col-md-3">
-                <strong class="lab_space">Item Name</strong>
+                <strong class="lab_space">Item Name<em class="text-danger">*</em></strong>
                 <div class="d-flex">
                     {!! Form::text('item_name', null, ['class' => 'form-control','placeholder' =>'Item Name','id' => 'item_name' ]) !!}
                 </div>
-                @error('item_name')
-                <div class="text-danger">{{ $message }}</div>
-                @enderror
+                <div class="text-danger" id="item_name_e"></div>
             </div>
-            <div class="col-xs-1 col-sm-3 col-md-3">
-                <strong class="lab_space">Used Qty</strong>
+            <div class="col-xs-1 col-sm-3 col-md-2">
+                <strong class="lab_space">Used Qty<em class="text-danger">*</em></strong>
                 <div class="d-flex">
-                    {!! Form::text('used_qty', null, ['class' => 'form-control','placeholder' =>'Used Qty','id' => 'used_qty' ]) !!}
+                    {!! Form::text('used_qty', null, ['class' => 'form-control','placeholder' =>'Used Qty','id' => 'used_qty','onkeyup'=>'totalAmount();' ]) !!}
                 </div>
-                @error('used_qty')
-                <div class="text-danger">{{ $message }}</div>
-                @enderror
+                <div class="text-danger" id="used_qty_e"></div>
             </div>
-            <div class="col-xs-1 col-sm-3 col-md-3">
-                <strong class="lab_space">Rate</strong>
+            <div class="col-xs-1 col-sm-3 col-md-2">
+                <strong class="lab_space">Rate<em class="text-danger">*</em></strong>
                 <div class="d-flex">
-                    {!! Form::text('rate', null, ['class' => 'form-control','placeholder' =>'Rate','id' => 'rate' ]) !!}
+                    {!! Form::text('rate', null, ['class' => 'form-control','placeholder' =>'Rate','id' => 'rate','onkeyup'=>'totalAmount();' ]) !!}
                 </div>
-                @error('rate')
-                <div class="text-danger">{{ $message }}</div>
-                @enderror
+                <div class="text-danger" id="rate_e"></div>
             </div>
-            <div class="col-xs-1 col-sm-3 col-md-3">
-                <strong class="lab_space">Amount</strong>
+            <div class="col-xs-1 col-sm-3 col-md-2">
+                <strong class="lab_space">Amount<em class="text-danger">*</em></strong>
                 <div class="d-flex">
-                    {!! Form::text('amount', null, ['class' => 'form-control','placeholder' =>'Amount','id' => 'amount' ]) !!}
+                    {!! Form::text('amount', null, ['class' => 'form-control','placeholder' =>'Amount','id' => 'amount','readonly' ]) !!}
                 </div>
-                @error('amount')
-                <div class="text-danger">{{ $message }}</div>
-                @enderror
+                <div class="text-danger" id="amount_e"></div>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3">
+                <a href="javascript:void(0)" class="form_btn" name="add" value="Add" onclick="item_add();">Add</a>
             </div>
         </div>
         <div class="row my-3">
@@ -165,36 +157,30 @@ th {
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody id="product_body">
+                    <tbody id="item_body">
                         @php
-                            $product = getAmcProductDetails(1);
+                            $items = callUpdateItems($data->id);
                         @endphp
-                        @if(isset($product) && $product)
-                            @foreach ($product as $data)
+                        @if(isset($items) && $items)
+                            @foreach ($items as $data)
                             @php $uniqId = uniqid(); @endphp
                             <tr id="row_{{ $uniqId }}">
-                                <td>{{ $data->product_code }}
-                                    <input type="hidden" value="{{ $data->product_code }}" name="product_code_{{ $uniqId }}" id="product_code_{{ $uniqId }}">
+                                <td>{{ $data->item_name }}
+                                    <input type="hidden" value="{{ $data->item_name }}" name="item_name_{{ $uniqId }}" id="item_name_{{ $uniqId }}">
                                 </td>
-                                <td> {{ $data->product_name }}
-                                    <input type="hidden" value="{{ $data->product_id }}" name="product_id_{{$uniqId}}" id="product_id_{{$uniqId}}">
+                                <td>{{ $data->used_qty }}
+                                    <input type="hidden" value="{{ $data->used_qty }}" name="used_qty_{{ $uniqId }}" id="used_qty_{{ $uniqId }}">
                                 </td>
-                                <td>{{$data->model}}
-                                    <input type="hidden" value="{{$data->model_id}}" name="model_id_{{$uniqId}}" id="model_id_{{$uniqId}}">
+                                <td>{{ $data->rate }}
+                                    <input type="hidden" value="{{ $data->rate }}" name="rate_{{ $uniqId }}" id="rate_{{ $uniqId }}">
                                 </td>
-                                <td>{{$data->brand}}
-                                    <input type="hidden" value="{{$data->brand_id}}" name="brand_id_{{$uniqId}}" id="brand_id_{{$uniqId}}">
-                                </td>
-                                <td>{{$data->qty}}
-                                    <input type="hidden" value="{{$data->qty}}" name="qty_{{$uniqId}}" id="qty_{{$uniqId}}">
-                                </td>
-                                <td>{{$data->note}}
-                                    <input type="hidden" value="{{$data->note}}" name="note_{{$uniqId}}" id="note_{{$uniqId}}">
+                                <td>{{ $data->amount }}
+                                    <input type="hidden" value="{{ $data->amount }}" name="amount_{{ $uniqId }}" id="amount_{{ $uniqId }}">
                                 </td>
 
                                 <td>
-                                    <a href="javascript:void(0)" onclick="productRemove(`{{$uniqId}}`)"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
-                                    <input type="hidden" name="get_ids[]" value="{{$uniqId}}">
+                                    <a href="javascript:void(0)" onclick="productRemove(`{{ $uniqId }}`)"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
+                                    <input type="hidden" name="get_ids[]" value="{{ $uniqId }}">
                                 </td>
                             </tr>
                             @endforeach
@@ -210,11 +196,75 @@ th {
 </div>
   {!! Form::close() !!}
 @endsection
-
 @section('js-script')
 <script>
 $(document).ready(function(){
     $('#tax_id').trigger('change');
 });
+
+function totalAmount()
+{
+    let used_qty = $('#used_qty').val();
+    let rate = $('#rate').val();
+
+    let total = used_qty * rate ;
+    $('#amount').val(total);
+}
+
+function item_add()
+{
+    let item_name = $('#item_name').val();
+    let used_qty = $('#used_qty').val();
+    let rate = $('#rate').val();
+    let amount = $('#amount').val();
+    let error = 0;
+    $('#item_name_e').html('');
+    $('#used_qty_e').html('');
+    $('#rate_e').html('');
+    $('#amount_e').html('');
+    if(item_name == '')
+    {
+        $('#item_name_e').html('please enter item name');
+        error = 1;
+    }
+    if(used_qty == '')
+    {
+        $('#used_qty_e').html('please enter item name');
+        error = 1;
+    }
+    if(rate == '')
+    {
+        $('#rate_e').html('please enter item name');
+        error = 1;
+    }
+    if(amount == '')
+    {
+        $('#amount_e').html('please enter item name');
+        error = 1;
+    }
+
+    if(error != 0)
+    {
+        return false;
+    }
+    else
+    {
+        $.ajax({
+            url:"{{ route('item_add') }}",
+            type:'POST',
+            data:{
+                    '_token' : '{{ csrf_token() }}',
+                    item_name:item_name,
+                    used_qty:used_qty,
+                    rate:rate,
+                    amount:amount,
+            },
+            success:function(data) {
+                data = $.parseJSON(data)
+                $('#item_body').append(data.html);
+            }
+        });
+    }
+}
 </script>
 @endsection
