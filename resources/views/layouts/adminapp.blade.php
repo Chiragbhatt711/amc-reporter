@@ -125,6 +125,11 @@
                                             <i class=""></i>Manage Complaint
                                         </a>
                                     </li>
+                                    <li class="dropdown-item">
+                                        <a class="nav-link" href="{{ route('call_register') }}">
+                                            <i class=""></i>Call Register
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown" >
