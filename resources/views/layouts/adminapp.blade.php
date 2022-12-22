@@ -130,6 +130,11 @@
                                             <i class=""></i>Call Register
                                         </a>
                                     </li>
+                                    <li class="dropdown-item">
+                                        <a class="nav-link" href="{{ route('complaint_summary') }}">
+                                            <i class=""></i>Complaint Summary
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown" >

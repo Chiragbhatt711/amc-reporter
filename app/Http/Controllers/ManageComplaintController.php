@@ -13,6 +13,7 @@ use App\Models\ManageSolutionTemplate;
 use Spatie\Permission\Models\Role;
 use App\Models\CallUpdateItem;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ManageComplaintController extends Controller
 {
@@ -41,7 +42,8 @@ class ManageComplaintController extends Controller
         }
         $admin_id = admin_id();
         $data = ManageComplaint::where('manage_complaints.admin_id',$admin_id)
-        ->whereBetween('manage_complaints.created_at',[$startDate,$endDate])
+        ->whereDate('manage_complaints.created_at', '>=', $startDate)
+        ->whereDate('manage_complaints.created_at', '<=', $endDate)
         ->join('manage_amcs','manage_complaints.amc_no','=','manage_amcs.id','LEFT')
         ->join('manage_parties','manage_amcs.party_id','=','manage_parties.id','LEFT')
         ->join('manage_complaint_templates','manage_complaints.complaint_id','=','manage_complaint_templates.id','LEFT')
@@ -62,7 +64,7 @@ class ManageComplaintController extends Controller
         $admin_id = admin_id();
 
         $amcData = ManageAmc::where(['manage_amcs.admin_id' => $admin_id])
-        ->join('manage_parties','manage_amcs.party_id','manage_parties.id')
+        ->join('manage_parties','manage_amcs.party_id','manage_parties.id','LEFT')
         ->select('manage_amcs.*','manage_parties.party_name as party_name')
         ->get();
         $amc=[];
@@ -370,15 +372,47 @@ class ManageComplaintController extends Controller
         }
         $admin_id = admin_id();
         $data = ManageComplaint::where('manage_complaints.admin_id',$admin_id)
-        ->whereBetween('manage_complaints.created_at',[$startDate,$endDate])
+        ->whereDate('manage_complaints.created_at', '>=', $startDate)
+        ->whereDate('manage_complaints.created_at', '<=', $endDate)
         ->join('manage_amcs','manage_complaints.amc_no','=','manage_amcs.id','LEFT')
         ->join('manage_parties','manage_amcs.party_id','=','manage_parties.id','LEFT')
         ->join('manage_complaint_templates','manage_complaints.complaint_id','=','manage_complaint_templates.id','LEFT')
         ->join('manage_parties as complaint_user','manage_complaints.complaint_by','=','complaint_user.id','LEFT')
         ->join('users as handover','manage_complaints.handover_to','=','handover.id','LEFT')
-        ->select('manage_complaints.id as id','manage_complaints.comp_by_mobile_number as mobile','manage_complaints.description as description','manage_complaints.priority as priority','manage_complaints.handover as handover','manage_complaints.handover_date as handover_date','manage_complaints.handover_time as handover_time','manage_complaints.created_at as created_at','manage_complaints.status as status','manage_amcs.id as amc_no','manage_amcs.amc_type as amc_type','manage_amcs.start_date as start_date','manage_amcs.end_date as end_date','manage_parties.party_name','manage_parties.contact_person_name','manage_parties.city','manage_complaint_templates.title as complait_title','complaint_user.party_name as complait_by','handover.name as handover')
+        ->select('manage_complaints.id as id','manage_complaints.comp_by_mobile_number as mobile','manage_complaints.description as description','manage_complaints.priority as priority','manage_complaints.handover as handover','manage_complaints.handover_date as handover_date','manage_complaints.handover_time as handover_time','manage_complaints.created_at as created_at','manage_complaints.status as status','manage_complaints.update_date','manage_complaints.call_remark','manage_amcs.id as amc_no','manage_amcs.amc_type as amc_type','manage_amcs.start_date as start_date','manage_amcs.end_date as end_date','manage_parties.party_name','manage_parties.contact_person_name','manage_parties.city','manage_parties.mobile_no','manage_complaint_templates.title as complait_title','complaint_user.party_name as complait_by','handover.name as handover')
         ->get();
-        dd($data);
+
         return view('call_reports.call_register',compact('startDate','endDate','data'));
+    }
+
+    public function complaintSummary(Request $request)
+    {
+        if(isset($request->start_date) && $request->start_date)
+        {
+            $startDate = $request->start_date;
+        }
+        else
+        {
+            $startDate = Carbon::now()->format('Y-m-01');
+        }
+        if(isset($request->end_date) && $request->end_date)
+        {
+            $endDate = $request->end_date;
+        }
+        else
+        {
+            $endDate = Carbon::now()->format('Y-m-d');
+        }
+        $admin_id = admin_id();
+
+        $data = ManageComplaint::where('manage_complaints.admin_id',$admin_id)
+        ->whereDate('manage_complaints.created_at', '>=', $startDate)
+        ->whereDate('manage_complaints.created_at', '<=', $endDate)
+        ->join('manage_complaint_templates','manage_complaints.complaint_id','=','manage_complaint_templates.id','LEFT')
+        ->groupBy('manage_complaint_templates.title','manage_complaints.complaint_id')
+        ->select('manage_complaint_templates.title as complait_title',DB::raw('count(manage_complaints.complaint_id) as total'))
+        ->get();
+
+        return view('call_reports.complaint_summary',compact('data','startDate','endDate'));
     }
 }

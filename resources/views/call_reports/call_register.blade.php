@@ -66,20 +66,27 @@
                 @endphp
                 <tr>
                     <td>{{ $i }}</td>
-                    <td>{{ $value->party_name }}</td>
-                    <td>{{ $value->person_name }}</td>
-                    <td>{{ $value->city }}</td>
-                    <td>{{ $value->mobile_no }}</td>
                     <td>{{ $value->id }}</td>
+                    <td>{{ $value->created_at }}</td>
+                    <td></td>
+                    <td>{{ $value->complait_by }}</td>
+                    <td>{{ $value->mobile }}</td>
+                    <td>{{ $value->complait_title }}</td>
+                    <td>{{ $value->priority }}</td>
+                    <td>{{ $value->status }}</td>
+                    <td>{{ $value->amc_no }}</td>
                     <td>{{ $value->amc_type }}</td>
                     <td>{{ $value->start_date }}</td>
                     <td>{{ $value->end_date }}</td>
-                    <td>
-                        @can('contract-type-edit')
-                            <a href="{{Route('amc_renew',$value->id)}}"> <i class="fas fa-sync"></i> </a>
-                        @endcan
-                    </td>
-
+                    <td>{{ $value->party_name }}</td>
+                    <td>{{ $value->city }}</td>
+                    <td>{{ $value->mobile_no }}</td>
+                    <td>{{ $value->handover }}</td>
+                    <td>{{ $value->handover_date.' '.$value->handover_time }}</td>
+                    <td>{{ $value->complait_by }}</td>
+                    <td>{{ $value->update_date }}</td>
+                    <td>{{ $value->description }}</td>
+                    <td>{{ $value->call_remark }}</td>
                 </tr>
             @endforeach
         @endif

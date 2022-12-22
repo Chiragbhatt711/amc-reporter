@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::PATCH('/call-update/{id}','ManageComplaintController@callUpdatePost')->name('call_update_post');
     Route::post('/item-add','ManageComplaintController@itemAdd')->name('item_add');
     Route::get('/call-register','ManageComplaintController@callRegister')->name('call_register');
+    Route::get('/complaint-summary','ManageComplaintController@complaintSummary')->name('complaint_summary');
 
     Route::resource('amc', AmcController::class);
     Route::resource('roles', RoleController::class);
