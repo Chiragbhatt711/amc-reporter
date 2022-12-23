@@ -407,4 +407,9 @@ class ManageAmcController extends Controller
 
         echo json_encode(['id'=>$uniqId,'html'=>$html]);
     }
+
+    public function partyLedgerSummary()
+    {
+        dd('hellow');
+    }
 }
