@@ -410,6 +410,12 @@ class ManageAmcController extends Controller
 
     public function partyLedgerSummary()
     {
-        dd('hellow');
+        $admin_id = admin_id();
+        $data = ManageAmc::where('manage_amcs.admin_id',$admin_id)
+            ->join('manage_parties','manage_amcs.party_id','manage_parties.id')
+            ->select('manage_amcs.id','manage_parties.party_name','manage_parties.contact_person_name','manage_parties.city','manage_parties.opening_balance','manage_amcs.total_amount','manage_amcs.amount_recieve')
+            ->get();
+
+        return view('manage_amc.party_ledger_summary',compact('data'));
     }
 }
