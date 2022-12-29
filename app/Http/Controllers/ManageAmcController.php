@@ -10,6 +10,7 @@ use App\Models\ManageTax;
 use App\Models\AmcPeroductDetail;
 use App\Models\AmcSchedulePaymentDetail;
 use App\Models\AmcScheduleServiceDetail;
+use Carbon\Carbon;
 
 class ManageAmcController extends Controller
 {
@@ -408,14 +409,55 @@ class ManageAmcController extends Controller
         echo json_encode(['id'=>$uniqId,'html'=>$html]);
     }
 
-    public function partyLedgerSummary()
+    public function partyLedgerSummary(Request $request)
     {
+        if(isset($request->start_date) && $request->start_date)
+        {
+            $startDate = $request->start_date;
+        }
+        else
+        {
+            $startDate = Carbon::now()->format('Y-m-d');
+        }
+        if(isset($request->end_date) && $request->end_date)
+        {
+            $endDate = $request->end_date;
+        }
+        else
+        {
+            $endDate = Carbon::now()->addMonth()->format('Y-m-d');
+        }
         $admin_id = admin_id();
         $data = ManageAmc::where('manage_amcs.admin_id',$admin_id)
+            ->whereDate('manage_amcs.start_date', '>=', $startDate)
+            ->whereDate('manage_amcs.start_date', '<=', $endDate)
             ->join('manage_parties','manage_amcs.party_id','manage_parties.id')
             ->select('manage_amcs.id','manage_parties.party_name','manage_parties.contact_person_name','manage_parties.city','manage_parties.opening_balance','manage_amcs.total_amount','manage_amcs.amount_recieve')
             ->get();
 
-        return view('manage_amc.party_ledger_summary',compact('data'));
+        return view('manage_amc.party_ledger_summary',compact('data','startDate','endDate'));
+    }
+
+    public function partyLedgerDetail(Request $request)
+    {
+        $data = [];
+        if(isset($request->start_date) && $request->start_date)
+        {
+            $startDate = $request->start_date;
+        }
+        else
+        {
+            $startDate = Carbon::now()->format('Y-m-d');
+        }
+        if(isset($request->end_date) && $request->end_date)
+        {
+            $endDate = $request->end_date;
+        }
+        else
+        {
+            $endDate = Carbon::now()->addMonth()->format('Y-m-d');
+        }
+        $admin_id = admin_id();
+        return view('manage_amc.party_ledger_detail',compact('data','startDate','endDate'));
     }
 }

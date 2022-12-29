@@ -83,7 +83,7 @@
                                         </a>
                                     </li>
                                     <li class="dropdown-item">
-                                        <a class="nav-link" href="#">
+                                        <a class="nav-link" href="{{ Route('party_ledger_details') }}">
                                         <i class=""></i>Party Leadger Detail Report
                                         </a>
                                     </li>

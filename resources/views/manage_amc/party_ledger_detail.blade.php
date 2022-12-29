@@ -7,10 +7,16 @@
         </div>
     @endif
     <div class="title">
-        <h3>Party ledger summary</h3>
+        <h3>Party Ledger Details</h3>
     </div>
-    {!! Form::open(array('route' => 'party_ledger_summary','method'=>'GET')) !!}
+    {!! Form::open(array('route' => 'party_ledger_details','method'=>'GET')) !!}
         <div class="row mt-1">
+            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
+                <div class="form-group">
+                    <strong class="lab_space">Look In</strong>
+                    {!! Form::select('look_in', ['Part Wise','AMC Wise'] , isset($_GET['look_in']) && $_GET['look_in'] ? $_GET['look_in'] : null, ['class' => 'form-select' ]) !!}
+                </div>
+            </div>
             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
                 <div class="form-group">
                     <strong class="lab_space">Start Date</strong>
@@ -23,6 +29,12 @@
                     {!! Form::text('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control datepicker')) !!}
                 </div>
             </div>
+            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
+                <div class="form-group">
+                    <strong class="lab_space">Party</strong>
+                    {!! Form::select('look_in', ['Part Wise','AMC Wise'] , isset($_GET['look_in']) && $_GET['look_in'] ? $_GET['look_in'] : null, ['class' => 'form-select' ]) !!}
+                </div>
+            </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-4">
                 <button type="submit" class="btn btn_tile">Search</button>
             </div>
@@ -32,15 +44,11 @@
         <thead  class="">
             <tr>
               <th scope="col">No</th>
-              <th scope="col">Party Name</th>
-              <th scope="col">Contact Person Name</th>
-              <th scope="col">City</th>
-              <th scope="col">AMC No</th>
-              <th scope="col">Opening Balance</th>
+              <th scope="col">Date</th>
+              <th scope="col">Particular</th>
               <th scope="col">Debit</th>
               <th scope="col">Credit</th>
               <th scope="col">Balance</th>
-              {{-- <th scope="col">Action</th> --}}
             </tr>
         </thead>
         <tbody>
@@ -65,19 +73,9 @@
                         {{-- <td>
                             <a href="{{Route('manage_amc.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i></a>
                         </td> --}}
-                    </tr>
                 @endforeach
             @endif
         </tbody>
     </table>
 </div>
-@endsection
-
-@section('js-script')
-<script>
-function deleteFunction(id){
-    $('#deleteForm').attr('action','{{ url("manage_amc") }}'+ '/'+id);
-    $('#deleteModal').modal('show');
-}
-</script>
 @endsection
