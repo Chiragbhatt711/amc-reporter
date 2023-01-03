@@ -67,7 +67,7 @@ class ManagePartyController extends Controller
 
         $create = ManageParty::create($input);
 
-        return redirect()->route('manage_party.index')->with('success','Party create uccessfully');
+        return redirect()->route('manage_party.index')->with('success','Party create successfully');
     }
 
     /**

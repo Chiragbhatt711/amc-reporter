@@ -4,6 +4,9 @@
 @if (count($errors) > 0)
 
 @endif
+<input type="hidden" id="brand_url" value="{{ route('add_brand') }}">
+<input type="hidden" id="model_url" value="{{ route('add_model') }}">
+<input type="hidden" id="group_url" value="{{ route('add_group') }}">
 {!! Form::open(array('route' => 'contract_type.store','method'=>'POST','enctype'=>'multipart/form-data')) !!}
 @csrf
 <div class="container">

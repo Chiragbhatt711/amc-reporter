@@ -55,7 +55,7 @@ class ManageTaxController extends Controller
 
         $create = ManageTax::create($input);
 
-        return redirect()->route('manage_tax.index')->with('success','Tax create uccessfully');
+        return redirect()->route('manage_tax.index')->with('success','Tax create successfully');
     }
 
     /**

@@ -73,7 +73,7 @@ function add_group()
 {
     let group = $('#add_group').val();
     $.ajax({
-        url:'/add-group',
+        url:$('#group_url').val(),
         type:'POST',
         data:{
                 '_token' : $('meta[name="csrf-token"]').attr('content'),
@@ -92,7 +92,7 @@ function add_brand()
 {
     let brand = $('#add_brand').val();
     $.ajax({
-        url:'/add-brand',
+        url:$('#brand_url').val(),
         type:'POST',
         data:{
                 '_token' : $('meta[name="csrf-token"]').attr('content'),
@@ -111,7 +111,7 @@ function add_model()
 {
     let model = $('#add_model').val();
     $.ajax({
-        url:'/add-model',
+        url:$('#model_url').val(),
         type:'POST',
         data:{
                 '_token' : $('meta[name="csrf-token"]').attr('content'),
@@ -425,5 +425,3 @@ function productDitailsHide(id)
     $('#productHide_'+id).hide();
     $('.child_row_'+id).hide();
 }
-
-

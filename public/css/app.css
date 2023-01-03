@@ -203,3 +203,8 @@ thead{
 }
 
 
+/* Login/Register */
+@media only screen and (max-width: 767px){
+    .box{display: block;width: 100%;position: relative;}
+    .box .login-box {display: block;width:100%;background: rgba(0,0,0,.5);}
+}

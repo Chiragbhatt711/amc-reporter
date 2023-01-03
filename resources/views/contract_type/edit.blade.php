@@ -4,6 +4,9 @@
 @if (count($errors) > 0)
 
 @endif
+<input type="hidden" id="brand_url" value="{{ route('add_brand') }}">
+<input type="hidden" id="model_url" value="{{ route('add_model') }}">
+<input type="hidden" id="group_url" value="{{ route('add_group') }}">
 {!! Form::model($contractType, ['method' => 'PATCH','route' => ['contract_type.update', $contractType->id]]) !!}
 @csrf
 <div class="container">

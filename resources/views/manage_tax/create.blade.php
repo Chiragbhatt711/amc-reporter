@@ -39,7 +39,7 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Tax Percentage 1 <em class="text-danger">*</em></strong>
-                    {!! Form::text('tax_percentage_1', null, array('placeholder' => 'Tax Percentage 1' ,'class' => 'form-control')) !!}
+                    {!! Form::text('tax_percentage_1', 0.00, array('placeholder' => 'Tax Percentage 1' ,'class' => 'form-control')) !!}
                     @error('tax_percentage_1')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -57,7 +57,7 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Tax Percentage 2</strong>
-                    {!! Form::text('tax_percentage_2', null, array('placeholder' => 'Tax Percentage 2' ,'class' => 'form-control')) !!}
+                    {!! Form::text('tax_percentage_2', 0.00, array('placeholder' => 'Tax Percentage 2' ,'class' => 'form-control')) !!}
                     @error('tax_percentage_2')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -75,7 +75,7 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Tax Percentage 3</strong>
-                    {!! Form::text('tax_percentage_3', null, array('placeholder' => 'Tax Percentage 3' ,'class' => 'form-control')) !!}
+                    {!! Form::text('tax_percentage_3', 0.00, array('placeholder' => 'Tax Percentage 3' ,'class' => 'form-control')) !!}
                     @error('tax_percentage_3')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -93,7 +93,7 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Tax Percentage 4</strong>
-                    {!! Form::text('tax_percentage_4', null, array('placeholder' => 'Tax Percentage 4' ,'class' => 'form-control')) !!}
+                    {!! Form::text('tax_percentage_4', 0.00, array('placeholder' => 'Tax Percentage 4' ,'class' => 'form-control')) !!}
                     @error('tax_percentage_4')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -111,7 +111,7 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Tax Percentage 5</strong>
-                    {!! Form::text('tax_percentage_5', null, array('placeholder' => 'Tax Percentage 5' ,'class' => 'form-control')) !!}
+                    {!! Form::text('tax_percentage_5', 0.00, array('placeholder' => 'Tax Percentage 5' ,'class' => 'form-control')) !!}
                     @error('tax_percentage_5')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror

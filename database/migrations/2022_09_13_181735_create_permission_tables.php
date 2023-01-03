@@ -27,10 +27,10 @@ class CreatePermissionTables extends Migration
 
         Schema::create($tableNames['permissions'], function (Blueprint $table) {
             $table->bigIncrements('id'); // permission id
-            $table->string('name');       // For MySQL 8.0 use string('name', 125);
-            $table->string('guard_name'); // For MySQL 8.0 use string('guard_name', 125);
-            $table->string('view_name')->nullable();
-            $table->string('menu_name')->nullable();
+            $table->string('name',100);       // For MySQL 8.0 use string('name', 125);
+            $table->string('guard_name',100); // For MySQL 8.0 use string('guard_name', 125);
+            $table->string('view_name',100)->nullable();
+            $table->string('menu_name',100)->nullable();
             $table->integer('order_by')->nullable();
             $table->timestamps();
 
@@ -44,8 +44,8 @@ class CreatePermissionTables extends Migration
                 $table->index($columnNames['team_foreign_key'], 'roles_team_foreign_key_index');
             }
             $table->integer('admin_id')->nullable();
-            $table->string('name');       // For MySQL 8.0 use string('name', 125);
-            $table->string('guard_name'); // For MySQL 8.0 use string('guard_name', 125);
+            $table->string('name',100);       // For MySQL 8.0 use string('name', 125);
+            $table->string('guard_name',100); // For MySQL 8.0 use string('guard_name', 125);
             $table->timestamps();
             if ($teams || config('permission.testing')) {
                 $table->unique([$columnNames['team_foreign_key'], 'name', 'guard_name']);
@@ -57,7 +57,7 @@ class CreatePermissionTables extends Migration
         Schema::create($tableNames['model_has_permissions'], function (Blueprint $table) use ($tableNames, $columnNames, $teams) {
             $table->unsignedBigInteger(PermissionRegistrar::$pivotPermission);
 
-            $table->string('model_type');
+            $table->string('model_type',100);
             $table->unsignedBigInteger($columnNames['model_morph_key']);
             $table->index([$columnNames['model_morph_key'], 'model_type'], 'model_has_permissions_model_id_model_type_index');
 
@@ -81,7 +81,7 @@ class CreatePermissionTables extends Migration
         Schema::create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames, $columnNames, $teams) {
             $table->unsignedBigInteger(PermissionRegistrar::$pivotRole);
 
-            $table->string('model_type');
+            $table->string('model_type',100);
             $table->unsignedBigInteger($columnNames['model_morph_key']);
             $table->index([$columnNames['model_morph_key'], 'model_type'], 'model_has_roles_model_id_model_type_index');
 

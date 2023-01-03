@@ -458,6 +458,15 @@ class ManageAmcController extends Controller
             $endDate = Carbon::now()->addMonth()->format('Y-m-d');
         }
         $admin_id = admin_id();
-        return view('manage_amc.party_ledger_detail',compact('data','startDate','endDate'));
+
+        $party = ManageParty::select('id','party_name')->where('admin_id',$admin_id)->get()->pluck('party_name','id')->toArray();
+        $amc = ManageAmc::where(['admin_id' => $admin_id])->get();
+        $amcData=[];
+        foreach ($amc as $value)
+        {
+            $amcData += [$value['id'] => $value['id'].', '.$value['amc_type'].', '.$value['start_date'].' To '.$value['end_date']];
+        }
+
+        return view('manage_amc.party_ledger_detail',compact('data','startDate','endDate','party','amcData'));
     }
 }
