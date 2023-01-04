@@ -25,6 +25,9 @@ th {
 @if (count($errors) > 0)
 
 @endif
+<input type="hidden" id="product_add" value="{{ route('product_add') }}">
+<input type="hidden" id="get_tex" value="{{ route('get_tex') }}">
+
 {!! Form::model($manageAmc, ['method' => 'PATCH','route' => ['manage_amc.update', $manageAmc->id]]) !!}
 @csrf
 <div class="container">

@@ -141,7 +141,7 @@ function dueAmount()
     if(amc_no)
     {
         $.ajax({
-            url:'/get-due-amount',
+            url:"{{ route('get_due_amount') }}",
             type:'POST',
             data:{
                     '_token' : $('meta[name="csrf-token"]').attr('content'),

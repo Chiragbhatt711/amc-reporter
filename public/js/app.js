@@ -144,7 +144,7 @@ function product_add()
     let note = $('#note').val();
 
     $.ajax({
-        url:'/product-add',
+        url: $('#product_add').val(),
         type:'POST',
         data:{
                 '_token' : $('meta[name="csrf-token"]').attr('content'),
@@ -307,7 +307,7 @@ async function amcTotalPrice(){
     if(tax_id)
     {
         await $.ajax({
-            url:'/get-tex',
+            url:$('#get_tex').val(),
             type:'POST',
             data:{
                     '_token' : $('meta[name="csrf-token"]').attr('content'),

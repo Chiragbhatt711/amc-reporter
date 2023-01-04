@@ -11,6 +11,7 @@ use App\Models\AmcPeroductDetail;
 use App\Models\AmcSchedulePaymentDetail;
 use App\Models\AmcScheduleServiceDetail;
 use Carbon\Carbon;
+use DB;
 
 class ManageAmcController extends Controller
 {
@@ -432,7 +433,9 @@ class ManageAmcController extends Controller
             ->whereDate('manage_amcs.start_date', '>=', $startDate)
             ->whereDate('manage_amcs.start_date', '<=', $endDate)
             ->join('manage_parties','manage_amcs.party_id','manage_parties.id')
-            ->select('manage_amcs.id','manage_parties.party_name','manage_parties.contact_person_name','manage_parties.city','manage_parties.opening_balance','manage_amcs.total_amount','manage_amcs.amount_recieve')
+            ->join('manage_receipts','manage_amcs.id','manage_receipts.amc_id')
+            ->select('manage_amcs.id','manage_parties.party_name','manage_parties.contact_person_name','manage_parties.city','manage_parties.opening_balance','manage_amcs.total_amount',DB::raw('SUM(manage_receipts.amount) as amount_recieve'))
+            ->groupBy('manage_amcs.id','manage_parties.party_name','manage_parties.contact_person_name','manage_parties.city','manage_parties.opening_balance','manage_amcs.total_amount','manage_receipts.amc_id')
             ->get();
 
         return view('manage_amc.party_ledger_summary',compact('data','startDate','endDate'));

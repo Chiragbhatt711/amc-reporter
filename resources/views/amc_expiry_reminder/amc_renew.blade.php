@@ -25,6 +25,9 @@ th {
 @if (count($errors) > 0)
 
 @endif
+
+<input type="hidden" id="product_add" value="{{ route('product_add') }}">
+<input type="hidden" id="get_tex" value="{{ route('get_tex') }}">
 {!! Form::model($manageAmc, ['method' => 'PATCH','route' => ['amc_renew_update', $manageAmc->id]]) !!}
 @csrf
 <div class="container">
@@ -128,7 +131,7 @@ th {
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3">
-                <a href="" class="form_btn" name="add" value="Add" onclick="product_add();">Add</a>
+                <a href="javascript:void(0)" class="form_btn" name="add" value="Add" onclick="product_add();">Add</a>
             </div>
         </div>
         <div class="row my-3">

@@ -25,6 +25,9 @@ th {
 @if (count($errors) > 0)
 
 @endif
+<input type="hidden" id="product_add" value="{{ route('product_add') }}">
+<input type="hidden" id="get_tex" value="{{ route('get_tex') }}">
+
 {!! Form::open(array('route' => 'manage_amc.store','method'=>'POST','enctype'=>'multipart/form-data')) !!}
 @csrf
 <div class="container">

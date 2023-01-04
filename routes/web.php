@@ -32,8 +32,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/add-group','GroupController@create')->name('add_group');
     Route::post('/add-brand','BrandController@create')->name('add_brand');
     Route::post('/add-model','ContractModelController@create')->name('add_model');
-    Route::post('/product-add','ManageAmcController@product_add');
-    Route::post('/get-tex','ManageTaxController@getTex');
+    Route::post('/product-add','ManageAmcController@product_add')->name('product_add');
+    Route::post('/get-tex','ManageTaxController@getTex')->name('get_tex');
     Route::get('/amc-expiry-reminder','AmcExpiryReminderController@index')->name('amc_expiry_reminder');
     Route::get('/amc-renew/{id}','AmcExpiryReminderController@amcRenew')->name('amc_renew');
     Route::patch('/amc-renew/{id}','AmcExpiryReminderController@amcRenewUpdate')->name('amc_renew_update');

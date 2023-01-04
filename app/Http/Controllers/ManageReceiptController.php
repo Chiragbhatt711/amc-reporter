@@ -217,17 +217,29 @@ class ManageReceiptController extends Controller
             $id = $request->id;
         }
 
-        $row = ManageAmc::where('manage_amcs.id',$amc_no);
+        $row = ManageAmc::where('manage_amcs.id',$amc_no)
+        ->select('manage_amcs.total_amount as total_amount')
+        ->get()->toArray();
+
+        $receipt = ManageReceipt::where('amc_id',$amc_no);
         if($id)
         {
-            $row->where('manage_receipts.id','!=',$id);
+            $receipt->where('id','!=',$id);
         }
-        $row = $row->join('manage_receipts','manage_amcs.id','=','manage_receipts.amc_id','LEFT')
-            ->select('manage_amcs.total_amount as total_amount',DB::raw('SUM(manage_receipts.amount) as amount'))
-            ->groupBy('manage_receipts.amc_id','total_amount')
-            ->get()->toArray();
+        $receipt = $receipt->select(DB::raw('SUM(amount) as amount'))
+        ->groupBy('manage_receipts.amc_id')
+        ->get()->toArray();
 
-        $dueAmount = $row[0]['total_amount'] - $row[0]['amount'];
+        $dueAmount = 0;
+        if(isset($row[0]['total_amount']))
+        {
+            $dueAmount = $row[0]['total_amount'];
+            if(isset($receipt[0]['amount']))
+            {
+                $dueAmount = $row[0]['total_amount'] - $receipt[0]['amount'];
+            }
+        }
+
 
         return $dueAmount;
     }
