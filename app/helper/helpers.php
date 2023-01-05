@@ -4,6 +4,7 @@ use App\Models\Role;
 use App\Models\ManageAmc;
 use App\Models\AmcPeroductDetail;
 use App\Models\CallUpdateItem;
+use App\Models\ManageReceipt;
 
 
 if(!function_exists('admin_id'))
@@ -48,7 +49,14 @@ function callUpdateItems($id)
     return $items;
 }
 
+if(!function_exists('getAmcReceipt'))
+{
+    function getAmcReceipt($id)
+    {
+        $receipt = ManageReceipt::where('amc_id',$id)->select('id','payment_mode','date','amount')->get();
 
-
+        return $receipt;
+    }
+}
 
 ?>

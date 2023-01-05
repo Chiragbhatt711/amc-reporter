@@ -470,6 +470,49 @@ class ManageAmcController extends Controller
             $amcData += [$value['id'] => $value['id'].', '.$value['amc_type'].', '.$value['start_date'].' To '.$value['end_date']];
         }
 
-        return view('manage_amc.party_ledger_detail',compact('data','startDate','endDate','party','amcData'));
+        $party_id = '';
+        if(isset($request->look_in) && $request->look_in)
+        {
+            if($request->look_in == "Part Wise")
+            {
+                if($request->party)
+                {
+                    $party_id = $request->party;
+                    $data = ManageAmc::where('party_id',$request->party)
+                    ->whereDate('start_date', '>=', $startDate)
+                    ->whereDate('start_date', '<=', $endDate)
+                    ->get();
+                }
+            }
+            else if($request->look_in == "AMC Wise")
+            {
+                if($request->amc)
+                {
+                    $amc_id = $request->amc;
+                    $data = ManageAmc::where('id',$request->amc)
+                    ->whereDate('start_date', '>=', $startDate)
+                    ->whereDate('start_date', '<=', $endDate)
+                    ->get();
+
+                    $amc_data = ManageAmc::where('id',$request->amc)
+                    ->whereDate('start_date', '>=', $startDate)
+                    ->whereDate('start_date', '<=', $endDate)
+                    ->first();
+                    if($amc_data)
+                    {
+                        $party_id = $amc_data->party_id;
+                    }
+                }
+            }
+        }
+
+        $partyDetails = [];
+        if($party_id)
+        {
+            $partyDetails = ManageParty::where('id',$party_id)->select('opening_balance','created_at')->first();
+        }
+        // dd($data);
+
+        return view('manage_amc.party_ledger_detail',compact('data','startDate','endDate','party','amcData','party_id','partyDetails'));
     }
 }

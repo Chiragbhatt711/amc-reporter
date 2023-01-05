@@ -58,27 +58,56 @@
             </tr>
         </thead>
         <tbody>
-            @if(isset($data) && $data)
+            @php
+                $i = 0;
+                $party_opening_balance = 0;
+            @endphp
+            @if (isset($partyDetails) && $partyDetails)
                 @php
-                    $i = 0;
+                    $i++;
+                    $party_opening_balance = $partyDetails->opening_balance;
                 @endphp
+                <tr>
+                    <td>{{ $i }}</td>
+                    <td>{{ Carbon\Carbon::parse($partyDetails->created_at)->format('Y-m-d') }}</td>
+                    <td>Opening Balance</td>
+                    <td>{{ $partyDetails->opening_balance }}</td>
+                    <td>0</td>
+                    <td>{{ $partyDetails->opening_balance }}</td>
+                </tr>
+            @endif
+            @if(isset($data) && $data)
                 @foreach ($data as $value)
                     @php
                         $i++;
+                        $totalAmount = $party_opening_balance + $value->total_amount;
                     @endphp
                     <tr>
                         <td>{{ $i }}</td>
-                        <td>{{ $value->party_name }}</td>
-                        <td>{{ $value->contact_person_name }}</td>
-                        <td>{{ $value->city }}</td>
-                        <td>{{ $value->id }}</td>
-                        <td>{{ $value->opening_balance }}</td>
+                        <td>{{ $value->start_date }}</td>
+                        <td>{{ "Installment - AMC No.:".$value->id.", AMC Type : ".$value->amc_type.", Start Date : ".$value->start_date.", End Date : ".$value->end_date }}</td>
                         <td>{{ $value->total_amount }}</td>
-                        <td>{{ $value->amount_recieve }}</td>
-                        <td>{{ $value->total_amount - $value->amount_recieve  }}</td>
-                        {{-- <td>
-                            <a href="{{Route('manage_amc.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                        </td> --}}
+                        <td>0</td>
+                        <td>{{ $party_opening_balance + $value->total_amount }}</td>
+                    </tr>
+                    @php
+                        $receipt = getAmcReceipt($value->id);
+                    @endphp
+                    @if(isset($receipt) && $receipt)
+                        @foreach ($receipt as $value)
+                            @php
+                                $i++;
+                            @endphp
+                            <tr>
+                                <td>{{ $i }}</td>
+                                <td>{{ $value->date }}</td>
+                                <td>{{ "Receipt No.:".$value->id.", Receipt Mode : ".$value->payment_mode }}</td>
+                                <td>0</td>
+                                <td>{{ $value->amount }}</td>
+                                <td>{{ $totalAmount - $value->amount  }}</td>
+                            </tr>
+                        @endforeach
+                    @endif
                 @endforeach
             @endif
         </tbody>
@@ -95,11 +124,13 @@ $('#look_in').change(function(){
     {
         $('#party_div').show();
         $('#amc_div').hide();
+        $('#amc').val([]);
     }
     else
     {
         $('#party_div').hide();
         $('#amc_div').show();
+        $('#party').val([]);
     }
 });
 </script>
