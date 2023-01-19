@@ -10,7 +10,9 @@ class PaymentPendingReportController extends Controller
 {
     public function index()
     {
-        $amcData = ManageAmc::join('manage_parties','manage_amcs.party_id','=','manage_parties.id','LEFT')
+        $admin_id = admin_id();
+        $amcData = ManageAmc::where('manage_amcs.admin_id',$admin_id)
+            ->join('manage_parties','manage_amcs.party_id','=','manage_parties.id','LEFT')
             ->select('manage_parties.party_name','manage_parties.contact_person_name','manage_parties.city','manage_parties.mobile_no','manage_amcs.id as amc_no','manage_amcs.amc_type','manage_amcs.start_date','manage_amcs.end_date','manage_amcs.total_amount')
             ->get();
         $report = [];

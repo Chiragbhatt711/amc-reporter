@@ -22,18 +22,7 @@ class UserController extends Controller
     public function index()
     {
 
-        $roleId = Role::where('name','=','Admin')->first();
-        $role_id = $roleId->id;
-        $userRole = auth()->user()->role_id;
-
-        if($userRole == $role_id)
-        {
-            $admin_id = auth()->user()->id;
-        }
-        else
-        {
-            $admin_id = auth()->user()->admin_id;
-        }
+        $admin_id = admin_id();
 
         $users = User::orderBy('users.id','ASC')->where('users.admin_id',$admin_id)
             ->join('roles','users.role_id','=','roles.id')
@@ -45,18 +34,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $roleId = Role::where('name','=','Admin')->first();
-        $role_id = $roleId->id;
-        $userRole = auth()->user()->role_id;
-
-        if($userRole == $role_id)
-        {
-            $admin_id = auth()->user()->id;
-        }
-        else
-        {
-            $admin_id = auth()->user()->admin_id;
-        }
+        $admin_id = admin_id();
         $roles = Role::orderBy('id','ASC')->where('admin_id',$admin_id)->get()->pluck('name','id')->toArray();
 
         return view('users.create',compact('roles'));
@@ -80,18 +58,7 @@ class UserController extends Controller
             'password.required' => 'Please enter password',
         ]);
 
-        $roleId = Role::where('name','=','Admin')->first();
-        $role_id = $roleId->id;
-        $userRole = auth()->user()->role_id;
-
-        if($userRole == $role_id)
-        {
-            $admin_id = auth()->user()->id;
-        }
-        else
-        {
-            $admin_id = auth()->user()->admin_id;
-        }
+        $admin_id = admin_id();
 
         $input = $request->all();
         if(isset($input['password']) && $input['password'])
@@ -116,18 +83,7 @@ class UserController extends Controller
         {
             if($user->admin_id == auth()->user()->id || $user->admin_id = auth()->user()->admin_id)
             {
-                $roleId = Role::where('name','=','Admin')->first();
-                $role_id = $roleId->id;
-                $userRole = auth()->user()->role_id;
-
-                if($userRole == $role_id)
-                {
-                    $admin_id = auth()->user()->id;
-                }
-                else
-                {
-                    $admin_id = auth()->user()->admin_id;
-                }
+                $admin_id = admin_id();
                 $roles = Role::orderBy('id','ASC')->where('admin_id',$admin_id)->get()->pluck('name','id')->toArray();
                 return view('users.edit',compact('user','roles'));
             }

@@ -18,18 +18,7 @@ class RoleController extends Controller
     }
     public function index()
     {
-        $roleId = Role::where('name','=','Admin')->first();
-        $role_id = $roleId->id;
-        $userRole = auth()->user()->role_id;
-
-        if($userRole == $role_id)
-        {
-            $admin_id = auth()->user()->id;
-        }
-        else
-        {
-            $admin_id = auth()->user()->admin_id;
-        }
+        $admin_id = admin_id();
 
 
         $roles = Role::orderBy('id','ASC')->where('admin_id',$admin_id)->get();
@@ -50,18 +39,7 @@ class RoleController extends Controller
             'name' => 'required',
         ]);
 
-        $roleId = Role::where('name','=','Admin')->first();
-        $role_id = $roleId->id;
-        $userRole = auth()->user()->role_id;
-
-        if($userRole == $role_id)
-        {
-            $admin_id = auth()->user()->id;
-        }
-        else
-        {
-            $admin_id = auth()->user()->admin_id;
-        }
+        $admin_id = admin_id();
 
         $input['name'] = $request->name;
         $input['admin_id'] = $admin_id;

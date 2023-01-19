@@ -74,7 +74,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
                         <div class="form-group">
                             <strong class="lab_space">Days</strong>
-                            {!! Form::text('day', $day, array('placeholder' => 'Days' ,'class' => 'form-control')) !!}
+                            {!! Form::text('payment_day', $paymentDay, array('placeholder' => 'Days' ,'class' => 'form-control')) !!}
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-4">
@@ -90,22 +90,24 @@
                                 <th>AMC No</th>
                                 <th>Company</th>
                                 <th>Person Name</th>
-                                <th>End Date</th>
+                                <th>Due Date</th>
+                                <th>Due Amount</th>
                                 <th>Remain Days</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if(isset($amcTicker) && $amcTicker)
-                                @foreach ($amcTicker as $value)
+                            @if(isset($paymentTicker) && $paymentTicker)
+                                @foreach ($paymentTicker as $value)
                                     <tr>
                                         {{-- class="col-lg-4 col-sm-12 col-md-4" --}}
                                         <td>{{ $value->id }}</td>
                                         <td>{{ $value->compny }}</td>
                                         <td>{{ $value->person_name }}</td>
-                                        <td>{{ $value->end_date }}</td>
+                                        <td>{{ $value->due_date }}</td>
+                                        <td>{{ $value->totle_amount - $value->paid_amount }}</td>
                                         <td>
                                             @php
-                                                $diff = strtotime($value->end_date) - strtotime(date('Y-m-d'));
+                                                $diff = strtotime($value->due_date) - strtotime(date('Y-m-d'));
                                                 echo abs(round($diff / 86400));
                                             @endphp
                                         </td>

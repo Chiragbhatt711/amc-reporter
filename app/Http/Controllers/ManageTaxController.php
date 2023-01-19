@@ -14,7 +14,8 @@ class ManageTaxController extends Controller
      */
     public function index()
     {
-        $tax = ManageTax::get();
+        $admin_id = admin_id();
+        $tax = ManageTax::where('admin_id',$admin_id)->get();
         return view('manage_tax.index',compact('tax'));
     }
 
