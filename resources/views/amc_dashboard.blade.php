@@ -100,11 +100,11 @@
                                 @foreach ($paymentTicker as $value)
                                     <tr>
                                         {{-- class="col-lg-4 col-sm-12 col-md-4" --}}
-                                        <td>{{ $value->id }}</td>
+                                        <td>{{ $value->amc_no }}</td>
                                         <td>{{ $value->compny }}</td>
                                         <td>{{ $value->person_name }}</td>
                                         <td>{{ $value->due_date }}</td>
-                                        <td>{{ $value->totle_amount - $value->paid_amount }}</td>
+                                        <td>{{ (isset($value->totle_amount) && $value->totle_amount ? $value->totle_amount : 0) - (isset($value->paid_amount) && $value->paid_amount ? $value->paid_amount : 0) }}</td>
                                         <td>
                                             @php
                                                 $diff = strtotime($value->due_date) - strtotime(date('Y-m-d'));
