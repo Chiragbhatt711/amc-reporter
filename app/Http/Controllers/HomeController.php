@@ -50,10 +50,16 @@ class HomeController extends Controller
         ->join('amc_schedule_payment_details','manage_amcs.id','=','amc_schedule_payment_details.amc_id','LEFT')
         ->join('manage_parties','manage_amcs.party_id','=','manage_parties.id','LEFT')
         ->join('manage_receipts','manage_amcs.id','=','manage_receipts.amc_id','LEFT')
+        ->leftJoin('amc_schedule_payment_details as payment', function($payment)use($toDay,$endDate){
+            $payment->on('manage_amcs.id','=','payment.amc_id')
+                ->whereDate('payment.installment_date', '>=', $toDay)
+                ->whereDate('payment.installment_date', '<=', $endDate)
+                ->orderBy('receipt.id','desc')->limit(1);
+        })
         ->whereDate('amc_schedule_payment_details.installment_date', '>=', $toDay)
         ->whereDate('amc_schedule_payment_details.installment_date', '<=', $endDate)
-        ->select('manage_amcs.id as amc_no','manage_parties.party_name as compny','manage_parties.contact_person_name as person_name','amc_schedule_payment_details.installment_date as due_date',DB::raw('SUM(amc_schedule_payment_details.installment_amount) as totle_amount, SUM(manage_receipts.amount) as paid_amount'))
-        ->orderBy('amc_schedule_payment_details.installment_date','DESC')
+        ->select('manage_amcs.id as amc_no','manage_parties.party_name as compny','manage_parties.contact_person_name as person_name','payment.installment_date as due_date',DB::raw('SUM(amc_schedule_payment_details.installment_amount) as totle_amount, SUM(manage_receipts.amount) as paid_amount'))
+        // ->orderBy('amc_schedule_payment_details.installment_date','DESC')
         ->groupBy('manage_amcs.id')
         ->get();
         // dd($paymentTicker);
