@@ -143,7 +143,19 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="dropdown-item">
-                                        <a class="nav-link" href="#"> Dropdown item 1 </a>
+                                        <a class="nav-link" href="{{ route('product_group.index') }}"> Product Group </a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a class="nav-link" href="#"> Manage Product </a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a class="nav-link" href="#"> Manage Supplier </a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a class="nav-link" href="#"> Manage Inward </a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a class="nav-link" href="#"> Manage Outward </a>
                                     </li>
                                 </ul>
                             </li>

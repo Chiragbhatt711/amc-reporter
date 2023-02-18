@@ -63,5 +63,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('manage_executive',ExecutiveController::class);
     Route::resource('service_tax_report',ServiceTaxReportController::class);
     Route::resource('manage_complaint',ManageComplaintController::class);
+    Route::resource('product_group',ProductGroupController::class);
 
 });
