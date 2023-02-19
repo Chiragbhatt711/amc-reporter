@@ -59,4 +59,24 @@ if(!function_exists('getAmcReceipt'))
     }
 }
 
+if(!function_exists('unit'))
+{
+    function unit()
+    {
+        $unit = [
+            'Pcs' => 'Pcs',
+            'Nos' => 'Nos',
+            'Kg' => 'Kg',
+            'gm' => 'gm',
+            'in' => 'in',
+            'mg' => 'mg',
+            'ml' => 'ml',
+            'm' => 'm',
+            'ft' => 'ft',
+        ];
+
+        return $unit;
+    }
+}
+
 ?>

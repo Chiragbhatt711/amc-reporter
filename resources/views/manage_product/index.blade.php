@@ -7,9 +7,9 @@
         </div>
     @endif
     <div class="title">
-        <h3>Product Group</h3>
+        <h3>Manage Product</h3>
         <!-- <div class="pull-right"> -->
-            <a class="btn add_btn" href="{{ route('product_group.create') }}">
+            <a class="btn add_btn" href="{{ route('manage_product.create') }}">
                 <i class="fa fa-plus" aria-hidden="true"></i>
             </a>
         <!-- </div> -->
@@ -17,29 +17,41 @@
     <table class="table  dynamic-data-table">
         <thead  class="">
             <tr>
-            <th scope="col">No</th>
             <th scope="col">Group</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Model</th>
+            <th scope="col">Product Code</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Unit</th>
+            <th scope="col">MRP</th>
+            <th scope="col">Opening Qty</th>
+            <th scope="col">Minimum Qty</th>
             <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
-            @if(isset($groups) && $groups)
+            @if(isset($products) && $products)
                 @php
                     $i = 0;
                 @endphp
-                @foreach ($groups as $group)
+                @foreach ($products as $value)
                     @php
                         $i++;
                     @endphp
                     <tr>
-                        <td>{{ $i }}</td>
-                        <td>{{ $group->group }}</td>
+                        <td>{{ $value->group }}</td>
+                        <td>{{ $value->brand }}</td>
+                        <td>{{ $value->model }}</td>
+                        <td>{{ $value->product_code }}</td>
+                        <td>{{ $value->product_name }}</td>
+                        <td>{{ $value->unit }}</td>
+                        <td>{{ $value->mrp }}</td>
+                        <td>{{ $value->opening_qty }}</td>
+                        <td>{{ $value->min_qty }}</td>
                         <td>
 
-                                <a href="{{Route('product_group.edit',$group->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
-
-
-                                <a onclick="deleteFunction( '{{ $group->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
+                                <a href="{{Route('manage_product.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
+                                <a onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
 
                         </td>
                     </tr>
@@ -72,7 +84,7 @@
 @section('js-script')
 <script>
 function deleteFunction(id){
-    $('#deleteForm').attr('action','{{ url("product_group") }}'+ '/'+id);
+    $('#deleteForm').attr('action','{{ url("manage_product") }}'+ '/'+id);
     $('#deleteModal').modal('show');
 }
 </script>

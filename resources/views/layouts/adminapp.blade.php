@@ -146,7 +146,7 @@
                                         <a class="nav-link" href="{{ route('product_group.index') }}"> Product Group </a>
                                     </li>
                                     <li class="dropdown-item">
-                                        <a class="nav-link" href="#"> Manage Product </a>
+                                        <a class="nav-link" href="{{ route('manage_product.index') }}"> Manage Product </a>
                                     </li>
                                     <li class="dropdown-item">
                                         <a class="nav-link" href="#"> Manage Supplier </a>
