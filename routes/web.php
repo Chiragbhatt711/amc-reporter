@@ -65,5 +65,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('manage_complaint',ManageComplaintController::class);
     Route::resource('product_group',ProductGroupController::class);
     Route::resource('manage_product',ManageProductController::class);
+    Route::resource('manage_supplier',SupplierController::class);
 
 });
