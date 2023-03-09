@@ -4,7 +4,7 @@
 @if (count($errors) > 0)
 
 @endif
-{!! Form::open(array('route' => 'manage_supplier.store','method'=>'POST','enctype'=>'multipart/form-data')) !!}
+{!! Form::model($supplier, ['method' => 'PATCH','route' => ['manage_supplier.update', $supplier->id]]) !!}
 @csrf
 <div class="container">
     <div id="accordion">

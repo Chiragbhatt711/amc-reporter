@@ -73,7 +73,7 @@ class UserController extends Controller
         $role = Role::where('id', $request->input('role_id'))->select('name')->first()->toArray();
         $user->assignRole($role['name']);
 
-        return redirect()->route('users.index')->with('success','User create uccessfully');
+        return redirect()->route('users.index')->with('success','User create successfully');
     }
 
     public function edit($id)

@@ -24,32 +24,32 @@
             <th scope="col">City</th>
             <th scope="col">State</th>
             <th scope="col">Country</th>
-            <th scope="col">Phone no.</th>
             <th scope="col">Pincode</th>
+            <th scope="col">Phone no.</th>
             <th scope="col">E-mail</th>
             <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
-            @if(isset($tax) && $tax)
+            @if(isset($data) && $data)
                 @php
                     $i = 0;
                 @endphp
-                @foreach ($tax as $value)
+                @foreach ($data as $value)
                     @php
                         $i++;
                     @endphp
                     <tr>
-                        <td>{{ $value->profile_name }}</td>
-                        <td>{{ $value->tax_lable_name }}</td>
-                        <td>{{ $value->tax_caption_1 }}</td>
-                        <td>{{ $value->tax_percentage_1 }}</td>
-                        <td>{{ $value->tax_caption_2 }}</td>
-                        <td>{{ $value->tax_percentage_2 }}</td>
-                        <td>{{ $value->tax_caption_3 }}</td>
-                        <td>{{ $value->tax_percentage_3 }}</td>
-                        <td>{{ $value->tax_caption_4 }}</td>
-                        <td>{{ $value->tax_percentage_4 }}</td>
+                        <td>{{ $value->company_name }}</td>
+                        <td>{{ $value->person_name }}</td>
+                        <td>{{ $value->supplier_type }}</td>
+                        <td>{{ $value->address }}</td>
+                        <td>{{ $value->city }}</td>
+                        <td>{{ $value->state }}</td>
+                        <td>{{ $value->country }}</td>
+                        <td>{{ $value->pincode }}</td>
+                        <td>{{ $value->phone_no }}</td>
+                        <td>{{ $value->e_mail }}</td>
                         <td>
                             @can('user-edit')
                                 <a href="{{Route('manage_supplier.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
