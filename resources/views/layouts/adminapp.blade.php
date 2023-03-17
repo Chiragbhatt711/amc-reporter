@@ -152,7 +152,7 @@
                                         <a class="nav-link" href="{{ route('manage_supplier.index') }}"> Manage Supplier </a>
                                     </li>
                                     <li class="dropdown-item">
-                                        <a class="nav-link" href="#"> Manage Inward </a>
+                                        <a class="nav-link" href="{{ route('manage_inward.index') }}"> Manage Inward </a>
                                     </li>
                                     <li class="dropdown-item">
                                         <a class="nav-link" href="#"> Manage Outward </a>
