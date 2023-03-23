@@ -48,6 +48,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/complaint-summary','ManageComplaintController@complaintSummary')->name('complaint_summary');
     Route::get('/party-ledger-summary','ManageAmcController@partyLedgerSummary')->name('party_ledger_summary');
     Route::get('/party-ledger-details','ManageAmcController@partyLedgerDetail')->name('party_ledger_details');
+    Route::post('/get-product-detail','ManageInwardController@getProductDetail')->name('get_product_detail');
+    Route::post('/add-product','ManageInwardController@addProduct')->name('add_product');
 
     Route::resource('amc', AmcController::class);
     Route::resource('roles', RoleController::class);
