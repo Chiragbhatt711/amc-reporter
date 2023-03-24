@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InwardProduct;
+use App\Models\ManageInward;
 use App\Models\ManageProduct;
 use Illuminate\Http\Request;
 use App\Models\Supplier;
@@ -23,6 +25,59 @@ class ManageInwardController extends Controller
         }
         $products = ManageProduct::where('admin_id',$admin_id)->select('product_name','id')->get()->pluck('product_name','id')->toArray();
         return view('manage_inward.create',compact('supplier','products'));
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'inward_date' => 'required',
+            'supplier_id' => 'required',
+            'product_id' => 'required',
+            'qty' => 'required',
+            'rate' => 'required',
+            'amount' => 'required',
+
+        ],[
+            'inward_date.required' => 'Please Enter inward date',
+            'supplier_id.required' => 'Please select supplier',
+            'product_id.required' => 'Please select product',
+            'qty.required' => 'Please enter qty',
+            'rate.required' => 'Please enter rate',
+            'amount.required' => 'Please enter amount',
+        ]);
+        $input = $request->all();
+        $admin_id = admin_id();
+
+        $inwardArray = [
+            'admin_id' => $admin_id,
+            'inward_date' => $request->inward_date,
+            'supplier_id' => $request->supplier_id,
+            'note' => $request->note,
+        ];
+
+        $inward = ManageInward::create($inwardArray);
+
+        $ids = $request->get_ids;
+        if(isset($ids) && $ids)
+        {
+            foreach ($ids as $id)
+            {
+                $product=[];
+                $product=[
+                    'admin_id' => $admin_id,
+                    'inward_id' => $inward->id,
+                    'product_id' => $input['product_id_'.$id],
+                    'qty' => $input['qty_'.$id],
+                    'rate' => $input['rate_'.$id],
+                    'amount' => $input['amount_'.$id],
+                ];
+                if($product)
+                {
+                    InwardProduct::create($product);
+                }
+            }
+        }
+        return redirect()->route('manage_inward.index')->with('success','Inward create successfully');
     }
 
     public function getProductDetail(Request $request)

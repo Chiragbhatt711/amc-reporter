@@ -28,7 +28,7 @@ th {
 <input type="hidden" id="product_add" value="{{ route('product_add') }}">
 <input type="hidden" id="get_tex" value="{{ route('get_tex') }}">
 
-{!! Form::open(array('route' => 'manage_amc.store','method'=>'POST','enctype'=>'multipart/form-data')) !!}
+{!! Form::open(array('route' => 'manage_inward.store','method'=>'POST','enctype'=>'multipart/form-data')) !!}
 @csrf
 <div class="container">
     <div id="accordion">
