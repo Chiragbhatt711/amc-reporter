@@ -14,7 +14,7 @@
             </a>
         <!-- </div> -->
     </div>
-    <table class="table dynamic-data-table">
+    <table class="table ">
         <thead  class="">
             <tr>
                 <th scope="col">Inward Date</th>
@@ -31,30 +31,33 @@
             </tr>
         </thead>
         <tbody>
-            @if(isset($manageParty) && $manageParty)
+            @if(isset($inward) && $inward)
                 @php
                     $i = 0;
                 @endphp
-                @foreach ($manageParty as $value)
+                @foreach ($inward as $value)
                     @php
                         $i++;
                     @endphp
                     <tr>
-                        <td>{{ $value->party_name }}</td>
-                        <td>{{ $value->contact_person_name }}</td>
-                        <td>{{ $value->address }}</td>
+                        <td>
+                            <a href="javascript:void(0);" onclick="productShow('{{ $value->id }}');" id="productShow_{{ $value->id }}">
+                                <img src="{{ asset('assets/image/plus.png') }}" style="max-width: 43%;height: auto;width: 21px;">
+                            </a>
+                            <a href="javascript:void(0);" onclick="productHide('{{ $value->id }}');" style="display:none;" id="productHide_{{ $value->id }}">
+                                <img src="{{ asset('assets/image/minus.png') }}" style="max-width: 43%;height: auto;width: 21px;">
+                            </a>
+                            {{ $value->inward_date }}
+                        </td>
+                        <td>{{ $value->id }}</td>
+                        <td>{{ $value->supplier_type }}</td>
+                        <td>{{ $value->company_name }}</td>
+                        <td>{{ $value->person_name }}</td>
                         <td>{{ $value->city }}</td>
-                        <td>{{ $value->state }}</td>
-                        <td>{{ $value->country }}</td>
-                        <td>{{ $value->mobile_no }}</td>
-                        <td>{{ $value->phone_no }}</td>
-                        <td>{{ $value->pincode }}</td>
-                        <td>{{ $value->email }}</td>
-                        <td>{{ $value->extf_1 }}</td>
-                        <td>{{ $value->extf_2 }}</td>
-                        <td>{{ $value->extf_3 }}</td>
-                        <td>{{ $value->extf_4 }}</td>
-                        <td>{{ $value->extf_5 }}</td>
+                        <td>{{ $value->total_product }}</td>
+                        <td>{{ $value->total_qty }}</td>
+                        <td>{{ $value->total_amount }}</td>
+                        <td>{{ $value->note }}</td>
                         <td>
                             @can('user-edit')
                                 <a href="{{Route('manage_inward.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
@@ -64,6 +67,29 @@
                             @endcan
                         </td>
                     </tr>
+                    <tr class="child_row_{{ $value->id }}" style="display: none">
+                        <th> </th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Purchase Rate</th>
+                        <th scope="col">Sale Rate</th>
+                        <th scope="col">Qty</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                    @php
+                        $product = getInwardProductDetails($value->id);
+                    @endphp
+                    @if(isset($product) && $product)
+                        @foreach ($product as $data)
+                            <tr class="child_row_{{ $value->id }}" style="display: none">
+                                <td></td>
+                                <td>{{ $data->product_name }}</td>
+                                <td>{{ $data->rate }}</td>
+                                <td></td>
+                                <td>{{ $data->qty }}</td>
+                                <td>{{ $data->amount }}</td>
+                            </tr>
+                        @endforeach
+                    @endif
                 @endforeach
             @endif
         </tbody>
@@ -95,6 +121,18 @@
 function deleteFunction(id){
     $('#deleteForm').attr('action','{{ url("manage_inward") }}'+ '/'+id);
     $('#deleteModal').modal('show');
+}
+function productShow(id)
+{
+    $("#productShow_"+id).hide();
+    $('#productHide_'+id).show();
+    $('.child_row_'+id).show();
+}
+function productHide(id)
+{
+    $('#productShow_'+id).show();
+    $('#productHide_'+id).hide();
+    $('.child_row_'+id).hide();
 }
 </script>
 @endsection

@@ -4,6 +4,7 @@ use App\Models\Role;
 use App\Models\ManageAmc;
 use App\Models\AmcPeroductDetail;
 use App\Models\CallUpdateItem;
+use App\Models\InwardProduct;
 use App\Models\ManageReceipt;
 
 
@@ -76,6 +77,20 @@ if(!function_exists('unit'))
         ];
 
         return $unit;
+    }
+}
+
+if(!function_exists('getInwardProductDetails'))
+{
+    function getInwardProductDetails($id)
+    {
+        $product = InwardProduct::where('inward_products.inward_id',$id)
+            ->join('manage_products','inward_products.product_id','=','manage_products.id','LEFT')
+            ->join('product_groups','manage_products.group_id','product_groups.id','LEFT')
+            ->select('inward_products.id','manage_products.product_code','manage_products.product_name','product_groups.group as group','inward_products.product_id',DB::raw('SUM(inward_products.qty) as qty'),DB::raw('SUM(inward_products.rate) as rate'),DB::raw('SUM(inward_products.amount) as amount'))
+            ->groupBy('inward_products.product_id')
+            ->get();
+        return $product;
     }
 }
 
