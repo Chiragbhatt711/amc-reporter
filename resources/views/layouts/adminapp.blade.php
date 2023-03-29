@@ -205,7 +205,7 @@
         <div class="content_side">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-3 col-md-3 col-lg-3 sideMenu collapse" id="main_nav">
+                    <div class="col-sm-3 col-md-3 col-lg-3 sideMenu collapse collapse-horizontal" id="main_nav">
                         <div class="navbar navbar-expand-lg">
                             <div class=" navbar-collapse menus">
                                 <ul class="navbar-nav">
@@ -328,7 +328,7 @@
                                         </ul>
                                     </li>
                                     @canany(['role-list','user-list'])
-                                        <li class="nav-item dropdown" >
+                                        <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#">
                                                 <i class="fa-solid fa-user-group"></i>Administrator
                                             </a>
@@ -359,7 +359,7 @@
                             </div>
                         </div>
                     </div>
-                    <main class="col-sm-9 col-md-9 col-lg-9 contentArea py-1">
+                    <main class="col-sm-12 col-md-12 col-lg-12 contentArea py-1">
                         @yield('content')
                     </main>
                 </div>

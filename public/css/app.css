@@ -59,8 +59,10 @@ span.form_sub_btn i{line-height: 1.5;color: #000;}
 .dashboard table tr td{font-size: 16px;font-weight: 400;}
 
 /* Sidebar */
+.navbar-expand-lg .navbar-toggler{display: block !important;}
 .content_side{display: flex;width: 100%;padding:0 0;margin: 0;flex-wrap: nowrap;}
-.content_side .sideMenu{display:block;margin: 0;padding:15px 0px;background:linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));}
+.content_side .sideMenu.show{display:block;margin: 0;padding: 0;background:linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));transition: all 0.5s ease;}
+.content_side .sideMenu.show .navbar{background:linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));transition: all 0.5s ease;}
 .content_side .sideMenu .menus{justify-content: space-between;align-items: center;}
 .content_side .sideMenu .navbar .menus ul.navbar-nav{display: flex;flex-direction: column;justify-content:space-between;align-items:flex-start;list-style: none;}
 .content_side .sideMenu .navbar .menus ul li.nav-item{display: inline-block;padding:10px 20px 10px 20px;}
