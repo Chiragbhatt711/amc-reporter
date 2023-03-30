@@ -11,25 +11,25 @@
     </div>
     {!! Form::open(array('route' => 'party_ledger_details','method'=>'GET')) !!}
         <div class="row mt-1">
-            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                 <div class="form-group">
                     <strong class="lab_space">Look In</strong>
                     {!! Form::select('look_in', ['Part Wise'=>'Part Wise','AMC Wise'=>'AMC Wise'] , isset($_GET['look_in']) && $_GET['look_in'] ? $_GET['look_in'] : null, ['class' => 'form-select','id'=>'look_in' ]) !!}
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                 <div class="form-group">
                     <strong class="lab_space">Start Date</strong>
                     {!! Form::text('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control datepicker')) !!}
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                 <div class="form-group">
                     <strong class="lab_space">End Date</strong>
                     {!! Form::text('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control datepicker')) !!}
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3" id="party_div" style="display: block;">
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" id="party_div" style="display: block;">
                 <div class="form-group">
                     <strong class="lab_space">Party</strong>
                     {!! Form::select('party', $party , isset($_GET['party']) && $_GET['party'] ? $_GET['party'] : null, ['class' => 'form-select','placeholder'=>'Please select','id'=>'party' ]) !!}
@@ -41,12 +41,12 @@
                     {!! Form::select('amc', $amcData , isset($_GET['amc']) && $_GET['amc'] ? $_GET['amc'] : null, ['class' => 'form-select','placeholder'=>'Please select','id'=>'amc' ]) !!}
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-4">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-lg-1">
                 <button type="submit" class="btn btn_tile">Search</button>
             </div>
         </div>
     {!! Form::close() !!}
-    <table class="table dynamic-data-table">
+    <table class="table table-bordered dynamic-data-table">
         <thead  class="">
             <tr>
               <th scope="col">No</th>
@@ -68,12 +68,12 @@
                     $party_opening_balance = $partyDetails->opening_balance;
                 @endphp
                 <tr>
-                    <td>{{ $i }}</td>
-                    <td>{{ Carbon\Carbon::parse($partyDetails->created_at)->format('Y-m-d') }}</td>
-                    <td>Opening Balance</td>
-                    <td>{{ $partyDetails->opening_balance }}</td>
-                    <td>0</td>
-                    <td>{{ $partyDetails->opening_balance }}</td>
+                    <td data-label="No">{{ $i }}</td>
+                    <td data-label="Date">{{ Carbon\Carbon::parse($partyDetails->created_at)->format('Y-m-d') }}</td>
+                    <td data-label="Particular">Opening Balance</td>
+                    <td data-label="Debit">{{ $partyDetails->opening_balance }}</td>
+                    <td data-label="Credit">0</td>
+                    <td data-label="Balance">{{ $partyDetails->opening_balance }}</td>
                 </tr>
             @endif
             @if(isset($data) && $data)

@@ -39,20 +39,18 @@
                         $i++;
                     @endphp
                     <tr>
-                        <td>{{ $value->group }}</td>
-                        <td>{{ $value->brand }}</td>
-                        <td>{{ $value->model }}</td>
-                        <td>{{ $value->product_code }}</td>
-                        <td>{{ $value->product_name }}</td>
-                        <td>{{ $value->unit }}</td>
-                        <td>{{ $value->mrp }}</td>
-                        <td>{{ $value->opening_qty }}</td>
-                        <td>{{ $value->min_qty }}</td>
-                        <td>
-
-                                <a href="{{Route('manage_product.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
-                                <a onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
-
+                        <td data-label="Group">{{ $value->group }}</td>
+                        <td data-label="Brand">{{ $value->brand }}</td>
+                        <td data-label="Model">{{ $value->model }}</td>
+                        <td data-label="Product Code">{{ $value->product_code }}</td>
+                        <td data-label="Product Name">{{ $value->product_name }}</td>
+                        <td data-label="Unit">{{ $value->unit }}</td>
+                        <td data-label="MRP">{{ $value->mrp }}</td>
+                        <td data-label="Opening Qty">{{ $value->opening_qty }}</td>
+                        <td data-label="Minimum Qty">{{ $value->min_qty }}</td>
+                        <td data-label="Action">
+                            <a href="{{Route('manage_product.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
+                            <a onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
                         </td>
                     </tr>
                 @endforeach

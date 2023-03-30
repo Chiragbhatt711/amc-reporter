@@ -14,7 +14,7 @@
             </a> --}}
         <!-- </div> -->
     </div>
-    <table class="table  dynamic-data-table">
+    <table class="table table-bordered dynamic-data-table">
         <thead  class="">
             <tr>
             <th scope="col">No</th>
@@ -40,16 +40,16 @@
                             $i++;
                         @endphp
                         <tr>
-                            <td>{{ $i }}</td>
-                            <td>{{ $value->party_name }}</td>
-                            <td>{{ $value->contact_person_name }}</td>
-                            <td>{{ $value->city }}</td>
-                            <td>{{ $value->mobile_no }}</td>
-                            <td>{{ $value->amc_no }}</td>
-                            <td>{{ $value->amc_type }}</td>
-                            <td>{{ $value->start_date }}</td>
-                            <td>{{ $value->end_date }}</td>
-                            <td>{{ $value->pending_amount }}</td>
+                            <td data-label="No">{{ $i }}</td>
+                            <td data-label="Party Name">{{ $value->party_name }}</td>
+                            <td data-label="Contact Person">{{ $value->contact_person_name }}</td>
+                            <td data-label="City">{{ $value->city }}</td>
+                            <td data-label="Mobile No">{{ $value->mobile_no }}</td>
+                            <td data-label="AMC No">{{ $value->amc_no }}</td>
+                            <td data-label="AMC Type">{{ $value->amc_type }}</td>
+                            <td data-label="Start Date">{{ $value->start_date }}</td>
+                            <td data-label="End Date">{{ $value->end_date }}</td>
+                            <td data-label="Pending Amount">{{ $value->pending_amount }}</td>
                         </tr>
                     @endif
                 @endforeach

@@ -16,7 +16,7 @@
             @endcan
         <!-- </div> -->
     </div>
-    <table class="table dynamic-data-table">
+    <table class="table table-bordered dynamic-data-table">
         <thead>
             <tr>
                 <th>No</th>
@@ -35,12 +35,12 @@
                 @foreach ($users as $value)
                     @php $i++;  @endphp
                     <tr>
-                        <td>{{ $i }}</td>
-                        <td>{{ $value->name }}</td>
-                        <td>{{ $value->email }}</td>
-                        <td>{{ $value->mobile_number }}</td>
-                        <td>{{ $value->role }}</td>
-                        <td>
+                        <td data-label="No">{{ $i }}</td>
+                        <td data-label="Name">{{ $value->name }}</td>
+                        <td data-label="Email">{{ $value->email }}</td>
+                        <td data-label="Mobile No">{{ $value->mobile_number }}</td>
+                        <td data-label="Role">{{ $value->role }}</td>
+                        <td data-label="Action">
                             @can('user-edit')
                                 <a href="{{Route('manage_executive.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                             @endcan

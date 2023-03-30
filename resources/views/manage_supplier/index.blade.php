@@ -14,7 +14,7 @@
             </a>
         <!-- </div> -->
     </div>
-    <table class="table  dynamic-data-table">
+    <table class="table table-bordered dynamic-data-table">
         <thead  class="">
             <tr>
             <th scope="col">Company Name</th>
@@ -40,17 +40,17 @@
                         $i++;
                     @endphp
                     <tr>
-                        <td>{{ $value->company_name }}</td>
-                        <td>{{ $value->person_name }}</td>
-                        <td>{{ $value->supplier_type }}</td>
-                        <td>{{ $value->address }}</td>
-                        <td>{{ $value->city }}</td>
-                        <td>{{ $value->state }}</td>
-                        <td>{{ $value->country }}</td>
-                        <td>{{ $value->pincode }}</td>
-                        <td>{{ $value->phone_no }}</td>
-                        <td>{{ $value->e_mail }}</td>
-                        <td>
+                        <td data-label="Company Name">{{ $value->company_name }}</td>
+                        <td data-label="Person Name">{{ $value->person_name }}</td>
+                        <td data-label="Supplier Type">{{ $value->supplier_type }}</td>
+                        <td data-label="Address">{{ $value->address }}</td>
+                        <td data-label="City">{{ $value->city }}</td>
+                        <td data-label="State">{{ $value->state }}</td>
+                        <td data-label="Country">{{ $value->country }}</td>
+                        <td data-label="Pincode">{{ $value->pincode }}</td>
+                        <td data-label="Phone No.">{{ $value->phone_no }}</td>
+                        <td data-label="E-mail">{{ $value->e_mail }}</td>
+                        <td data-label="Action">
                             @can('user-edit')
                                 <a href="{{Route('manage_supplier.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                             @endcan

@@ -14,7 +14,7 @@
         </a>
     <!-- </div> -->
 </div>
-<table class="table dynamic-data-table">
+<table class="table table-bordered dynamic-data-table">
     <thead  class="">
         <tr>
           <th scope="col">No</th>
@@ -34,11 +34,11 @@
                     $i++;
                 @endphp
                 <tr>
-                    <td>{{ $i }}</td>
-                    <td>{{ $value->title }}</td>
-                    <td>{{ $value->description }}</td>
-                    <td>{{ $value->priority }}</td>
-                    <td>
+                    <td data-label="No">{{ $i }}</td>
+                    <td data-label="Template Name">{{ $value->title }}</td>
+                    <td data-label="Template Description">{{ $value->description }}</td>
+                    <td data-label="Priority">{{ $value->priority }}</td>
+                    <td data-label="Action">
                         @can('user-edit')
                             <a href="{{Route('manage_complaint_template.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                         @endcan

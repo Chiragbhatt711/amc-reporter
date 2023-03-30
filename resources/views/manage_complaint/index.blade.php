@@ -18,19 +18,19 @@
     </div>
     {!! Form::open(array('route' => 'manage_complaint.index','method'=>'GET')) !!}
         <div class="row mt-1">
-            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Start Date</strong>
                     {!! Form::text('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control datepicker')) !!}
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">End Date</strong>
                     {!! Form::text('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control datepicker')) !!}
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-4">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-4">
                 <button type="submit" class="btn btn_tile">Search</button>
             </div>
         </div>
@@ -65,20 +65,20 @@
                 @foreach ($data as $value)
                     @php $i++;  @endphp
                     <tr>
-                        <td>{{ $value->id }}</td>
-                        <td>{{ $value->created_at }}</td>
-                        <td></td>
-                        <td>{{ $value->party_name }}</td>
-                        <td>{{ $value->contact_person_name }}</td>
-                        <td>{{ $value->city }}</td>
-                        <td>{{ $value->amc_no }}</td>
-                        <td>{{ $value->amc_type }}</td>
-                        <td>{{ $value->start_date }}</td>
-                        <td>{{ $value->end_date }}</td>
-                        <td>{{ $value->complait_by }}</td>
-                        <td>{{ $value->mobile }}</td>
-                        <td>{{ $value->priority }}</td>
-                        <td>
+                        <td data-label="Complaint No">{{ $value->id }}</td>
+                        <td data-label="Complaint Date">{{ $value->created_at }}</td>
+                        <td data-label="Call Type"></td>
+                        <td data-label="Party Name">{{ $value->party_name }}</td>
+                        <td data-label="Contract Person Name">{{ $value->contact_person_name }}</td>
+                        <td data-label="City">{{ $value->city }}</td>
+                        <td data-label="AMC No">{{ $value->amc_no }}</td>
+                        <td data-label="AMC Type">{{ $value->amc_type }}</td>
+                        <td data-label="Start Date">{{ $value->start_date }}</td>
+                        <td data-label="End Date">{{ $value->end_date }}</td>
+                        <td data-label="Complaint By">{{ $value->complait_by }}</td>
+                        <td data-label="Complaint By Contact Number">{{ $value->mobile }}</td>
+                        <td data-label="Priority">{{ $value->priority }}</td>
+                        <td data-label="Status">
                             @if($value->status)
                                 {{ $value->status }}
                                 @elseif ($value->handover)
@@ -87,9 +87,9 @@
                                 Pending
                             @endif
                         </td>
-                        <td>{{ $value->handover }}</td>
-                        <td>{{ $value->handover_date.' '.$value->handover_time }}</td>
-                        <td>
+                        <td data-label="Handover To">{{ $value->handover }}</td>
+                        <td data-label="Handover Date">{{ $value->handover_date.' '.$value->handover_time }}</td>
+                        <td data-label="Action"> 
                             @can('user-edit')
                                 <a href="{{Route('manage_complaint.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                             @endcan

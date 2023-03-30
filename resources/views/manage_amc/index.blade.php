@@ -14,7 +14,7 @@
             </a>
         <!-- </div> -->
     </div>
-    <table class="table dynamic-data-table">
+    <table class="table table-bordered dynamic-data-table">
         <thead  class="">
             <tr>
               <th scope="col">No</th>
@@ -40,7 +40,7 @@
                         $i++;
                     @endphp
                     <tr>
-                        <td>
+                        <td data-label="No">
                             <a href="javascript:void(0);" onclick="productDitailsShow('{{ $value->id }}');" id="productShow_{{ $value->id }}">
                                 <img src="{{ asset('assets/image/plus.png') }}" style="max-width: 43%;height: auto;width: 21px;">
                             </a>
@@ -49,16 +49,16 @@
                             </a>
                             {{ $i }}
                         </td>
-                        <td>{{ $value->party_name }}</td>
-                        <td>{{ $value->person_name }}</td>
-                        <td>{{ $value->city }}</td>
-                        <td>{{ $value->mobile_no }}</td>
-                        <td>{{ $value->amc_type }}</td>
-                        <td>{{ $value->start_date }}</td>
-                        <td>{{ $value->end_date }}</td>
-                        <td>{{ $value->contract_amount }}</td>
-                        <td>{{ $value->tax }}</td>
-                        <td>
+                        <td data-label="Party Name">{{ $value->party_name }}</td>
+                        <td data-label="Person Name">{{ $value->person_name }}</td>
+                        <td data-label="City">{{ $value->city }}</td>
+                        <td data-label="Mobile No">{{ $value->mobile_no }}</td>
+                        <td data-label="AMC Type">{{ $value->amc_type }}</td>
+                        <td data-label="AMC Start Date">{{ $value->start_date }}</td>
+                        <td data-label="AMC End Date">{{ $value->end_date }}</td>
+                        <td data-label="Contract Amount">{{ $value->contract_amount }}</td>
+                        <td data-label="Taxt">{{ $value->tax }}</td>
+                        <td data-label="Action">
                             @can('user-edit')
                                 <a href="{{Route('manage_amc.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                             @endcan
@@ -83,12 +83,12 @@
                         @foreach ($product as $data)
                             <tr class="child_row_{{ $value->id }}" style="display: none">
                                 <td></td>
-                                <td>{{ $data->product_code }}</td>
-                                <td>{{ $data->product_name }}</td>
-                                <td>{{ $data->model }}</td>
-                                <td>{{ $data->brand }}</td>
-                                <td>{{ $data->qty }}</td>
-                                <td>{{ $data->note }}</td>
+                                <td data-label="Product Code">{{ $data->product_code }}</td>
+                                <td data-label="Product Name">{{ $data->product_name }}</td>
+                                <td data-label="Model">{{ $data->model }}</td>
+                                <td data-label="Brand">{{ $data->brand }}</td>
+                                <td data-label="Qty">{{ $data->qty }}</td>
+                                <td data-label="Note">{{ $data->note }}</td>
                             </tr>
                         @endforeach
                     @endif

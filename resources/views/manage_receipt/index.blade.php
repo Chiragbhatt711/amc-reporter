@@ -14,7 +14,7 @@
             </a>
         <!-- </div> -->
     </div>
-    <table class="table  dynamic-data-table">
+    <table class="table table-bordered dynamic-data-table">
         <thead  class="">
             <tr>
             <th scope="col">Date</th>
@@ -41,18 +41,18 @@
                         $i++;
                     @endphp
                     <tr>
-                        <td>{{ $value->date }}</td>
-                        <td>{{ $value->party_name }}</td>
-                        <td>{{ $value->contact_person_name   }}</td>
-                        <td>{{ $value->city }}</td>
-                        <td>{{ $value->amc_no }}</td>
-                        <td>{{ $value->amc_type }}</td>
-                        <td>{{ $value->payment_mode }}</td>
-                        <td>{{ $value->amount }}</td>
-                        <td>{{ $value->payment_date }}</td>
-                        <td>{{ $value->reference_no }}</td>
-                        <td>{{ $value->note }}</td>
-                        <td>
+                        <td data-label="Date">{{ $value->date }}</td>
+                        <td data-label="Party Name">{{ $value->party_name }}</td>
+                        <td data-label="Contact person name">{{ $value->contact_person_name   }}</td>
+                        <td data-label="City">{{ $value->city }}</td>
+                        <td data-label="AMC No.">{{ $value->amc_no }}</td>
+                        <td data-label="AMC Type">{{ $value->amc_type }}</td>
+                        <td data-label="Payment Mode">{{ $value->payment_mode }}</td>
+                        <td data-label="Amount">{{ $value->amount }}</td>
+                        <td data-label="Payment date">{{ $value->payment_date }}</td>
+                        <td data-label="Reference No.">{{ $value->reference_no }}</td>
+                        <td data-label="Note">{{ $value->note }}</td>
+                        <td data-label="Action">
                             @can('user-edit')
                                 <a href="{{Route('manage_receipt.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                             @endcan
