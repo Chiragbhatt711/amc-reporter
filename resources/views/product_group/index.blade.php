@@ -14,7 +14,7 @@
             </a>
         <!-- </div> -->
     </div>
-    <table class="table  dynamic-data-table">
+    <table class="table table-bordered dynamic-data-table">
         <thead  class="">
             <tr>
             <th scope="col">No</th>
@@ -32,15 +32,11 @@
                         $i++;
                     @endphp
                     <tr>
-                        <td>{{ $i }}</td>
-                        <td>{{ $group->group }}</td>
-                        <td>
-
-                                <a href="{{Route('product_group.edit',$group->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
-
-
-                                <a onclick="deleteFunction( '{{ $group->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
-
+                        <td data-label="No">{{ $i }}</td>
+                        <td data-label="Group">{{ $group->group }}</td>
+                        <td data-label="Action">
+                            <a href="{{Route('product_group.edit',$group->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
+                            <a onclick="deleteFunction( '{{ $group->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
                         </td>
                     </tr>
                 @endforeach

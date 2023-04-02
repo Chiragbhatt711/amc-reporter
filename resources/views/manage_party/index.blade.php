@@ -14,7 +14,7 @@
             </a>
         <!-- </div> -->
     </div>
-    <table class="table dynamic-data-table">
+    <table class="table table-bordered dynamic-data-table">
         <thead  class="">
             <tr>
                 <th scope="col">Party Name</th>
@@ -45,22 +45,22 @@
                         $i++;
                     @endphp
                     <tr>
-                        <td>{{ $value->party_name }}</td>
-                        <td>{{ $value->contact_person_name }}</td>
-                        <td>{{ $value->address }}</td>
-                        <td>{{ $value->city }}</td>
-                        <td>{{ $value->state }}</td>
-                        <td>{{ $value->country }}</td>
-                        <td>{{ $value->mobile_no }}</td>
-                        <td>{{ $value->phone_no }}</td>
-                        <td>{{ $value->pincode }}</td>
-                        <td>{{ $value->email }}</td>
-                        <td>{{ $value->extf_1 }}</td>
-                        <td>{{ $value->extf_2 }}</td>
-                        <td>{{ $value->extf_3 }}</td>
-                        <td>{{ $value->extf_4 }}</td>
-                        <td>{{ $value->extf_5 }}</td>
-                        <td>
+                        <td data-label="Party Name">{{ $value->party_name }}</td>
+                        <td data-label="Contact Person Name">{{ $value->contact_person_name }}</td>
+                        <td data-label="Address">{{ $value->address }}</td>
+                        <td data-label="City">{{ $value->city }}</td>
+                        <td data-label="State">{{ $value->state }}</td>
+                        <td data-label="Country">{{ $value->country }}</td>
+                        <td data-label="Mobile No">{{ $value->mobile_no }}</td>
+                        <td data-label="Phone No">{{ $value->phone_no }}</td>
+                        <td data-label="Pincode">{{ $value->pincode }}</td>
+                        <td data-label="E-mail">{{ $value->email }}</td>
+                        <td data-label="extf1">{{ $value->extf_1 }}</td>
+                        <td data-label="extf2">{{ $value->extf_2 }}</td>
+                        <td data-label="extf3">{{ $value->extf_3 }}</td>
+                        <td data-label="extf4">{{ $value->extf_4 }}</td>
+                        <td data-label="extf5">{{ $value->extf_5 }}</td>
+                        <td data-label="Action">
                             @can('user-edit')
                                 <a href="{{Route('manage_party.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                             @endcan

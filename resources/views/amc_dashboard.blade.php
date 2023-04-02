@@ -28,7 +28,7 @@
             </div>
             <div class="col-lg-12 col-xs-12">
                 <div class="table-responsive">
-                    <table class="table dynamic-data-table">
+                    <table class="table table-bordered dynamic-data-table">
                         <thead>
                             <tr>
                                 <th>AMC No</th>
@@ -52,11 +52,11 @@
                                     @endphp
                                     <tr style="background-color:{{ $bgcolor }}">
                                         {{-- class="col-lg-4 col-sm-12 col-md-4" --}}
-                                        <td>{{ $value->id }}</td>
-                                        <td>{{ $value->compny }}</td>
-                                        <td>{{ $value->person_name }}</td>
-                                        <td>{{ $value->end_date }}</td>
-                                        <td>{{ $remainDay }}</td>
+                                        <td data-label="AMC No">{{ $value->id }}</td>
+                                        <td data-label="Company">{{ $value->compny }}</td>
+                                        <td data-label="Person Name">{{ $value->person_name }}</td>
+                                        <td data-label="End Date">{{ $value->end_date }}</td>
+                                        <td data-label="Remain Days">{{ $remainDay }}</td>
                                     </tr>
                                 @endforeach
                             @endif
@@ -84,7 +84,7 @@
             </div>
             <div class="col-lg-12 col-xs-12">
                 <div class="table-responsive">
-                    <table class="table dynamic-data-table">
+                    <table class = "table table-bordered dynamic-data-table">
                         <thead>
                             <tr>
                                 <th>AMC No</th>
@@ -100,12 +100,12 @@
                                 @foreach ($paymentTicker as $value)
                                     <tr>
                                         {{-- class="col-lg-4 col-sm-12 col-md-4" --}}
-                                        <td>{{ $value->amc_no }}</td>
-                                        <td>{{ $value->compny }}</td>
-                                        <td>{{ $value->person_name }}</td>
-                                        <td>{{ $value->due_date }}</td>
-                                        <td>{{ (isset($value->totle_amount) && $value->totle_amount ? $value->totle_amount : 0) - (isset($value->paid_amount) && $value->paid_amount ? $value->paid_amount : 0) }}</td>
-                                        <td>
+                                        <td data-label="AMC No">{{ $value->amc_no }}</td>
+                                        <td data-label="Company">{{ $value->compny }}</td>
+                                        <td data-label="Person Name">{{ $value->person_name }}</td>
+                                        <td data-label="Due Date">{{ $value->due_date }}</td>
+                                        <td data-label="AMC No">{{ (isset($value->totle_amount) && $value->totle_amount ? $value->totle_amount : 0) - (isset($value->paid_amount) && $value->paid_amount ? $value->paid_amount : 0) }}</td>
+                                        <td data-label="Remain Days">
                                             @php
                                                 $diff = strtotime($value->due_date) - strtotime(date('Y-m-d'));
                                                 echo abs(round($diff / 86400));

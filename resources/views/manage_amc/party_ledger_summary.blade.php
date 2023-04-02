@@ -11,24 +11,24 @@
     </div>
     {!! Form::open(array('route' => 'party_ledger_summary','method'=>'GET')) !!}
         <div class="row mt-1">
-            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
                 <div class="form-group">
                     <strong class="lab_space">Start Date</strong>
                     {!! Form::text('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control datepicker')) !!}
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
                 <div class="form-group">
                     <strong class="lab_space">End Date</strong>
                     {!! Form::text('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control datepicker')) !!}
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-4">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-4">
                 <button type="submit" class="btn btn_tile">Search</button>
             </div>
         </div>
     {!! Form::close() !!}
-    <table class="table dynamic-data-table">
+    <table class="table  table-bordered dynamic-data-table">
         <thead  class="">
             <tr>
               <th scope="col">No</th>
@@ -53,16 +53,16 @@
                         $i++;
                     @endphp
                     <tr>
-                        <td>{{ $i }}</td>
-                        <td>{{ $value->party_name }}</td>
-                        <td>{{ $value->contact_person_name }}</td>
-                        <td>{{ $value->city }}</td>
-                        <td>{{ $value->id }}</td>
-                        <td>{{ $value->opening_balance }}</td>
-                        <td>{{ $value->total_amount }}</td>
-                        <td>{{ $value->amount_recieve }}</td>
-                        <td>{{ $value->total_amount - $value->amount_recieve  }}</td>
-                        {{-- <td>
+                        <td data-label="No">{{ $i }}</td>
+                        <td data-label="Party Name">{{ $value->party_name }}</td>
+                        <td data-label="Contact Person Name">{{ $value->contact_person_name }}</td>
+                        <td data-label="City">{{ $value->city }}</td>
+                        <td data-label="AMC No">{{ $value->id }}</td>
+                        <td data-label="Opening Balance">{{ $value->opening_balance }}</td>
+                        <td data-label="Debit">{{ $value->total_amount }}</td>
+                        <td data-label="Credit">{{ $value->amount_recieve }}</td>
+                        <td data-label="Balance">{{ $value->total_amount - $value->amount_recieve  }}</td>
+                        {{-- <td data-label="Action">
                             <a href="{{Route('manage_amc.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i></a>
                         </td> --}}
                     </tr>

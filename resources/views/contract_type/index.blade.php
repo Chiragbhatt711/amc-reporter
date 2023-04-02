@@ -16,7 +16,7 @@
         @endcan
     <!-- </div> -->
 </div>
-<table class="table  dynamic-data-table">
+<table class="table table-bordered dynamic-data-table">
     <thead  class="">
         <tr>
           <th scope="col">No</th>
@@ -39,14 +39,14 @@
                     $i++;
                 @endphp
                 <tr>
-                    <td>{{ $i }}</td>
-                    <td>{{ $value->group }}</td>
-                    <td>{{ $value->brand }}</td>
-                    <td>{{ $value->model }}</td>
-                    <td>{{ $value->product_code }}</td>
-                    <td>{{ $value->product_name }}</td>
-                    <td>{{ $value->product_description }}</td>
-                    <td>
+                    <td data-label="No">{{ $i }}</td>
+                    <td data-label="Group">{{ $value->group }}</td>
+                    <td data-label="Brand">{{ $value->brand }}</td>
+                    <td data-label="Model">{{ $value->model }}</td>
+                    <td data-label="Product Code">{{ $value->product_code }}</td>
+                    <td data-label="Product Name">{{ $value->product_name }}</td>
+                    <td data-label="Product Description">{{ $value->product_description }}</td>
+                    <td data-label="Action">
                         @can('contract-type-edit')
                             <a href="{{Route('contract_type.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                         @endcan

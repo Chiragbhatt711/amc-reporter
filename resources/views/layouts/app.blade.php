@@ -28,7 +28,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app"class="login_register_header">
+    <div id="app" class="login_register_header">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand log_register_logo" href="#">
@@ -51,7 +51,7 @@
                 <!-- navbar-collapse.// -->
             </div>
             <!-- container-fluid.// -->
-        </nav>
+        </nav>        
     </div>
     <main class="">
         @yield('content')

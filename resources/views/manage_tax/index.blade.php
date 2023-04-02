@@ -14,7 +14,7 @@
             </a>
         <!-- </div> -->
     </div>
-    <table class="table  dynamic-data-table">
+    <table class="table table-bordered dynamic-data-table">
         <thead  class="">
             <tr>
             <th scope="col">Tax Profile Name</th>
@@ -42,19 +42,19 @@
                         $i++;
                     @endphp
                     <tr>
-                        <td>{{ $value->profile_name }}</td>
-                        <td>{{ $value->tax_lable_name }}</td>
-                        <td>{{ $value->tax_caption_1 }}</td>
-                        <td>{{ $value->tax_percentage_1 }}</td>
-                        <td>{{ $value->tax_caption_2 }}</td>
-                        <td>{{ $value->tax_percentage_2 }}</td>
-                        <td>{{ $value->tax_caption_3 }}</td>
-                        <td>{{ $value->tax_percentage_3 }}</td>
-                        <td>{{ $value->tax_caption_4 }}</td>
-                        <td>{{ $value->tax_percentage_4 }}</td>
-                        <td>{{ $value->tax_caption_5 }}</td>
-                        <td>{{ $value->tax_percentage_5 }}</td>
-                        <td>
+                        <td data-label="Tax Profile Name">{{ $value->profile_name }}</td>
+                        <td data-label="Tax Lable Name">{{ $value->tax_lable_name }}</td>
+                        <td data-label="Tax Caption 1">{{ $value->tax_caption_1 }}</td>
+                        <td data-label="Tax 1(%)">{{ $value->tax_percentage_1 }}</td>
+                        <td data-label="Tax Caption 2">{{ $value->tax_caption_2 }}</td>
+                        <td data-label="Tax 2(%)">{{ $value->tax_percentage_2 }}</td>
+                        <td data-label="Tax Caption 3">{{ $value->tax_caption_3 }}</td>
+                        <td data-label="Tax 3(%)">{{ $value->tax_percentage_3 }}</td>
+                        <td data-label="Tax Caption 4">{{ $value->tax_caption_4 }}</td>
+                        <td data-label="Tax 4(%)">{{ $value->tax_percentage_4 }}</td>
+                        <td data-label="Tax Caption 5">{{ $value->tax_caption_5 }}</td>
+                        <td data-label="Tax 5(%)">{{ $value->tax_percentage_5 }}</td>
+                        <td data-label="Action">
                             @can('user-edit')
                                 <a href="{{Route('manage_tax.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                             @endcan

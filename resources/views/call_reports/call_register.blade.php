@@ -11,19 +11,19 @@
 </div>
 {!! Form::open(array('route' => 'call_register','method'=>'GET')) !!}
 <div class="row mt-1">
-    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
         <div class="form-group">
             <strong class="lab_space">Start Date</strong>
             {!! Form::text('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control datepicker')) !!}
         </div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
         <div class="form-group">
             <strong class="lab_space">End Date</strong>
             {!! Form::text('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control datepicker')) !!}
         </div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-4">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-4">
         <button type="submit" class="btn btn_tile">Search</button>
     </div>
     {!! Form::close() !!}
@@ -65,28 +65,28 @@
                     $i++;
                 @endphp
                 <tr>
-                    <td>{{ $i }}</td>
-                    <td>{{ $value->id }}</td>
-                    <td>{{ $value->created_at }}</td>
-                    <td></td>
-                    <td>{{ $value->complait_by }}</td>
-                    <td>{{ $value->mobile }}</td>
-                    <td>{{ $value->complait_title }}</td>
-                    <td>{{ $value->priority }}</td>
-                    <td>{{ $value->status }}</td>
-                    <td>{{ $value->amc_no }}</td>
-                    <td>{{ $value->amc_type }}</td>
-                    <td>{{ $value->start_date }}</td>
-                    <td>{{ $value->end_date }}</td>
-                    <td>{{ $value->party_name }}</td>
-                    <td>{{ $value->city }}</td>
-                    <td>{{ $value->mobile_no }}</td>
-                    <td>{{ $value->handover }}</td>
-                    <td>{{ $value->handover_date.' '.$value->handover_time }}</td>
-                    <td>{{ $value->complait_by }}</td>
-                    <td>{{ $value->update_date }}</td>
-                    <td>{{ $value->description }}</td>
-                    <td>{{ $value->call_remark }}</td>
+                    <td data-label="No">{{ $i }}</td>
+                    <td data-label="Call No">{{ $value->id }}</td>
+                    <td data-label="Call Date/Time">{{ $value->created_at }}</td>
+                    <td data-label=""></td>
+                    <td data-label="Complaint By">{{ $value->complait_by }}</td>
+                    <td data-label="Comp.by Contact No">{{ $value->mobile }}</td>
+                    <td data-label="Complaint">{{ $value->complait_title }}</td>
+                    <td data-label="Priority">{{ $value->priority }}</td>
+                    <td data-label="Status">{{ $value->status }}</td>
+                    <td data-label="AMC No">{{ $value->amc_no }}</td>
+                    <td data-label="AMC Type">{{ $value->amc_type }}</td>
+                    <td data-label="Start Date">{{ $value->start_date }}</td>
+                    <td data-label="End Date">{{ $value->end_date }}</td>
+                    <td data-label="Party Name">{{ $value->party_name }}</td>
+                    <td data-label="City">{{ $value->city }}</td>
+                    <td data-label="Mobile No">{{ $value->mobile_no }}</td>
+                    <td data-label="Handover">{{ $value->handover }}</td>
+                    <td data-label="Handover Date">{{ $value->handover_date.' '.$value->handover_time }}</td>
+                    <td data-label="Completed By">{{ $value->complait_by }}</td>
+                    <td data-label="Date/Time">{{ $value->update_date }}</td>
+                    <td data-label="Description">{{ $value->description }}</td>
+                    <td data-label="Remark">{{ $value->call_remark }}</td>
                 </tr>
             @endforeach
         @endif

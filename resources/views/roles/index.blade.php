@@ -16,7 +16,7 @@
             @endcan
         <!-- </div> -->
     </div>
-    <table class="table dynamic-data-table">
+    <table class="table table-bordered dynamic-data-table">
         <thead>
             <tr>
                 <th>No</th>
@@ -32,9 +32,9 @@
                 @foreach ($roles as $value)
                     @php $i++;  @endphp
                     <tr>
-                        <td>{{ $i }}</td>
-                        <td>{{ $value->name }}</td>
-                        <td>
+                        <td data-label="No">{{ $i }}</td>
+                        <td data-label="Name">{{ $value->name }}</td>
+                        <td data-label="Action">
                             @can('role-edit')
                                 <a href="{{Route('roles.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                             @endcan
