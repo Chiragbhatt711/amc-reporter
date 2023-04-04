@@ -39,14 +39,14 @@ span.form_sub_btn i{line-height: 1.5;color: #000;}
 
 /* Login Resigter Page */
 #app.login_register_header{display: block;width: 100%;margin: 0;padding: 0;background:linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));}
-#app.login_register_header nav.navbar{display: block;width: 100%;margin: 0;padding:10px;}
+#app.login_register_header nav.navbar{display: block;width: 100%;margin: 0;padding:10px;} 
 #app.login_register_header a.log_register_logo{text-decoration: none;padding: 0;}
 #app.login_register_header a.log_register_logo{display: block;width: 200px !important;height: auto;}
 #app.login_register_header a.log_register_logo img{max-width:100%;height: auto;}
 #app.login_register_header .log_register_menus{display: flex;justify-content: flex-end !important;align-items:flex-end;}
 #app.login_register_header .log_register_menus ul{gap:24px;list-style: none;}
 #app.login_register_header .log_register_menus ul li a{text-decoration:none;padding:0 !important;font-size:18px;font-weight: 500;color:#000;}
-#app.login_register_header .log_register_menus ul li a i{display: inline;padding-right:6px;vertical-align: middle;}
+#app.navbar-toggler .log_register_menus ul li a i{display: inline;padding-right:6px;vertical-align: middle;}
 
 /* Header */
 .header{display: block;width: 100%;padding: 0;margin: 0;background-color: #84fab0;background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));}
@@ -67,7 +67,10 @@ span.form_sub_btn i{line-height: 1.5;color: #000;}
 .dashboard table tr td{font-size: 16px;font-weight: 400;}
 
 /* Sidebar */
-.navbar-expand-lg .navbar-toggler{display: block !important;}
+.navbar-expand-lg .navbar-toggler{display: block !important;border:4px solid #ce345c;background-color:#ce345c;color: #4A0C4A;}
+.navbar-expand-lg .navbar-toggler:hover,
+.navbar-expand-lg .navbar-toggler:focus,
+.navbar-expand-lg .navbar-toggler:active{border:4px solid #761950;background-color:#761950;color: #fff;outline: none;box-shadow: none;}
 .content_side{display: flex;width: 100%;padding:0 0;margin: 0;flex-wrap: nowrap;}
 .content_side .sideMenu.show{display:block;margin: 0;padding: 0;min-height: calc(85vh - 70px);background:linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));transition: all 0.5s ease;}
 .content_side .sideMenu.show .navbar{background:linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));transition: all 0.5s ease;}

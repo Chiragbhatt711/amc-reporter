@@ -48,7 +48,8 @@
                                         </a>
                                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav"
                                             aria-expanded="false" aria-label="Toggle navigation">
-                                            <span class="navbar-toggler-icon"></span>
+                                            <!-- <span class="navbar-toggler-icon"></span> -->
+                                            <i class="fa-solid fa-bars"></i>
                                         </button>
                                         <!-- <div class="collapse navbar-collapse menus" id="main_nav">
                                             <ul class="navbar-nav">
