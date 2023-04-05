@@ -50,7 +50,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/party-ledger-details','ManageAmcController@partyLedgerDetail')->name('party_ledger_details');
     Route::post('/get-product-detail','ManageInwardController@getProductDetail')->name('get_product_detail');
     Route::post('/add-product','ManageInwardController@addProduct')->name('add_product');
-    Route::post('/get-product-detail','ManageOutwardController@getProductDetail')->name('get_product_detail_outward');
+    Route::post('/get-outward-product-detail','ManageOutwardController@getProductDetail')->name('get_product_detail_outward');
 
     Route::resource('amc', AmcController::class);
     Route::resource('roles', RoleController::class);
