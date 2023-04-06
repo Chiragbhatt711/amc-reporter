@@ -28,13 +28,13 @@ th {
 <input type="hidden" id="product_add" value="{{ route('product_add') }}">
 <input type="hidden" id="get_tex" value="{{ route('get_tex') }}">
 
-{!! Form::open(array('route' => 'manage_inward.store','method'=>'POST','enctype'=>'multipart/form-data')) !!}
+{!! Form::open(array('route' => 'manage_outward.store','method'=>'POST','enctype'=>'multipart/form-data')) !!}
 @csrf
 <div class="container">
     <div id="accordion">
         <div class="row mt-1">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
-                <strong class="lab_space">Inward Date<em class="text-danger">*</em></strong>
+                <strong class="lab_space">Outward Date<em class="text-danger">*</em></strong>
                 {!! Form::text('inward_date', date('Y-m-d'), array('placeholder' => 'Inward date','class' => 'form-control datepicker','id'=>'inward_date')) !!}
                 @error('inward_date')
                 <div class="text-danger">{{ $message }}</div>
@@ -125,6 +125,7 @@ th {
 
 @section('js-script')
 <script>
+let totalProduct = 0;
     function productDetail()
     {
         var product_id = $('#product_id').val();
@@ -144,7 +145,12 @@ th {
                 }
                 if(data.qty)
                 {
+                    totalProduct = data.qty;
                     $('#qty').val(data.qty);
+                }
+                else
+                {
+                    totalProduct =0;
                 }
                 amountCount();
             }
@@ -164,7 +170,11 @@ th {
         var product_id = $('#product_id').val();
         var qty = $('#qty').val();
         var rate = $('#rate').val();
-
+        if(qty > totalProduct)
+        {
+            alert('Outward quantity is more then stock quantity');
+            return false;
+        }
         $.ajax({
             url: "{{ route('add_product') }}",
             type:'POST',
@@ -177,12 +187,17 @@ th {
             success:function(data) {
                 data = JSON.parse(data);
                 $('#product_body').append(data);
+                totalProduct = totalProduct - qty;
             }
         });
     }
 
     function removeProduct(id)
     {
+        var qty = $('#qty_'+id).val();
+        console.log(qty);
+        totalProduct += parseInt(qty);
+        console.log(totalProduct);
         $('#row_'+id).remove();
     }
 </script>
