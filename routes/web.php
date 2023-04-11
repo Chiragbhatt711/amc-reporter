@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/get-product-detail','ManageInwardController@getProductDetail')->name('get_product_detail');
     Route::post('/add-product','ManageInwardController@addProduct')->name('add_product');
     Route::post('/get-outward-product-detail','ManageOutwardController@getProductDetail')->name('get_product_detail_outward');
+    Route::get('/stock-register','StockManagmentController@stockRegister')->name('stock_register');
 
     Route::resource('amc', AmcController::class);
     Route::resource('roles', RoleController::class);

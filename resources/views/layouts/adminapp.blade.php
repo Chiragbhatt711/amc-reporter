@@ -331,6 +331,9 @@
                                                 <li class="dropdown-item">
                                                     <a class="nav-link" href="{{ route('manage_outward.index') }}"> Manage Outward </a>
                                                 </li>
+                                                <li class="dropdown-item">
+                                                    <a class="nav-link" href="{{ route('stock_register') }}"> Stock Register </a>
+                                                </li>
                                             </ul>
                                         </li>
                                         @canany(['role-list','user-list'])

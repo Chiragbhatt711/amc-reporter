@@ -15,14 +15,13 @@ class ManageOutwardController extends Controller
     public function index()
     {
         $admin_id = admin_id();
-        // $inward = ManageOutward::where('manage_inwards.admin_id',$admin_id)
-        // ->join('suppliers','manage_inwards.supplier_id','=','suppliers.id','LEFT')
-        // ->join('inward_products','manage_inwards.id','=','inward_products.inward_id','LEFT')
-        // ->groupBy('manage_inwards.id')
-        // ->select('manage_inwards.id','manage_inwards.inward_date','manage_inwards.note','suppliers.person_name','suppliers.company_name','suppliers.supplier_type','suppliers.city',DB::raw('COUNT(inward_products.id) as total_product'),DB::raw('SUM(inward_products.qty) as total_qty'),DB::raw('SUM(inward_products.amount) as total_amount'))
-        // ->get();
+        $outward = ManageOutward::where('manage_outwards.admin_id',$admin_id)
+        ->join('outward_products','manage_outwards.id','=','outward_products.outward_id','LEFT')
+        ->groupBy('manage_outwards.id')
+        ->select('manage_outwards.id','manage_outwards.inward_date','manage_outwards.note','manage_outwards.outward_type',DB::raw('COUNT(outward_products.id) as total_product'),DB::raw('SUM(outward_products.qty) as total_qty'),DB::raw('SUM(outward_products.amount) as total_amount'))
+        ->get();
 
-        return view('manage_outward.index');
+        return view('manage_outward.index',compact('outward'));
     }
 
     public function create()
@@ -54,7 +53,7 @@ class ManageOutwardController extends Controller
         $input = $request->all();
         $admin_id = admin_id();
 
-        $inwardArray = [
+        $outwardArray = [
             'admin_id' => $admin_id,
             'inward_date' => $request->inward_date,
             'outward_type' => $request->outward_type,
@@ -62,7 +61,7 @@ class ManageOutwardController extends Controller
             'note' => $request->note,
         ];
 
-        $outward = ManageOutward::create($inwardArray);
+        $outward = ManageOutward::create($outwardArray);
 
         $ids = $request->get_ids;
         if(isset($ids) && $ids)
@@ -85,6 +84,80 @@ class ManageOutwardController extends Controller
             }
         }
         return redirect()->route('manage_outward.index')->with('success','Outward create successfully');
+    }
+
+    public function edit($id)
+    {
+        $outward = ManageOutward::find($id);
+        $admin_id = admin_id();
+        $type = ['Retail Sales' => 'Retail Sales','Scrap'=>'Scrap','Branch Transfer'=>'Branch Transfer'];
+        $products = ManageProduct::where('admin_id',$admin_id)->select('product_name','id')->get()->pluck('product_name','id')->toArray();
+        return view('manage_outward.edit',compact('outward','type','products'));
+    }
+
+    public function update(Request $request,$id)
+    {
+        $this->validate($request, [
+            'inward_date' => 'required',
+            'outward_type' => 'required',
+
+        ],[
+            'inward_date.required' => 'Please Enter outward date',
+            'outward_type.required' => 'Please select outward type',
+        ]);
+
+        $input = $request->all();
+        $admin_id = admin_id();
+        $outward = ManageOutward::find($id);
+
+        $outwardArray = [
+            'admin_id' => $admin_id,
+            'inward_date' => $request->inward_date,
+            'outward_type' => $request->outward_type,
+            'supplier_id' => $request->supplier_id,
+            'note' => $request->note,
+        ];
+
+        $outward->update($outwardArray);
+
+        $ids = $request->get_ids;
+        if(isset($ids) && $ids)
+        {
+            OutwardProduct::where('outward_id',$outward->id)->delete();
+            foreach ($ids as $id)
+            {
+                $product=[];
+                $product=[
+                    'admin_id' => $admin_id,
+                    'outward_id' => $outward->id,
+                    'product_id' => $input['product_id_'.$id],
+                    'qty' => $input['qty_'.$id],
+                    'rate' => $input['rate_'.$id],
+                    'amount' => $input['amount_'.$id],
+                ];
+                if($product)
+                {
+                    OutwardProduct::create($product);
+                }
+            }
+        }
+        return redirect()->route('manage_outward.index')->with('success','Outward update successfully');
+    }
+
+    public function destroy($id)
+    {
+        $admin_id = admin_id();
+        $inward = ManageOutward::find($id);
+        if($inward->admin_id == $admin_id)
+        {
+            $inward->delete();
+            OutwardProduct::where('outward_id',$id)->delete();
+            return redirect()->route('manage_inward.index')->with('success','Inward delete successfully');
+        }
+        else
+        {
+            return redirect()->route('manage_inward.index')->with('success','Somthing wrong');
+        }
     }
 
     public function getProductDetail(Request $request)

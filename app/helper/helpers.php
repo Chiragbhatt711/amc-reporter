@@ -6,7 +6,7 @@ use App\Models\AmcPeroductDetail;
 use App\Models\CallUpdateItem;
 use App\Models\InwardProduct;
 use App\Models\ManageReceipt;
-
+use App\Models\OutwardProduct;
 
 if(!function_exists('admin_id'))
 {
@@ -89,6 +89,20 @@ if(!function_exists('getInwardProductDetails'))
             ->join('product_groups','manage_products.group_id','product_groups.id','LEFT')
             ->select('inward_products.id','manage_products.product_code','manage_products.product_name','product_groups.group as group','inward_products.product_id',DB::raw('SUM(inward_products.qty) as qty'),DB::raw('SUM(inward_products.rate) as rate'),DB::raw('SUM(inward_products.amount) as amount'))
             ->groupBy('inward_products.product_id')
+            ->get();
+        return $product;
+    }
+}
+
+if(!function_exists('getOutwardProductDetails'))
+{
+    function getOutwardProductDetails($id)
+    {
+        $product = OutwardProduct::where('outward_products.outward_id',$id)
+            ->join('manage_products','outward_products.product_id','=','manage_products.id','LEFT')
+            ->join('product_groups','manage_products.group_id','product_groups.id','LEFT')
+            ->select('outward_products.id','manage_products.product_code','manage_products.product_name','product_groups.group as group','outward_products.product_id',DB::raw('SUM(outward_products.qty) as qty'),DB::raw('SUM(outward_products.rate) as rate'),DB::raw('SUM(outward_products.amount) as amount'))
+            ->groupBy('outward_products.product_id')
             ->get();
         return $product;
     }

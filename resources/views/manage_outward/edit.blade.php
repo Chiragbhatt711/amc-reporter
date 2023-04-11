@@ -28,25 +28,25 @@ th {
 <input type="hidden" id="product_add" value="{{ route('product_add') }}">
 <input type="hidden" id="get_tex" value="{{ route('get_tex') }}">
 
-{!! Form::model($inward, ['method' => 'PATCH','route' => ['manage_inward.update', $inward->id]]) !!}
+{!! Form::model($outward, ['method' => 'PATCH','route' => ['manage_outward.update', $outward->id]]) !!}
 @csrf
 <div class="container">
     <div id="accordion">
         <div class="row mt-1">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
-                <strong class="lab_space">Inward Date<em class="text-danger">*</em></strong>
+                <strong class="lab_space">Outward Date<em class="text-danger">*</em></strong>
                 {!! Form::text('inward_date', date('Y-m-d'), array('placeholder' => 'Inward date','class' => 'form-control datepicker','id'=>'inward_date')) !!}
                 @error('inward_date')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
-                <strong class="lab_space">Supplier  <em class="text-danger">*</em></strong>
+                <strong class="lab_space">Outward Type <em class="text-danger">*</em></strong>
                 <div class="d-flex">
-                    {!! Form::select('supplier_id', $supplier , null, ['class' => 'form-select','placeholder' =>'Please Select','id'=>'supplier_id' ]) !!}
+                    {!! Form::select('outward_type', $type , null, ['class' => 'form-select','placeholder' =>'Please Select','id'=>'supplier_id' ]) !!}
                     {{-- <i title="Add Party" class="ml-1 btn btn_tile fa fa-plus plus_btn" aria-hidden="true" id="addModel" data-bs-toggle="modal" data-bs-target="#modelModal"></i> --}}
                 </div>
-                @error('supplier_id')
+                @error('outward_type')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
@@ -101,7 +101,7 @@ th {
                     </thead>
                     <tbody id="product_body">
                         @php
-                            $product = getInwardProductDetails($inward->id);
+                            $product = getOutwardProductDetails($outward->id);
                             $uniqId = uniqid();
                         @endphp
                         @if(isset($product) && $product)
@@ -158,12 +158,13 @@ th {
 
 @section('js-script')
 <script>
+    let totalProduct = 0;
     function productDetail()
     {
         var product_id = $('#product_id').val();
 
         $.ajax({
-            url: "{{ route('get_product_detail') }}",
+            url: "{{ route('get_product_detail_outward') }}",
             type:'POST',
             data:{
                     '_token' : $('meta[name="csrf-token"]').attr('content'),
@@ -171,8 +172,19 @@ th {
             },
             success:function(data) {
                 data = JSON.parse(data);
-                $('#qty').val(data.min_qty);
-                $('#rate').val(data.mrp);
+                if(data.product)
+                {
+                    $('#rate').val(data.product.mrp);
+                }
+                if(data.qty)
+                {
+                    totalProduct = data.qty;
+                    $('#qty').val(data.qty);
+                }
+                else
+                {
+                    totalProduct =0;
+                }
                 amountCount();
             }
         });
@@ -191,7 +203,11 @@ th {
         var product_id = $('#product_id').val();
         var qty = $('#qty').val();
         var rate = $('#rate').val();
-
+        if(qty > totalProduct)
+        {
+            alert('Outward quantity is more then stock quantity');
+            return false;
+        }
         $.ajax({
             url: "{{ route('add_product') }}",
             type:'POST',
@@ -204,6 +220,7 @@ th {
             success:function(data) {
                 data = JSON.parse(data);
                 $('#product_body').append(data);
+                totalProduct = totalProduct - qty;
             }
         });
     }

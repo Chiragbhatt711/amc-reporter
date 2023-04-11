@@ -19,10 +19,7 @@
             <tr>
                 <th scope="col">Inward Date</th>
                 <th scope="col">Reference Bill No</th>
-                <th scope="col">Supplier Type</th>
-                <th scope="col">Company Name</th>
-                <th scope="col">Person Name</th>
-                <th scope="col">City</th>
+                <th scope="col">Outward Type</th>
                 <th scope="col">Total Item</th>
                 <th scope="col">Total Qty</th>
                 <th scope="col">Total Amount</th>
@@ -31,11 +28,11 @@
             </tr>
         </thead>
         <tbody>
-            @if(isset($inward) && $inward)
+            @if(isset($outward) && $outward)
                 @php
                     $i = 0;
                 @endphp
-                @foreach ($inward as $value)
+                @foreach ($outward as $value)
                     @php
                         $i++;
                     @endphp
@@ -50,10 +47,7 @@
                             {{ $value->inward_date }}
                         </td>
                         <td>{{ $value->id }}</td>
-                        <td>{{ $value->supplier_type }}</td>
-                        <td>{{ $value->company_name }}</td>
-                        <td>{{ $value->person_name }}</td>
-                        <td>{{ $value->city }}</td>
+                        <td>{{ $value->outward_type }}</td>
                         <td>{{ $value->total_product }}</td>
                         <td>{{ $value->total_qty }}</td>
                         <td>{{ $value->total_amount }}</td>
@@ -70,20 +64,18 @@
                     <tr class="child_row_{{ $value->id }}" style="display: none">
                         <th> </th>
                         <th scope="col">Product</th>
-                        <th scope="col">Purchase Rate</th>
                         <th scope="col">Sale Rate</th>
                         <th scope="col">Qty</th>
                         <th scope="col">Amount</th>
                     </tr>
                     @php
-                        $product = getInwardProductDetails($value->id);
+                        $product = getOutwardProductDetails($value->id);
                     @endphp
                     @if(isset($product) && $product)
                         @foreach ($product as $data)
                             <tr class="child_row_{{ $value->id }}" style="display: none">
                                 <td></td>
                                 <td>{{ $data->product_name }}</td>
-                                <td>{{ $data->rate }}</td>
                                 <td></td>
                                 <td>{{ $data->qty }}</td>
                                 <td>{{ $data->amount }}</td>
