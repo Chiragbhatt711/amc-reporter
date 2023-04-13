@@ -334,6 +334,12 @@
                                                 <li class="dropdown-item">
                                                     <a class="nav-link" href="{{ route('stock_register') }}"> Stock Register </a>
                                                 </li>
+                                                <li class="dropdown-item">
+                                                    <a class="nav-link" href="{{ route('month_wise_item_stock') }}"> Month Wise Item Stock </a>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <a class="nav-link" href="{{ route('minimum_item_stock_report') }}"> Minimum Item Stock Report </a>
+                                                </li>
                                             </ul>
                                         </li>
                                         @canany(['role-list','user-list'])

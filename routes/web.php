@@ -52,6 +52,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/add-product','ManageInwardController@addProduct')->name('add_product');
     Route::post('/get-outward-product-detail','ManageOutwardController@getProductDetail')->name('get_product_detail_outward');
     Route::get('/stock-register','StockManagmentController@stockRegister')->name('stock_register');
+    Route::get('/month-wise-item-stock','StockManagmentController@MonthWiseItemStock')->name('month_wise_item_stock');
+    Route::get('/minimum-item-stock-report','StockManagmentController@minimumItemStockReport')->name('minimum_item_stock_report');
 
     Route::resource('amc', AmcController::class);
     Route::resource('roles', RoleController::class);

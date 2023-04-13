@@ -136,6 +136,20 @@ $('.datepicker').datepicker({
     orientation: "auto"
 });
 
+$('.monthpicker').datepicker({
+    format: "yyyy-mm",
+    autoclose: true,
+    orientation: "auto",
+    minViewMode: 'months',
+});
+
+$('.yearpicker').datepicker({
+    format: "yyyy",
+    autoclose: true,
+    orientation: "auto",
+    minViewMode: 'year',
+});
+
 
 function product_add()
 {
