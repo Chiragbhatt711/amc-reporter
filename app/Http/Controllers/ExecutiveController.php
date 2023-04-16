@@ -84,7 +84,7 @@ class ExecutiveController extends Controller
         $role = Role::where('id', $request->input('role_id'))->select('name')->first()->toArray();
         $user->assignRole($role['name']);
 
-        return redirect()->route('manage_executive.index')->with('success','Executive create uccessfully');
+        return redirect()->route('manage_executive.index')->with('success','Executive create successfully');
     }
 
     /**

@@ -55,6 +55,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/month-wise-item-stock','StockManagmentController@MonthWiseItemStock')->name('month_wise_item_stock');
     Route::get('/minimum-item-stock-report','StockManagmentController@minimumItemStockReport')->name('minimum_item_stock_report');
 
+    Route::get('/call-dashboard','HomeController@callDashboard')->name('call_dashboard');
+
     Route::resource('amc', AmcController::class);
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);

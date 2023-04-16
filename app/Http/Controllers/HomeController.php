@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ManageAmc;
+use App\Models\ManageComplaint;
 use Carbon\Carbon;
 use DB;
 
@@ -64,5 +65,17 @@ class HomeController extends Controller
         ->get();
         // dd($paymentTicker);
         return view('amc_dashboard',compact('day','amcTicker','paymentDay','paymentTicker'));
+    }
+
+    public function callDashboard()
+    {
+        $admin_id = admin_id();
+        $pendingComplaint = ManageComplaint::where('admin_id',$admin_id)
+            ->where('status',null)
+            ->count();
+        $completeComplaint = ManageComplaint::where('admin_id',$admin_id)
+            ->whereNotNull('status')
+            ->count();
+        return view('call_dashboard',compact('pendingComplaint','completeComplaint'));
     }
 }

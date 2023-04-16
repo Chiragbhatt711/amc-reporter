@@ -414,10 +414,8 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <!-- Bootstrap datepicker JS-->
     <script src="{{ asset('assets/datepicker/bootstrap-datepicker.min.js') }}"></script>
-    {{-- JQuery Data table js --}}
-    <!-- <script type="text/javascript" charset="utf8" src="{{ asset('assets/DataTables/datatables.min.js') }}"></script>
-    <script type="text/javascript" charset="utf8" src="{{ asset('assets/DataTables/dataTables.responsive.min.js') }}"></script>
-    <script type="text/javascript" charset="utf8" src="{{ asset('assets/DataTables/dataTables_sum.js') }}"></script> -->
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('js-script')
