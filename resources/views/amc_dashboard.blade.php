@@ -10,7 +10,7 @@
                 <a href="{{ route('call_dashboard') }}" class="homeBtn btn">Call Dashboard</a>
             </div>
             <div class="col-lg-2 col-xs-12">
-                <a href="" class="btn homeBtn">Stock Dashboard</a>
+                <a href="{{ route('stock_dashboard') }}" class="btn homeBtn">Stock Dashboard</a>
             </div>
         </div>
         <div class="row">

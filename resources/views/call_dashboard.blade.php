@@ -3,10 +3,14 @@
 <div class="dashboard">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 col-xs-12">
-                <a href="{{ route('home') }}" class="btn">AMC Dashboard</a>
-                <a href="{{ route('call_dashboard') }}" class="btn active">Call Dashboard</a>
-                <a href="" class="btn">Stock Dashboard</a>
+            <div class="col-lg-2 col-xs-12">
+                <a href="{{ route('home') }}" class="homeBtn btn">AMC Dashboard</a>
+            </div>
+            <div class="col-lg-2 col-xs-12">
+                <a href="{{ route('call_dashboard') }}" class="homeBtn btn active">Call Dashboard</a>
+            </div>
+            <div class="col-lg-2 col-xs-12">
+                <a href="{{ route('stock_dashboard') }}" class="btn homeBtn">Stock Dashboard</a>
             </div>
         </div>
         <div class="row">

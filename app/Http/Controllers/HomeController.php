@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ManageAmc;
 use App\Models\ManageComplaint;
+use App\Models\ManageOutward;
+use App\Models\ManageProduct;
+use App\Models\OutwardProduct;
 use Carbon\Carbon;
 use DB;
 
@@ -77,5 +80,45 @@ class HomeController extends Controller
             ->whereNotNull('status')
             ->count();
         return view('call_dashboard',compact('pendingComplaint','completeComplaint'));
+    }
+
+    public function stockDashboard(Request $request)
+    {
+        $admin_id = admin_id();
+        $toDay = Carbon::now()->format('Y-m-d');
+        $day = isset($request->day) && $request->day ? $request->day : 30;
+        if($day)
+        {
+            $endDate = Carbon::now()->subDay($day)->format('Y-m-d');
+        }
+
+        $data = ManageProduct::where('manage_products.admin_id', $admin_id)
+            ->leftJoin('inward_products', 'manage_products.id', '=', 'inward_products.product_id')
+            ->select('manage_products.*',
+                    DB::raw('COALESCE(SUM(inward_products.qty), 0) as inward_qty'))
+            ->groupBy('inward_products.product_id')
+            ->get();
+        $stockSummary = [];
+        foreach ($data as $key => $value) {
+            $productId = $value->id;
+            $outward = OutwardProduct::where('product_id',$productId)
+                ->select(DB::raw('COALESCE(SUM(qty), 0) as outward_qty'))
+                ->groupBy('product_id')
+                ->get();
+            $value['outward_qty'] = isset($outward[0]->outward_qty) && $outward[0]->outward_qty ? $outward[0]->outward_qty : 0;
+            array_push($stockSummary,$value);
+        }
+
+
+        $OutWard = OutwardProduct::where('outward_products.admin_id', $admin_id)
+            ->whereDate('outward_products.created_at', '<=', $toDay)
+            ->whereDate('outward_products.created_at', '>=', $endDate)
+            ->leftJoin('manage_products', 'outward_products.product_id', '=', 'manage_products.id')
+            ->select('manage_products.*',
+                    DB::raw('COALESCE(SUM(outward_products.qty), 0) as outward_qty'))
+            ->groupBy('outward_products.product_id')
+            ->get();
+
+        return view('stock_dashboard',compact('stockSummary','OutWard','day'));
     }
 }
