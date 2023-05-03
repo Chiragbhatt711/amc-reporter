@@ -28,6 +28,12 @@
                 {!! Form::open(array('route' => 'home','method'=>'GET')) !!}
                     <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
                         <div class="form-group">
+                            <strong class="lab_space">Type</strong>
+                            {!! Form::select('type',array('Free Service','Complaint'),isset($type) && $type ? $type : null, array('class' => 'form-control')) !!}
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
+                        <div class="form-group">
                             <strong class="lab_space">Days</strong>
                             {!! Form::text('day',isset($day) && $day ? $day : null, array('placeholder' => 'Days' ,'class' => 'form-control')) !!}
                         </div>
@@ -46,16 +52,16 @@
                                 <th>Company</th>
                                 <th>Person Name</th>
                                 <th>City</th>
-                                <th>Complaint No</th>
+                                {{-- <th>Complaint No</th> --}}
                                 <th>Complaint Date</th>
                                 <th>Remain Hours</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @if(isset($amcTicker) && $amcTicker)
-                                @foreach ($amcTicker as $value)
+                            @if(isset($data) && $data)
+                                @foreach ($data as $value)
                                     @php
-                                        $diff = strtotime($value->end_date) - strtotime(date('Y-m-d'));
+                                        $diff = strtotime($value->date) - strtotime(date('Y-m-d'));
                                         $remainDay = abs(round($diff / 86400));
                                         $bgcolor = "";
                                         if($remainDay <= 10)
@@ -65,11 +71,13 @@
                                     @endphp
                                     <tr style="background-color:{{ $bgcolor }}">
                                         {{-- class="col-lg-4 col-sm-12 col-md-4" --}}
-                                        <td data-label="AMC No">{{ $value->id }}</td>
-                                        <td data-label="Company">{{ $value->compny }}</td>
+                                        <td data-label="AMC No">{{ $value->amc_id }}</td>
+                                        <td data-label="Company">{{ $value->company_name }}</td>
                                         <td data-label="Person Name">{{ $value->person_name }}</td>
-                                        <td data-label="End Date">{{ $value->end_date }}</td>
-                                        <td data-label="Remain Days">{{ $remainDay }}</td>
+                                        <td data-label="City">{{ $value->city }}</td>
+                                        {{-- <td data-label="Complaint No">{{ $remainDay }}</td> --}}
+                                        <td data-label="Complaint Date">{{ $value->date }}</td>
+                                        <td data-label="Remain Hour">{{ $remainDay }}</td>
                                     </tr>
                                 @endforeach
                             @endif

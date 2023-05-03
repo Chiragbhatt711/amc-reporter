@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AmcScheduleServiceDetail;
 use Illuminate\Http\Request;
 use App\Models\ManageAmc;
 use App\Models\ManageComplaint;
@@ -70,16 +71,57 @@ class HomeController extends Controller
         return view('amc_dashboard',compact('day','amcTicker','paymentDay','paymentTicker'));
     }
 
-    public function callDashboard()
+    public function callDashboard(Request $request)
     {
         $admin_id = admin_id();
+
+        $type = "Free Service";
+        $day = 30;
+        if($request->type)
+        {
+            $type = $request->type;
+        }
+        if($request->day)
+        {
+            $day = $request->day;
+        }
+
+        $today = Carbon::now()->format('Y-m-d');
+        $endDate = Carbon::now()->addDay($day)->format('Y-m-d');
+
+        switch ($type) {
+            case 'Free Service':
+                $data = AmcScheduleServiceDetail::where('amc_schedule_service_details.admin_id',$admin_id)
+                    ->whereBetween('amc_schedule_service_details.service_date',[$today,$endDate])
+                    ->join('manage_amcs','amc_schedule_service_details.amc_id','=','manage_amcs.id')
+                    ->join('manage_parties','manage_amcs.party_id','manage_parties.id')
+                    ->groupBy('manage_amcs.id')
+                    ->select('manage_amcs.id as amc_id','amc_schedule_service_details.service_date as date','manage_parties.contact_person_name as person_name','manage_parties.city as city','manage_parties.party_name as company_name')
+                    ->get();
+                break;
+            case 'Complaint':
+                $data = ManageComplaint::where('manage_complaints.admin_id',$admin_id)
+                    ->whereDate('manage_complaints.handover_date', '>=', $today)
+                    ->whereDate('manage_complaints.handover_date', '<=', $endDate)
+                    ->join('manage_amcs','manage_complaints.amc_no','=','manage_amcs.id','LEFT')
+                    ->join('manage_parties','manage_amcs.party_id','=','manage_parties.id','LEFT')
+                    ->select('manage_amcs.id as amc_id','manage_complaints.handover_date as date','manage_parties.party_name as company_name','manage_parties.contact_person_name as person_name','manage_parties.city as city')
+                    ->get();
+                break;
+
+            default:
+                $data = [];
+                break;
+        }
+        // dd($data);
+
         $pendingComplaint = ManageComplaint::where('admin_id',$admin_id)
             ->where('status',null)
             ->count();
         $completeComplaint = ManageComplaint::where('admin_id',$admin_id)
             ->whereNotNull('status')
             ->count();
-        return view('call_dashboard',compact('pendingComplaint','completeComplaint'));
+        return view('call_dashboard',compact('data','pendingComplaint','completeComplaint','type','day'));
     }
 
     public function stockDashboard(Request $request)
