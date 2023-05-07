@@ -9,7 +9,7 @@
     <div class="title">
         <h3>Manage Complaint</h3>
         <!-- <div class="pull-right"> -->
-            @can('user-create')
+            @can('manage-complaint-create')
                 <a class="btn add_btn" href="{{ Route('manage_complaint.create') }}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </a>
@@ -89,15 +89,16 @@
                         </td>
                         <td data-label="Handover To">{{ $value->handover }}</td>
                         <td data-label="Handover Date">{{ $value->handover_date.' '.$value->handover_time }}</td>
-                        <td data-label="Action"> 
-                            @can('user-edit')
+                        <td data-label="Action">
+                            @can('manage-complaint-edit')
                                 <a href="{{Route('manage_complaint.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                             @endcan
-                            @can('user-delete')
+                            @can('manage-complaint-delete')
                                 <a onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
                             @endcan
+                            @can('manage-complaint-edit')
                                 <a href="{{Route('call_update',$value->id)}}"> <i class="fa-solid fa-clipboard-check"></i> </a>
-
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

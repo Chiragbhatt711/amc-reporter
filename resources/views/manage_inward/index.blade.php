@@ -8,11 +8,11 @@
     @endif
     <div class="title">
         <h3>Manage Inward</h3>
-        <!-- <div class="pull-right"> -->
-            <a class="btn add_btn" href="{{ route('manage_inward.create') }}">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-            </a>
-        <!-- </div> -->
+            @can('manage-inward-create')
+                <a class="btn add_btn" href="{{ route('manage_inward.create') }}">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </a>
+            @endcan
     </div>
     <table class="table ">
         <thead  class="">
@@ -59,10 +59,10 @@
                         <td>{{ $value->total_amount }}</td>
                         <td>{{ $value->note }}</td>
                         <td>
-                            @can('user-edit')
+                            @can('manage-inward-edit')
                                 <a href="{{Route('manage_inward.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                             @endcan
-                            @can('user-delete')
+                            @can('manage-inward-delete')
                                 <a onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
                             @endcan
                         </td>

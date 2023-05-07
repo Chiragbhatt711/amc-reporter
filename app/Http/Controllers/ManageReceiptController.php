@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\DB;
 
 class ManageReceiptController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:manage-receipt-list|manage-receipt-create|manage-receipt-edit|manage-receipt-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:manage-receipt-create', ['only' => ['create','store']]);
+         $this->middleware('permission:manage-receipt-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:manage-receipt-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

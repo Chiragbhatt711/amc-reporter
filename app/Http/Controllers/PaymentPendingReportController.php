@@ -8,6 +8,14 @@ use DB;
 
 class PaymentPendingReportController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:payment-pending-report-list|payment-pending-report-create|payment-pending-report-edit|payment-pending-report-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:payment-pending-report-create', ['only' => ['create','store']]);
+         $this->middleware('permission:payment-pending-report-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:payment-pending-report-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $admin_id = admin_id();

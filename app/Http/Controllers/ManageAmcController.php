@@ -15,6 +15,15 @@ use DB;
 
 class ManageAmcController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:manage-amc-list|manage-amc-create|manage-amc-edit|manage-amc-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:manage-amc-create', ['only' => ['create','store']]);
+         $this->middleware('permission:manage-amc-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:manage-amc-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:party-ledger-summary-list', ['only' => ['partyLedgerSummary']]);
+         $this->middleware('permission:party-ledger-details-list', ['only' => ['partyLedgerDetail']]);
+    }
     /**
      * Display a listing of the resource.
      *

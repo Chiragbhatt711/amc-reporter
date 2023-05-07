@@ -8,13 +8,11 @@
     @endif
     <div class="title">
         <h3>Manage Executive</h3>
-        <!-- <div class="pull-right"> -->
-            @can('user-create')
+            @can('manage-executive-create')
                 <a class="btn add_btn" href="{{ Route('manage_executive.create') }}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </a>
             @endcan
-        <!-- </div> -->
     </div>
     <table class="table table-bordered dynamic-data-table">
         <thead>
@@ -41,10 +39,10 @@
                         <td data-label="Mobile No">{{ $value->mobile_number }}</td>
                         <td data-label="Role">{{ $value->role }}</td>
                         <td data-label="Action">
-                            @can('user-edit')
+                            @can('manage-executive-edit')
                                 <a href="{{Route('manage_executive.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                             @endcan
-                            @can('user-delete')
+                            @can('manage-executive-delete')
                                 <a onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
                             @endcan
                         </td>

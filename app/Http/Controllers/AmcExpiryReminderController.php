@@ -15,6 +15,13 @@ use Carbon\Carbon;
 
 class AmcExpiryReminderController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:amc-expiry-reminder-list|amc-expiry-reminder-create|amc-expiry-reminder-edit|amc-expiry-reminder-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:amc-expiry-reminder-create', ['only' => ['create','store']]);
+         $this->middleware('permission:amc-expiry-reminder-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:amc-expiry-reminder-delete', ['only' => ['destroy']]);
+    }
     public function index(Request $request)
     {
         if(isset($request->start_date) && $request->start_date)

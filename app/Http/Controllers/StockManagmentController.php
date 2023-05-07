@@ -9,6 +9,12 @@ use DB;
 
 class StockManagmentController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:stock-register-list', ['only' => ['stockRegister']]);
+         $this->middleware('permission:month-wise-item-stock-list', ['only' => ['MonthWiseItemStock']]);
+         $this->middleware('permission:minimum-item-stock-report-list', ['only' => ['minimumItemStockReport']]);
+    }
     public function stockRegister()
     {
         $admin_id = admin_id();
