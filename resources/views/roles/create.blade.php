@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <!-- trading history area start -->
-        <div class="col-lg-6 m-auto">
+        <div class="col-lg-8 m-auto">
             <div class="card">
                 <div class="card-body m-auto">
                     <h4 class="form_sub_title text-center border-0">Create role</h4>

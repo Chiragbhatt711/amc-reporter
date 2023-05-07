@@ -439,24 +439,10 @@ function productDitailsHide(id)
     $('#productHide_'+id).hide();
     $('.child_row_'+id).hide();
 }
-// alert("Outside hello");
 $("button").click(function(){
-//     console.log("Inside hello");
-//     console.log($("button"));
     $(".contentArea").addClass("col-sm-9 col-md-9 col-lg-9");
     $(".contentArea").removeClass("col-sm-12 col-md-12 col-lg-12");
-//     // if ($("button").prop("disabled")){
-//     //     console.log("Not clicked");
-//     //     console.log($("button").prop("disabled"));
-//     //     $(".contentArea").addClass("col-sm-12 col-md-12 col-lg-12");
-//     //     $(".contentArea").removeClass("col-sm-9 col-md-9 col-lg-9");
-//     // }else{
-//     //     $(".contentArea").removeClass("col-sm-12 col-md-12 col-lg-12");
-//     //     $(".contentArea").addClass("col-sm-9 col-md-9 col-lg-9");
-//     //     console.log("Clicked")
-//     //     console.log($("button").prop("disabled"));
-//     // }
-  });
+});
 
 const $menu = $('.dropdown-toggle')
 const $dropdownMenu = $('.dropdownMenu')

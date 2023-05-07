@@ -29,9 +29,7 @@
         {{-- JQuery Data table css --}}
         <!-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/DataTables/datatables.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/DataTables/responsive.dataTables.min.css') }}"> -->
-        <style>
-            /* .content_side .sideMenu{display:block;width:100%;margin: 0;padding: 0;flex-basis: 350px;} */
-        </style>
+        <style></style>
 </head>
 <body>
     <div id="app">
@@ -46,9 +44,7 @@
                                         <a class="navbar-brand logo_div" href="#">
                                             <img src="{{ asset('assets/image/happy_technology_logo.png') }}" class="logo" alt="Logo" loading="lazy" />
                                         </a>
-                                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav"
-                                            aria-expanded="false" aria-label="Toggle navigation">
-                                            <!-- <span class="navbar-toggler-icon"></span> -->
+                                        <button onclick="toggleMneu()" id="toogleBtn" class="navbar-toggler colleps-btn">
                                             <i class="fa-solid fa-bars"></i>
                                         </button>
                                     </div>
@@ -59,225 +55,200 @@
                 </div>
             </div>
             <div class="content_side">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-3 col-md-3 col-lg-3 sideMenu collapse collapse-horizontal" id="main_nav">
-                            <div class="navbar navbar-expand-lg">
-                                <div class=" navbar-collapse menus">
-                                    <ul class="navbar-nav">
-                                        <li  class="nav-item dropdown">
-                                            <a class="nav-link" href="{{route('home')}}"><i class='fa fa-home'></i>Dashboard</a>
+                <div class="container-fluid p-0">
+                    <div class="d-flex">
+                        <div id="mysidebar" class="sidebar shrink_sidebar">
+                            <ul class="sidebar-navlink ">
+                                <li  class="nav-item dropdown">
+                                    <a class="nav-link" href="{{route('home')}}"><i class='fa fa-home'></i>Dashboard</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="javascript:void(0)"><i class='fa fa-gears'></i>AMC</a>
+                                    <ul class="dropdownMenu">
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ route('contract_type.index') }}">
+                                                <i class="fas fa-file"></i> Manage AMC Contract Product
+                                            </a>
                                         </li>
-                                        @canany(['contract-type-list','manage-party-list','manage-amc-list','manage-receipt-list','manage-tax-list','amc-expiry-reminder-list','party-ledger-summary-list','party-ledger-details-list','payment-pending-report-list','service-tax-report-list'])
-                                            <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="javascript:void(0)"><i class='fa fa-gears'></i>AMC</a>
-                                                <ul class="dropdownMenu">
-                                                    @can('contract-type-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ route('contract_type.index') }}">
-                                                                <i class="fas fa-file"></i> Manage AMC Contract Product
-                                                            </a>
-                                                        </li>
-                                                    @endcan
-                                                    @can('manage-party-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ route('manage_party.index') }}">
-                                                                <i class="fa fa-users" aria-hidden="true"></i> Manage Party
-                                                            </a>
-                                                        </li>
-                                                    @endcan
-                                                    @can('manage-amc-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ route('manage_amc.index') }}">
-                                                                <i class="fa fa-cog" aria-hidden="true"></i>Manage AMC
-                                                            </a>
-                                                        </li>
-                                                    @endcan
-                                                    @can('manage-receipt-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ route('manage_receipt.index') }}">
-                                                                <i class="fas fa-dollar-sign"></i>Manage Receipt
-                                                            </a>
-                                                        </li>
-                                                    @endcan
-                                                    @can('manage-tax-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ Route('manage_tax.index') }}">
-                                                                <i class="fa fa-percent" aria-hidden="true"></i>Manage Tax
-                                                            </a>
-                                                        </li>
-                                                    @endcan
-                                                    @can('amc-expiry-reminder-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ Route('amc_expiry_reminder') }}">
-                                                            <i class="fa-solid fa-calendar-clock"></i>AMC Expiry Reminder
-                                                            </a>
-                                                        </li>
-                                                    @endcan
-                                                    @can('party-ledger-summary-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ Route('party_ledger_summary') }}">
-                                                            <i class=""></i>Party Leadger Summary Report
-                                                            </a>
-                                                        </li>
-                                                    @endcan
-                                                    @can('party-ledger-details-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ Route('party_ledger_details') }}">
-                                                            <i class=""></i>Party Leadger Detail Report
-                                                            </a>
-                                                        </li>
-                                                    @endcan
-                                                    @can('payment-pending-report-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ route('payment_pending_report.index') }}">
-                                                            <i class=""></i>Payment Pending Report
-                                                            </a>
-                                                        </li>
-                                                    @endcan
-                                                    @can('service-tax-report-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ route('service_tax_report.index') }}">
-                                                            <i class=""></i>Service Tax Report
-                                                            </a>
-                                                        </li>
-                                                    @endcan
-                                                </ul>
-                                            </li>
-                                        @endcanany
-                                        @canany(['manage-complaint-template-list','manage-solution-template-list','manage-executive-list','manage-complaint-list','call-register-list','complaint-summary-list'])
-                                            <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="#">
-                                                    <i class="fa fa-phone" aria-hidden="true"></i>Call Management
-                                                </a>
-                                                <ul class="dropdownMenu">
-                                                    @can('manage-complaint-template-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ route('manage_complaint_template.index') }}">
-                                                                <i class=""></i>Complant Template
-                                                            </a>
-                                                        </li>
-                                                    @endcan
-                                                    @can('manage-solution-template-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ route('manage_solution_template.index') }}">
-                                                                <i class=""></i>Solution Template
-                                                            </a>
-                                                        </li>
-                                                    @endcan
-                                                    @can('manage-executive-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ route('manage_executive.index') }}">
-                                                                <i class=""></i>Manage Executive
-                                                            </a>
-                                                        </li>
-                                                    @endcan
-                                                    @can('manage-complaint-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ route('manage_complaint.index') }}">
-                                                                <i class=""></i>Manage Complaint
-                                                            </a>
-                                                        </li>
-                                                    @endcan
-                                                    @can('call-register-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ route('call_register') }}">
-                                                                <i class=""></i>Call Register
-                                                            </a>
-                                                        </li>
-                                                    @endcan
-                                                    @can('complaint-summary-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ route('complaint_summary') }}">
-                                                                <i class=""></i>Complaint Summary
-                                                            </a>
-                                                        </li>
-                                                    @endcan
-                                                </ul>
-                                            </li>
-                                        @endcanany
-                                        @canany(['product-group-list','manage-product-list','manage-supplier-list','manage-inward-list','manage-outward-list','stock-register-list','month-wise-item-stock-list','minimum-item-stock-report-list'])
-                                            <li class="nav-item dropdown" >
-                                                <a class="nav-link dropdown-toggle" href="#">
-                                                    <i class="fa fa-pie-chart" aria-hidden="true"></i>Stock Management
-                                                </a>
-                                                <ul class="dropdownMenu">
-                                                    @can('product-group-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ route('product_group.index') }}"> Product Group </a>
-                                                        </li>
-                                                    @endcan
-                                                    @can('manage-product-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ route('manage_product.index') }}"> Manage Product </a>
-                                                        </li>
-                                                    @endcan
-                                                    @can('manage-supplier-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ route('manage_supplier.index') }}"> Manage Supplier </a>
-                                                        </li>
-                                                    @endcan
-                                                    @can('manage-inward-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ route('manage_inward.index') }}"> Manage Inward </a>
-                                                        </li>
-                                                    @endcan
-                                                    @can('manage-outward-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ route('manage_outward.index') }}"> Manage Outward </a>
-                                                        </li>
-                                                    @endcan
-                                                    @can('stock-register-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ route('stock_register') }}"> Stock Register </a>
-                                                        </li>
-                                                    @endcan
-                                                    @can('month-wise-item-stock-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ route('month_wise_item_stock') }}"> Month Wise Item Stock </a>
-                                                        </li>
-                                                    @endcan
-                                                    @can('minimum-item-stock-report-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ route('minimum_item_stock_report') }}"> Minimum Item Stock Report </a>
-                                                        </li>
-                                                    @endcan
-                                                </ul>
-                                            </li>
-                                        @endcanany
-                                        @canany(['role-list','user-list'])
-                                            <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="#">
-                                                    <i class="fa-solid fa-user-group"></i>Administrator
-                                                </a>
-                                                <ul class="dropdownMenu">
-                                                    @can('role-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ Route('roles.index') }}">
-                                                                <i class="fa-solid fa-user"></i>User Role
-                                                            </a>
-                                                        </li>
-                                                    @endcan
-                                                    @can('user-list')
-                                                        <li class="dropdown-item">
-                                                            <a class="nav-link" href="{{ Route('users.index') }}">
-                                                                <i class="fa-solid fa-user"></i>Users
-                                                            </a>
-                                                        </li>
-                                                    @endcan
-                                                </ul>
-                                            </li>
-                                        @endcanany
-                                        <li class="nav-item log_out">
-                                            <a class="nav-link" href="{{ Route('logout') }}" title="Log Out">
-                                                <i class="fa-solid fa-arrow-right-from-bracket"></i>Log Out
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ route('manage_party.index') }}">
+                                                <i class="fa fa-users" aria-hidden="true"></i> Manage Party
+                                            </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ route('manage_amc.index') }}">
+                                                <i class="fa fa-cog" aria-hidden="true"></i>Manage AMC
+                                            </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ route('manage_receipt.index') }}">
+                                                <i class="fas fa-dollar-sign"></i>Manage Receipt
+                                            </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ Route('manage_tax.index') }}">
+                                                <i class="fa fa-percent" aria-hidden="true"></i>Manage Tax
+                                            </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ Route('amc_expiry_reminder') }}">
+                                            <i class="fa-solid fa-calendar-clock"></i>AMC Expiry Reminder
+                                            </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ Route('party_ledger_summary') }}">
+                                            <i class=""></i>Party Leadger Summary Report
+                                            </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ Route('party_ledger_details') }}">
+                                            <i class=""></i>Party Leadger Detail Report
+                                            </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ route('payment_pending_report.index') }}">
+                                            <i class=""></i>Payment Pending Report
+                                            </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ route('service_tax_report.index') }}">
+                                            <i class=""></i>Service Tax Report
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#">
+                                        <i class="fa fa-phone" aria-hidden="true"></i>Call Management
+                                    </a>
+                                    <ul class="dropdownMenu">
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ route('manage_complaint_template.index') }}">
+                                                <i class=""></i>Complant Template
+                                            </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ route('manage_solution_template.index') }}">
+                                                <i class=""></i>Solution Template
+                                            </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ route('manage_executive.index') }}">
+                                                <i class=""></i>Manage Executive
+                                            </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ route('manage_complaint.index') }}">
+                                                <i class=""></i>Manage Complaint
+                                            </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ route('call_register') }}">
+                                                <i class=""></i>Call Register
+                                            </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ route('complaint_summary') }}">
+                                                <i class=""></i>Complaint Summary
                                             </a>
                                         </li>
                                     </ul>
-                                </div>
-                            </div>
+                                </li>
+                                <li class="nav-item dropdown" >
+                                    <a class="nav-link dropdown-toggle" href="#">
+                                        <i class="fa fa-pie-chart" aria-hidden="true"></i>Stock Management
+                                    </a>
+                                    <ul class="dropdownMenu">
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ route('product_group.index') }}"> Product Group </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ route('manage_product.index') }}"> Manage Product </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ route('manage_supplier.index') }}"> Manage Supplier </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ route('manage_inward.index') }}"> Manage Inward </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ route('manage_outward.index') }}"> Manage Outward </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ route('stock_register') }}"> Stock Register </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ route('month_wise_item_stock') }}"> Month Wise Item Stock </a>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <a class="nav-link" href="{{ route('minimum_item_stock_report') }}"> Minimum Item Stock Report </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                @canany(['role-list','user-list'])
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#">
+                                            <i class="fa-solid fa-user-group"></i>Administrator
+                                        </a>
+                                        <ul class="dropdownMenu">
+                                            @can('role-list')
+                                                <li class="dropdown-item">
+                                                    <a class="nav-link" href="{{ Route('roles.index') }}">
+                                                        <i class="fa-solid fa-user"></i>User Role
+                                                    </a>
+                                                </li>
+                                            @endcan
+                                            @can('user-list')
+                                                <li class="dropdown-item">
+                                                    <a class="nav-link" href="{{ Route('users.index') }}">
+                                                        <i class="fa-solid fa-user"></i>Users
+                                                    </a>
+                                                </li>
+                                            @endcan
+                                        </ul>
+                                    </li>
+                                @endcanany
+                                <li class="nav-item log_out">
+                                    <a class="nav-link" href="{{ Route('logout') }}" title="Log Out">
+                                        <i class="fa-solid fa-arrow-right-from-bracket"></i>Log Out
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- <ul class="sidebar-navlink">
+                                <li>
+                                    <a href="#">
+                                    <i class="fa-solid fa-house"></i>
+                                    <span>Home</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                    <i class="fa-solid fa-chart-simple"></i>
+                                    <span>Analytics</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                    <i class="fa-solid fa-clock-rotate-left"></i>
+                                    <span>Activity</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                    <i class="fa-solid fa-list-check"></i>
+                                    <span>Mangement</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                    <i class="fa-solid fa-users"></i>
+                                    <span>Users</span>
+                                    </a>
+                                </li>
+                            </ul> -->
                         </div>
-                        <main class="col-sm-12 col-md-12 col-lg-12 contentArea py-1">
+                        <main class="container mt-4">
                             @yield('content')
                         </main>
                     </div>
@@ -309,6 +280,14 @@
             });
         }
     </script>
+    <script>
+    const mysidebar = document.getElementById("mysidebar");
+    function toggleMneu() {
+      mysidebar.classList.toggle("shrink_sidebar");
+    }
+
+    </script>
+
         <!-- Scripts -->
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
