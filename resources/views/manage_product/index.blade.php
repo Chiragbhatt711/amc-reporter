@@ -8,11 +8,11 @@
     @endif
     <div class="title">
         <h3>Manage Product</h3>
-        <!-- <div class="pull-right"> -->
-            <a class="btn add_btn" href="{{ route('manage_product.create') }}">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-            </a>
-        <!-- </div> -->
+            @can('manage-product-create')
+                <a class="btn add_btn" href="{{ route('manage_product.create') }}">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </a>
+            @endcan
     </div>
     <table class="table  dynamic-data-table">
         <thead  class="">
@@ -49,8 +49,12 @@
                         <td data-label="Opening Qty">{{ $value->opening_qty }}</td>
                         <td data-label="Minimum Qty">{{ $value->min_qty }}</td>
                         <td data-label="Action">
-                            <a href="{{Route('manage_product.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
-                            <a onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
+                            @can('manage-product-edit')
+                                <a href="{{Route('manage_product.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
+                            @endcan
+                            @can('manage-product-delete')
+                                <a onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

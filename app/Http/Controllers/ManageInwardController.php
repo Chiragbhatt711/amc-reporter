@@ -11,6 +11,14 @@ use DB;
 
 class ManageInwardController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:manage-inward-list|manage-inward-create|manage-inward-edit|manage-inward-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:manage-inward-create', ['only' => ['create','store']]);
+         $this->middleware('permission:manage-inward-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:manage-inward-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $admin_id = admin_id();

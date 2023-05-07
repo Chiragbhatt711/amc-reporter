@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class ManageSolutionTemplateController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:manage-solution-template-list|manage-solution-template-create|manage-solution-template-edit|manage-solution-template-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:manage-solution-template-create', ['only' => ['create','store']]);
+         $this->middleware('permission:manage-solution-template-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:manage-solution-template-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

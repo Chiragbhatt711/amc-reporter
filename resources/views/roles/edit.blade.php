@@ -49,6 +49,126 @@
                                                         $menuName = 'contract-type';
                                                         $mainTitle = "Contract type";
                                                     }
+                                                    if(trim(strtolower($key)) == 'manage-party')
+                                                    {
+                                                        $menuName = 'manage-party';
+                                                        $mainTitle = "Manage party";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'manage-amc')
+                                                    {
+                                                        $menuName = 'manage-amc';
+                                                        $mainTitle = "Mmanage AMC";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'manage-receipt')
+                                                    {
+                                                        $menuName = 'manage-receipt';
+                                                        $mainTitle = "Manage receipt";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'manage-tax')
+                                                    {
+                                                        $menuName = 'manage-tax';
+                                                        $mainTitle = "Manage tax";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'amc-expiry-reminder')
+                                                    {
+                                                        $menuName = 'amc-expiry-reminder';
+                                                        $mainTitle = "AMC expiry reminder";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'party-ledger-summary')
+                                                    {
+                                                        $menuName = 'party-ledger-summary';
+                                                        $mainTitle = "Party ledger summary";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'party-ledger-details')
+                                                    {
+                                                        $menuName = 'party-ledger-details';
+                                                        $mainTitle = "Party ledger details";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'payment-pending-report')
+                                                    {
+                                                        $menuName = 'payment-pending-report';
+                                                        $mainTitle = "Payment pending report";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'service-tax-report')
+                                                    {
+                                                        $menuName = 'service-tax-report';
+                                                        $mainTitle = "Service tax report";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'manage-complaint-template')
+                                                    {
+                                                        $menuName = 'manage-complaint-template';
+                                                        $mainTitle = "Manage complaint template";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'manage-solution-template')
+                                                    {
+                                                        $menuName = 'manage-solution-template';
+                                                        $mainTitle = "Manage solution template";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'manage-executive')
+                                                    {
+                                                        $menuName = 'manage-executive';
+                                                        $mainTitle = "Manage executive";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'manage-complaint')
+                                                    {
+                                                        $menuName = 'manage-complaint';
+                                                        $mainTitle = "Manage complaint";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'call-register')
+                                                    {
+                                                        $menuName = 'call-register';
+                                                        $mainTitle = "Call register";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'complaint-summary')
+                                                    {
+                                                        $menuName = 'complaint-summary';
+                                                        $mainTitle = "Complaint summary";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'product-group')
+                                                    {
+                                                        $menuName = 'product-group';
+                                                        $mainTitle = "Product group";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'manage-product')
+                                                    {
+                                                        $menuName = 'manage-product';
+                                                        $mainTitle = "Manage product";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'manage-supplier')
+                                                    {
+                                                        $menuName = 'manage-supplier';
+                                                        $mainTitle = "Manage supplier";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'manage-inward')
+                                                    {
+                                                        $menuName = 'manage-inward';
+                                                        $mainTitle = "Manage inward";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'manage-outward')
+                                                    {
+                                                        $menuName = 'manage-outward';
+                                                        $mainTitle = "Manage outward";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'stock-register')
+                                                    {
+                                                        $menuName = 'stock-register';
+                                                        $mainTitle = "Stock register";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'month-wise-item-stock')
+                                                    {
+                                                        $menuName = 'month-wise-item-stock';
+                                                        $mainTitle = "Month wise item stock";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'minimum-item-stock-report')
+                                                    {
+                                                        $menuName = 'minimum-item-stock-report';
+                                                        $mainTitle = "Minimum item stock report";
+                                                    }
+                                                    if(trim(strtolower($key)) == 'minimum-item-stock-report')
+                                                    {
+                                                        $menuName = 'minimum-item-stock-report';
+                                                        $mainTitle = "Minimum item stock report";
+                                                    }
                                                 @endphp
                                                 <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
                                                     <strong style="margin-right: 80px;">{{ $mainTitle }}</strong>

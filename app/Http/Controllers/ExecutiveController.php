@@ -9,6 +9,13 @@ use Hash;
 
 class ExecutiveController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:manage-executive-list|manage-executive-create|manage-executive-edit|manage-executive-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:manage-executive-create', ['only' => ['create','store']]);
+         $this->middleware('permission:manage-executive-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:manage-executive-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

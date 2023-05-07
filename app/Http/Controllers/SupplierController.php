@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class SupplierController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:manage-supplier-list|manage-supplier-create|manage-supplier-edit|manage-supplier-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:manage-supplier-create', ['only' => ['create','store']]);
+         $this->middleware('permission:manage-supplier-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:manage-supplier-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $admin_id = admin_id();

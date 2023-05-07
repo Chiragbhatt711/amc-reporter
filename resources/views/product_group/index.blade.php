@@ -8,11 +8,11 @@
     @endif
     <div class="title">
         <h3>Product Group</h3>
-        <!-- <div class="pull-right"> -->
-            <a class="btn add_btn" href="{{ route('product_group.create') }}">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-            </a>
-        <!-- </div> -->
+            @can('product-group-create')
+                <a class="btn add_btn" href="{{ route('product_group.create') }}">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </a>
+            @endcan
     </div>
     <table class="table table-bordered dynamic-data-table">
         <thead  class="">
@@ -35,8 +35,12 @@
                         <td data-label="No">{{ $i }}</td>
                         <td data-label="Group">{{ $group->group }}</td>
                         <td data-label="Action">
-                            <a href="{{Route('product_group.edit',$group->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
-                            <a onclick="deleteFunction( '{{ $group->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
+                            @can('product-group-edit')
+                                <a href="{{Route('product_group.edit',$group->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
+                            @endcan
+                            @can('product-group-delete')
+                                <a onclick="deleteFunction( '{{ $group->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

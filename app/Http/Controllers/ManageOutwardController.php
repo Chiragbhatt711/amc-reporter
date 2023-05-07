@@ -12,6 +12,14 @@ use DB;
 
 class ManageOutwardController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:manage-outward-list|manage-outward-create|manage-outward-edit|manage-outward-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:manage-outward-create', ['only' => ['create','store']]);
+         $this->middleware('permission:manage-outward-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:manage-outward-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $admin_id = admin_id();

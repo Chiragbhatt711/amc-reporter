@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\DB;
 
 class ServiceTaxReportController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:service-tax-report-list|service-tax-report-create|service-tax-report-edit|service-tax-report-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:service-tax-report-create', ['only' => ['create','store']]);
+         $this->middleware('permission:service-tax-report-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:service-tax-report-delete', ['only' => ['destroy']]);
+    }
     public function index(Request $request)
     {
         if(isset($request->start_date) && $request->start_date)

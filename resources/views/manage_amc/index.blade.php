@@ -8,11 +8,11 @@
     @endif
     <div class="title">
         <h3>Manage AMC</h3>
-        <!-- <div class=""> -->
-            <a class="btn add_btn" href="{{ route('manage_amc.create') }}">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-            </a>
-        <!-- </div> -->
+            @can('manage-amc-create')
+                <a class="btn add_btn" href="{{ route('manage_amc.create') }}">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </a>
+            @endcan
     </div>
     <table class="table table-bordered dynamic-data-table">
         <thead  class="">
@@ -59,10 +59,10 @@
                         <td data-label="Contract Amount">{{ $value->contract_amount }}</td>
                         <td data-label="Taxt">{{ $value->tax }}</td>
                         <td data-label="Action">
-                            @can('user-edit')
+                            @can('manage-amc-edit')
                                 <a href="{{Route('manage_amc.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                             @endcan
-                            @can('user-delete')
+                            @can('manage-amc-delete')
                                 <a onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
                             @endcan
                         </td>

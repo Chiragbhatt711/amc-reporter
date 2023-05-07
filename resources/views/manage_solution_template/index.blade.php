@@ -8,11 +8,11 @@
 @endif
 <div class="title">
     <h3>Manage Complaint Template</h3>
-    <!-- <div class="pull-right"> -->
-        <a class="btn add_btn" href="{{ route('manage_solution_template.create') }}">
-            <i class="fa fa-plus" aria-hidden="true"></i>
-        </a>
-    <!-- </div> -->
+        @can('manage-solution-template-create')
+            <a class="btn add_btn" href="{{ route('manage_solution_template.create') }}">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+            </a>
+        @endcan
 </div>
 <table class="table table-bordered dynamic-data-table">
     <thead  class="">
@@ -37,10 +37,10 @@
                     <td data-label="Template Name">{{ $value->title }}</td>
                     <td data-label="Template Description">{{ $value->description }}</td>
                     <td data-label="Action">
-                        @can('user-edit')
+                        @can('manage-solution-template-edit')
                             <a href="{{Route('manage_solution_template.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                         @endcan
-                        @can('user-delete')
+                        @can('manage-solution-template-delete')
                             <a onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
                         @endcan
                     </td>

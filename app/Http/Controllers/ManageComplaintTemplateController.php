@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class ManageComplaintTemplateController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:manage-complaint-template-list|manage-complaint-template-create|manage-complaint-template-edit|manage-complaint-template-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:manage-complaint-template-create', ['only' => ['create','store']]);
+         $this->middleware('permission:manage-complaint-template-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:manage-complaint-template-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

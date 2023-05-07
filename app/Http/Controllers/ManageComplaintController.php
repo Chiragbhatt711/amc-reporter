@@ -17,6 +17,15 @@ use Illuminate\Support\Facades\DB;
 
 class ManageComplaintController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:manage-complaint-list|manage-complaint-create|manage-complaint-edit|manage-complaint-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:manage-complaint-create', ['only' => ['create','store']]);
+         $this->middleware('permission:manage-complaint-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:manage-complaint-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:call-register-list', ['only' => ['callRegister']]);
+         $this->middleware('permission:complaint-summary-list', ['only' => ['complaintSummary']]);
+    }
     /**
      * Display a listing of the resource.
      *

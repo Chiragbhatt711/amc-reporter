@@ -8,6 +8,13 @@ use App\Models\ProductGroup;
 
 class ManageProductController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:manage-product-list|manage-product-create|manage-product-edit|manage-product-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:manage-product-create', ['only' => ['create','store']]);
+         $this->middleware('permission:manage-product-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:manage-product-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

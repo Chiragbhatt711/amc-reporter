@@ -8,11 +8,11 @@
     @endif
     <div class="title">
         <h3>Manage Supplier</h3>
-        <!-- <div class="pull-right"> -->
-            <a class="btn add_btn" href="{{ route('manage_supplier.create') }}">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-            </a>
-        <!-- </div> -->
+            @can('manage-supplier-create')
+                <a class="btn add_btn" href="{{ route('manage_supplier.create') }}">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </a>
+            @endcan
     </div>
     <table class="table table-bordered dynamic-data-table">
         <thead  class="">
@@ -51,10 +51,10 @@
                         <td data-label="Phone No.">{{ $value->phone_no }}</td>
                         <td data-label="E-mail">{{ $value->e_mail }}</td>
                         <td data-label="Action">
-                            @can('user-edit')
+                            @can('manage-supplier-edit')
                                 <a href="{{Route('manage_supplier.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                             @endcan
-                            @can('user-delete')
+                            @can('manage-supplier-delete')
                                 <a onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
                             @endcan
                         </td>

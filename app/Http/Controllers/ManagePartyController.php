@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class ManagePartyController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:manage-party-list|manage-party-create|manage-party-edit|manage-party-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:manage-party-create', ['only' => ['create','store']]);
+         $this->middleware('permission:manage-party-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:manage-party-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

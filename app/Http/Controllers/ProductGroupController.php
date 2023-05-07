@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class ProductGroupController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:product-group-list|product-group-create|product-group-edit|product-group-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:product-group-create', ['only' => ['create','store']]);
+         $this->middleware('permission:product-group-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:product-group-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
