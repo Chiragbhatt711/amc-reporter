@@ -10,7 +10,7 @@ use App\Models\ManageComplaintTemplate;
 use App\Models\User;
 use App\Models\AmcPeroductDetail;
 use App\Models\ManageSolutionTemplate;
-use Spatie\Permission\Models\Role;
+use Role;
 use App\Models\CallUpdateItem;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
