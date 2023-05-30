@@ -14,7 +14,7 @@
                 </a>
             @endcan
     </div>
-    <table class="table ">
+    <table class="table table-bordered dynamic-data-table ">
         <thead  class="">
             <tr>
                 <th scope="col">Inward Date</th>

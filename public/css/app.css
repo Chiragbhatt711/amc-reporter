@@ -80,7 +80,7 @@ span.form_sub_btn i{line-height: 1.5;color: #000;}
 .navbar-expand-lg .navbar-toggler:focus,
 .navbar-expand-lg .navbar-toggler:active{border:4px solid #761950;background-color:#761950;color: #fff;outline: none;box-shadow: none;}
 .content_side{display: flex;width: 100%;padding:0 0;margin: 0;flex-wrap: nowrap;}
-.content_side .sideMenu.show .navbar{background:linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));transition: all 0.5s ease;}
+.content_side .sideMenu.show .navbar{background:linear-gradient(to right, rgba(239 214 65 / 80%), rgba(240 222 108 / 47%));transition: all 0.5s ease;}
 .content_side .sideMenu .menus{justify-content: space-between;align-items: center;}
 .content_side .sideMenu .navbar .menus ul.navbar-nav{display: flex;flex-direction: column;justify-content:space-between;align-items:flex-start;list-style: none;}
 .sidebar-navlink .nav-item{display: inline-block;padding:10px 20px 10px 20px;}
@@ -120,9 +120,9 @@ footer{display: block;width: 100%;height:50px;}
 .box .login-box .user-box input:valid ~ label {top:-20px !important;left: 0;color: #03e9f4;font-size: 16px;}
 .box .login-box .error{display: block;font-size:18px;}
 .box .login-box .submit_btn{position: relative;display:block;padding:10px 20px;color: #000;font-size:18px;font-weight:600;text-decoration: none;text-transform:capitalize;overflow: hidden; border-radius:8px;-webkit-border-radius:8px;-moz-border-radius:8px;-ms-border-radius:8px;-o-border-radius:8px;cursor: pointer;}
-.box .login-box .submit_btn:hover{background:linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));color: #000;}
+.box .login-box .submit_btn:hover{background:linear-gradient(to right, rgba(239 214 65 / 80%), rgba(240 222 108 / 47%));color: #000;}
 
-.homeBtn{ display: block; width: 100%; margin:20px 0; padding:10px 5px; background:#03f4e0; border-radius:6px; text-align: center; -webkit-border-radius:6px; -moz-border-radius:6px; -ms-border-radius:6px; -o-border-radius:6px;font-weight: 500;}
+.homeBtn{ display: block; width: 100%; margin:20px 0; padding:10px 5px; background:#ecd861; border-radius:6px; text-align: center; -webkit-border-radius:6px; -moz-border-radius:6px; -ms-border-radius:6px; -o-border-radius:6px;font-weight: 500;}
 .homeBtn:hover{ background:#fff;border: 1px solid #000;color: #000;text-decoration: none;}
 
 
@@ -132,10 +132,10 @@ footer{display: block;width: 100%;height:50px;}
   background: #84fab0;
 
   /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+  background: -webkit-linear-gradient(to right, rgba(239 214 65 / 80%), rgba(240 222 108 / 47%));
 
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
+  background: linear-gradient(to right, rgba(239 214 65 / 80%), rgba(240 222 108 / 47%))
   }
 
   .gradient-custom-4 {
@@ -181,7 +181,7 @@ a{
 }
 
 .btn_tile{
-  background: #03f4e0;
+  background: #ecd861;
   /* top: 35px; */
 }
 .plus_btn{

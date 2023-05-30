@@ -7,17 +7,17 @@
         </div>
     @endif
     <div class="title">
-        <h3>Manage Inward</h3>
+        <h3>Manage Outward</h3>
             @can('manage-outward-create')
                 <a class="btn add_btn" href="{{ route('manage_outward.create') }}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </a>
             @endcan
     </div>
-    <table class="table ">
+    <table class="table table-bordered dynamic-data-table ">
         <thead  class="">
             <tr>
-                <th scope="col">Inward Date</th>
+                <th scope="col">Outward Date</th>
                 <th scope="col">Reference Bill No</th>
                 <th scope="col">Outward Type</th>
                 <th scope="col">Total Item</th>
