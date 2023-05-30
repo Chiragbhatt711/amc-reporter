@@ -38,8 +38,8 @@ span.form_sub_btn:hover i{color: #03f4e0;}
 span.form_sub_btn i{line-height: 1.5;color: #000;}
 
 /* Login Resigter Page */
-#app.login_register_header{display: block;width: 100%;margin: 0;padding: 0;background:linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));}
-#app.login_register_header nav.navbar{display: block;width: 100%;margin: 0;padding:10px;} 
+#app.login_register_header{display: block;width: 100%;margin: 0;padding: 0;background:linear-gradient(to right, rgba(239 214 65 / 80%), rgba(240 222 108 / 47%));}
+#app.login_register_header nav.navbar{display: block;width: 100%;margin: 0;padding:10px;}
 #app.login_register_header a.log_register_logo{text-decoration: none;padding: 0;}
 #app.login_register_header a.log_register_logo{display: block;width: 200px !important;height: auto;}
 #app.login_register_header a.log_register_logo img{max-width:100%;height: auto;}
@@ -49,7 +49,7 @@ span.form_sub_btn i{line-height: 1.5;color: #000;}
 #app.navbar-toggler .log_register_menus ul li a i{display: inline;padding-right:6px;vertical-align: middle;}
 
 /* Header */
-.header{display: block;width: 100%;padding: 0;margin: 0;background-color: #84fab0;background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));}
+.header{display: block;width: 100%;padding: 0;margin: 0;background-color: #84fab0;background: linear-gradient(to right, rgba(239 214 65 / 80%), rgba(240 222 108 / 47%));}
 .header .navbar{width: 100%;padding:10px 20px;margin:0;}
 .header .navbar a.logo_div{display: block;width: 200px !important;height: auto;text-decoration: none;padding: 0;}
 .header .navbar a.logo_div img.logo{max-width:100%;height:auto;}
@@ -68,7 +68,8 @@ span.form_sub_btn i{line-height: 1.5;color: #000;}
 
 /* Sidebar */
 
-.sidebar { max-width: 350px; height: 100vh; min-height: calc(85vh - 70px); background:linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5)); border-right: 1px solid var(--gray); overflow: auto; position: relative; transition: max-width 0.5s; overflow: hidden;}
+/* .sidebar { max-width: 350px; height: 100vh; min-height: calc(85vh - 70px); background:linear-gradient(to right, rgba(239 214 65 / 80%), rgba(240 222 108 / 47%)); border-right: 1px solid var(--gray); overflow: auto; position: relative; transition: max-width 0.5s; overflow: hidden;} */
+.sidebar { max-width: 350px; min-height: calc(85vh - 70px); background:linear-gradient(to right, rgba(239 214 65 / 80%), rgba(240 222 108 / 47%)); border-right: 1px solid var(--gray); overflow: auto; position: relative; transition: max-width 0.5s; overflow: hidden;}
 .sidebar-navlink {padding:26px 0 0px 10px;}
 
 .sidebar.shrink_sidebar ul li a span {opacity: 0;transition: all 0.4s ease;}
@@ -87,7 +88,7 @@ span.form_sub_btn i{line-height: 1.5;color: #000;}
 .sidebar-navlink .nav-item a.nav-link:hover{background:#ce345c;}
 .sidebar-navlink .nav-item a.nav-link i{display: inline;padding-right:25px;vertical-align: middle;}
 .sidebar-navlink .nav-item .dropdownMenu{display: none;
-  background:linear-gradient(rgba(143, 211, 244, 0.5), rgba(132, 250, 176, 0.5));padding:20px 10px 20px 10px;}
+  background:linear-gradient(rgba(239 214 65 / 80%), rgba(240 222 108 / 47%));padding:20px 10px 20px 10px;}
 .sidebar-navlink .nav-item .dropdownMenu .dropdown-item{padding:5px 0;}
 .sidebar-navlink .nav-item .dropdownMenu .dropdown-item a.nav-link{font-size: 16px;}
 
@@ -98,7 +99,7 @@ span.form_sub_btn i{line-height: 1.5;color: #000;}
 
 /* Footer */
 footer{display: block;width: 100%;height:50px;}
-.footer{display: flex;justify-content: center;align-items: center;width: 100%;position: relative;background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));}
+.footer{display: flex;justify-content: center;align-items: center;width: 100%;position: relative;background: linear-gradient(to right, rgba(239 214 65 / 80%), rgba(240 222 108 / 47%));}
 
 .footer .footer-area{display: block;width: 100%;padding:10px;margin:10px 0 0;}
 
@@ -136,7 +137,7 @@ footer{display: block;width: 100%;height:50px;}
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
   }
-  
+
   .gradient-custom-4 {
   /* fallback for old browsers */
   background: #84fab0;
@@ -192,3 +193,7 @@ a{
 thead{
   font-size: 14px;
 }
+
+/* Chirag add */
+
+.d-flex .container {background-color: white;}
