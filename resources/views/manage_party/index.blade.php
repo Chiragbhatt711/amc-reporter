@@ -27,11 +27,11 @@
                 <th scope="col">Phone No</th>
                 <th scope="col">Pincode</th>
                 <th scope="col">E-mail</th>
-                <th scope="col">extf1</th>
+                {{-- <th scope="col">extf1</th>
                 <th scope="col">extf2</th>
                 <th scope="col">extf3</th>
                 <th scope="col">extf4</th>
-                <th scope="col">extf5</th>
+                <th scope="col">extf5</th> --}}
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -55,11 +55,11 @@
                         <td data-label="Phone No">{{ $value->phone_no }}</td>
                         <td data-label="Pincode">{{ $value->pincode }}</td>
                         <td data-label="E-mail">{{ $value->email }}</td>
-                        <td data-label="extf1">{{ $value->extf_1 }}</td>
+                        {{-- <td data-label="extf1">{{ $value->extf_1 }}</td>
                         <td data-label="extf2">{{ $value->extf_2 }}</td>
                         <td data-label="extf3">{{ $value->extf_3 }}</td>
                         <td data-label="extf4">{{ $value->extf_4 }}</td>
-                        <td data-label="extf5">{{ $value->extf_5 }}</td>
+                        <td data-label="extf5">{{ $value->extf_5 }}</td> --}}
                         <td data-label="Action">
                             @can('manage-party-edit')
                                 <a href="{{Route('manage_party.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
