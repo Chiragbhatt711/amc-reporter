@@ -22,7 +22,7 @@
         </div>
         <div class="row">
             <div class="col-lg-12 col-xs-12">
-                <h2 class="sub-header">Srvice/Call Reminder</h2>
+                <h2 class="sub-header">Service/Call Reminder</h2>
             </div>
             <div class="row mt-1">
                 {!! Form::open(array('route' => 'home','method'=>'GET')) !!}
