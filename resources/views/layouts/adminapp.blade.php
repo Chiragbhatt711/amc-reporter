@@ -44,9 +44,9 @@
                                         <a class="navbar-brand logo_div" href="#">
                                             <img src="{{ asset('assets/image/happy_technology_logo.png') }}" class="logo" alt="Logo" loading="lazy" />
                                         </a>
-                                        <button onclick="toggleMneu()" id="toogleBtn" class="navbar-toggler colleps-btn">
+                                        <!-- <button onclick="toggleMneu()" id="toogleBtn" class="navbar-toggler colleps-btn">
                                             <i class="fa-solid fa-bars"></i>
-                                        </button>
+                                        </button> -->
                                     </div>
                                 </nav>
                             </div>
@@ -59,6 +59,9 @@
                     <div class="d-flex">
                         <div id="mysidebar" class="sidebar shrink_sidebar">
                             <ul class="sidebar-navlink ">
+                                <li  class="nav-item dropdown">
+                                    <a href="#" onclick="toggleMneu()" id="toogleBtn" class="nav-link"><i class="fa-solid fa-bars"></i> Menu</a>
+                                </li>
                                 <li  class="nav-item dropdown">
                                     <a class="nav-link" href="{{route('home')}}"><i class='fa fa-home'></i>Dashboard</a>
                                 </li>
