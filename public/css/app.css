@@ -69,7 +69,7 @@ span.form_sub_btn i{line-height: 1.5;color: #000;}
 /* Sidebar */
 
 /* .sidebar { max-width: 350px; height: 100vh; min-height: calc(85vh - 70px); background:linear-gradient(to right, rgba(239 214 65 / 80%), rgba(240 222 108 / 47%)); border-right: 1px solid var(--gray); overflow: auto; position: relative; transition: max-width 0.5s; overflow: hidden;} */
-.sidebar { max-width: 350px; min-height: calc(85vh - 70px); background:linear-gradient(to right, rgba(239 214 65 / 80%), rgba(240 222 108 / 47%)); border-right: 1px solid var(--gray); overflow: auto; position: relative; transition: max-width 0.5s; overflow: hidden;}
+.sidebar { max-width: 350px;width: 100%;min-height: calc(85vh - 70px); background:linear-gradient(to right, rgba(239 214 65 / 80%), rgba(240 222 108 / 47%)); border-right: 1px solid var(--gray); overflow: auto; position: relative; transition: max-width 0.5s; overflow: hidden;}
 .sidebar-navlink {padding:26px 0 0px 10px;}
 
 .sidebar.shrink_sidebar ul li a span {opacity: 0;transition: all 0.4s ease;}
@@ -83,6 +83,7 @@ span.form_sub_btn i{line-height: 1.5;color: #000;}
 .content_side .sideMenu.show .navbar{background:linear-gradient(to right, rgba(239 214 65 / 80%), rgba(240 222 108 / 47%));transition: all 0.5s ease;}
 .content_side .sideMenu .menus{justify-content: space-between;align-items: center;}
 .content_side .sideMenu .navbar .menus ul.navbar-nav{display: flex;flex-direction: column;justify-content:space-between;align-items:flex-start;list-style: none;}
+.sidebar-navlink {display: flex;justify-content: flex-start;flex-direction: column;width: 100%;}
 .sidebar-navlink .nav-item{display: inline-block;padding:10px 20px 10px 20px;}
 .sidebar-navlink .nav-item a.nav-link{text-decoration:none;padding:5px 5px!important;font-size:18px;color: #000;white-space: nowrap;}
 .sidebar-navlink .nav-item a.nav-link:hover{background:#ce345c;}
@@ -121,10 +122,10 @@ footer{display: block;width: 100%;height:50px;}
 .box .login-box .error{display: block;font-size:18px;}
 .box .login-box .submit_btn{position: relative;display:block;padding:10px 20px;color: #000;font-size:18px;font-weight:600;text-decoration: none;text-transform:capitalize;overflow: hidden; border-radius:8px;-webkit-border-radius:8px;-moz-border-radius:8px;-ms-border-radius:8px;-o-border-radius:8px;cursor: pointer;}
 .box .login-box .submit_btn:hover{background:linear-gradient(to right, rgba(239 214 65 / 80%), rgba(240 222 108 / 47%));color: #000;}
-
-.homeBtn{ display: block; width: 100%; margin:20px 0; padding:10px 5px; background:#ecd861; border-radius:6px; text-align: center; -webkit-border-radius:6px; -moz-border-radius:6px; -ms-border-radius:6px; -o-border-radius:6px;font-weight: 500;}
-.homeBtn:hover{ background:#fff;border: 1px solid #000;color: #000;text-decoration: none;}
-
+.button_Box{display: flex;justify-content: space-between;align-items: center;flex-direction: row;gap:20px;background-color: #fff;padding: 5px 10px;margin-bottom: 10px;}
+.button_Box .homeBtn{ display: block; width: 100%; margin:20px 0; padding:10px 50px; background:#ecd861; border-radius:6px; text-align: center; -webkit-border-radius:6px; -moz-border-radius:6px; -ms-border-radius:6px; -o-border-radius:6px;font-weight: 500;}
+.button_Box .homeBtn:hover{ background:#fff;border: 1px solid #000;color: #000;text-decoration: none;}
+.box1{display: block;padding: 10px 20px;background-color: #fff;}
 
 
 .gradient-custom-3 {
@@ -196,4 +197,4 @@ thead{
 
 /* Chirag add */
 
-.d-flex .container {background-color: white;}
+/* .d-flex .container {background-color: white;} */
