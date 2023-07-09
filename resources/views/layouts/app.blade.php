@@ -26,6 +26,7 @@
         integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app" class="login_register_header">
@@ -35,15 +36,15 @@
                     <img src="{{ asset('assets/image/happy_technology_logo.png') }}" alt="Logo" loading="lazy" />
                 </a>
                 <div class="log_register_menus collapse navbar-collapse nav justify-content-center" id="main_nav">
-                    <ul class="navbar-nav ">
+                    <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">
-                                <i class="fa-solid fa-right-to-bracket"></i>Login
+                                <i class="me-2 fa-solid fa-right-to-bracket"></i>Login
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('register') }}">
-                                <i class="fa-solid fa-user-plus"></i>Register
+                                <i class="me-2 fa-solid fa-user-plus"></i>Register
                             </a>
                         </li>
                     </ul>

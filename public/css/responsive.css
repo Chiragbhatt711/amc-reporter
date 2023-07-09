@@ -1,5 +1,8 @@
 
 @media only screen and (max-width: 991px)  {
+    /* #app.login_register_header a.log_register_logo{} */
+    #app.login_register_header .log_register_menus{max-width:50%;width: 100%;}
+    .dashboard table tr td{font-size: 14px;}
     /* Force table to not be like tables anymore */
 	table, thead, tbody, th, td, tr {display: block;}
 		/* Hide table headers (but not display: none;, for accessibility) */
@@ -10,11 +13,18 @@
 		border: none;border-bottom: 1px solid #eee;position: relative;padding-left: 50%;text-align: right;}
     td:before {/* Now like a table header */
         position: absolute;/* Top/left values mimic padding */
-        top:8px;left: 6px;width:50%;padding-right: 10px;white-space: nowrap; content: attr(data-label);float: left;font-weight: bold;text-transform: uppercase;text-align: left;}
+        top:8px;left: 6px;width:50%;padding-right: 10px;white-space: nowrap; content: attr(data-label);float: left;font-weight: bold;text-transform: uppercase;text-align: left;font-size: 14px;}
+    .button_Box .homeBtn{padding: 10px 30px;}
 
     }
     @media only screen and (max-width: 767px){
+        #app.login_register_header .log_register_menus{max-width: 100px;width: 100%;}
+        #app.login_register_header .log_register_menus ul{gap:5px;}
         /* Login Form */
         .box{display: block;width: 100%;position: relative;}
         .box .login-box {display: block;width:100%;background: rgba(0,0,0,.5);}
+        .button_Box{flex-direction: column;gap: 0;}
+        .button_Box .homeBtn{margin:8px;font-size: 14px;}
+
+        .responsiveSlider{background-color: black;}
 }
