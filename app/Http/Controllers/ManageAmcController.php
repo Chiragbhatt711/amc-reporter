@@ -524,4 +524,15 @@ class ManageAmcController extends Controller
 
         return view('manage_amc.party_ledger_detail',compact('data','startDate','endDate','party','amcData','party_id','partyDetails'));
     }
+
+    public function AmcProductDetails(Request $request)
+    {
+        $product = ContractType::where('contract_types.id',$request->product_id)
+                ->join('brands','contract_types.brand','brands.id')
+                ->join('contract_models','contract_types.model','contract_models.id')
+                ->select('contract_types.id','contract_types.product_code as product_code','contract_types.product_name as product_name','brands.name as brand','contract_models.name as model','contract_types.product_description')
+                ->first();
+
+        return response()->json($product);
+    }
 }

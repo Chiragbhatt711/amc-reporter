@@ -58,6 +58,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/call-dashboard','HomeController@callDashboard')->name('call_dashboard');
     Route::get('/stock-dashboard','HomeController@stockDashboard')->name('stock_dashboard');
 
+    Route::post('/amc-product-detail','ManageAmcController@AmcProductDetails')->name('amc_product_detail');
+
     Route::resource('amc', AmcController::class);
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
