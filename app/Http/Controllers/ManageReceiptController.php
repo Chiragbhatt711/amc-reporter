@@ -39,7 +39,7 @@ class ManageReceiptController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $admin_id = admin_id();
         $party = ManageParty::select('id','party_name','city')->where('admin_id',$admin_id)->get();
@@ -55,7 +55,15 @@ class ManageReceiptController extends Controller
             'Net Transfer/RTGS/NEFT' => 'Net Transfer/RTGS/NEFT',
             'Other' => 'Other',
         ];
-        return view('manage_receipt.create',compact('partyName','paymentMode'));
+        $selectedParty = null;
+        $selectedAmcId = null;
+        if(isset($request->id) && $request->id)
+        {
+            $partyId = ManageAmc::find($request->id);
+            $selectedParty = $partyId->party_id;
+            $selectedAmcId = $request->id;
+        }
+        return view('manage_receipt.create',compact('partyName','paymentMode','selectedParty','selectedAmcId'));
     }
 
     /**
