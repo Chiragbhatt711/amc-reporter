@@ -13,7 +13,7 @@
                 <div class="form-group">
                     <strong class="lab_space">party name  <em class="text-danger">*</em></strong>
                     <div class="d-flex">
-                    {!! Form::select('party_id', $partyName , null, ['class' => 'form-select','placeholder' =>'Please Select', 'id'=>'party_id' ]) !!}
+                    {!! Form::select('party_id', $partyName , $selectedParty, ['class' => 'form-select','placeholder' =>'Please Select', 'id'=>'party_id' ]) !!}
                 </div>
                     @error('party_id')
                     <div class="text-danger">{{ $message }}</div>
@@ -111,9 +111,13 @@
 
 @section('js-script')
 <script>
+    $(document).ready(function(){
+        $('#party_id').trigger('change');
+    })
 
 $('#party_id').change(function(){
     var party_id = $('#party_id').val();
+    var amc_id = {{ isset($selectedAmcId) && $selectedAmcId ? $selectedAmcId : null }};
     $.ajax({
         url:'{{ route('get_amc_number') }}',
         type:'POST',
@@ -125,9 +129,15 @@ $('#party_id').change(function(){
             data = JSON.parse(data);
             var html = "<option value=''>Please select</option>";
             $.each(data, function (key, value) {
-                html += "<option value='"+key+"'>"+value+"</option>";
+                var select = "";
+                if(key == amc_id)
+                {
+                    select = "selected";
+                }
+                html += "<option value='"+key+"' "+select+">"+value+"</option>";
             });
             $('#amc_no').html(html);
+            $('#amc_no').trigger('change');
         }
     });
 
