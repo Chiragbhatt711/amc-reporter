@@ -217,6 +217,20 @@ th {
 
 @section('js-script')
 <script>
+$('#product_id').change(function(){
+    var product_id = $('#product_id').val();
 
+    $.ajax({
+        url: "{{ route('amc_product_detail') }}",
+        type:'POST',
+        data:{
+                '_token' : $('meta[name="csrf-token"]').attr('content'),
+                product_id:product_id,
+        },
+        success:function(data) {
+            $('#note').val(data.product_description)
+        }
+    });
+});
 </script>
 @endsection

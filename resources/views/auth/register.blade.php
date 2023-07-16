@@ -9,27 +9,45 @@
       <form method="POST" action="{{ route('register_post') }}">
           @csrf
           <div class="user-box">
-            <input type="text" name="first_name">
+            {!! Form::text('first_name', null, []) !!}
+            @error('first_name')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
             <label>First Name</label>
           </div>
           <div class="user-box">
-              <input type="text" name="last_name">
+            {!! Form::text('last_name', null, []) !!}
+            @error('last_name')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
               <label>Last Name</label>
           </div>
           <div class="user-box">
-              <input type="text" name="email">
+                {!! Form::text('email', null, []) !!}
+                @error('email')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
               <label>Email</label>
           </div>
           <div class="user-box">
-              <input type="tel" name="mobile_number">
+                {!! Form::text('mobile_number', null, []) !!}
+                @error('mobile_number')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
               <label>Mobile Number</label>
           </div>
           <div class="user-box">
             <input type="password" name="password">
+            @error('password')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
             <label>Password</label>
           </div>
           <div class="user-box">
             <input type="password" name="confirm_password">
+            @error('confirm_password')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
             <label>Confirm Password</label>
           </div>
           {{-- <a href="#">

@@ -51,6 +51,7 @@
                                         <th>Person Name</th>
                                         <th>End Date</th>
                                         <th>Remain Days</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -72,6 +73,11 @@
                                                 <td data-label="Person Name">{{ $value->person_name }}</td>
                                                 <td data-label="End Date">{{ $value->end_date }}</td>
                                                 <td data-label="Remain Days">{{ $remainDay }}</td>
+                                                <td data-label="Action">
+                                                    @can('contract-type-edit')
+                                                        <a href="{{Route('amc_renew',$value->id)}}"> <i class="fas fa-sync"></i> </a>
+                                                    @endcan
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @endif
