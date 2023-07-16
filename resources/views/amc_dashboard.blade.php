@@ -116,6 +116,7 @@
                                         <th>Due Date</th>
                                         <th>Due Amount</th>
                                         <th>Remain Days</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -133,6 +134,11 @@
                                                         $diff = strtotime($value->due_date) - strtotime(date('Y-m-d'));
                                                         echo abs(round($diff / 86400));
                                                     @endphp
+                                                </td>
+                                                <td data-label="Action">
+                                                    @can('manage-receipt-create')
+                                                        <a href="{{Route('manage_receipt.create').'?id='.$value->amc_no}}"> <i class="fas fa-sync"></i> </a>
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach
