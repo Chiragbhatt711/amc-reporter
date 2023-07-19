@@ -439,9 +439,9 @@ function productDitailsHide(id)
     $('#productHide_'+id).hide();
     $('.child_row_'+id).hide();
 }
-$("button").click(function(){
-    $(".contentArea").addClass("col-sm-9 col-md-9 col-lg-9");
-    $(".contentArea").removeClass("col-sm-12 col-md-12 col-lg-12");
+$("#toogleBtn").click(function(){
+
+    document.getElementById("mysidebar").classList.add("responsiveSlider");
 });
 
 const $menu = $('.dropdown-toggle')
