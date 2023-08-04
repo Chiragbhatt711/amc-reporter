@@ -96,6 +96,10 @@ class ManageReceiptController extends Controller
         $input['admin_id'] = $admin_id;
         $insert = ManageReceipt::create($input);
 
+        if(isset($request->print) && $request->print)
+        {
+            return redirect()->route('manage_receipt.show',$insert->id);
+        }
         return redirect()->route('manage_receipt.index')->with('success','Manage receipt create successfully');
     }
 
@@ -107,7 +111,7 @@ class ManageReceiptController extends Controller
      */
     public function show(ManageReceipt $manageReceipt)
     {
-        //
+        return view('manage_receipt.print');
     }
 
     /**
