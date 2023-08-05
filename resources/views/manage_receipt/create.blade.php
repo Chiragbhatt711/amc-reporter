@@ -117,7 +117,7 @@
 
 $('#party_id').change(function(){
     var party_id = $('#party_id').val();
-    var amc_id = {{ isset($selectedAmcId) && $selectedAmcId ? $selectedAmcId : null }};
+    var amc_id = '{{ isset($selectedAmcId) && $selectedAmcId ? $selectedAmcId : '' }}';
     $.ajax({
         url:'{{ route('get_amc_number') }}',
         type:'POST',
