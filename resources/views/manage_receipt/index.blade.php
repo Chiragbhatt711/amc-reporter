@@ -59,6 +59,7 @@
                             @can('manage-receipt-delete')
                                 <a onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
                             @endcan
+                            <a href="{{Route('manage_receipt.show',$value->id)}}"> <i class="fa fa-print" aria-hidden="true"></i> </a>
                         </td>
                     </tr>
                 @endforeach

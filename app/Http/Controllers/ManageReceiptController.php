@@ -109,9 +109,15 @@ class ManageReceiptController extends Controller
      * @param  \App\Models\ManageReceipt  $manageReceipt
      * @return \Illuminate\Http\Response
      */
-    public function show(ManageReceipt $manageReceipt)
+    public function show($id)
     {
-        return view('manage_receipt.print');
+        $data = ManageReceipt::where('manage_receipts.id',$id)
+            ->join('manage_amcs','manage_receipts.amc_id','=','manage_amcs.id','LEFT')
+            ->join('manage_parties','manage_amcs.party_id','=','manage_parties.id','LEFT')
+            ->select('manage_receipts.*','manage_amcs.start_date','manage_amcs.end_date','manage_parties.party_name')
+            ->first();
+
+        return view('manage_receipt.print',compact('data'));
     }
 
     /**

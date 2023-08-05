@@ -13,10 +13,10 @@
             </tr>
             <tr style="height: 30px;">
                 <td>
-                    <strong>Receipt No :-</strong> 1234
+                    <strong>Receipt No :-</strong> {{ $data->id }}
                 </td>
                 <td colspan="2">
-                    <strong>Date :-</strong> 2023-08-02
+                    <strong>Date :-</strong> {{ $data->date }}
                 </td>
             </tr>
             <tr style="height: 30px;">
@@ -24,22 +24,22 @@
             </tr>
             <tr style="border: 0;">
                 <td colspan="3">
-                    <strong>Party Name :-</strong> Chirag Bhatt
+                    <strong>Party Name :-</strong> {{ $data->party_name }}
                 </td>
             </tr>
             <tr style="border: 0;">
                 <td colspan="3">
-                    <strong>AMC NO:-</strong> 001
+                    <strong>AMC NO:-</strong> {{ $data->amc_id }}
                 </td>
             </tr>
             <tr style="border: 0;">
                 <td colspan="3">
-                    <strong>AMC Start Date :-</strong> 2023-08-01
+                    <strong>AMC Start Date :-</strong> {{ $data->start_date }}
                 </td>
             </tr>
             <tr>
                 <td colspan="3">
-                    <strong>AMC End Date :-</strong> 2024-07-31
+                    <strong>AMC End Date :-</strong> {{ $data->end_date }}
                 </td>
             </tr>
             <tr style="height: 30px;">
@@ -58,15 +58,19 @@
             </tr>
             <tr>
                 <td>
-                    2023-08-04
+                    {{ $data->payment_date }}
                 </td>
                 <td>
-                    Cash
+                    {{ $data->payment_mode }}
                 </td>
                 <td>
-                    10,000
+                    {{ $data->amount }}
                 </td>
             </tr>
         </table>
     </div>
-    <input type="button" value="Print this page" onClick="window.print()" style="display: block;margin: 0 auto;padding: 10px 20px;background-color: #141414;color: white;border: none;cursor: pointer;border-radius: 5px;">
+    <div style="display: flex; flex-direction: column; align-items: center; height: 100vh;">
+        <a href="{{ route('manage_receipt.index') }}" class="btn button" style="margin: 10px;padding: 10px 20px;background-color: #141414;color: white;border: none;cursor: pointer;border-radius: 5px;">Back</a>
+        <input type="button" value="Print this page" onClick="window.print()" style="margin: 10px;padding: 10px 20px;background-color: #141414;color: white;border: none;cursor: pointer;border-radius: 5px;">
+    </div>
+
