@@ -303,7 +303,7 @@ class ManageAmcController extends Controller
                     }
                 }
             }
-            ManageComplaint::where('amc_no',$amc_id)->delete();
+            ManageComplaint::where(['amc_no'=>$amc_id,'is_free'=>1])->delete();
             $scheduleServiceDetails = [];
             if(isset($input['no_of_service']) && $input['no_of_service'])
             {
@@ -374,7 +374,7 @@ class ManageAmcController extends Controller
         {
             $manageAmc->delete();
             AmcPeroductDetail::where('amc_id',$id)->delete();
-            AmcScheduleServiceDetail::where('amc_id',$id)->delete();
+            ManageComplaint::where(['amc_id'=>$id,'is_free'=>1])->delete();
             AmcSchedulePaymentDetail::where('amc_id',$id)->delete();
 
             return redirect()->route('manage_amc.index')->with('success','Manage amc delete successfully');
