@@ -21,6 +21,12 @@
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Start Date</strong>
+                    {!! Form::select('type', array('all'=>'All','free'=>'Free','complaint'=>'Complaint'),isset($_GET['type']) ? $_GET['type'] : null, array('class' => 'form-select','onchange'=>'this.form.submit()')) !!}
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="form-group">
+                    <strong class="lab_space">Start Date</strong>
                     {!! Form::text('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control datepicker')) !!}
                 </div>
             </div>
@@ -66,8 +72,8 @@
                     @php $i++;  @endphp
                     <tr>
                         <td data-label="Complaint No">{{ $value->id }}</td>
-                        <td data-label="Complaint Date">{{ $value->created_at }}</td>
-                        <td data-label="Call Type"></td>
+                        <td data-label="Complaint Date">{{ \Carbon\Carbon::parse($value->service_date)->format('Y-m-d') }}</td>
+                        <td data-label="Call Type">{{ $value->is_free == 1 ? 'Free' : 'Complaint' }}</td>
                         <td data-label="Party Name">{{ $value->party_name }}</td>
                         <td data-label="Contract Person Name">{{ $value->contact_person_name }}</td>
                         <td data-label="City">{{ $value->city }}</td>

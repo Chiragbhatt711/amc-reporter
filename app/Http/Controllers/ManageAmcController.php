@@ -10,6 +10,7 @@ use App\Models\ManageTax;
 use App\Models\AmcPeroductDetail;
 use App\Models\AmcSchedulePaymentDetail;
 use App\Models\AmcScheduleServiceDetail;
+use App\Models\ManageComplaint;
 use Carbon\Carbon;
 use DB;
 
@@ -152,13 +153,17 @@ class ManageAmcController extends Controller
                 {
                     $scheduleServiceDetails = [
                         'admin_id' => $admin_id,
-                        'amc_id' => $amc_id,
+                        'amc_no' => $amc_id,
                         'service_date' => $input['service_'.$i],
+                        'complaint_by' => $request->party_id,
+                        'description' => $i.' Free service',
+                        'is_free' => 1
                     ];
                 }
                 if($scheduleServiceDetails)
                 {
-                    $scheduleServiceCreate = AmcScheduleServiceDetail::create($scheduleServiceDetails);
+                    // $scheduleServiceCreate = AmcScheduleServiceDetail::create($scheduleServiceDetails);
+                    $scheduleServiceCreate = ManageComplaint::create($scheduleServiceDetails);
                 }
             }
         }
@@ -235,7 +240,7 @@ class ManageAmcController extends Controller
             {
                 $day +=[$i => $i];
             }
-            $service = AmcScheduleServiceDetail::where('amc_id',$id)->get();
+            $service = ManageComplaint::where(['amc_no'=>$id,'is_free'=>'1'])->get();
             $payment = AmcSchedulePaymentDetail::where('amc_id',$id)->get();
             return view('manage_amc.edit',compact('manageAmc','partyName','tax','products','day','service','payment'));
         }
@@ -298,7 +303,7 @@ class ManageAmcController extends Controller
                     }
                 }
             }
-            AmcScheduleServiceDetail::where('amc_id',$amc_id)->delete();
+            ManageComplaint::where('amc_no',$amc_id)->delete();
             $scheduleServiceDetails = [];
             if(isset($input['no_of_service']) && $input['no_of_service'])
             {
@@ -310,13 +315,16 @@ class ManageAmcController extends Controller
                     {
                         $scheduleServiceDetails = [
                             'admin_id' => $admin_id,
-                            'amc_id' => $amc_id,
+                            'amc_no' => $amc_id,
                             'service_date' => $input['service_'.$i],
+                            'complaint_by' => $request->party_id,
+                            'description' => $i.' Free service',
+                            'is_free' => 1
                         ];
                     }
                     if($scheduleServiceDetails)
                     {
-                        $scheduleServiceCreate = AmcScheduleServiceDetail::create($scheduleServiceDetails);
+                        $scheduleServiceCreate = ManageComplaint::create($scheduleServiceDetails);
                     }
                 }
             }

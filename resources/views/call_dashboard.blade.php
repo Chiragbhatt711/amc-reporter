@@ -29,7 +29,7 @@
                         <h2 class="sub-header">Service/Call Reminder</h2>
                     </div>
                     <div class="col-lg-12 col-xs-12 mt-1">
-                        {!! Form::open(array('route' => 'home','method'=>'GET')) !!}
+                        {!! Form::open(array('route' => 'call_dashboard','method'=>'GET')) !!}
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
                                 <div class="form-group">
                                     <strong class="lab_space">Type</strong>
@@ -97,7 +97,7 @@
                         <h2 class="sub-header">Complaint Summary</h2>
                     </div>
                     <div class="col-lg-12 col-xs-12 mt-1">
-                        {!! Form::open(array('route' => 'home','method'=>'GET')) !!}
+                        {!! Form::open(array('route' => 'call_dashboard','method'=>'GET')) !!}
                             <div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
                                 <div class="form-group">
                                     <strong class="lab_space">From Date</strong>

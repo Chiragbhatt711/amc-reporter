@@ -26,6 +26,8 @@ class ManageComplaint extends Model
         'solution_id',
         'call_description',
         'call_remark',
-        'complaint_id'
+        'complaint_id',
+        'service_date',
+        'is_free'
     ];
 }
