@@ -67,13 +67,21 @@
                 <tr>
                     <td data-label="No">{{ $i }}</td>
                     <td data-label="Call No">{{ $value->id }}</td>
-                    <td data-label="Call Date/Time">{{ $value->created_at }}</td>
-                    <td data-label=""></td>
+                    <td data-label="Call Date/Time">{{ \Carbon\Carbon::parse($value->service_date)->format('Y-m-d') }}</td>
+                    <td data-label="">{{ $value->is_free == 1 ? 'Free' : 'Complaint' }}</td>
                     <td data-label="Complaint By">{{ $value->complait_by }}</td>
                     <td data-label="Comp.by Contact No">{{ $value->mobile }}</td>
                     <td data-label="Complaint">{{ $value->complait_title }}</td>
                     <td data-label="Priority">{{ $value->priority }}</td>
-                    <td data-label="Status">{{ $value->status }}</td>
+                    <td data-label="Status">
+                        @if($value->status)
+                            {{ $value->status }}
+                        @elseif ($value->handover)
+                            Under Process
+                        @else
+                            Pending
+                        @endif
+                    </td>
                     <td data-label="AMC No">{{ $value->amc_no }}</td>
                     <td data-label="AMC Type">{{ $value->amc_type }}</td>
                     <td data-label="Start Date">{{ $value->start_date }}</td>

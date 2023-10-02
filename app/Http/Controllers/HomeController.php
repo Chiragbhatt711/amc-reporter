@@ -77,9 +77,9 @@ class HomeController extends Controller
 
         $type = "Free Service";
         $day = 30;
-        if($request->type)
+        if($request->type == 1)
         {
-            $type = $request->type;
+            $type = "Complaint";
         }
         if($request->day)
         {
@@ -89,30 +89,25 @@ class HomeController extends Controller
         $today = Carbon::now()->format('Y-m-d');
         $endDate = Carbon::now()->addDay($day)->format('Y-m-d');
 
-        switch ($type) {
-            case 'Free Service':
-                $data = AmcScheduleServiceDetail::where('amc_schedule_service_details.admin_id',$admin_id)
-                    ->whereBetween('amc_schedule_service_details.service_date',[$today,$endDate])
-                    ->join('manage_amcs','amc_schedule_service_details.amc_id','=','manage_amcs.id')
-                    ->join('manage_parties','manage_amcs.party_id','manage_parties.id')
-                    ->groupBy('manage_amcs.id')
-                    ->select('manage_amcs.id as amc_id','amc_schedule_service_details.service_date as date','manage_parties.contact_person_name as person_name','manage_parties.city as city','manage_parties.party_name as company_name')
-                    ->get();
-                break;
-            case 'Complaint':
-                $data = ManageComplaint::where('manage_complaints.admin_id',$admin_id)
-                    ->whereDate('manage_complaints.handover_date', '>=', $today)
-                    ->whereDate('manage_complaints.handover_date', '<=', $endDate)
+        $data = ManageComplaint::where('manage_complaints.admin_id',$admin_id)
+                    ->whereDate('manage_complaints.service_date', '>=', $today)
+                    ->whereDate('manage_complaints.service_date', '<=', $endDate)
                     ->join('manage_amcs','manage_complaints.amc_no','=','manage_amcs.id','LEFT')
                     ->join('manage_parties','manage_amcs.party_id','=','manage_parties.id','LEFT')
-                    ->select('manage_amcs.id as amc_id','manage_complaints.handover_date as date','manage_parties.party_name as company_name','manage_parties.contact_person_name as person_name','manage_parties.city as city')
-                    ->get();
+                    ->select('manage_amcs.id as amc_id','manage_complaints.service_date as date','manage_parties.party_name as company_name','manage_parties.contact_person_name as person_name','manage_parties.city as city');
+        switch ($type) {
+            case 'Free Service':
+                $data->where('manage_complaints.is_free',1);
+                break;
+            case 'Complaint':
+                $data->where('manage_complaints.is_free',0);
                 break;
 
             default:
-                $data = [];
+                $data->where('manage_complaints.is_free',1);
                 break;
         }
+        $data = $data->get();
         // dd($data);
 
         $pendingComplaint = ManageComplaint::where('admin_id',$admin_id)
