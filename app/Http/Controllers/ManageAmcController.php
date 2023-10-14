@@ -374,7 +374,7 @@ class ManageAmcController extends Controller
         {
             $manageAmc->delete();
             AmcPeroductDetail::where('amc_id',$id)->delete();
-            ManageComplaint::where(['amc_id'=>$id,'is_free'=>1])->delete();
+            ManageComplaint::where(['amc_no'=>$id,'is_free'=>1])->delete();
             AmcSchedulePaymentDetail::where('amc_id',$id)->delete();
 
             return redirect()->route('manage_amc.index')->with('success','Manage amc delete successfully');
