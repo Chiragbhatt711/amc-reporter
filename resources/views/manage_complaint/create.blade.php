@@ -57,7 +57,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                     <div class="form-group">
                         <strong class="description">Description<em class="text-danger">*</em></strong>
-                        {!! Form::textarea('description', null, array('placeholder' => 'Comp.by Contact No' ,'class' => 'form-control')) !!}
+                        {!! Form::textarea('description', null, array('placeholder' => 'Comp.by Contact No' ,'class' => 'form-control','id'=>'description')) !!}
                         @error('description')
                         <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -153,6 +153,20 @@
                   $("#product_id").html(html);
               }
             });
+    });
+
+    $('#complaint_id').change(function(){
+        var complaint_id = $('#complaint_id').val();
+        $.ajax({
+            url:"{{ route('get_complaint_details') }}",
+            type:'POST',
+            data:{ '_token' : '<?php echo csrf_token() ?>',
+                complaint_id:complaint_id,
+            },
+            success:function(data) {
+                $('#description').val(data.description);
+            }
+        });
     });
   </script>
   @endsection
