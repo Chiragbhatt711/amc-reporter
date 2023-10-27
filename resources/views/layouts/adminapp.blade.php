@@ -72,42 +72,42 @@
                                             @can('contract-type-list')
                                                 <li class="dropdown-item">
                                                     <a class="nav-link" href="{{ route('contract_type.index') }}">
-                                                        <i class="fas fa-file"></i> Manage AMC Contract Product
+                                                        <i class=""></i> Manage AMC Contract Product
                                                     </a>
                                                 </li>
                                             @endcan
                                             @can('manage-party-list')
                                                 <li class="dropdown-item">
                                                     <a class="nav-link" href="{{ route('manage_party.index') }}">
-                                                        <i class="fa fa-users" aria-hidden="true"></i> Manage Party
+                                                        <i class="" aria-hidden="true"></i> Manage Party
                                                     </a>
                                                 </li>
                                             @endcan
                                             @can('manage-amc-list')
                                                 <li class="dropdown-item">
                                                     <a class="nav-link" href="{{ route('manage_amc.index') }}">
-                                                        <i class="fa fa-cog" aria-hidden="true"></i>Manage AMC
+                                                        <i class="" aria-hidden="true"></i>Manage AMC
                                                     </a>
                                                 </li>
                                             @endcan
                                             @can('manage-receipt-list')
                                                 <li class="dropdown-item">
                                                     <a class="nav-link" href="{{ route('manage_receipt.index') }}">
-                                                        <i class="fas fa-dollar-sign"></i>Manage Receipt
+                                                        <i class=""></i>Manage Receipt
                                                     </a>
                                                 </li>
                                             @endcan
                                             @can('manage-tax-list')
                                                 <li class="dropdown-item">
                                                     <a class="nav-link" href="{{ Route('manage_tax.index') }}">
-                                                        <i class="fa fa-percent" aria-hidden="true"></i>Manage Tax
+                                                        <i class="" aria-hidden="true"></i>Manage Tax
                                                     </a>
                                                 </li>
                                             @endcan
                                             @can('amc-expiry-reminder-list')
                                                 <li class="dropdown-item">
                                                     <a class="nav-link" href="{{ Route('amc_expiry_reminder') }}">
-                                                    <i class="fa-solid fa-calendar-clock"></i>AMC Expiry Reminder
+                                                    <i class=""></i>AMC Expiry Reminder
                                                     </a>
                                                 </li>
                                             @endcan

@@ -439,4 +439,13 @@ class ManageComplaintController extends Controller
 
         return view('call_reports.complaint_summary',compact('data','startDate','endDate'));
     }
+
+    public function getComplaintDetails(Request $request)
+    {
+        $complaint_id = $request->complaint_id;
+
+        $data = ManageComplaintTemplate::find($complaint_id);
+
+        return response()->json($data);
+    }
 }

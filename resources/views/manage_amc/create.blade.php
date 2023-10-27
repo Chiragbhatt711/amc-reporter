@@ -59,7 +59,7 @@ th {
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                 <strong class="lab_space">End Date<em class="text-danger">*</em></strong>
-                {!! Form::text('end_date', date('Y-m-d', strtotime(now()." +364 day")), array('placeholder' => 'End date','class' => 'form-control datepicker','id'=>'end_date')) !!}
+                {!! Form::text('end_date', date('Y-m-d', strtotime(now()." +365 day")), array('placeholder' => 'End date','class' => 'form-control datepicker','id'=>'end_date')) !!}
                 @error('end_date')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
