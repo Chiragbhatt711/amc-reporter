@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    // return view('auth.login');
+    return redirect()->route('login');
 });
 
 Auth::routes();
@@ -80,5 +81,18 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('manage_supplier',SupplierController::class);
     Route::resource('manage_inward',ManageInwardController::class);
     Route::resource('manage_outward',ManageOutwardController::class);
+});
 
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::get('/', function () {
+        return redirect()->route('admin.login');
+    });
+    Route::get('/login','Admin\LoginController@index')->name('login');
+    Route::post('login-check','Admin\LoginController@login')->name('login_check');
+
+    Route::group(['middleware' => 'auth:admin'], function () {
+        Route::get('/dashboard','Admin\HomeController@index')->name('dashboard');
+        Route::get('/logout','Admin\LoginController@logout')->name('logout');
+        Route::resource('users', Admin\UserController::class);
+    });
 });
