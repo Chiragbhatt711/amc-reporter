@@ -894,5 +894,6 @@
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" referrerpolicy="no-referrer"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+        @yield('js-script')
     </body>
 </html>

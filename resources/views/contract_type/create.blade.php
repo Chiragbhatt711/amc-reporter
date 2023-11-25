@@ -21,7 +21,7 @@
             <div class="card custom-card">
                 <div class="card-header">
                     <div class="card-title">
-                        Creatr
+                        Create
                     </div>
                 </div>
                 <div class="card-body">
