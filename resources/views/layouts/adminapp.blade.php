@@ -46,6 +46,8 @@
         <link rel="stylesheet" href="{{ asset('dist/assets/libs/choices.js/public/assets/styles/choices.min.css') }}">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" referrerpolicy="no-referrer" />
+        <!-- Bootstrap datepicker CSS -->
+        <link rel="stylesheet" href="{{ asset('assets/datepicker/bootstrap-datepicker.min.css') }}">
     </head>
 
     <body class="app sidebar-mini">
@@ -890,10 +892,12 @@
         <script src="{{ asset('dist/assets/js/custom-switcher.min.js') }}"></script>
         <!-- CUSTOM JS -->
         <script src="{{ asset('dist/assets/js/custom.js') }}"></script>
-
-        <script src="{{ asset('js/app.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" referrerpolicy="no-referrer"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+        <!-- Bootstrap datepicker JS-->
+        <script src="{{ asset('assets/datepicker/bootstrap-datepicker.min.js') }}"></script>
+
+        <script src="{{ asset('js/app.js') }}"></script>
         @yield('js-script')
     </body>
 </html>

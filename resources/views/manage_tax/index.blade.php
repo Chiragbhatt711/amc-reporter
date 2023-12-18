@@ -20,8 +20,8 @@
             <div class="card custom-card">
                 <div class="card-header">
                     <div class="card-title">
-                        @can('manage-receipt-create')
-                            <a class="btn btn-primary btn-block float-end my-2" href="{{ route('manage_receipt.create') }}">
+                        @can('manage-tax-create')
+                            <a class="btn btn-primary btn-block float-end my-2" href="{{ route('manage_tax.create') }}">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </a>
                         @endcan
@@ -71,10 +71,10 @@
                                             <td data-label="Tax 5(%)">{{ $value->tax_percentage_5 }}</td>
                                             <td data-label="Action">
                                                 @can('manage-tax-edit')
-                                                    <a href="{{Route('manage_tax.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
+                                                    <a class="btn btn-sm btn-icon btn-info-light rounded-circle" href="{{Route('manage_tax.edit',$value->id)}}"> <i class="bi bi-pencil-square" aria-hidden="true"></i> </a>
                                                 @endcan
                                                 @can('manage-tax-delete')
-                                                    <a onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
+                                                    <a class="btn btn-sm btn-icon btn-secondary-light rounded-circle" onclick="deleteFunction( '{{ $value->id }}')"> <i class="bi bi-trash" aria-hidden="true"></i> </a>
                                                 @endcan
                                             </td>
                                         </tr>
@@ -111,7 +111,7 @@
 <!-- CONTAINER CLOSED -->
 <script>
     function deleteFunction(id){
-        $('#deleteForm').attr('action','{{ url("manage_amc") }}'+ '/'+id);
+        $('#deleteForm').attr('action','{{ url("manage_tax") }}'+ '/'+id);
         $('#deleteModal').modal('show');
     }
 </script>

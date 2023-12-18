@@ -369,3 +369,28 @@ $("#toogleBtn").click(function(){
 
     document.getElementById("mysidebar").classList.add("responsiveSlider");
 });
+
+$('.datepicker').datepicker({
+    format: "yyyy-mm-dd",
+    // startDate: '0d',
+    weekStart: 0,
+    calendarWeeks: true,
+    autoclose: true,
+    todayHighlight: true,
+    // rtl: true,
+    orientation: "auto"
+});
+
+$('.monthpicker').datepicker({
+    format: "yyyy-mm",
+    autoclose: true,
+    orientation: "auto",
+    minViewMode: 'months',
+});
+
+$('.yearpicker').datepicker({
+    format: "yyyy",
+    autoclose: true,
+    orientation: "auto",
+    minViewMode: 'year',
+});
