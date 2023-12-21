@@ -1,52 +1,3 @@
-document.addEventListener("DOMContentLoaded", function(){
-    // make it as accordion for smaller screens
-    if (window.innerWidth < 992) {
-
-      // close all inner dropdowns when parent is closed
-      document.querySelectorAll('.navbar .dropdown').forEach(function(everydropdown){
-        everydropdown.addEventListener('hidden.bs.dropdown', function () {
-          // after dropdown is hidden, then find all submenus
-            this.querySelectorAll('.submenu').forEach(function(everysubmenu){
-              // hide every submenu as well
-              everysubmenu.style.display = 'none';
-            });
-        })
-      });
-
-      document.querySelectorAll('.dropdown-menu a').forEach(function(element){
-        element.addEventListener('click', function (e) {
-            let nextEl = this.nextElementSibling;
-            if(nextEl && nextEl.classList.contains('submenu')) {
-              // prevent opening link if link needs to open dropdown
-              e.preventDefault();
-              if(nextEl.style.display == 'block'){
-                nextEl.style.display = 'none';
-              } else {
-                nextEl.style.display = 'block';
-              }
-
-            }
-        });
-      })
-    }
-    // end if innerWidth
-
-});
-
-$(document).ready(function(){
-    $('.dynamic-data-table').DataTable({
-        // ordering: false,
-        "order": [],
-        responsive: false,
-        paging: false,
-        "info": false,
-        lengthMenu: [
-            [10, 25, 50, -1],
-            [10, 25, 50, 'All'],
-        ]
-    });
-});
-
 // list permission auto select
 function permissionListAutoSelect(data) {
     var checkBox = $(data);
@@ -125,31 +76,6 @@ function add_model()
         }
     });
 }
-$('.datepicker').datepicker({
-    format: "yyyy-mm-dd",
-    // startDate: '0d',
-    weekStart: 0,
-    calendarWeeks: true,
-    autoclose: true,
-    todayHighlight: true,
-    // rtl: true,
-    orientation: "auto"
-});
-
-$('.monthpicker').datepicker({
-    format: "yyyy-mm",
-    autoclose: true,
-    orientation: "auto",
-    minViewMode: 'months',
-});
-
-$('.yearpicker').datepicker({
-    format: "yyyy",
-    autoclose: true,
-    orientation: "auto",
-    minViewMode: 'year',
-});
-
 
 function product_add()
 {
@@ -444,22 +370,27 @@ $("#toogleBtn").click(function(){
     document.getElementById("mysidebar").classList.add("responsiveSlider");
 });
 
-const $menu = $('.dropdown-toggle')
-const $dropdownMenu = $('.dropdownMenu')
-const onMouseUp = e => {
-    if (!$menu.is(e.target) // If the target of the click isn't the container...
-        && $menu.has(e.target).length === 0) // ... or a descendant of the container.
-    {
-        $menu.removeClass('active');
-        $dropdownMenu.css("display", "none");
-    }
-}
-$('.nav-link').on('click', () => {
-    $menu.toggleClass('active').promise().done(() => {
-        if ($menu.hasClass('active')) {
-            $(document).on('mouseup', onMouseUp) // Only listen for mouseup when menu is active...
-        } else {
-            $(document).off('mouseup', onMouseUp) // else remove listener.
-        }
-    })
-})
+$('.datepicker').datepicker({
+    format: "yyyy-mm-dd",
+    // startDate: '0d',
+    weekStart: 0,
+    calendarWeeks: true,
+    autoclose: true,
+    todayHighlight: true,
+    // rtl: true,
+    orientation: "auto"
+});
+
+$('.monthpicker').datepicker({
+    format: "yyyy-mm",
+    autoclose: true,
+    orientation: "auto",
+    minViewMode: 'months',
+});
+
+$('.yearpicker').datepicker({
+    format: "yyyy",
+    autoclose: true,
+    orientation: "auto",
+    minViewMode: 'year',
+});

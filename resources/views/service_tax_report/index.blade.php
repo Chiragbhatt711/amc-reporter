@@ -1,70 +1,96 @@
 @extends('layouts.adminapp')
 @section('content')
-<div class="container">
-    @if ($message = Session::get('success'))
-        <div class="alert alert_msg">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
-    <div class="title">
-        <h3>Service Tax Report</h3>
-    </div>
-    {!! Form::open(array('route' => 'service_tax_report.index','method'=>'GET')) !!}
+<!-- PAGE-HEADER -->
+<div class="page-header d-flex align-items-center justify-content-between border-bottom mb-4">
+    <h1 class="page-title">Service Tax Report</h1>
+    {{-- <div>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">AMC Dashboard</li>
+        </ol>
+    </div> --}}
+</div>
+<!-- PAGE-HEADER END -->
+
+<!-- CONTAINER -->
+<div class="main-container container-fluid">
     <div class="row mt-1">
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-            <div class="form-group">
-                <strong class="lab_space">Start Date</strong>
-                {!! Form::text('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control datepicker')) !!}
+        {!! Form::open(array('route' => 'service_tax_report.index','method'=>'GET')) !!}
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="form-group">
+                    <strong class="lab_space">Start Date</strong>
+                    {!! Form::text('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control datepicker')) !!}
+                </div>
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-            <div class="form-group">
-                <strong class="lab_space">End Date</strong>
-                {!! Form::text('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control datepicker')) !!}
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="form-group">
+                    <strong class="lab_space">End Date</strong>
+                    {!! Form::text('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control datepicker')) !!}
+                </div>
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-4">
-            <button type="submit" class="btn btn_tile">Search</button>
-        </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-4">
+                <button type="submit" class="btn btn-primary btn-block float-end my-2">Search</button>
+            </div>
         {!! Form::close() !!}
     </div>
-    <table class="table table-bordered dynamic-data-table">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Party Name</th>
-                <th>Contract Person Name</th>
-                <th>City</th>
-                <th>AMC NO</th>
-                <th>AMC Type</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Basic Amount</th>
-                <th>Tax (%)</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if(isset($data) && $data)
-                @php
-                    $i = 0;
-                @endphp
-                @foreach ($data as $value)
-                    @php $i++;  @endphp
-                    <tr>
-                        <td data-label="No">{{ $i }}</td>
-                        <td data-label="Party Name">{{ $value->party_name }}</td>
-                        <td data-label="Contract Person Name">{{ $value->contact_person }}</td>
-                        <td data-label="City">{{ $value->city }}</td>
-                        <td data-label="AMC No">{{ $value->id }}</td>
-                        <td data-label="AMC Type">{{ $value->amc_type }}</td>
-                        <td data-label="Start Date">{{ $value->start_date }}</td>
-                        <td data-label="End Date">{{ $value->end_date }}</td>
-                        <td data-label="Basic Amount">{{ $value->basic_amount }}</td>
-                        <td data-label="Tax(%)">{{ $value->tax }}</td>
-                    </tr>
-                @endforeach
-            @endif
-        </tbody>
-    </table>
+    <!-- Start:: row-2 -->
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card custom-card">
+                <div class="card-header">
+                    <div class="card-title">
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="grid-pagination">
+                        <table class="table table-bordered dynamic-data-table">
+                            <thead  class="">
+                                <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Party Name</th>
+                                <th scope="col">Contract Person Name</th>
+                                <th scope="col">City</th>
+                                <th scope="col">Mobile No</th>
+                                <th scope="col">AMC No</th>
+                                <th scope="col">AMC Type</th>
+                                <th scope="col">Start Date</th>
+                                <th scope="col">End Date</th>
+                                <th scope="col">Pending Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(isset($report) && $report)
+                                    @php
+                                        $i = 0;
+                                    @endphp
+                                    @foreach ($report as $value)
+                                        @if($value->pending_amount != 0)
+                                            @php
+                                                $i++;
+                                            @endphp
+                                            <tr>
+                                                <td data-label="No">{{ $i }}</td>
+                                                <td data-label="Party Name">{{ $value->party_name }}</td>
+                                                <td data-label="Contact Person">{{ $value->contact_person_name }}</td>
+                                                <td data-label="City">{{ $value->city }}</td>
+                                                <td data-label="Mobile No">{{ $value->mobile_no }}</td>
+                                                <td data-label="AMC No">{{ $value->amc_no }}</td>
+                                                <td data-label="AMC Type">{{ $value->amc_type }}</td>
+                                                <td data-label="Start Date">{{ $value->start_date }}</td>
+                                                <td data-label="End Date">{{ $value->end_date }}</td>
+                                                <td data-label="Pending Amount">{{ $value->pending_amount }}</td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- CONTAINER CLOSED -->
 @endsection
