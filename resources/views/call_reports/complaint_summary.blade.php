@@ -1,60 +1,87 @@
 @extends('layouts.adminapp')
 @section('content')
-<div class="container">
-@if ($message = Session::get('success'))
-    <div class="alert alert_msg">
-        <p>{{ $message }}</p>
-    </div>
-@endif
-<div class="title">
-    <h3>Complaint Summary</h3>
+<!-- PAGE-HEADER -->
+<div class="page-header d-flex align-items-center justify-content-between border-bottom mb-4">
+    <h1 class="page-title">Complaint Summary</h1>
+    {{-- <div>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">AMC Dashboard</li>
+        </ol>
+    </div> --}}
 </div>
-{!! Form::open(array('route' => 'complaint_summary','method'=>'GET')) !!}
-<div class="row mt-1">
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-        <div class="form-group">
-            <strong class="lab_space">Start Date</strong>
-            {!! Form::text('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control datepicker')) !!}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-        <div class="form-group">
-            <strong class="lab_space">End Date</strong>
-            {!! Form::text('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control datepicker')) !!}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-4">
-        <button type="submit" class="btn btn_tile">Search</button>
-    </div>
-    {!! Form::close() !!}
-</div>
-<table class="table table-bordered dynamic-data-table">
-    <thead  class="">
-        <tr>
-          <th scope="col">No</th>
-          <th scope="col">Complaint Title</th>
-          <th scope="col">No of Times</th>
-        </tr>
-      </thead>
-      <tbody>
-        @if(isset($data) && $data)
-            @php
-                $i = 0;
-            @endphp
-            @foreach ($data as $value)
-                @php
-                    $i++;
-                @endphp
-                <tr>
-                    <td data-lael="No">{{ $i }}</td>
-                    <td data-lael="Complaint Title">{{ $value->complait_title }}</td>
-                    <td data-lael="No Of Times">{{ $value->total }}</td>
-                </tr>
-            @endforeach
-        @endif
-      </tbody>
-  </table>
+<!-- PAGE-HEADER END -->
 
+<!-- CONTAINER -->
+<div class="main-container container-fluid">
+    <div class="row mt-1">
+        {!! Form::open(array('route' => 'complaint_summary','method'=>'GET')) !!}
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+                <strong class="lab_space">Start Date</strong>
+                {!! Form::text('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control datepicker')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+                <strong class="lab_space">End Date</strong>
+                {!! Form::text('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control datepicker')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-4">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+        {!! Form::close() !!}
+    </div>
+    <!-- Start:: row-2 -->
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card custom-card">
+                <div class="card-header">
+                    <div class="card-title">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="grid-pagination">
+                        <div role="complementary" class="gridjs gridjs-container" style="width: 100%;">
+                            <div class="gridjs-wrapper" style="height: auto;">
+                                <table role="grid" class="gridjs-table" style="height: auto;">
+                                    <thead  class="gridjs-thead">
+                                        <tr class="gridjs-tr">
+                                          <th class="gridjs-th" data-column-id="No"><div class="gridjs-th-content">No</div></th>
+                                          <th class="gridjs-th" data-column-id="Complaint Title"><div class="gridjs-th-content">Complaint Title</div></th>
+                                          <th class="gridjs-th" data-column-id="No of Times"><div class="gridjs-th-content">No of Times</div></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="gridjs-tbody">
+                                    @if(isset($data) && $data)
+                                        @php
+                                            $i = 0;
+                                        @endphp
+                                        @foreach ($data as $value)
+                                            @php
+                                                $i++;
+                                            @endphp
+                                            <tr class="gridjs-tr">
+                                                <td class="gridjs-td" data-column-id="No">{{ $i }}</td>
+                                                <td class="gridjs-td" data-column-id="Complaint Title">{{ $value->complait_title }}</td>
+                                                <td class="gridjs-td" data-column-id="No Of Times">{{ $value->total }}</td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- CONTAINER CLOSED -->
 @endsection
 
 @section('js-script')
