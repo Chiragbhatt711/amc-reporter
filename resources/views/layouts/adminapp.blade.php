@@ -507,7 +507,7 @@
                                         <a href="javascript:void(0);" class="header-link dropdown-toggle d-flex align-items-center"
                                             id="mainHeaderProfile" data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="me-2">
-                                                <img src="../assets/images/users/21.jpg" alt="img" width="30"
+                                                <img src="{{ asset('assets/images/users/21.jpg') }}" alt="img" width="30"
                                                     height="30" class="rounded-circle">
                                             </span>
                                             <div class="d-xl-block d-none lh-1">
