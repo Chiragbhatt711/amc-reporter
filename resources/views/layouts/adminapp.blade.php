@@ -518,9 +518,9 @@
                                         <!-- End::header-link|dropdown-toggle -->
                                         <ul class="dropdown-menu pt-0 overflow-hidden dropdown-menu-end mt-1"
                                             aria-labelledby="mainHeaderProfile">
-                                            <li><a class="dropdown-item" href="profile.html"><i
-                                                        class="ti ti-user-circle fs-18 me-2 op-7"></i>Profile</a></li>
-                                            <li><a class="dropdown-item" href="login.html"><i
+                                            {{-- <li><a class="dropdown-item" href="profile.html"><i
+                                                        class="ti ti-user-circle fs-18 me-2 op-7"></i>Profile</a></li> --}}
+                                            <li><a class="dropdown-item" href="{{ Route('logout') }}"><i
                                                         class="ti ti-power fs-18 me-2 op-7"></i>Sign Out</a></li>
                                             <li>
                                                 <hr class="dropdown-divider my-0">
@@ -561,7 +561,7 @@
 
                 <!-- Start::main-sidebar-header -->
                 <div class="main-sidebar-header">
-                    <a href="index.html" class="header-logo">
+                    <a href="{{ route('home') }}" class="header-logo">
                         <img src="{{ asset('assets/web_image/happy_technology_logo.png') }}" alt="logo" class="desktop-logo">
                         <img src="{{ asset('assets/web_image/happy_technology_logo.png') }}" alt="logo" class="toggle-logo">
                         <img src="{{ asset('assets/web_image/happy_technology_logo.png') }}" alt="logo" class="desktop-dark">
