@@ -505,7 +505,9 @@
             <!-- CONTAINER OPEN -->
             <div class="">
                 <div class="text-center">
-                    <a href="index.html"><img src="../assets/images/brand/desktop-dark.png" class="header-brand-img" alt=""></a>
+                    <a href="/">
+                        <img src="{{ asset('assets/web_image/happy_technology_logo.png') }}" alt="logo" class="toggle-dark">
+                    </a>
                 </div>
             </div>
             @yield('content')

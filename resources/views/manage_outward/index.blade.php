@@ -1,111 +1,137 @@
 @extends('layouts.adminapp')
 @section('content')
-<div class="container">
-    @if ($message = Session::get('success'))
-        <div class="alert alert_msg">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
-    <div class="title">
-        <h3>Manage Outward</h3>
-            @can('manage-outward-create')
-                <a class="btn add_btn" href="{{ route('manage_outward.create') }}">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                </a>
-            @endcan
-    </div>
-    <table class="table table-bordered dynamic-data-table ">
-        <thead  class="">
-            <tr>
-                <th scope="col">Outward Date</th>
-                <th scope="col">Reference Bill No</th>
-                <th scope="col">Outward Type</th>
-                <th scope="col">Total Item</th>
-                <th scope="col">Total Qty</th>
-                <th scope="col">Total Amount</th>
-                <th scope="col">Note</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if(isset($outward) && $outward)
-                @php
-                    $i = 0;
-                @endphp
-                @foreach ($outward as $value)
-                    @php
-                        $i++;
-                    @endphp
-                    <tr>
-                        <td>
-                            <a href="javascript:void(0);" onclick="productShow('{{ $value->id }}');" id="productShow_{{ $value->id }}">
-                                <img src="{{ asset('assets/image/plus.png') }}" style="max-width: 43%;height: auto;width: 21px;">
+<!-- PAGE-HEADER -->
+<div class="page-header d-flex align-items-center justify-content-between border-bottom mb-4">
+    <h1 class="page-title">Manage Outward</h1>
+    {{-- <div>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">AMC Dashboard</li>
+        </ol>
+    </div> --}}
+</div>
+<!-- PAGE-HEADER END -->
+
+<!-- CONTAINER -->
+<div class="main-container container-fluid">
+    <!-- Start:: row-2 -->
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card custom-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        @can('manage-outward-create')
+                            <a class="btn btn-primary" href="{{ route('manage_outward.create') }}">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
                             </a>
-                            <a href="javascript:void(0);" onclick="productHide('{{ $value->id }}');" style="display:none;" id="productHide_{{ $value->id }}">
-                                <img src="{{ asset('assets/image/minus.png') }}" style="max-width: 43%;height: auto;width: 21px;">
-                            </a>
-                            {{ $value->inward_date }}
-                        </td>
-                        <td>{{ $value->id }}</td>
-                        <td>{{ $value->outward_type }}</td>
-                        <td>{{ $value->total_product }}</td>
-                        <td>{{ $value->total_qty }}</td>
-                        <td>{{ $value->total_amount }}</td>
-                        <td>{{ $value->note }}</td>
-                        <td>
-                            @can('manage-outward-edit')
-                                <a href="{{Route('manage_outward.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
-                            @endcan
-                            @can('manage-outward-delete')
-                                <a onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
-                            @endcan
-                        </td>
-                    </tr>
-                    <tr class="child_row_{{ $value->id }}" style="display: none">
-                        <th> </th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Sale Rate</th>
-                        <th scope="col">Qty</th>
-                        <th scope="col">Amount</th>
-                    </tr>
-                    @php
-                        $product = getOutwardProductDetails($value->id);
-                    @endphp
-                    @if(isset($product) && $product)
-                        @foreach ($product as $data)
-                            <tr class="child_row_{{ $value->id }}" style="display: none">
-                                <td></td>
-                                <td>{{ $data->product_name }}</td>
-                                <td></td>
-                                <td>{{ $data->qty }}</td>
-                                <td>{{ $data->amount }}</td>
-                            </tr>
-                        @endforeach
-                    @endif
-                @endforeach
-            @endif
-        </tbody>
-    </table>
-    <div class="modal" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        @endcan
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <p>Are sure want to delete</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn_tile" data-bs-dismiss="modal">Cancel</button>
-                    {!! Form::open(['method' => 'DELETE','style'=>'display:inline','id'=>'deleteForm']) !!}
-                        <input type="submit" class="btn btn_tile" value="Delete">
-                    {!! Form::close() !!}
+                <div class="card-body">
+                    <div id="grid-pagination">
+                        <div role="complementary" class="gridjs gridjs-container" style="width: 100%;">
+                            <div class="gridjs-wrapper" style="height: auto;">
+                                <table role="grid" class="gridjs-table" style="height: auto;">
+                                    <thead  class="gridjs-thead">
+                                        <tr>
+                                            <th class="gridjs-th" data-column-id="Outward Date">Outward Date</th>
+                                            <th class="gridjs-th" data-column-id="Reference Bill No">Reference Bill No</th>
+                                            <th class="gridjs-th" data-column-id="Outward Type">Outward Type</th>
+                                            <th class="gridjs-th" data-column-id="Total Item">Total Item</th>
+                                            <th class="gridjs-th" data-column-id="Total Qty">Total Qty</th>
+                                            <th class="gridjs-th" data-column-id="Total Amount">Total Amount</th>
+                                            <th class="gridjs-th" data-column-id="Note">Note</th>
+                                            <th class="gridjs-th" data-column-id="Action">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if(isset($outward) && $outward)
+                                            @php
+                                                $i = 0;
+                                            @endphp
+                                            @foreach ($outward as $value)
+                                                @php
+                                                    $i++;
+                                                @endphp
+                                                <tr>
+                                                    <td class="gridjs-td" data-column-id="Outward Date">
+                                                        <a href="javascript:void(0);" onclick="productShow('{{ $value->id }}');" id="productShow_{{ $value->id }}">
+                                                            <span class="btn btn-sm btn-icon btn-info-light rounded-circle">+</span>
+                                                        </a>
+                                                        <a href="javascript:void(0);" onclick="productHide('{{ $value->id }}');" style="display:none;" id="productHide_{{ $value->id }}">
+                                                            <span class="btn btn-sm btn-icon btn-info-light rounded-circle">-</span>
+                                                        </a>
+                                                        {{ $value->inward_date }}
+                                                    </td>
+                                                    <td class="gridjs-td" data-column-id="Reference Bill No">{{ $value->id }}</td>
+                                                    <td class="gridjs-td" data-column-id="Outward Type">{{ $value->outward_type }}</td>
+                                                    <td class="gridjs-td" data-column-id="Total Item">{{ $value->total_product }}</td>
+                                                    <td class="gridjs-td" data-column-id="Total Qty">{{ $value->total_qty }}</td>
+                                                    <td class="gridjs-td" data-column-id="Total Amount">{{ $value->total_amount }}</td>
+                                                    <td class="gridjs-td" data-column-id="Note">{{ $value->note }}</td>
+                                                    <td class="gridjs-td" data-column-id="Action">
+                                                        @can('manage-outward-edit')
+                                                            <a class="btn btn-sm btn-icon btn-info-light rounded-circle" href="{{Route('manage_outward.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
+                                                        @endcan
+                                                        @can('manage-outward-delete')
+                                                            <a class="btn btn-sm btn-icon btn-secondary-light rounded-circle" onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
+                                                        @endcan
+                                                    </td>
+                                                </tr>
+                                                <tr class="child_row_{{ $value->id }}" style="display: none">
+                                                    <th> </th>
+                                                    <th class="gridjs-th" data-column-id="Product">Product</th>
+                                                    <th class="gridjs-th" data-column-id="Sale Rate">Sale Rate</th>
+                                                    <th class="gridjs-th" data-column-id="Qty">Qty</th>
+                                                    <th class="gridjs-th" data-column-id="Amount">Amount</th>
+                                                </tr>
+                                                @php
+                                                    $product = getOutwardProductDetails($value->id);
+                                                @endphp
+                                                @if(isset($product) && $product)
+                                                    @foreach ($product as $data)
+                                                        <tr class="child_row_{{ $value->id }}" style="display: none">
+                                                            <td></td>
+                                                            <td class="gridjs-td" data-column-id="Product">{{ $data->product_name }}</td>
+                                                            <td class="gridjs-td" data-column-id="Sale Rate"></td>
+                                                            <td class="gridjs-td" data-column-id="Qty">{{ $data->qty }}</td>
+                                                            <td class="gridjs-td" data-column-id="Amount">{{ $data->amount }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<div class="modal" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are sure want to delete</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn_tile" data-bs-dismiss="modal">Cancel</button>
+                {!! Form::open(['method' => 'DELETE','style'=>'display:inline','id'=>'deleteForm']) !!}
+                    <input type="submit" class="btn btn-primary" value="Delete">
+                {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- CONTAINER CLOSED -->
 @endsection
 
 @section('js-script')

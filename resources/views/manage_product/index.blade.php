@@ -1,93 +1,119 @@
 @extends('layouts.adminapp')
 @section('content')
-<div class="container">
-    @if ($message = Session::get('success'))
-        <div class="alert alert_msg">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
-    <div class="title">
-        <h3>Manage Product</h3>
-            @can('manage-product-create')
-                <a class="btn add_btn" href="{{ route('manage_product.create') }}">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                </a>
-            @endcan
-    </div>
-    <table class="table  dynamic-data-table">
-        <thead  class="">
-            <tr>
-            <th scope="col">Group</th>
-            <th scope="col">Brand</th>
-            <th scope="col">Model</th>
-            <th scope="col">Product Code</th>
-            <th scope="col">Product Name</th>
-            <th scope="col">Unit</th>
-            <th scope="col">MRP</th>
-            <th scope="col">Opening Qty</th>
-            <th scope="col">Minimum Qty</th>
-            <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if(isset($products) && $products)
-                @php
-                    $i = 0;
-                @endphp
-                @foreach ($products as $value)
-                    @php
-                        $i++;
-                    @endphp
-                    <tr>
-                        <td data-label="Group">{{ $value->group }}</td>
-                        <td data-label="Brand">{{ $value->brand }}</td>
-                        <td data-label="Model">{{ $value->model }}</td>
-                        <td data-label="Product Code">{{ $value->product_code }}</td>
-                        <td data-label="Product Name">{{ $value->product_name }}</td>
-                        <td data-label="Unit">{{ $value->unit }}</td>
-                        <td data-label="MRP">{{ $value->mrp }}</td>
-                        <td data-label="Opening Qty">{{ $value->opening_qty }}</td>
-                        <td data-label="Minimum Qty">{{ $value->min_qty }}</td>
-                        <td data-label="Action">
-                            @can('manage-product-edit')
-                                <a href="{{Route('manage_product.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
-                            @endcan
-                            @can('manage-product-delete')
-                                <a onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
-                            @endcan
-                        </td>
-                    </tr>
-                @endforeach
-            @endif
-        </tbody>
-    </table>
-    <div class="modal" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="`modal-header">
-                    <h5 class="modal-title"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>`
-                <div class="modal-body">
-                    <p>Are sure want to delete</p>
+<!-- PAGE-HEADER -->
+<div class="page-header d-flex align-items-center justify-content-between border-bottom mb-4">
+    <h1 class="page-title">Manage Product</h1>
+    {{-- <div>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">AMC Dashboard</li>
+        </ol>
+    </div> --}}
+</div>
+<!-- PAGE-HEADER END -->
+
+<!-- CONTAINER -->
+<div class="main-container container-fluid">
+    <!-- Start:: row-2 -->
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card custom-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        @can('manage-product-create')
+                            <a class="btn btn-primary" href="{{ route('manage_product.create') }}">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </a>
+                        @endcan
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn " data-dismiss="modal">Cancel</button>
-                    {!! Form::open(['method' => 'DELETE','style'=>'display:inline','id'=>'deleteForm']) !!}
-                        <input type="submit" class="btn " value="Delete">
-                    {!! Form::close() !!}
+                <div class="card-body">
+                    <div id="grid-pagination">
+                        <div role="complementary" class="gridjs gridjs-container" style="width: 100%;">
+                            <div class="gridjs-wrapper" style="height: auto;">
+                                <table role="grid" class="gridjs-table" style="height: auto;">
+                                    <thead  class="gridjs-thead">
+                                        <tr>
+                                        <th class="gridjs-th" data-column-id="Group">Group</th>
+                                        <th class="gridjs-th" data-column-id="Brand">Brand</th>
+                                        <th class="gridjs-th" data-column-id="Model">Model</th>
+                                        <th class="gridjs-th" data-column-id="Product Code">Product Code</th>
+                                        <th class="gridjs-th" data-column-id="Product Name">Product Name</th>
+                                        <th class="gridjs-th" data-column-id="Unit">Unit</th>
+                                        <th class="gridjs-th" data-column-id="MRP">MRP</th>
+                                        <th class="gridjs-th" data-column-id="Opening Qty">Opening Qty</th>
+                                        <th class="gridjs-th" data-column-id="Minimum Qty">Minimum Qty</th>
+                                        <th class="gridjs-th" data-column-id="Action">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if(isset($products) && $products)
+                                            @php
+                                                $i = 0;
+                                            @endphp
+                                            @foreach ($products as $value)
+                                                @php
+                                                    $i++;
+                                                @endphp
+                                                <tr>
+                                                    <td class="gridjs-td" data-column-id="Group">{{ $value->group }}</td>
+                                                    <td class="gridjs-td" data-column-id="Brand">{{ $value->brand }}</td>
+                                                    <td class="gridjs-td" data-column-id="Model">{{ $value->model }}</td>
+                                                    <td class="gridjs-td" data-column-id="Product Code">{{ $value->product_code }}</td>
+                                                    <td class="gridjs-td" data-column-id="Product Name">{{ $value->product_name }}</td>
+                                                    <td class="gridjs-td" data-column-id="Unit">{{ $value->unit }}</td>
+                                                    <td class="gridjs-td" data-column-id="MRP">{{ $value->mrp }}</td>
+                                                    <td class="gridjs-td" data-column-id="Opening Qty">{{ $value->opening_qty }}</td>
+                                                    <td class="gridjs-td" data-column-id="Minimum Qty">{{ $value->min_qty }}</td>
+                                                    <td class="gridjs-td" data-column-id="Action">
+                                                        @can('manage-product-edit')
+                                                            <a class="btn btn-sm btn-icon btn-info-light rounded-circle" href="{{Route('manage_product.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
+                                                        @endcan
+                                                        @can('manage-product-delete')
+                                                            <a class="btn btn-sm btn-icon btn-secondary-light rounded-circle" onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
+                                                        @endcan
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-    @endsection
+
+<div class="modal" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are sure want to delete</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn_tile" data-bs-dismiss="modal">Cancel</button>
+                {!! Form::open(['method' => 'DELETE','style'=>'display:inline','id'=>'deleteForm']) !!}
+                    <input type="submit" class="btn btn-primary" value="Delete">
+                {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- CONTAINER CLOSED -->
+@endsection
 
 @section('js-script')
 <script>
-function deleteFunction(id){
-    $('#deleteForm').attr('action','{{ url("manage_product") }}'+ '/'+id);
-    $('#deleteModal').modal('show');
-}
+    function deleteFunction(id){
+        $('#deleteForm').attr('action','{{ url("manage_product") }}'+ '/'+id);
+        $('#deleteModal').modal('show');
+    }
 </script>
 @endsection

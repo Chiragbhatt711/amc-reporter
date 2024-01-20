@@ -1,34 +1,47 @@
 @extends('layouts.adminapp')
-
 @section('content')
-@if (count($errors) > 0)
-
-@endif
-{!! Form::model($group, ['method' => 'PATCH','route' => ['product_group.update', $group->id]]) !!}
-@csrf
-<div class="container">
-    <div id="accordion">
-        <div class="row mt-1">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
-                <div class="form-group">
-                    <strong class="lab_space">Group <em class="text-danger">*</em></strong>
-                    {!! Form::text('group', null, array('placeholder' => 'Group' ,'class' => 'form-control')) !!}
-                    @error('group')
-                    <div class="text-danger">{{ $message }}</div>
-                    @enderror
+<!-- PAGE-HEADER -->
+<div class="page-header d-flex align-items-center justify-content-between border-bottom mb-4">
+    <h1 class="page-title">Product Group</h1>
+    {{-- <div>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">AMC Dashboard</li>
+        </ol>
+    </div> --}}
+</div>
+<!-- PAGE-HEADER END -->
+<!-- CONTAINER -->
+<div class="main-container container-fluid">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card custom-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        Edit
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn_tile">Submit</button>
+                <div class="card-body">
+                    {!! Form::model($group, ['method' => 'PATCH','route' => ['product_group.update', $group->id]]) !!}
+                    @csrf
+                        <div class="row mt-1">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <strong class="lab_space">Group <em class="text-danger">*</em></strong>
+                                    {!! Form::text('group', null, array('placeholder' => 'Group' ,'class' => 'form-control')) !!}
+                                    @error('group')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    {!! Form::close() !!}
+                </div>
             </div>
         </div>
     </div>
 </div>
-  {!! Form::close() !!}
-@endsection
-
-@section('js-script')
-<script>
-
-</script>
 @endsection
