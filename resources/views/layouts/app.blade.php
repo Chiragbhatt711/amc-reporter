@@ -7,9 +7,9 @@
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Vexel – Bootstrap 5  Admin & Dashboard Template">
-    <meta name="author" content="Spruko Technologies Private Limited">
-    <meta name="keywords" content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
+    <meta name="description" content="AMC Reporter">
+    <meta name="author" content="">
+    <meta name="keywords" content="amc,amc-reporter,reporter">
 
      <!-- FAVICON -->
      <link rel="shortcut icon" type="image/x-icon" href="{{ asset('dist/assets/images/brand/favicon.ico') }}">
@@ -18,7 +18,7 @@
      <script src="{{ asset('dist/assets/js/authentication-main.js') }}"></script>
 
      <!-- TITLE -->
-     <title>Vexel – Bootstrap 5 Admin &amp; Dashboard Template </title>
+     <title>{{ env('APP_NAME') }}</title>
 
      <!-- BOOTSTRAP CSS -->
      <link id="style" href="{{ asset('dist/assets/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
