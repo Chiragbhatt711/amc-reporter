@@ -33,8 +33,8 @@
                                 <strong class="lab_space">Group<em class="text-danger">*</em></strong>
                                 <div class="d-flex">
                                     {!! Form::select('group', $group , null, ['class' => 'form-select','placeholder' =>'Please Select','id'=>'group' ]) !!}
-                                    <span class="btn btn-primary">
-                                      <i title="add group" class="fa fa-plus" aria-hidden="true" id="addGroup" data-bs-toggle="modal" data-bs-target="#groupModal"></i>
+                                    <span class="btn btn-primary" id="addGroup" data-bs-toggle="modal" data-bs-target="#groupModal">
+                                      <i title="add group" class="fa fa-plus" aria-hidden="true"></i>
                                     </span>
                                 </div>
                                 @error('group')
@@ -47,8 +47,8 @@
                                 <strong class="lab_space">Brand</strong>
                                 <div class="d-flex">
                                     {!! Form::select('brand', $brand , null, ['class' => 'form-select','placeholder' =>'Please Select','id'=>'brand' ]) !!}
-                                    <span class="btn btn-primary">
-                                      <i title="add brand" class="fa fa-plus" aria-hidden="true" id="addBrand" data-bs-toggle="modal" data-bs-target="#brandModal"></i>
+                                    <span class="btn btn-primary" id="addBrand" data-bs-toggle="modal" data-bs-target="#brandModal">
+                                      <i title="add brand" class="fa fa-plus" aria-hidden="true"></i>
                                     </span>
                                 </div>
                                 @error('brand')
@@ -61,8 +61,8 @@
                                 <strong class="lab_space">Model</strong>
                                 <div class="d-flex">
                                     {!! Form::select('model', $model , null, ['class' => 'form-select','placeholder' =>'Please Select','id'=>'model' ]) !!}
-                                    <span class="btn btn-primary">
-                                      <i title="add model" class="fa fa-plus" aria-hidden="true" id="addModel" data-bs-toggle="modal" data-bs-target="#modelModal"></i>
+                                    <span class="btn btn-primary" id="addModel" data-bs-toggle="modal" data-bs-target="#modelModal">
+                                      <i title="add model" class="fa fa-plus" aria-hidden="true"></i>
                                     </span>
                                 </div>
                                 @error('model')
