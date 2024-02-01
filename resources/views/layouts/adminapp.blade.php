@@ -48,6 +48,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" referrerpolicy="no-referrer" />
         <!-- Bootstrap datepicker CSS -->
         <link rel="stylesheet" href="{{ asset('assets/datepicker/bootstrap-datepicker.min.css') }}">
+
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     </head>
 
     <body class="app sidebar-mini">
@@ -900,6 +902,7 @@
         <script src="{{ asset('dist/assets/js/custom.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" referrerpolicy="no-referrer"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
         <!-- Bootstrap datepicker JS-->
         <script src="{{ asset('assets/datepicker/bootstrap-datepicker.min.js') }}"></script>
 

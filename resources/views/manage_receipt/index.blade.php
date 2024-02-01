@@ -110,7 +110,7 @@
 <!-- CONTAINER CLOSED -->
 <script>
     function deleteFunction(id){
-        $('#deleteForm').attr('action','{{ url("manage_amc") }}'+ '/'+id);
+        $('#deleteForm').attr('action','{{ url("manage_receipt") }}'+ '/'+id);
         $('#deleteModal').modal('show');
     }
 </script>

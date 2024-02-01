@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
+use App\Models\Country;
 use App\Models\ManageParty;
+use App\Models\State;
 use Illuminate\Http\Request;
 
 class ManagePartyController extends Controller
@@ -175,5 +178,41 @@ class ManagePartyController extends Controller
         {
             return redirect()->route('manage_party.index')->with('success','Somthing wrong');
         }
+    }
+
+    public function cityAutoComplete(Request $request)
+    {
+        $term = $request->q;
+
+        $city = City::where('name','LIKE','%'.$term.'%')->get();
+        $cityArray=[];
+        foreach ($city as $key => $value) {
+            $cityArray[]=['label'=>$value->name,'value'=>$value->name];
+        }
+        return response()->json($cityArray);
+    }
+
+    public function stateAutoComplete(Request $request)
+    {
+        $term = $request->q;
+
+        $state = State::where('name','LIKE','%'.$term.'%')->get();
+        $stateArray=[];
+        foreach ($state as $key => $value) {
+            $stateArray[]=['label'=>$value->name,'value'=>$value->name];
+        }
+        return response()->json($stateArray);
+    }
+
+    public function countryAutoComplete(Request $request)
+    {
+        $term = $request->q;
+
+        $country = Country::where('name','LIKE','%'.$term.'%')->get();
+        $countryArray=[];
+        foreach ($country as $key => $value) {
+            $countryArray[]=['label'=>$value->name,'value'=>$value->name];
+        }
+        return response()->json($countryArray);
     }
 }

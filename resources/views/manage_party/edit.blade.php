@@ -55,7 +55,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                             <div class="form-group">
                                 <strong class="lab_space">City  <em class="text-danger">*</em></strong>
-                                {!! Form::text('city', null, array('placeholder' => 'City' ,'class' => 'form-control')) !!}
+                                {!! Form::text('city', null, array('placeholder' => 'City','id'=>'city' ,'class' => 'form-control')) !!}
                                 @error('city')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -64,7 +64,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                             <div class="form-group">
                                 <strong class="lab_space">State  <em class="text-danger">*</em></strong>
-                                {!! Form::text('state', null, array('placeholder' => 'State' ,'class' => 'form-control')) !!}
+                                {!! Form::text('state', null, array('placeholder' => 'State','id'=>'state' ,'class' => 'form-control')) !!}
                                 @error('state')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -73,7 +73,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                             <div class="form-group">
                                 <strong class="lab_space">Country  <em class="text-danger">*</em></strong>
-                                {!! Form::text('country', null, array('placeholder' => 'Country' ,'class' => 'form-control')) !!}
+                                {!! Form::text('country', null, array('placeholder' => 'Country','id'=>'country' ,'class' => 'form-control')) !!}
                                 @error('country')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -179,4 +179,86 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js-script')
+<script>
+    $(document).ready(function () {
+        $( "#city" ).autocomplete({
+            source: function( request, response ) {
+                $.ajax({
+                    url: "{{ route('city_autocomplete') }}",
+                    type:'POST',
+                    data:{
+                            '_token' : $('meta[name="csrf-token"]').attr('content'),
+                            q: request.term
+                    },
+                    success:function(data) {
+                        response( data );
+                    }
+                });
+            },
+            minLength: 3,
+            select: function( event, ui ) {
+                $('#city').val(ui.item.label);
+            },
+            open: function() {
+                $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+            },
+            close: function() {
+                $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+            }
+        });
+        $( "#state" ).autocomplete({
+            source: function( request, response ) {
+                $.ajax({
+                    url: "{{ route('state_autocomplete') }}",
+                    type:'POST',
+                    data:{
+                            '_token' : $('meta[name="csrf-token"]').attr('content'),
+                            q: request.term
+                    },
+                    success:function(data) {
+                        response( data );
+                    }
+                });
+            },
+            minLength: 3,
+            select: function( event, ui ) {
+                $('#state').val(ui.item.label);
+            },
+            open: function() {
+                $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+            },
+            close: function() {
+                $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+            }
+        });
+        $( "#country" ).autocomplete({
+            source: function( request, response ) {
+                $.ajax({
+                    url: "{{ route('country_autocomplete') }}",
+                    type:'POST',
+                    data:{
+                            '_token' : $('meta[name="csrf-token"]').attr('content'),
+                            q: request.term
+                    },
+                    success:function(data) {
+                        response( data );
+                    }
+                });
+            },
+            minLength: 3,
+            select: function( event, ui ) {
+                $('#country').val(ui.item.label);
+            },
+            open: function() {
+                $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+            },
+            close: function() {
+                $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+            }
+        });
+    })
+</script>
 @endsection

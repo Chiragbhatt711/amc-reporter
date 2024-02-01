@@ -371,15 +371,16 @@ $("#toogleBtn").click(function(){
 });
 
 $('.datepicker').datepicker({
-    format: "yyyy-mm-dd",
+    // format: "yyyy-mm-dd",
+    format: "dd-mm-yyyy",
     // startDate: '0d',
-    weekStart: 0,
-    calendarWeeks: true,
-    autoclose: true,
-    todayHighlight: true,
+    // weekStart: 0,
+    // calendarWeeks: true,
+    // autoclose: true,
+    // todayHighlight: true,
     // rtl: true,
-    orientation: "auto"
-});
+    // orientation: "auto"
+}).dateickepr('setDate', 'today');
 
 $('.monthpicker').datepicker({
     format: "yyyy-mm",
