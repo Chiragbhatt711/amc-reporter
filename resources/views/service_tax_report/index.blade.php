@@ -19,13 +19,13 @@
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">Start Date</strong>
-                    {!! Form::text('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control datepicker')) !!}
+                    {!! Form::date('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <div class="form-group">
                     <strong class="lab_space">End Date</strong>
-                    {!! Form::text('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control datepicker')) !!}
+                    {!! Form::date('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-4">
@@ -44,48 +44,52 @@
                 </div>
                 <div class="card-body">
                     <div id="grid-pagination">
-                        <table class="table table-bordered dynamic-data-table">
-                            <thead  class="">
-                                <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Party Name</th>
-                                <th scope="col">Contract Person Name</th>
-                                <th scope="col">City</th>
-                                <th scope="col">Mobile No</th>
-                                <th scope="col">AMC No</th>
-                                <th scope="col">AMC Type</th>
-                                <th scope="col">Start Date</th>
-                                <th scope="col">End Date</th>
-                                <th scope="col">Pending Amount</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if(isset($report) && $report)
-                                    @php
-                                        $i = 0;
-                                    @endphp
-                                    @foreach ($report as $value)
-                                        @if($value->pending_amount != 0)
+                        <div role="complementary" class="gridjs gridjs-container" style="width: 100%;">
+                            <div class="gridjs-wrapper" style="height: auto;">
+                                <table role="grid" class="gridjs-table" style="height: auto;">
+                                    <thead  class="gridjs-thead">
+                                        <tr>
+                                            <th class="gridjs-th" data-column-id="No">No</th>
+                                            <th class="gridjs-th" data-column-id="Party Name">Party Name</th>
+                                            <th class="gridjs-th" data-column-id="Contract Person Name">Contract Person Name</th>
+                                            <th class="gridjs-th" data-column-id="City">City</th>
+                                            <th class="gridjs-th" data-column-id="AMC NO">AMC NO</th>
+                                            <th class="gridjs-th" data-column-id="AMC Type">AMC Type</th>
+                                            <th class="gridjs-th" data-column-id="Start Date">Start Date</th>
+                                            <th class="gridjs-th" data-column-id="End Date">End Date</th>
+                                            <th class="gridjs-th" data-column-id="Basic Amount">Basic Amount</th>
+                                            <th class="gridjs-th" data-column-id="Tax (%)">Tax (%)</th>
+                                            <th class="gridjs-th" data-column-id="Tax Amount">Tax Amount</th>
+                                            <th class="gridjs-th" data-column-id="Total Amount">Total Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if(isset($data) && $data)
                                             @php
-                                                $i++;
+                                                $i = 0;
                                             @endphp
-                                            <tr>
-                                                <td data-label="No">{{ $i }}</td>
-                                                <td data-label="Party Name">{{ $value->party_name }}</td>
-                                                <td data-label="Contact Person">{{ $value->contact_person_name }}</td>
-                                                <td data-label="City">{{ $value->city }}</td>
-                                                <td data-label="Mobile No">{{ $value->mobile_no }}</td>
-                                                <td data-label="AMC No">{{ $value->amc_no }}</td>
-                                                <td data-label="AMC Type">{{ $value->amc_type }}</td>
-                                                <td data-label="Start Date">{{ $value->start_date }}</td>
-                                                <td data-label="End Date">{{ $value->end_date }}</td>
-                                                <td data-label="Pending Amount">{{ $value->pending_amount }}</td>
-                                            </tr>
+                                            @foreach ($data as $value)
+                                                @php $i++;  @endphp
+                                                <tr>
+                                                    <td class="gridjs-td" data-column-id="No">{{ $i }}</td>
+                                                    <td class="gridjs-td" data-column-id="Party Name">{{ $value->party_name }}</td>
+                                                    <td class="gridjs-td" data-column-id="Contract Person Name">{{ $value->contact_person }}</td>
+                                                    <td class="gridjs-td" data-column-id="City">{{ $value->city }}</td>
+                                                    <td class="gridjs-td" data-column-id="AMC No">{{ $value->id }}</td>
+                                                    <td class="gridjs-td" data-column-id="AMC Type">{{ $value->amc_type }}</td>
+                                                    <td class="gridjs-td" data-column-id="Start Date">{{ $value->start_date }}</td>
+                                                    <td class="gridjs-td" data-column-id="End Date">{{ $value->end_date }}</td>
+                                                    <td class="gridjs-td" data-column-id="Basic Amount">{{ $value->basic_amount }}</td>
+                                                    <td class="gridjs-td" data-column-id="Tax(%)">{{ $value->tax }}</td>
+                                                    <td class="gridjs-td" data-column-id="Tax Amount">{{ $value->total_amount - $value->basic_amount }}</td>
+                                                    <td class="gridjs-td" data-column-id="Total Amount">{{ $value->total_amount }}</td>
+                                                </tr>
+                                            @endforeach
                                         @endif
-                                    @endforeach
-                                @endif
-                            </tbody>
-                        </table>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

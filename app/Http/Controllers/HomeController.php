@@ -67,6 +67,26 @@ class HomeController extends Controller
         // ->orderBy('amc_schedule_payment_details.installment_date','DESC')
         ->groupBy('manage_amcs.id')
         ->get();
+        // $paymentTicker = ManageAmc::where('manage_amcs.admin_id', $admin_id)
+        // ->leftJoin('amc_schedule_payment_details', 'manage_amcs.id', '=', 'amc_schedule_payment_details.amc_id')
+        // ->leftJoin('manage_parties', 'manage_amcs.party_id', '=', 'manage_parties.id')
+        // ->leftJoin('manage_receipts', 'manage_amcs.id', '=', 'manage_receipts.amc_id')
+        // ->whereDate('amc_schedule_payment_details.installment_date', '>=', $toDay)
+        // ->whereDate('amc_schedule_payment_details.installment_date', '<=', $endDate)
+        // ->select(
+        //     'manage_amcs.id as amc_no',
+        //     'manage_parties.party_name as company',
+        //     'manage_parties.contact_person_name as person_name',
+        //     'amc_schedule_payment_details.installment_date as due_date',
+        //     DB::raw('SUM(amc_schedule_payment_details.installment_amount) as total_amount'),
+        //     DB::raw('SUM(manage_receipts.amount) as paid_amount')
+        // )
+        // ->orderBy('amc_schedule_payment_details.installment_date', 'ASC')
+        // ->groupBy('manage_amcs.id')
+        // ->distinct('amc_schedule_payment_details.id')
+        // ->get();
+
+
         // dd($paymentTicker);
         return view('amc_dashboard',compact('day','amcTicker','paymentDay','paymentTicker'));
     }
