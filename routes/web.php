@@ -34,6 +34,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/add-brand','BrandController@create')->name('add_brand');
     Route::post('/add-model','ContractModelController@create')->name('add_model');
     Route::post('/product-add','ManageAmcController@product_add')->name('product_add');
+    Route::post('/get-product-detail','ManageAmcController@getAmcProductDetail')->name('get_amc_product_detail');
     Route::post('/get-tex','ManageTaxController@getTex')->name('get_tex');
     Route::get('/amc-expiry-reminder','AmcExpiryReminderController@index')->name('amc_expiry_reminder');
     Route::get('/amc-renew/{id}','AmcExpiryReminderController@amcRenew')->name('amc_renew');
@@ -61,6 +62,9 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::post('/amc-product-detail','ManageAmcController@AmcProductDetails')->name('amc_product_detail');
     Route::post('/get-complaint-details','ManageComplaintController@getComplaintDetails')->name('get_complaint_details');
+    Route::post('/city-autocomplete','ManagePartyController@cityAutoComplete')->name('city_autocomplete');
+    Route::post('/state-autocomplete','ManagePartyController@stateAutoComplete')->name('state_autocomplete');
+    Route::post('/country-autocomplete','ManagePartyController@countryAutoComplete')->name('country_autocomplete');
 
     Route::resource('amc', AmcController::class);
     Route::resource('roles', RoleController::class);

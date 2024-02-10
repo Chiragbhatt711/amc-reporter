@@ -79,6 +79,7 @@
                                     {{-- <th>Complaint No</th> --}}
                                     <th>Complaint Date</th>
                                     <th>Remain Hours</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -102,6 +103,11 @@
                                             {{-- <td data-label="Complaint No">{{ $remainDay }}</td> --}}
                                             <td data-label="Complaint Date">{{ $value->date }}</td>
                                             <td data-label="Remain Hour">{{ $remainDay }}</td>
+                                            <td data-label="Action">
+                                                @can('manage-complaint-edit')
+                                                    <a class="btn btn-sm btn-icon btn-info-light rounded-circle" href="{{Route('call_update',$value->id)}}"> <i class="fa-solid fa-clipboard-check"></i> </a>
+                                                @endcan
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @endif

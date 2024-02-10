@@ -51,22 +51,44 @@ class HomeController extends Controller
             $endDate = Carbon::now()->addDay($paymentDay)->format('Y-m-d');
         }
 
-        $paymentTicker = ManageAmc::where('manage_amcs.admin_id',$admin_id)
-        ->join('amc_schedule_payment_details','manage_amcs.id','=','amc_schedule_payment_details.amc_id','LEFT')
-        ->join('manage_parties','manage_amcs.party_id','=','manage_parties.id','LEFT')
-        ->join('manage_receipts','manage_amcs.id','=','manage_receipts.amc_id','LEFT')
-        ->leftJoin('amc_schedule_payment_details as payment', function($payment)use($toDay,$endDate){
-            $payment->on('manage_amcs.id','=','payment.amc_id')
-                ->whereDate('payment.installment_date', '>=', $toDay)
-                ->whereDate('payment.installment_date', '<=', $endDate)
-                ->orderBy('receipt.id','desc')->limit(1);
-        })
+        // $paymentTicker = ManageAmc::where('manage_amcs.admin_id',$admin_id)
+        // ->join('amc_schedule_payment_details','manage_amcs.id','=','amc_schedule_payment_details.amc_id','LEFT')
+        // ->join('manage_parties','manage_amcs.party_id','=','manage_parties.id','LEFT')
+        // ->join('manage_receipts','manage_amcs.id','=','manage_receipts.amc_id','LEFT')
+        // ->leftJoin('amc_schedule_payment_details as payment', function($payment)use($toDay,$endDate){
+        //     $payment->on('manage_amcs.id','=','payment.amc_id')
+        //         ->whereDate('payment.installment_date', '>=', $toDay)
+        //         ->whereDate('payment.installment_date', '<=', $endDate)
+        //         ->orderBy('receipt.id','desc')->limit(1);
+        // })
+        // ->whereDate('amc_schedule_payment_details.installment_date', '>=', $toDay)
+        // ->whereDate('amc_schedule_payment_details.installment_date', '<=', $endDate)
+        // ->select('manage_amcs.id as amc_no','manage_parties.party_name as compny','manage_parties.contact_person_name as person_name','payment.installment_date as due_date',DB::raw('SUM(amc_schedule_payment_details.installment_amount) as totle_amount, SUM(manage_receipts.amount) as paid_amount'))
+        // // ->orderBy('amc_schedule_payment_details.installment_date','DESC')
+        // ->groupBy('manage_amcs.id')
+        // ->get();
+
+        $paymentTicker = ManageAmc::where('manage_amcs.admin_id', $admin_id)
+        ->leftJoin('amc_schedule_payment_details', 'manage_amcs.id', '=', 'amc_schedule_payment_details.amc_id')
+        ->leftJoin('manage_parties', 'manage_amcs.party_id', '=', 'manage_parties.id')
+        ->leftJoin('manage_receipts', 'manage_amcs.id', '=', 'manage_receipts.amc_id')
         ->whereDate('amc_schedule_payment_details.installment_date', '>=', $toDay)
         ->whereDate('amc_schedule_payment_details.installment_date', '<=', $endDate)
-        ->select('manage_amcs.id as amc_no','manage_parties.party_name as compny','manage_parties.contact_person_name as person_name','payment.installment_date as due_date',DB::raw('SUM(amc_schedule_payment_details.installment_amount) as totle_amount, SUM(manage_receipts.amount) as paid_amount'))
-        // ->orderBy('amc_schedule_payment_details.installment_date','DESC')
-        ->groupBy('manage_amcs.id')
+        ->select(
+            'manage_amcs.id as amc_no',
+            'manage_parties.party_name as company',
+            'manage_parties.contact_person_name as person_name',
+            'amc_schedule_payment_details.installment_date as due_date',
+            'amc_schedule_payment_details.installment_amount as due_amount',
+            // DB::raw('SUM(amc_schedule_payment_details.installment_amount) as total_amount'),
+            // DB::raw('SUM(manage_receipts.amount) as paid_amount')
+        )
+        ->orderBy('amc_schedule_payment_details.installment_date', 'ASC')
+        // ->groupBy('manage_amcs.id')
+        ->distinct('amc_schedule_payment_details.id')
         ->get();
+
+
         // dd($paymentTicker);
         return view('amc_dashboard',compact('day','amcTicker','paymentDay','paymentTicker'));
     }
@@ -94,7 +116,7 @@ class HomeController extends Controller
                     ->whereDate('manage_complaints.service_date', '<=', $endDate)
                     ->join('manage_amcs','manage_complaints.amc_no','=','manage_amcs.id','LEFT')
                     ->join('manage_parties','manage_amcs.party_id','=','manage_parties.id','LEFT')
-                    ->select('manage_amcs.id as amc_id','manage_complaints.service_date as date','manage_parties.party_name as company_name','manage_parties.contact_person_name as person_name','manage_parties.city as city');
+                    ->select('manage_complaints.id','manage_amcs.id as amc_id','manage_complaints.service_date as date','manage_parties.party_name as company_name','manage_parties.contact_person_name as person_name','manage_parties.city as city');
         switch ($type) {
             case 'Free Service':
                 $data->where('manage_complaints.is_free',1);

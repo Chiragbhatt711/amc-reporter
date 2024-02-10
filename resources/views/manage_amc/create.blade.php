@@ -2,11 +2,12 @@
 <style>
 .fixTableHead {
     overflow-y: auto;
-    height: 150px;
+    height: 250px;
 }
 .fixTableHead thead th {
     position: sticky;
     top: 0;
+    background: #f3f6f9!important;
 }
 table {
     border-collapse: collapse;
@@ -68,14 +69,14 @@ th {
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                             <strong class="lab_space">Start Date<em class="text-danger">*</em></strong>
-                            {!! Form::text('start_date', date('Y-m-d'), array('placeholder' => 'Start date','class' => 'form-control datepicker','id'=>'start_date')) !!}
+                            {!! Form::date('start_date', \Carbon\Carbon::now()->format('Y-m-d'), array('placeholder' => 'Start date','class' => 'form-control ','id'=>'start_date','format' => 'dd-MM-yyyy')) !!}
                             @error('start_date')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                             <strong class="lab_space">End Date<em class="text-danger">*</em></strong>
-                            {!! Form::text('end_date', date('Y-m-d', strtotime(now()." +365 day")), array('placeholder' => 'End date','class' => 'form-control datepicker','id'=>'end_date')) !!}
+                            {!! Form::date('end_date',\Carbon\Carbon::now()->addYear()->format('Y-m-d'), array('placeholder' => 'End date','class' => 'form-control','id'=>'end_date')) !!}
                             @error('end_date')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -110,10 +111,10 @@ th {
                                 {!! Form::textarea('note', null, ['class' => 'form-control','placeholder' =>'Note','id' => 'note' ]) !!}
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 mt-4">
                             <strong class="lab_space"> </strong>
-                            <a href="javascript:void(0)"class="form_btn" name="add" value="Add" onclick="product_add();">ADD</a>
-                            <!-- <input type="" class="form_btn" name="add" value="Add" onclick="product_add();"> -->
+                            <a href="javascript:void(0)"class="btn btn-primary" name="add" value="Add" onclick="product_add();">ADD</a>
+                            <!-- <input type="" class="btn btn-primary" name="add" value="Add" onclick="product_add();"> -->
                         </div>
                     </div>
                     <div class="row my-3">
@@ -149,10 +150,10 @@ th {
                                         <span id="serviceE" class="text-danger"></span>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                            <a href="javascript:void(0)" class="form_btn mt-3" name="set_service" value="Set Service" onclick="setService();">Set Service</a>
+                                            <a href="javascript:void(0)" class="btn btn-primary mt-3" name="set_service" value="Set Service" onclick="setService();">Set Service</a>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                            <a href="javascript:void(0)" class="form_btn mt-3" name="cleare_service" value="Clear All" onclick="cleareService();">Clear All</a>
+                                            <a href="javascript:void(0)" class="btn btn-primary mt-3" name="cleare_service" value="Clear All" onclick="cleareService();">Clear All</a>
                                         </div>
                                     <div class="fixTableHead mt-3">
                                         <table class="table">
@@ -198,13 +199,13 @@ th {
                                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                         <strong class="lab_space">Total Amount</strong>
                                         {!! Form::text('total', 0, ['class' => 'form-control','placeholder' =>'Total Amount', 'id'=> 'total','disabled' ]) !!}
-                                        {{ Form::hidden('total_amount', 'secret', array('id' => 'total_amount')) }}
+                                        {{ Form::hidden('total_amount', null, array('id' => 'total_amount')) }}
                                     </div>
-                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                        <a href="javascript:void(0)" class="form_btn" name="set" value="Set" onclick="setSchedulePayment();">Set</a>
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2">
+                                        <a href="javascript:void(0)" class="btn btn-primary" name="set" value="Set" onclick="setSchedulePayment();">Set</a>
                                     </div>
-                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                        <a href="javascript:void(0)" class="form_btn" name="schedule_payment" value="Clear All" onclick="cleareSchedulePayment();">Clear All</a>
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2">
+                                        <a href="javascript:void(0)" class="btn btn-primary" name="schedule_payment" value="Clear All" onclick="cleareSchedulePayment();">Clear All</a>
                                     </div>
                                     <div class="fixTableHead mt-3">
                                         <table class="table">
@@ -232,4 +233,24 @@ th {
         </div>
     </div>
 </div>
+@endsection
+
+@section('js-script')
+    <script>
+        $('#product_id').change(function(){
+            var product_id = $('#product_id').val();
+            $.ajax({
+                url: "{{ route('amc_product_detail') }}",
+                type:'POST',
+                data:{
+                        '_token' : $('meta[name="csrf-token"]').attr('content'),
+                        product_id:product_id,
+                },
+                success:function(data) {
+                    // data = JSON.parse(data);
+                    $('#note').val(data.product_description);
+                }
+            });
+        });
+    </script>
 @endsection
