@@ -2,11 +2,12 @@
 <style>
 .fixTableHead {
     overflow-y: auto;
-    height: 150px;
+    height: 250px;
 }
 .fixTableHead thead th {
     position: sticky;
     top: 0;
+    background: #f3f6f9!important;
 }
 table {
     border-collapse: collapse;

@@ -153,7 +153,8 @@
                                             <td data-label="Company">{{ $value->compny }}</td>
                                             <td data-label="Person Name">{{ $value->person_name }}</td>
                                             <td data-label="Due Date">{{ $value->due_date }}</td>
-                                            <td data-label="AMC No">{{ (isset($value->totle_amount) && $value->totle_amount ? $value->totle_amount : 0) - (isset($value->paid_amount) && $value->paid_amount ? $value->paid_amount : 0) }}</td>
+                                            {{-- <td data-label="AMC No">{{ (isset($value->totle_amount) && $value->totle_amount ? $value->totle_amount : 0) - (isset($value->paid_amount) && $value->paid_amount ? $value->paid_amount : 0) }}</td> --}}
+                                            <td data-label="AMC No">{{ $value->due_amount }}</td>
                                             <td data-label="Remain Days">
                                                 @php
                                                     $diff = strtotime($value->due_date) - strtotime(date('Y-m-d'));

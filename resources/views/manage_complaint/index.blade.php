@@ -14,31 +14,31 @@
 
 <!-- CONTAINER -->
 <div class="main-container container-fluid">
-    <div class="row mt-1">
         {!! Form::open(array('route' => 'manage_complaint.index','method'=>'GET')) !!}
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                <div class="form-group">
-                    <strong class="lab_space">Start Date</strong>
-                    {!! Form::select('type', array('all'=>'All','free'=>'Free','complaint'=>'Complaint'),isset($_GET['type']) ? $_GET['type'] : null, array('class' => 'form-select','onchange'=>'this.form.submit()')) !!}
+            <div class="row mt-1">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="form-group">
+                        <strong class="lab_space">Start Date</strong>
+                        {!! Form::select('type', array('all'=>'All','free'=>'Free','complaint'=>'Complaint'),isset($_GET['type']) ? $_GET['type'] : null, array('class' => 'form-select','onchange'=>'this.form.submit()')) !!}
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                <div class="form-group">
-                    <strong class="lab_space">Start Date</strong>
-                    {!! Form::text('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control datepicker')) !!}
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="form-group">
+                        <strong class="lab_space">Start Date</strong>
+                        {!! Form::date('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control')) !!}
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                <div class="form-group">
-                    <strong class="lab_space">End Date</strong>
-                    {!! Form::text('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control datepicker')) !!}
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="form-group">
+                        <strong class="lab_space">End Date</strong>
+                        {!! Form::date('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control')) !!}
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
-                <button type="submit" class="btn btn-primary">Search</button>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
             </div>
         {!! Form::close() !!}
-    </div>
     <!-- Start:: row-2 -->
     <div class="row">
         <div class="col-xl-12">
@@ -46,7 +46,7 @@
                 <div class="card-header">
                     <div class="card-title">
                         @can('manage-complaint-create')
-                            <a class="btn btn-primary" href="{{ Route('manage_complaint.create') }}">
+                            <a class="btn btn-primary btn-block float-end my-2" href="{{ Route('manage_complaint.create') }}">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </a>
                         @endcan
@@ -56,26 +56,26 @@
                     <div id="grid-pagination">
                         <div role="complementary" class="gridjs gridjs-container" style="width: 100%;">
                             <div class="gridjs-wrapper" style="height: auto;">
-                                <table class="gridjs-table">
-                                    <thead>
+                                <table role="grid" class="gridjs-table" style="height: auto;">
+                                    <thead  class="gridjs-thead">
                                         <tr>
-                                            <th>Complaint No</th>
-                                            <th>Complaint Date</th>
-                                            <th>Call Type</th>
-                                            {{-- <th>Party Name</th> --}}
-                                            <th>Contract Person Name</th>
-                                            <th>City</th>
-                                            <th>AMC No</th>
-                                            <th>AMC Type</th>
-                                            {{-- <th>Start Date</th>
-                                            <th>End Date</th> --}}
-                                            <th>Complaint By</th>
-                                            {{-- <th>Complaint By Contact Number</th> --}}
-                                            <th>Priority</th>
-                                            <th>Status</th>
-                                            <th>Handover TO</th>
-                                            <th>Handover Date</th>
-                                            <th>Action</th>
+                                            <th  class="gridjs-th" data-column-id="Complaint No">Complaint No</th>
+                                            <th  class="gridjs-th" data-column-id="Complaint Date">Complaint Date</th>
+                                            <th  class="gridjs-th" data-column-id="Call Type">Call Type</th>
+                                            {{-- <th  class="gridjs-th" data-column-id="">Party Name</th> --}}
+                                            <th  class="gridjs-th" data-column-id="Contract Person Name">Contract Person Name</th>
+                                            <th  class="gridjs-th" data-column-id="City">City</th>
+                                            <th  class="gridjs-th" data-column-id="AMC No">AMC No</th>
+                                            <th  class="gridjs-th" data-column-id="AMC Type">AMC Type</th>
+                                            {{-- <th  class="gridjs-th" data-column-id="Start Date">Start Date</th>
+                                            <th  class="gridjs-th" data-column-id="End Date">End Date</th> --}}
+                                            <th  class="gridjs-th" data-column-id="Complaint By">Complaint By</th>
+                                            {{-- <th  class="gridjs-th" data-column-id="Complaint By Contact Number">Complaint By Contact Number</th> --}}
+                                            <th  class="gridjs-th" data-column-id="Priority">Priority</th>
+                                            <th  class="gridjs-th" data-column-id="Status">Status</th>
+                                            <th  class="gridjs-th" data-column-id="Handover TO">Handover TO</th>
+                                            <th  class="gridjs-th" data-column-id="Handover Date">Handover Date</th>
+                                            <th  class="gridjs-th" data-column-id="Action">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -86,20 +86,20 @@
                                             @foreach ($data as $value)
                                                 @php $i++;  @endphp
                                                 <tr>
-                                                    <td data-label="Complaint No">{{ $value->id }}</td>
-                                                    <td data-label="Complaint Date">{{ \Carbon\Carbon::parse($value->service_date)->format('Y-m-d') }}</td>
-                                                    <td data-label="Call Type">{{ $value->is_free == 1 ? 'Free' : 'Complaint' }}</td>
-                                                    {{-- <td data-label="Party Name">{{ $value->party_name }}</td> --}}
-                                                    <td data-label="Contract Person Name">{{ $value->contact_person_name }}</td>
-                                                    <td data-label="City">{{ $value->city }}</td>
-                                                    <td data-label="AMC No">{{ $value->amc_no }}</td>
-                                                    <td data-label="AMC Type">{{ $value->amc_type }}</td>
-                                                    {{-- <td data-label="Start Date">{{ $value->start_date }}</td>
-                                                    <td data-label="End Date">{{ $value->end_date }}</td> --}}
-                                                    <td data-label="Complaint By">{{ $value->complait_by }}</td>
-                                                    {{-- <td data-label="Complaint By Contact Number">{{ $value->mobile }}</td> --}}
-                                                    <td data-label="Priority">{{ $value->priority }}</td>
-                                                    <td data-label="Status">
+                                                    <td class="gridjs-td" data-column-id="Complaint No">{{ $value->id }}</td>
+                                                    <td class="gridjs-td" data-column-id="Complaint Date">{{ \Carbon\Carbon::parse($value->service_date)->format('Y-m-d') }}</td>
+                                                    <td class="gridjs-td" data-column-id="Call Type">{{ $value->is_free == 1 ? 'Free' : 'Complaint' }}</td>
+                                                    {{-- <td class="gridjs-td" data-column-id="Party Name">{{ $value->party_name }}</td> --}}
+                                                    <td class="gridjs-td" data-column-id="Contract Person Name">{{ $value->contact_person_name }}</td>
+                                                    <td class="gridjs-td" data-column-id="City">{{ $value->city }}</td>
+                                                    <td class="gridjs-td" data-column-id="AMC No">{{ $value->amc_no }}</td>
+                                                    <td class="gridjs-td" data-column-id="AMC Type">{{ $value->amc_type }}</td>
+                                                    {{-- <td class="gridjs-td" data-column-id="Start Date">{{ $value->start_date }}</td>
+                                                    <td class="gridjs-td" data-column-id="End Date">{{ $value->end_date }}</td> --}}
+                                                    <td class="gridjs-td" data-column-id="Complaint By">{{ $value->complait_by }}</td>
+                                                    {{-- <td class="gridjs-td" data-column-id="Complaint By Contact Number">{{ $value->mobile }}</td> --}}
+                                                    <td class="gridjs-td" data-column-id="Priority">{{ $value->priority }}</td>
+                                                    <td class="gridjs-td" data-column-id="Status">
                                                         @if($value->status)
                                                             {{ $value->status }}
                                                             @elseif ($value->handover)
@@ -108,9 +108,9 @@
                                                             Pending
                                                         @endif
                                                     </td>
-                                                    <td data-label="Handover To">{{ $value->handover }}</td>
-                                                    <td data-label="Handover Date">{{ $value->handover_date.' '.$value->handover_time }}</td>
-                                                    <td data-label="Action">
+                                                    <td class="gridjs-td" data-column-id="Handover To">{{ $value->handover }}</td>
+                                                    <td class="gridjs-td" data-column-id="Handover Date">{{ $value->handover_date.' '.$value->handover_time }}</td>
+                                                    <td class="gridjs-td" data-column-id="Action">
                                                         @can('manage-complaint-edit')
                                                             <a class="btn btn-sm btn-icon btn-info-light rounded-circle" href="{{Route('manage_complaint.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                                                         @endcan
