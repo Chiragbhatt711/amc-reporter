@@ -476,6 +476,7 @@ html[data-menu-styles=light] {
 }
 html[data-menu-styles=light][data-nav-layout=vertical] .app-sidebar .main-sidebar-header .header-logo .desktop-logo {
   display: block;
+  width: 50%;
 }
 html[data-menu-styles=light][data-nav-layout=vertical] .app-sidebar .main-sidebar-header .header-logo .desktop-dark,
 html[data-menu-styles=light][data-nav-layout=vertical] .app-sidebar .main-sidebar-header .header-logo .toggle-dark,
