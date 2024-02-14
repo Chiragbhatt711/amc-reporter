@@ -179,6 +179,9 @@ class ExecutiveController extends Controller
         DB::table('model_has_roles')->where('model_id',$id)->delete();
         $role = Role::where('id', $request->input('role_id'))->select('name')->first()->toArray();
         $user->assignRole($role['name']);
+        // $roleId = $request->input('role_id');
+        // $role = Role::find($roleId);
+        // $user->assignRole($role);
 
         return redirect()->route('manage_executive.index')
                         ->with('success','Executive update successfully');

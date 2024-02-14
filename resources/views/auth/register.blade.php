@@ -107,15 +107,19 @@
                                 <div class="mb-3">
                                     <label class="mb-2 fw-500">Create a Password<span class="text-danger ms-1">*</span></label>
                                     <div class="input-group has-validation">
-                                        <input type="password" class="form-control ms-0 border-end-0" placeholder="Create a Password"  id="signup-password"
+                                        <input type="password" name="password" class="form-control ms-0 border-end-0" placeholder="Create a Password"  id="signup-password"
                                             required>
                                         <button class="btn btn-light" onclick="createpassword('signup-password',this)" type="button" id="button-addon2"><i class="ri-eye-off-line align-middle"></i></button>
                                         <div class="invalid-feedback">
                                             Please choose a username.
                                         </div>
+                                        @error('password')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                     </div>
                                 </div>
                             </div>
+
                             {{-- <div class="col-sm-12">
                                 <div class="mb-3">
                                     <label class="mb-2 fw-500">Confirm Password<span class="text-danger ms-1">*</span></label>
