@@ -30,7 +30,7 @@
                         <div class="row mt-1">
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                                 <strong class="lab_space">Inward Date<em class="text-danger">*</em></strong>
-                                {!! Form::text('inward_date', date('Y-m-d'), array('placeholder' => 'Inward date','class' => 'form-control datepicker','id'=>'inward_date')) !!}
+                                {!! Form::date('inward_date', date('Y-m-d'), array('placeholder' => 'Inward date','class' => 'form-control','id'=>'inward_date')) !!}
                                 @error('inward_date')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -60,7 +60,7 @@
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                                 <strong class="lab_space">Qty  <em class="text-danger">*</em></strong>
                                 <div class="d-flex">
-                                    {!! Form::text('qty', 1, ['class' => 'form-control','placeholder' =>'Qty', 'id'=> 'qty','onkeyup'=>'amountCount()' ]) !!}
+                                    {!! Form::text('qty', null, ['class' => 'form-control','placeholder' =>'Qty', 'id'=> 'qty','onkeyup'=>'amountCount()' ]) !!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">

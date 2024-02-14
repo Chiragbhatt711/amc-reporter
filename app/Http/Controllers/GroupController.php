@@ -8,7 +8,7 @@ use App\Models\Group;
 class GroupController extends Controller
 {
 
-    public function create(Request $request)
+    public function createGroup(Request $request)
     {
         $admin_id = admin_id();
         $group = $request->group;

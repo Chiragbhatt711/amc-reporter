@@ -7,7 +7,7 @@ use App\Models\ContractModel;
 
 class ContractModelController extends Controller
 {
-    public function create(Request $request)
+    public function createModel(Request $request)
     {
         $admin_id = admin_id();
         $model = $request->model;

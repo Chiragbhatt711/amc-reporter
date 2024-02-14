@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AmcSchedulePaymentDetail;
 use App\Models\ManageReceipt;
 use Illuminate\Http\Request;
 use App\Models\ManageParty;
@@ -246,26 +247,36 @@ class ManageReceiptController extends Controller
         ->select('manage_amcs.total_amount as total_amount')
         ->get()->toArray();
 
-        $receipt = ManageReceipt::where('amc_id',$amc_no);
-        if($id)
-        {
-            $receipt->where('id','!=',$id);
-        }
-        $receipt = $receipt->select(DB::raw('SUM(amount) as amount'))
-        ->groupBy('manage_receipts.amc_id')
-        ->get()->toArray();
+        // $receipt = ManageReceipt::where('amc_id',$amc_no);
+        // if($id)
+        // {
+        //     $receipt->where('id','!=',$id);
+        // }
+        // $receipt = $receipt->select(DB::raw('SUM(amount) as amount'))
+        // ->groupBy('manage_receipts.amc_id')
+        // ->get()->toArray();
 
-        $dueAmount = 0;
-        if(isset($row[0]['total_amount']))
-        {
-            $dueAmount = $row[0]['total_amount'];
-            if(isset($receipt[0]['amount']))
-            {
-                $dueAmount = $row[0]['total_amount'] - $receipt[0]['amount'];
-            }
-        }
+        // $dueAmount = 0;
+        // if(isset($row[0]['total_amount']))
+        // {
+        //     $dueAmount = $row[0]['total_amount'];
+        //     if(isset($receipt[0]['amount']))
+        //     {
+        //         $dueAmount = $row[0]['total_amount'] - $receipt[0]['amount'];
+        //     }
+        // }
+        $dueAmount = AmcSchedulePaymentDetail::where('amc_id',$amc_no)
+                    ->whereDate('installment_date', '>=', now())
+                    ->orderBy('installment_date','ASC')
+                    ->first();
+
+        $data=[
+            'total_amount' => $row[0]['total_amount'],
+            'due_amount'=> $dueAmount->installment_amount,
+            'installment_date' => $dueAmount->installment_date
+        ];
 
 
-        return $dueAmount;
+        return response()->json($data);
     }
 }
