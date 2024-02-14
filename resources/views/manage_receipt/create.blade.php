@@ -72,6 +72,7 @@
                                 <strong class="lab_space">Due Amount <em class="text-danger">*</em></strong>
                                 {!! Form::text('due_amount', null, array('placeholder' => 'Due Amount' ,'class' => 'form-control','id' => 'due_amount','readonly')) !!}
                                 {!! Form::hidden('total_amount', null, array('id' => 'total_amount')) !!}
+                                <span id="total_amount_text"></span>
                                 @error('due_amount')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -176,8 +177,10 @@ function dueAmount()
                     amc_no:amc_no,
             },
             success:function(data) {
-                $('#due_amount').val(data);
-                $('#total_amount').val(data);
+                $('#due_amount').val(data.due_amount);
+                $('#total_amount').val(data.due_amount);
+                $('#total_amount_text').html('Total amount:-'+data.total_amount);
+                $('#date').val(data.installment_date);
             }
         });
     }

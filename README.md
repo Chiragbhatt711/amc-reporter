@@ -16,3 +16,6 @@ Steps are below:
     php artisan db:seed --class=PermissionTableSeeder
     php artisan db:seed --class=RoleSeeder
     php artisan db:seed --class=CreateAdminSeedereder
+    php artisan db:seed --class=CountrySeeder
+    php artisan db:seed --class=StateSeeder
+    php artisan db:seed --class=CitySeeder

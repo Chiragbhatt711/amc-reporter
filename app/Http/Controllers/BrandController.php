@@ -7,7 +7,7 @@ use App\Models\Brand;
 
 class BrandController extends Controller
 {
-    public function create(Request $request)
+    public function createBrand(Request $request)
     {
         $admin_id = admin_id();
         $brand = $request->brand;
