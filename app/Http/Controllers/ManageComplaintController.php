@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\AmcPeroductDetail;
 use App\Models\ManageSolutionTemplate;
 use App\Models\CallUpdateItem;
+use App\Models\ManageProduct;
 use App\Models\Role;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -284,6 +285,7 @@ class ManageComplaintController extends Controller
             $soluction = ManageSolutionTemplate::where('admin_id',$admin_id)->get()->pluck('title','id')->toArray();
             $executiveRole =Role::where(['admin_id'=>$admin_id,'name'=>'Executive'])->pluck('id')->first();
             $executive = User::where(['admin_id'=>$admin_id,'role_id'=>$executiveRole])->get()->pluck('name','id')->toArray();
+            $product = ManageProduct::where('admin_id',$admin_id)->get()->pluck('product_name','product_name');
             return view('manage_complaint.call_update',compact('data','parties','executive','soluction'));
         }
         else

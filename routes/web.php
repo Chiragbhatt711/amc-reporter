@@ -85,6 +85,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('manage_supplier',SupplierController::class);
     Route::resource('manage_inward',ManageInwardController::class);
     Route::resource('manage_outward',ManageOutwardController::class);
+    Route::resource('brand',BrandController::class);
+    Route::resource('model',ContractModelController::class);
+    Route::resource('group',GroupController::class);
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {

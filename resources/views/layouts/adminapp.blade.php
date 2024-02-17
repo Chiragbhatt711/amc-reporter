@@ -622,6 +622,15 @@
                                         <li class="slide side-menu__label1">
                                             <a href="javascript:void(0);">AMC</a>
                                         </li>
+                                        <li class="slide">
+                                            <a href="{{ route('brand.index') }}" class="side-menu__item">Brand</a>
+                                        </li>
+                                        <li class="slide">
+                                            <a href="{{ route('model.index') }}" class="side-menu__item">Model</a>
+                                        </li>
+                                        <li class="slide">
+                                            <a href="{{ route('group.index') }}" class="side-menu__item">Group</a>
+                                        </li>
                                         @can('contract-type-list')
                                             <li class="slide">
                                                 <a href="{{ route('contract_type.index') }}" class="side-menu__item">Manage AMC Contract Product</a>
