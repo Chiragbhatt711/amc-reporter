@@ -55,7 +55,7 @@
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                                 <div class="form-group">
                                     <strong class="comp_by_mobile_number">Comp.by Contact No<em class="text-danger">*</em></strong>
-                                    {!! Form::text('comp_by_mobile_number', null, array('placeholder' => 'Comp.by Contact No' ,'class' => 'form-control')) !!}
+                                    {!! Form::text('comp_by_mobile_number', null, array('placeholder' => 'Comp.by Contact No' ,'class' => 'form-control','id'=>'comp_by_mobile_number')) !!}
                                     @error('comp_by_mobile_number')
                                     <div class="text-danger">{{ $message }}</div>
                                     @enderror
@@ -146,6 +146,21 @@
       }
 
   });
+
+$('#complaint_by').change(function(){
+      var party = $('#complaint_by').val();
+      $.ajax({
+          url:"{{ route('get_amc_party_details') }}",
+          type:'POST',
+          data:{ '_token' : '<?php echo csrf_token() ?>',
+                  party:party,
+          },
+          success:function(data) {
+            console.log(data);
+            $('#comp_by_mobile_number').val(data.mobile_no);
+          }
+        });
+});
 
   $('#amc_no').change(function(){
       var amc_no = $('#amc_no').val();

@@ -13,5 +13,6 @@ class ManageInward extends Model
         'inward_date',
         'supplier_id',
         'note',
+        'reference_no'
     ];
 }

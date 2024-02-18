@@ -66,7 +66,7 @@
                                                         </a>
                                                         {{ $value->inward_date }}
                                                     </td>
-                                                    <td class="gridjs-td" data-column-id="Reference Bill No">{{ $value->id }}</td>
+                                                    <td class="gridjs-td" data-column-id="Reference Bill No">{{ $value->reference_no }}</td>
                                                     <td class="gridjs-td" data-column-id="Supplier Type">{{ $value->supplier_type }}</td>
                                                     <td class="gridjs-td" data-column-id="Company Name">{{ $value->company_name }}</td>
                                                     <td class="gridjs-td" data-column-id="Person Name">{{ $value->person_name }}</td>

@@ -45,7 +45,8 @@ function getAmcProductDetails($id)
 function callUpdateItems($id)
 {
     $items = CallUpdateItem::where('complaint_id',$id)
-        ->select('item_name','used_qty','rate','amount')
+        ->leftjoin('contract_types','call_update_items.item_name','contract_types.id')
+        ->select('contract_types.product_name as item_name','call_update_items.used_qty','call_update_items.rate','call_update_items.amount')
         ->get();
     return $items;
 }

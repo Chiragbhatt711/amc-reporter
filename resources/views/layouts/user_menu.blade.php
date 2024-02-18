@@ -5,6 +5,11 @@
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="javascript:void(0)"><i class='fa fa-gears'></i>AMC</a>
         <ul class="dropdownMenu">
+            <li class="dropdown-item">
+                <a class="nav-link" href="{{ route('brand.index') }}">
+                    <i class=""></i> Brand
+                </a>
+            </li>
             @can('contract-type-list')
                 <li class="dropdown-item">
                     <a class="nav-link" href="{{ route('contract_type.index') }}">

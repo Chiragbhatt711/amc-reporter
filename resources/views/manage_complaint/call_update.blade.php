@@ -111,9 +111,18 @@
                         <div class="col-xs-1 col-sm-3 col-md-3">
                             <strong class="lab_space">Item Name<em class="text-danger">*</em></strong>
                             <div class="d-flex">
-                                {!! Form::text('item_name', null, ['class' => 'form-control','placeholder' =>'Item Name','id' => 'item_name' ]) !!}
+                                {!! Form::select('item_name', $product , null, ['class' => 'form-select','placeholder' =>'Please Select', 'id'=>'item_name' ]) !!}
                             </div>
                             <div class="text-danger" id="item_name_e"></div>
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-3">
+                            <strong class="lab_space">Attend by  <em class="text-danger">*</em></strong>
+                            <div class="d-flex">
+                                {!! Form::select('attend_by', $executive , null, ['class' => 'form-select','placeholder' =>'Please Select', 'id'=>'attend_by' ]) !!}
+                            </div>
+                            @error('attend_by')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-xs-1 col-sm-3 col-md-2">
                             <strong class="lab_space">Used Qty<em class="text-danger">*</em></strong>

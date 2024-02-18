@@ -65,6 +65,15 @@
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                                <strong class="lab_space">Reference no  <em class="text-danger">*</em></strong>
+                                <div class="d-flex">
+                                    {!! Form::text('reference_no', null, ['class' => 'form-control','placeholder' =>'Reference no', 'id'=> 'reference_no' ]) !!}
+                                </div>
+                                @error('reference_no')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-xs-12 col-sm-12 col-md-12">

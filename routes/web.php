@@ -65,6 +65,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/city-autocomplete','ManagePartyController@cityAutoComplete')->name('city_autocomplete');
     Route::post('/state-autocomplete','ManagePartyController@stateAutoComplete')->name('state_autocomplete');
     Route::post('/country-autocomplete','ManagePartyController@countryAutoComplete')->name('country_autocomplete');
+    Route::post('/get-amc-party-details','ManageComplaintController@getAmcPartyDetails')->name('get_amc_party_details');
 
     Route::resource('amc', AmcController::class);
     Route::resource('roles', RoleController::class);
@@ -85,6 +86,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('manage_supplier',SupplierController::class);
     Route::resource('manage_inward',ManageInwardController::class);
     Route::resource('manage_outward',ManageOutwardController::class);
+    Route::resource('brand',BrandController::class);
+    Route::resource('model',ContractModelController::class);
+    Route::resource('group',GroupController::class);
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {

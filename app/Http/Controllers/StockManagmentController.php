@@ -96,7 +96,10 @@ class StockManagmentController extends Controller
                 ->groupBy('product_id')
                 ->get();
             $value['outward_qty'] = isset($outward[0]->outward_qty) && $outward[0]->outward_qty ? $outward[0]->outward_qty : 0;
-            array_push($mainData,$value);
+            $stockQty = $value['inward_qty'] - $value['outward_qty'];
+            if($value['min_qty'] >= $stockQty){
+                array_push($mainData,$value);
+            }
         }
 
         return view('stock_managment.minimum_item_stock',compact('mainData'));
