@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\AmcPeroductDetail;
 use App\Models\ManageSolutionTemplate;
 use App\Models\CallUpdateItem;
+use App\Models\ContractType;
 use App\Models\ManageProduct;
 use App\Models\Role;
 use Carbon\Carbon;
@@ -285,8 +286,8 @@ class ManageComplaintController extends Controller
             $soluction = ManageSolutionTemplate::where('admin_id',$admin_id)->get()->pluck('title','id')->toArray();
             $executiveRole =Role::where(['admin_id'=>$admin_id,'name'=>'Executive'])->pluck('id')->first();
             $executive = User::where(['admin_id'=>$admin_id,'role_id'=>$executiveRole])->get()->pluck('name','id')->toArray();
-            $product = ManageProduct::where('admin_id',$admin_id)->get()->pluck('product_name','product_name');
-            return view('manage_complaint.call_update',compact('data','parties','executive','soluction'));
+            $product = ContractType::where('admin_id',$admin_id)->get()->pluck('product_name','id');
+            return view('manage_complaint.call_update',compact('data','parties','executive','soluction','product'));
         }
         else
         {
@@ -349,16 +350,18 @@ class ManageComplaintController extends Controller
 
     public function itemAdd(Request $request)
     {
-        $item_name = $request->item_name;
+        $item_id = $request->item_name;
         $used_qty = $request->used_qty;
         $rate = $request->rate;
         $amount = $request->amount;
 
         $uniqId = uniqid();
 
+        $product = ContractType::find($item_id);
+
         $html = '<tr id="row_'.$uniqId.'">
-                    <td>'.$item_name.'
-                        <input type="hidden" value="'.$item_name.'" name="item_name_'.$uniqId.'" id="item_name_'.$uniqId.'">
+                    <td>'.$product->product_name.'
+                        <input type="hidden" value="'.$item_id.'" name="item_name_'.$uniqId.'" id="item_name_'.$uniqId.'">
                     </td>
                     <td>'.$used_qty.'
                         <input type="hidden" value="'.$used_qty.'" name="used_qty_'.$uniqId.'" id="used_qty_'.$uniqId.'">
@@ -447,6 +450,15 @@ class ManageComplaintController extends Controller
         $complaint_id = $request->complaint_id;
 
         $data = ManageComplaintTemplate::find($complaint_id);
+
+        return response()->json($data);
+    }
+
+    public function getAmcPartyDetails(Request $request)
+    {
+        $party = $request->party;
+
+        $data = ManageParty::find($party);
 
         return response()->json($data);
     }

@@ -26,7 +26,7 @@ class ManageInwardController extends Controller
         ->join('suppliers','manage_inwards.supplier_id','=','suppliers.id','LEFT')
         ->join('inward_products','manage_inwards.id','=','inward_products.inward_id','LEFT')
         ->groupBy('manage_inwards.id')
-        ->select('manage_inwards.id','manage_inwards.inward_date','manage_inwards.note','suppliers.person_name','suppliers.company_name','suppliers.supplier_type','suppliers.city',DB::raw('COUNT(inward_products.id) as total_product'),DB::raw('SUM(inward_products.qty) as total_qty'),DB::raw('SUM(inward_products.amount) as total_amount'))
+        ->select('manage_inwards.id','manage_inwards.inward_date','manage_inwards.note','manage_inwards.reference_no','suppliers.person_name','suppliers.company_name','suppliers.supplier_type','suppliers.city',DB::raw('COUNT(inward_products.id) as total_product'),DB::raw('SUM(inward_products.qty) as total_qty'),DB::raw('SUM(inward_products.amount) as total_amount'))
         ->get();
 
         return view('manage_inward.index',compact('inward'));
@@ -53,6 +53,7 @@ class ManageInwardController extends Controller
             'qty' => 'required',
             'rate' => 'required',
             'amount' => 'required',
+            'reference_no' => 'required',
 
         ],[
             'inward_date.required' => 'Please Enter inward date',
@@ -61,6 +62,7 @@ class ManageInwardController extends Controller
             'qty.required' => 'Please enter qty',
             'rate.required' => 'Please enter rate',
             'amount.required' => 'Please enter amount',
+            'reference_no.required' => 'Please enter reference no',
         ]);
         $input = $request->all();
         $admin_id = admin_id();
@@ -70,6 +72,7 @@ class ManageInwardController extends Controller
             'inward_date' => $request->inward_date,
             'supplier_id' => $request->supplier_id,
             'note' => $request->note,
+            'reference_no' => $request->reference_no
         ];
 
         $inward = ManageInward::create($inwardArray);
@@ -117,10 +120,12 @@ class ManageInwardController extends Controller
         $this->validate($request, [
             'inward_date' => 'required',
             'supplier_id' => 'required',
+            'reference_no' => 'required',
 
         ],[
             'inward_date.required' => 'Please Enter inward date',
             'supplier_id.required' => 'Please select supplier',
+            'reference_no' => $request->reference_no
         ]);
 
         $input = $request->all();
@@ -132,6 +137,7 @@ class ManageInwardController extends Controller
             'inward_date' => $request->inward_date,
             'supplier_id' => $request->supplier_id,
             'note' => $request->note,
+            'reference_no' => $request->reference_no
         ];
 
         $inward->update($inwardArray);
