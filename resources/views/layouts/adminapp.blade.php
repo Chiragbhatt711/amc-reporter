@@ -15,7 +15,7 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- FAVICON -->
-        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('dist/assets/images/brand/favicon.ico') }}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.jpeg') }}">
 
         <!-- Main Theme Js -->
         <script src="{{ asset('dist/assets/js/main.js') }}"></script>
