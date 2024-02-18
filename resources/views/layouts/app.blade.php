@@ -12,7 +12,7 @@
     <meta name="keywords" content="amc,amc-reporter,reporter">
 
      <!-- FAVICON -->
-     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('dist/assets/images/brand/favicon.ico') }}">
+     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.jpeg') }}">
 
      <!-- Main Theme Js -->
      <script src="{{ asset('dist/assets/js/authentication-main.js') }}"></script>
