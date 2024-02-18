@@ -569,19 +569,19 @@ html[data-menu-styles=dark][data-theme-mode=light] {
   --menu-prime-color: rgba(255, 255, 255, 0.6);
 }
 html[data-menu-styles=dark][data-theme-mode=light][data-bg-img=bgimg1] {
-  --menu-bg: url("./bg-img1-XKJCWI6N.jpg");
+  --menu-bg: url("./bg-img1.jpg");
 }
 html[data-menu-styles=dark][data-theme-mode=light][data-bg-img=bgimg2] {
-  --menu-bg: url("./bg-img2-U3AF256W.jpg");
+  --menu-bg: url("./bg-img2.jpg");
 }
 html[data-menu-styles=dark][data-theme-mode=light][data-bg-img=bgimg3] {
-  --menu-bg: url("./bg-img3-S4IDUFZF.jpg");
+  --menu-bg: url("./bg-img3.jpg");
 }
 html[data-menu-styles=dark][data-theme-mode=light][data-bg-img=bgimg4] {
-  --menu-bg: url("./bg-img4-XPTII56W.jpg");
+  --menu-bg: url("./bg-img4.jpg");
 }
 html[data-menu-styles=dark][data-theme-mode=light][data-bg-img=bgimg5] {
-  --menu-bg: url("./bg-img5-CYGX2LY6.jpg");
+  --menu-bg: url("./bg-img5.jpg");
 }
 html[data-menu-styles=dark][data-theme-mode=light] .app-sidebar::before,
 html[data-menu-styles=dark][data-theme-mode=light] .main-sidebar-header::before {
@@ -1949,34 +1949,34 @@ html[data-bg-img=bgimg1] .app-sidebar:before {
   z-index: -1;
 }
 html[data-bg-img=bgimg1] {
-  --menu-bg: url("./bg-img1-XKJCWI6N.jpg");
+  --menu-bg: url("./bg-img1.jpg");
 }
 html[data-bg-img=bgimg1][data-menu-styles=transparent][data-theme-mode=dark] {
-  --menu-bg: url("./bg-img1-XKJCWI6N.jpg");
+  --menu-bg: url("./bg-img1.jpg");
 }
 html[data-bg-img=bgimg2] {
-  --menu-bg: url("./bg-img2-U3AF256W.jpg");
+  --menu-bg: url("./bg-img2.jpg");
 }
 html[data-bg-img=bgimg2][data-menu-styles=transparent][data-theme-mode=dark] {
-  --menu-bg: url("./bg-img2-U3AF256W.jpg");
+  --menu-bg: url("./bg-img2.jpg");
 }
 html[data-bg-img=bgimg3] {
-  --menu-bg: url("./bg-img3-S4IDUFZF.jpg");
+  --menu-bg: url("./bg-img3.jpg");
 }
 html[data-bg-img=bgimg3][data-menu-styles=transparent][data-theme-mode=dark] {
-  --menu-bg: url("./bg-img3-S4IDUFZF.jpg");
+  --menu-bg: url("./bg-img3.jpg");
 }
 html[data-bg-img=bgimg4] {
-  --menu-bg: url("./bg-img4-XPTII56W.jpg");
+  --menu-bg: url("./bg-img4.jpg");
 }
 html[data-bg-img=bgimg4][data-menu-styles=transparent][data-theme-mode=dark] {
-  --menu-bg: url("./bg-img4-XPTII56W.jpg");
+  --menu-bg: url("./bg-img4.jpg");
 }
 html[data-bg-img=bgimg5] {
-  --menu-bg: url("./bg-img5-CYGX2LY6.jpg");
+  --menu-bg: url("./bg-img5.jpg");
 }
 html[data-bg-img=bgimg5][data-menu-styles=transparent][data-theme-mode=dark] {
-  --menu-bg: url("./bg-img5-CYGX2LY6.jpg");
+  --menu-bg: url("./bg-img5.jpg");
 }
 [data-nav-style=menu-click][data-toggled=menu-click-closed] .app-sidebar.ps,
 [data-nav-style=menu-hover][data-toggled=menu-hover-closed] .app-sidebar.ps,
@@ -22706,7 +22706,7 @@ list-style6 ul {
   box-shadow: 0 0 0 0.25rem var(--black-1);
 }
 .menu-image .bgimage-input.bg-img1 {
-  background-image: url("./bg-img1-XKJCWI6N.jpg") !important;
+  background-image: url("./bg-img1.jpg") !important;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -22715,7 +22715,7 @@ list-style6 ul {
   background-color: none;
 }
 .menu-image .bgimage-input.bg-img2 {
-  background-image: url("./bg-img2-U3AF256W.jpg") !important;
+  background-image: url("./bg-img2.jpg") !important;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -22724,7 +22724,7 @@ list-style6 ul {
   background-color: none;
 }
 .menu-image .bgimage-input.bg-img3 {
-  background-image: url("./bg-img3-S4IDUFZF.jpg") !important;
+  background-image: url("./bg-img3.jpg") !important;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -22733,7 +22733,7 @@ list-style6 ul {
   background-color: none;
 }
 .menu-image .bgimage-input.bg-img4 {
-  background-image: url("./bg-img4-XPTII56W.jpg") !important;
+  background-image: url("./bg-img4.jpg") !important;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -22742,7 +22742,7 @@ list-style6 ul {
   background-color: none;
 }
 .menu-image .bgimage-input.bg-img5 {
-  background-image: url("./bg-img5-CYGX2LY6.jpg") !important;
+  background-image: url("./bg-img5.jpg") !important;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
