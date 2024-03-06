@@ -80,6 +80,7 @@
                                                 @can('manage-amc-delete')
                                                     <a class="btn btn-sm btn-icon btn-secondary-light rounded-circle" onclick="deleteFunction( '{{ $value->id }}')"> <i class="bi bi-trash" aria-hidden="true"></i> </a>
                                                 @endcan
+                                                <a class="btn btn-sm btn-icon btn-secondary-light rounded-circle" href="{{Route('manage_amc.show',$value->id)}}"> <i class="bi bi-printer" aria-hidden="true"></i> </a>
                                             </td>
                                         </tr>
                                         <tr class="child_row_{{ $value->id }}" style="display: none">
