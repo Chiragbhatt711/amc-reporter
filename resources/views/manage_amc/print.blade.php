@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>file_1709746061467</title>
+    <title>AMC Reporter</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
         /* Add any additional styles here */
@@ -71,33 +71,33 @@
     <table class="table table-bordered" style="margin-left: 5.9125pt">
         <tr style="height: 43pt">
             <td class="col-2" rowspan="3"><p class="s1">Logo</p></td>
-            <td class="col-8" colspan="7"><p class="s2 text-center">Company Name</p></td>
+            <td class="col-8" colspan="7"><p class="s2 text-center">{{ $manageAmc->party_name }}</p></td>
         </tr>
         <tr style="height: 19pt">
-            <td class="col-8" colspan="7"><p class="s3 text-center">Address Line 1</p></td>
+            <td class="col-8" colspan="7"><p class="s3 text-center">{{ $manageAmc->address }}</p></td>
         </tr>
         <tr style="height: 20pt">
-            <td class="col-8" colspan="7"><p class="s4 text-center">Address Line 2</p></td>
+            <td class="col-8" colspan="7"><p class="s4 text-center">{{ $manageAmc->city.', '.$manageAmc->state.', '.$manageAmc->country.', '.$manageAmc->pincode }}</p></td>
         </tr>
-        <tr style="height: 19pt">
+        <tr >
             <td class="col-12" colspan="8"><p class="s5 text-center">Annual Maintenance Contract</p></td>
         </tr>
         <tr style="height: 74pt">
             <td class="col-7" colspan="3">
-                <p class="s5">Party Name:</p>
-                <p class="s5">Person Name:</p>
-                <p class="s5">Contact Number:</p>
-                <p class="s5">Site Address:</p>
+                <p class="s5">Party Name: {{ $manageAmc->party_name }}</p>
+                <p class="s5">Person Name: {{ $manageAmc->person_name }}</p>
+                <p class="s5">Contact Number: {{ $manageAmc->mobile_no }}</p>
+                <p class="s5">Site Address: {{ $manageAmc->address }}</p>
             </td>
-            <td class="col-2" colspan="5" bgcolor="#E4E4E4">
-                <p class="s5">AMC No.:</p>
-                <p class="s5">Start Date:</p>
-                <p class="s5">End Date:</p>
+            <td class="col-2" colspan="5" style="background-color:#E4E4E4;">
+                <p class="s5">AMC No.: {{ $manageAmc->id }}</p>
+                <p class="s5">Start Date: {{ $manageAmc->start_date }}</p>
+                <p class="s5">End Date: {{ $manageAmc->end_date }}</p>
             </td>
         </tr>
-        <tr style="height: 28pt">
+        {{-- <tr style="height: 28pt">
             <td class="col-12" colspan="8"><p class="text-center"><br/></p></td>
-        </tr>
+        </tr> --}}
         <tr style="height: 27pt">
             <td class="col-2"><p class="s5 text-left">Sr No.</p></td>
             <td class="col-4" colspan="2"><p class="s5 text-left">Service Name</p></td>
@@ -114,9 +114,9 @@
             <td class="col-1"></td>
             <td class="col-2" colspan="2"></td>
         </tr>
-        <tr style="height: 23pt">
+        {{-- <tr style="height: 23pt">
             <td class="col-12" colspan="8"><p class="text-left"><br/></p></td>
-        </tr>
+        </tr> --}}
         <!-- Add more table rows as needed -->
 
         <tr style="height: 14pt">
@@ -130,9 +130,9 @@
             <td class="col-2"><p class="s5 text-left">Total Amount</p></td>
             <td class="col-1" colspan="4"></td>
         </tr>
-        <tr style="height: 12pt">
+        {{-- <tr style="height: 12pt">
             <td class="col-12" colspan="7"><p class="text-left"><br/></p></td>
-        </tr>
+        </tr> --}}
         <tr style="height: 144pt">
             <td class="col-12" colspan="7"><p class="s5 text-left">Terms & Conditions:</p></td>
         </tr>
@@ -145,22 +145,31 @@
             <td colspan="2"><p >Installment Date</p></td>
             <td colspan="6" class="col-3"><p >Installment Amount</p></td>
         </tr>
-        <tr>
-            <td colspan="2"><p ></p></td>
-            <td colspan="6" class="col-3"><p ></p></td>
+        @foreach ($payment as $value)
+            <tr>
+                <td colspan="2"><p >{{ date('Y-m-d',strtotime($value->installment_date)) }}</p></td>
+                <td colspan="6" class="col-3"><p >{{ $value->installment_amount }}</p></td>
+            </tr>
+        @endforeach
+        <tr style="height: 30pt">
+            <td class="col-2" colspan="8"><p class="s5 text-left">Service Details:</p></td>
         </tr>
         <tr>
             <td class="col-2" colspan="2"><p class="s4 text-left">Free Service No</p></td>
-            <td class="col-2" colspan=""><p class="s4 text-left">Free Service Date</p></td>
-            <td class="col-2" colspan="2"><p class="s4 text-left">Free Service No</p></td>
-            <td class="col-2" colspan="2"><p class="s4 text-left">Free Service Date</p></td>
+            <td class="col-2" colspan="6"><p class="s4 text-left">Free Service Date</p></td>
+            {{-- <td class="col-2" colspan="2"><p class="s4 text-left">Free Service No</p></td>
+            <td class="col-2" colspan="2"><p class="s4 text-left">Free Service Date</p></td> --}}
         </tr>
-        <tr>
-            <td class="col-2" colspan="2"><p class="s4 text-left"></p></td>
-            <td class="col-2" colspan=""><p class="s4 text-left"></p></td>
-            <td class="col-2" colspan="2"><p class="s4 text-left"></p></td>
-            <td class="col-2" colspan="2"><p class="s4 text-left"></p></td>
-        </tr>
+        @php $count = 0; @endphp
+        @foreach ($service as $data )
+        @php $count++; @endphp
+            <tr>
+                <td class="col-2" colspan="2"><p class="s4 text-left">{{ date('Y-m-d',strtotime($data->service_date)) }}</p></td>
+                <td class="col-2" colspan="6"><p class="s4 text-left">{{$count.' Free Service'}}</p></td>
+                {{-- <td class="col-2" colspan="2"><p class="s4 text-left"></p></td>
+                <td class="col-2" colspan="2"><p class="s4 text-left"></p></td> --}}
+            </tr>
+        @endforeach
         <tr >
             <td class="col-4" colspan="8">
                 <p class="s4 text-right" style="display:inline-block; text-align:right;margin-top: 50px; border-top: 1px solid;">Customer Name</p>
