@@ -102,5 +102,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('/dashboard','Admin\HomeController@index')->name('dashboard');
         Route::get('/logout','Admin\LoginController@logout')->name('logout');
         Route::resource('users', Admin\UserController::class);
+        Route::resource('license', Admin\LicenseKeyController::class);
     });
 });

@@ -25,7 +25,7 @@ class UserController extends Controller
         $users = User::orderBy('users.id','ASC')->where(['users.admin_id'=>$admin_id,'role_id'=>2])
             ->join('roles','users.role_id','=','roles.id')
             ->select('users.*','roles.name as role')
-            ->get();
+            ->paginate(10);
 
         return view('admin.users.index',compact('users'));
     }

@@ -2,7 +2,7 @@
 @section('content')
 <!-- PAGE-HEADER -->
 <div class="page-header d-flex align-items-center justify-content-between border-bottom mb-4">
-    <h1 class="page-title">Users</h1>
+    <h1 class="page-title">License Management</h1>
     {{-- <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
@@ -20,7 +20,7 @@
             <div class="card custom-card">
                 <div class="card-header">
                     <div class="card-title">
-                        <a class="btn btn-primary btn-block float-end my-2" href="{{ Route('admin.users.create') }}">
+                        <a class="btn btn-primary btn-block float-end my-2" onclick="addNewLicense()">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -33,37 +33,28 @@
                                     <thead  class="gridjs-thead">
                                         <tr>
                                             <th  class="gridjs-th" data-column-id="No">No</th>
-                                            <th  class="gridjs-th" data-column-id="Name">Name</th>
-                                            <th  class="gridjs-th" data-column-id="Email">Email</th>
-                                            <th  class="gridjs-th" data-column-id="Mobile No">Mobile No</th>
-                                            <th  class="gridjs-th" data-column-id="Role">Role</th>
-                                            <th  class="gridjs-th" data-column-id="Action">Action</th>
+                                            <th  class="gridjs-th" data-column-id="Key">Key</th>
+                                            <th  class="gridjs-th" data-column-id="Time Period">Time Period</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if(isset($users) && $users)
+                                        @if(isset($data) && $data)
                                             @php
                                                 $i = 0;
                                             @endphp
-                                            @foreach ($users as $value)
+                                            @foreach ($data as $value)
                                                 @php $i++;  @endphp
                                                 <tr>
                                                     <td class="gridjs-td" data-column-id="No">{{ $i }}</td>
-                                                    <td class="gridjs-td" data-column-id="Name">{{ $value->name }}</td>
-                                                    <td class="gridjs-td" data-column-id="Email">{{ $value->email }}</td>
-                                                    <td class="gridjs-td" data-column-id="Mobile No">{{ $value->mobile_number }}</td>
-                                                    <td class="gridjs-td" data-column-id="Role">{{ $value->role }}</td>
-                                                    <td class="gridjs-td" data-column-id="Action">
-                                                        <a class="btn btn-sm btn-icon btn-info-light rounded-circle" href="{{Route('admin.users.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
-                                                        <a class="btn btn-sm btn-icon btn-secondary-light rounded-circle" onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
-                                                    </td>
+                                                    <td class="gridjs-td" data-column-id="Key">{{ $value->key }}</td>
+                                                    <td class="gridjs-td" data-column-id="Time Period">{{ $value->valid_day }} Days</td>
                                                 </tr>
                                             @endforeach
                                         @endif
                                     </tbody>
                                 </table>
                                 <div class="mt-3">
-                                    {{ $users->links() }}
+                                    {{ $data->links() }}
                                 </div>
                             </div>
                         </div>
@@ -74,7 +65,7 @@
     </div>
 </div>
 
-<div class="modal" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="addNewLicenseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -82,13 +73,25 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Are sure want to delete</p>
+                <div class="row mt-1">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                            <strong class="valid_day">Time Period<em class="text-danger">*</em></strong>
+                            <select name="valid_day" id="valid_day">
+                                <option value="">Please select plan</option>
+                                <option value="28">1 Month (28 days)</option>
+                                <option value="84">3 Month (84 days)</option>
+                                <option value="180">6 Month (180 days)</option>
+                                <option value="365">1 Year (365 days)</option>
+                            </select>
+                            <div class="text-danger" id="valid_day_error"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn_tile" data-bs-dismiss="modal">Cancel</button>
-                {!! Form::open(['method' => 'DELETE','style'=>'display:inline','id'=>'deleteForm']) !!}
-                    <input type="submit" class="btn btn-primary" value="Delete">
-                {!! Form::close() !!}
+                <button type="button" class="btn btn_tile" onclick="submit()">Submit</button>
             </div>
         </div>
     </div>
@@ -98,9 +101,27 @@
 
 @section('js-script')
 <script>
-    function deleteFunction(id){
-        $('#deleteForm').attr('action','{{ url("admin/users") }}'+ '/'+id);
-        $('#deleteModal').modal('show');
+    function addNewLicense(){
+        $('#addNewLicenseModal').modal('show');
+    }
+
+    function submit(){
+        $('#valid_day_error').html('');
+        if($('#valid_day').val() == "") {
+            $('#valid_day_error').html('Please select plan');
+        } else {
+            $.ajax({
+                url: "{{ route('admin.license.store') }}",
+                type:'POST',
+                data:{
+                        '_token' : $('meta[name="csrf-token"]').attr('content'),
+                        valid_day:$('#valid_day').val(),
+                },
+                success:function(data) {
+                    location.reload();
+                }
+            });
+        }
     }
 </script>
 @endsection
