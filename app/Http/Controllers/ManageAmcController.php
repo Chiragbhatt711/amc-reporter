@@ -205,7 +205,7 @@ class ManageAmcController extends Controller
         $manageAmc = ManageAmc::where(['manage_amcs.admin_id'=>$admin_id,'manage_amcs.id'=>$id])
             ->join('manage_parties','manage_amcs.party_id','manage_parties.id')
             ->join('manage_taxes','manage_amcs.tax','manage_taxes.id')
-            ->select('manage_amcs.id as id','manage_amcs.amc_type as amc_type','manage_amcs.start_date as start_date','manage_amcs.end_date as end_date','manage_amcs.contract_amount as contract_amount','manage_parties.party_name as party_name','manage_parties.contact_person_name as person_name','manage_parties.address','manage_parties.city as city','manage_parties.state','manage_parties.country','manage_parties.pincode','manage_parties.mobile_no as mobile_no','manage_taxes.tax_lable_name as tax')
+            ->select('manage_amcs.id as id','manage_amcs.amc_type as amc_type','manage_amcs.start_date as start_date','manage_amcs.end_date as end_date','manage_amcs.contract_amount as contract_amount','manage_amcs.total_amount','manage_parties.party_name as party_name','manage_parties.contact_person_name as person_name','manage_parties.address','manage_parties.city as city','manage_parties.state','manage_parties.country','manage_parties.pincode','manage_parties.mobile_no as mobile_no','manage_taxes.tax_lable_name as tax')
             ->first();
         $service = ManageComplaint::where(['amc_no'=>$id,'is_free'=>'1'])->get();
         $payment = AmcSchedulePaymentDetail::where('amc_id',$id)->get();

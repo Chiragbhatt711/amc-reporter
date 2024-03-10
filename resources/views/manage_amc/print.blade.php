@@ -63,6 +63,11 @@
             vertical-align: top;
             overflow: visible;
         }
+        @media print {
+            body {
+                margin: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -106,14 +111,25 @@
             <td class="col-1"><p class="s5 text-left">GST %</p></td>
             <td class="col-2" colspan="2"><p class="s5 text-left">Amount</p></td>
         </tr>
-        <tr style="height: 14pt">
-            <td class="col-2"></td>
-            <td class="col-4"colspan="2"></td>
-            <td class="col-1"></td>
-            <td class="col-1"></td>
-            <td class="col-1"></td>
-            <td class="col-2" colspan="2"></td>
-        </tr>
+        @php
+            $product = getAmcProductDetails($manageAmc->id);
+            $srNo=0;
+        @endphp
+        @if(isset($product) && $product)
+            @foreach ($product as $data)
+                @php
+                    $srNo++;
+                @endphp
+                <tr style="height: 14pt">
+                    <td class="col-2">{{ $srNo }}</td>
+                    <td class="col-4"colspan="2">{{ $data->product_name }}</td>
+                    <td class="col-1">{{ $data->qty }}</td>
+                    <td class="col-1">{{ $manageAmc->contract_amount }}</td>
+                    <td class="col-1">{{ $manageAmc->tax }}</td>
+                    <td class="col-2" colspan="2">{{ $manageAmc->total_amount }}</td>
+                </tr>
+            @endforeach
+        @endif
         {{-- <tr style="height: 23pt">
             <td class="col-12" colspan="8"><p class="text-left"><br/></p></td>
         </tr> --}}
@@ -121,14 +137,14 @@
 
         <tr style="height: 14pt">
             <td class="col-8" colspan="3"></td>
-            <td class="col-2"><p class="s4 text-left">GST Amount</p></td>
-            <td class="col-1" colspan="4"></td>
+            <td class="col-2"><p class="s5 text-left">GST Amount</p></td>
+            <td class="col-1" colspan="4">{{ $manageAmc->total_amount - $manageAmc->contract_amount }}</td>
         </tr>
         <tr style="height: 14pt">
             <td class="col-4" colspan="2"></td>
             <td class="col-2"></td>
             <td class="col-2"><p class="s5 text-left">Total Amount</p></td>
-            <td class="col-1" colspan="4"></td>
+            <td class="col-1" colspan="4">{{ $manageAmc->total_amount }}</td>
         </tr>
         {{-- <tr style="height: 12pt">
             <td class="col-12" colspan="7"><p class="text-left"><br/></p></td>
@@ -142,8 +158,8 @@
             <td class="col-2" colspan="8"><p class="s5 text-left">Installment Details:</p></td>
         </tr>
         <tr>
-            <td colspan="2"><p >Installment Date</p></td>
-            <td colspan="6" class="col-3"><p >Installment Amount</p></td>
+            <td colspan="2"><p class="s5 text-left">Installment Date</p></td>
+            <td colspan="6" class="col-3"><p class="s5 text-left">Installment Amount</p></td>
         </tr>
         @foreach ($payment as $value)
             <tr>
@@ -171,10 +187,10 @@
             </tr>
         @endforeach
         <tr >
-            <td class="col-4" colspan="8">
+            <td class="col-12" colspan="8">
                 <p class="s4 text-right" style="display:inline-block; text-align:right;margin-top: 50px; border-top: 1px solid;">Customer Name</p>
-                <span style="display:inline-block; width:80%;"></span>
-                <p class="s4 text-left" style="display:inline-block; text-align:left;margin-top: 50px; border-top: 1px solid;">Company Name</p>
+                <span style="display:inline-block; width:59%;"></span>
+                <p class="s4 text-left" style="display:inline-block;  border-top: 1px solid;">Company Name</p>
             </td>
         </tr>
     </table>
