@@ -5,9 +5,11 @@ use App\Models\ManageAmc;
 use App\Models\AmcPeroductDetail;
 use App\Models\CallUpdateItem;
 use App\Models\InwardProduct;
+use App\Models\LicenseKey;
 use App\Models\ManageReceipt;
 use App\Models\OutwardProduct;
 use App\Models\User;
+use Carbon\Carbon;
 
 if(!function_exists('admin_id'))
 {
@@ -116,6 +118,32 @@ if(!function_exists('totalSubscriptions'))
     {
         $total = User::where('role_id',2)->count();
         return $total;
+    }
+}
+
+if(!function_exists('checkLicenseActivate'))
+{
+    function checkLicenseActivate()
+    {
+        $adminId = admin_id();
+        $isActivate=0;
+        if($adminId){
+            $admin = User::find($adminId);
+            $licenseKey = $admin->license_key;
+            if($licenseKey) {
+                $license = LicenseKey::where('key',$licenseKey)->first();
+                if($license) {
+                    $currentDate = Carbon::now()->toDateTimeString();
+                    $isActivate = 1;
+                } else {
+                    $isActivate=0;
+                }
+            } else {
+                $isActivate=0;
+            }
+
+        }
+        return $isActivate;
     }
 }
 

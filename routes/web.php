@@ -103,5 +103,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('/logout','Admin\LoginController@logout')->name('logout');
         Route::resource('users', Admin\UserController::class);
         Route::resource('license', Admin\LicenseKeyController::class);
+        Route::resource('plans', Admin\LicenseKeyController::class);
     });
 });

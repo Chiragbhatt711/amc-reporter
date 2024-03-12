@@ -598,6 +598,25 @@
             </div>
         </div>
 
+        <!-- MODAL EFFECTS -->
+        <div class="modal fade" id="modaldemo8">
+            <div class="modal-dialog modal-dialog-centered text-center" role="document">
+                <div class="modal-content modal-content-demo">
+                    <div class="modal-header">
+                        <h6 class="modal-title">License Update</h6><button aria-label="Close" class="btn-close"
+                            data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input id="licenseKeyField" type="text" class="form-control" maxlength="19" placeholder="License Key" value=""></input>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary">Submit</button> <button class="btn btn-light"
+                            data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- FOOTER -->
         <footer class="footer">
             <div class="container">
@@ -651,6 +670,66 @@
         <script src="{{ asset('assets/datepicker/bootstrap-datepicker.min.js') }}"></script>
 
         <script src="{{ asset('js/app.js') }}"></script>
+        <script>
+            $(document).ready(function() {
+                var inputField = $("#licenseKeyField");
+
+                inputField.on("input", function() {
+                var enteredNum = $(this).val().split('-').join('');
+                // console.log(enteredNum);
+                var enteredNumLength = enteredNum.length;
+                inputField.val(enteredNum);
+
+                var fieldValue = [];
+
+                function resetFieldValue(fieldValue) {
+                    // console.log(fieldValue);
+                    var newValue = fieldValue.join('-');
+                    inputField.val(newValue);
+                }
+
+                if (enteredNumLength == 16) {
+                    fieldValue[0] = enteredNum.substring(0, 4);
+                    fieldValue[1] = enteredNum.substring(4, 8);
+                    fieldValue[2] = enteredNum.substring(8, 12);
+                    fieldValue[3] = enteredNum.substring(12, 16);
+
+                    resetFieldValue(fieldValue);
+                } else if (enteredNumLength > 12) {
+                    fieldValue[0] = enteredNum.substring(0, 4);
+                    fieldValue[1] = enteredNum.substring(4, 8);
+                    fieldValue[2] = enteredNum.substring(8, 12);
+                    fieldValue[3] = enteredNum.substring(12, enteredNumLength);
+
+                    resetFieldValue(fieldValue);
+                } else if (enteredNumLength == 12) {
+                    fieldValue[0] = enteredNum.substring(0, 4);
+                    fieldValue[1] = enteredNum.substring(4, 8);
+                    fieldValue[2] = enteredNum.substring(8, 12);
+
+                    resetFieldValue(fieldValue);
+                } else if (enteredNumLength > 8) {
+                    fieldValue[0] = enteredNum.substring(0, 4);
+                    fieldValue[1] = enteredNum.substring(4, 8);
+                    fieldValue[2] = enteredNum.substring(8, enteredNumLength);
+
+                    resetFieldValue(fieldValue);
+                } else if (enteredNumLength == 8) {
+                    fieldValue[0] = enteredNum.substring(0, 4);
+                    fieldValue[1] = enteredNum.substring(4, 8);
+
+                    resetFieldValue(fieldValue);
+                } else if (enteredNumLength > 0) {
+                    fieldValue[0] = enteredNum.substring(0, 4);
+                    fieldValue[1] = enteredNum.substring(4, enteredNumLength);
+
+                    resetFieldValue(fieldValue);
+                } else {
+                    return;
+                }
+                });
+            });
+        </script>
         @yield('js-script')
     </body>
 </html>
