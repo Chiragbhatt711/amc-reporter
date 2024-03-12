@@ -7,6 +7,7 @@ use App\Models\CallUpdateItem;
 use App\Models\InwardProduct;
 use App\Models\ManageReceipt;
 use App\Models\OutwardProduct;
+use App\Models\User;
 
 if(!function_exists('admin_id'))
 {
@@ -106,6 +107,15 @@ if(!function_exists('getOutwardProductDetails'))
             ->groupBy('outward_products.product_id')
             ->get();
         return $product;
+    }
+}
+
+if(!function_exists('totalSubscriptions'))
+{
+    function totalSubscriptions()
+    {
+        $total = User::where('role_id',2)->count();
+        return $total;
     }
 }
 
