@@ -603,15 +603,19 @@
             <div class="modal-dialog modal-dialog-centered text-center" role="document">
                 <div class="modal-content modal-content-demo">
                     <div class="modal-header">
-                        <h6 class="modal-title">License Update</h6><button aria-label="Close" class="btn-close"
-                            data-bs-dismiss="modal"></button>
+                        <h6 class="modal-title">License Update</h6>
+                        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-                    <div class="modal-body">
-                        <input id="licenseKeyField" type="text" class="form-control" maxlength="19" placeholder="License Key" value=""></input>
+                    <div class="modal-body text-center d-flex align-items-center justify-content-center">
+                        <input type="hidden" name="license_submit" id="license_submit" value="{{ route('license_verify') }}">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <label class="lab_space">License Key</label>
+                            <input id="licenseKeyField" type="text" class="form-control" maxlength="19" placeholder="License Key" value=""></input>
+                            <span class="text-danger" id="licenseKeyE"></span>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-primary">Submit</button> <button class="btn btn-light"
-                            data-bs-dismiss="modal">Close</button>
+                        <button id="licenseSubmitBtn" onclick="licenseSubmit()" class="btn btn-primary">Submit</button> <button class="btn btn-light" .data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>

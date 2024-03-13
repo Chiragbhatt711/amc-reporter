@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\AmcScheduleServiceDetail;
+use App\Models\LicenseKey;
 use Illuminate\Http\Request;
 use App\Models\ManageAmc;
 use App\Models\ManageComplaint;
 use App\Models\ManageOutward;
 use App\Models\ManageProduct;
 use App\Models\OutwardProduct;
+use App\Models\User;
 use Carbon\Carbon;
 use DB;
 
@@ -182,5 +184,22 @@ class HomeController extends Controller
             ->get();
 
         return view('stock_dashboard',compact('stockSummary','OutWard','day'));
+    }
+
+    public function licenseVerify(Request $request)
+    {
+        $key = $request->licenseKeyField;
+        $licenseData = LicenseKey::where('key',$key)->first();
+        if($licenseData){
+            if($licenseData->activate_date == ""){
+                $licenseData->update(['activate_date'=>Carbon::now()->toDateTimeString()]);
+            }
+            $userUpdate = User::find(auth()->user()->id);
+            $userUpdate->update(['license_key'=>$key]);
+
+            return response()->json(['success'=>'Licess activate successfully']);
+        } else {
+            return response()->json(['error'=>'Invalide license key']);
+        }
     }
 }

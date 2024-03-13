@@ -396,4 +396,28 @@ $('.yearpicker').datepicker({
     minViewMode: 'year',
 });
 
-
+function licenseSubmit(){
+    $('#licenseKeyE').html();
+    var licenseKeyField = $('#licenseKeyField').val();
+    var url = $('#license_submit').val();
+    if(licenseKeyField){
+        $.ajax({
+            url: url,
+            type:'POST',
+            data:{
+                    '_token' : $('meta[name="csrf-token"]').attr('content'),
+                    licenseKeyField:licenseKeyField,
+            },
+            success:function(data) {
+                if(data.error){
+                    $('#licenseKeyE').html(data.error);
+                } else {
+                    $('#modaldemo8').modal('hide');
+                    location.reload();
+                }
+            }
+        });
+    } else {
+        $('#licenseKeyE').html('Please enter license key');
+    }
+}
