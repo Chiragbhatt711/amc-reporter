@@ -265,12 +265,21 @@
             <!-- End::slide -->
         @endcanany
 
-        @if (auth()->user()->id == admin_id() && !checkLicenseActivate())
+        @if (auth()->user()->id == admin_id())
+            @if (!checkLicenseActivate())
+                <li class="slide">
+                    <a data-bs-effect="effect-rotate-left" data-bs-toggle="modal"
+                    href="#modaldemo8" class="modal-effect side-menu__item">
+                        <i class="bi bi-key-fill side-menu__icon" style="height:26px;width:26px;color: #00a5a2;"></i>
+                        <span class="side-menu__label">License Activate</span>
+                    </a>
+                </li>
+            @endif
             <li class="slide">
-                <a data-bs-effect="effect-rotate-left" data-bs-toggle="modal"
-                href="#modaldemo8" class="modal-effect side-menu__item">
-                    <i class="bi bi-key-fill side-menu__icon" style="height:26px;width:26px;color: #00a5a2;"></i>
-                    <span class="side-menu__label">License Activate</span>
+                <a data-bs-effect="effect-rotate-left"
+                href="{{ route('setting.index') }}" class="modal-effect side-menu__item">
+                    <i class="bi bi-gear side-menu__icon" style="height:26px;width:26px;color: #00a5a2;"></i>
+                    <span class="side-menu__label">General Settings</span>
                 </a>
             </li>
         @endif

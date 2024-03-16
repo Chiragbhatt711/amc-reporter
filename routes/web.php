@@ -90,6 +90,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('brand',BrandController::class);
     Route::resource('model',ContractModelController::class);
     Route::resource('group',GroupController::class);
+    Route::resource('setting',SettingController::class);
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
