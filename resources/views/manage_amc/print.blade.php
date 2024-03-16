@@ -75,7 +75,15 @@
 <div class="container">
     <table class="table table-bordered" style="margin-left: 5.9125pt">
         <tr style="height: 43pt">
-            <td class="col-2" rowspan="3"><p class="s1">Logo</p></td>
+            <td class="col-2" rowspan="3">
+                <p class="s1">
+                    @if (isset($setting) && $setting->logo && File::exists(str_replace('\\', '/', base_path('public\logo_img/' . $setting->logo))))
+                        <div class="mt-3">
+                            <img style="height: 165px;" src="{{ asset('logo_img/' . $setting->logo) }}" alt="Logo">
+                        </div>
+                    @endif
+                </p>
+            </td>
             <td class="col-8" colspan="7"><p class="s2 text-center">{{ $manageAmc->party_name }}</p></td>
         </tr>
         <tr style="height: 19pt">

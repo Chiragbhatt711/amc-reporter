@@ -11,6 +11,7 @@ use App\Models\AmcPeroductDetail;
 use App\Models\AmcSchedulePaymentDetail;
 use App\Models\AmcScheduleServiceDetail;
 use App\Models\ManageComplaint;
+use App\Models\Setting;
 use Carbon\Carbon;
 use DB;
 
@@ -209,8 +210,9 @@ class ManageAmcController extends Controller
             ->first();
         $service = ManageComplaint::where(['amc_no'=>$id,'is_free'=>'1'])->get();
         $payment = AmcSchedulePaymentDetail::where('amc_id',$id)->get();
+        $setting = Setting::where('admin_id',$admin_id)->first();
         // dd($manageAmc);
-        return view('manage_amc.print',compact('manageAmc','service','payment'));
+        return view('manage_amc.print',compact('manageAmc','service','payment','setting'));
     }
 
     /**

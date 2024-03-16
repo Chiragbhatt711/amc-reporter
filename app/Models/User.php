@@ -28,7 +28,8 @@ class User extends Authenticatable
         'mobile_number',
         'admin_id',
         'role_id',
-        'is_active'
+        'is_active',
+        'license_key'
     ];
 
     /**

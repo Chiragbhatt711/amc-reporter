@@ -66,6 +66,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/state-autocomplete','ManagePartyController@stateAutoComplete')->name('state_autocomplete');
     Route::post('/country-autocomplete','ManagePartyController@countryAutoComplete')->name('country_autocomplete');
     Route::post('/get-amc-party-details','ManageComplaintController@getAmcPartyDetails')->name('get_amc_party_details');
+    Route::post('/license-verify','HomeController@licenseVerify')->name('license_verify');
 
     Route::resource('amc', AmcController::class);
     Route::resource('roles', RoleController::class);
@@ -89,6 +90,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('brand',BrandController::class);
     Route::resource('model',ContractModelController::class);
     Route::resource('group',GroupController::class);
+    Route::resource('setting',SettingController::class);
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
@@ -103,5 +105,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('/logout','Admin\LoginController@logout')->name('logout');
         Route::resource('users', Admin\UserController::class);
         Route::resource('license', Admin\LicenseKeyController::class);
+        Route::resource('plans', Admin\LicenseKeyController::class);
     });
 });
