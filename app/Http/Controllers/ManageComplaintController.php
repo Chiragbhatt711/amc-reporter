@@ -27,6 +27,8 @@ class ManageComplaintController extends Controller
          $this->middleware('permission:manage-complaint-delete', ['only' => ['destroy']]);
          $this->middleware('permission:call-register-list', ['only' => ['callRegister']]);
          $this->middleware('permission:complaint-summary-list', ['only' => ['complaintSummary']]);
+
+         $this->middleware('license_validation')->only('create','store','edit','update','destroy');
     }
     /**
      * Display a listing of the resource.

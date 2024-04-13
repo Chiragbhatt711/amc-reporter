@@ -133,8 +133,14 @@ if(!function_exists('checkLicenseActivate'))
             if($licenseKey) {
                 $license = LicenseKey::where('key',$licenseKey)->first();
                 if($license) {
+                    $activateDate = Carbon::parse($license->activate_date);
                     $currentDate = Carbon::now()->toDateTimeString();
-                    $isActivate = 1;
+                    $diffInDays = $activateDate->diffInDays($currentDate);
+                    if($diffInDays <= $license->valid_day){
+                        $isActivate = 1;
+                    } else {
+                        $isActivate = 0;
+                    }
                 } else {
                     $isActivate=0;
                 }

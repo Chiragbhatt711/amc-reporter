@@ -7,6 +7,10 @@ use App\Models\Brand;
 
 class BrandController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('license_validation')->only('create','store','edit','update','destroy','createBrand');
+    }
     public function index()
     {
         $admin_id = admin_id();

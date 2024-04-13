@@ -18,6 +18,8 @@ class ManageOutwardController extends Controller
          $this->middleware('permission:manage-outward-create', ['only' => ['create','store']]);
          $this->middleware('permission:manage-outward-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:manage-outward-delete', ['only' => ['destroy']]);
+
+         $this->middleware('license_validation')->only('create','store','edit','update','destroy');
     }
 
     public function index()

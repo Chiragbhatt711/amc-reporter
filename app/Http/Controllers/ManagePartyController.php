@@ -16,6 +16,8 @@ class ManagePartyController extends Controller
          $this->middleware('permission:manage-party-create', ['only' => ['create','store']]);
          $this->middleware('permission:manage-party-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:manage-party-delete', ['only' => ['destroy']]);
+
+         $this->middleware('license_validation')->only('create','store','edit','update','destroy');
     }
     /**
      * Display a listing of the resource.

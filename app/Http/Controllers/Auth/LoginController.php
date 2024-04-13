@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 
 class LoginController extends Controller
@@ -65,7 +66,20 @@ class LoginController extends Controller
 
         if(Auth::guard('web')->attempt(['email'=> $email,'password'=>$password,'is_active'=>1]))
         {
-            return redirect()->route('home');
+            $adminId = admin_id();
+            $licenseCheck = checkLicenseActivate();
+            if($licenseCheck){
+                return redirect()->route('home');
+            } else {
+                if(auth()->user()->id == $adminId){
+                    Session::put('session_expire', '1');
+                    return redirect()->route('home');
+                } else {
+                    Auth::guard('web')->logout();
+                    return redirect()->back()->withInput()->withErrors(['error' => 'License expire contact administrator']);
+                }
+            }
+
         }
 
         return redirect()->back()->withInput()->withErrors(['error' => 'Invalid Credentials!!']);

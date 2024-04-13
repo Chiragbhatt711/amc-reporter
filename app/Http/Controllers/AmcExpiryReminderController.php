@@ -21,6 +21,8 @@ class AmcExpiryReminderController extends Controller
          $this->middleware('permission:amc-expiry-reminder-create', ['only' => ['create','store']]);
          $this->middleware('permission:amc-expiry-reminder-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:amc-expiry-reminder-delete', ['only' => ['destroy']]);
+
+         $this->middleware('license_validation')->only('amcRenew','amcRenewUpdate');
     }
     public function index(Request $request)
     {

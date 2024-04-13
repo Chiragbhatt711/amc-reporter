@@ -13,6 +13,8 @@ class ProductGroupController extends Controller
          $this->middleware('permission:product-group-create', ['only' => ['create','store']]);
          $this->middleware('permission:product-group-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:product-group-delete', ['only' => ['destroy']]);
+
+         $this->middleware('license_validation')->only('create','store','edit','update','destroy');
     }
     /**
      * Display a listing of the resource.

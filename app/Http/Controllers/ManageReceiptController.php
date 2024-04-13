@@ -17,6 +17,8 @@ class ManageReceiptController extends Controller
          $this->middleware('permission:manage-receipt-create', ['only' => ['create','store']]);
          $this->middleware('permission:manage-receipt-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:manage-receipt-delete', ['only' => ['destroy']]);
+
+         $this->middleware('license_validation')->only('create','store','edit','update','destroy');
     }
     /**
      * Display a listing of the resource.

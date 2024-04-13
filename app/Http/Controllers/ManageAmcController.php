@@ -25,6 +25,8 @@ class ManageAmcController extends Controller
          $this->middleware('permission:manage-amc-delete', ['only' => ['destroy']]);
          $this->middleware('permission:party-ledger-summary-list', ['only' => ['partyLedgerSummary']]);
          $this->middleware('permission:party-ledger-details-list', ['only' => ['partyLedgerDetail']]);
+
+         $this->middleware('license_validation')->only('create','store','edit','update','destroy');
     }
     /**
      * Display a listing of the resource.

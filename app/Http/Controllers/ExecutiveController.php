@@ -17,6 +17,8 @@ class ExecutiveController extends Controller
          $this->middleware('permission:manage-executive-create', ['only' => ['create','store']]);
          $this->middleware('permission:manage-executive-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:manage-executive-delete', ['only' => ['destroy']]);
+
+         $this->middleware('license_validation')->only('create','store','edit','update','destroy');
     }
     /**
      * Display a listing of the resource.

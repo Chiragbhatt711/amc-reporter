@@ -615,7 +615,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button id="licenseSubmitBtn" onclick="licenseSubmit()" class="btn btn-primary">Submit</button> <button class="btn btn-light" .data-bs-dismiss="modal">Close</button>
+                        <button id="licenseSubmitBtn" onclick="licenseSubmit()" class="btn btn-primary">Submit</button>
+                        <button class="btn btn-light" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -732,6 +733,17 @@
                     return;
                 }
                 });
+
+                @if (session()->has('session_expire'))
+                    var sessionExpire = @json(session()->get('session_expire'));
+                    if (sessionExpire == 1) {
+                        @php
+                            session()->forget('session_expire');
+                        @endphp
+                        $('#licenseKeyE').html('Your license has been expired');
+                        $('#modaldemo8').modal('show');
+                    }
+                @endif
             });
         </script>
         @yield('js-script')
