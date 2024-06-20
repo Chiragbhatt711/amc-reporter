@@ -107,5 +107,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::resource('users', Admin\UserController::class);
         Route::resource('license', Admin\LicenseKeyController::class);
         Route::resource('plans', Admin\LicenseKeyController::class);
+        Route::get('manage-user/{id}','Admin\UserController@manageUser')->name('manage_user');
+        Route::get('create-user/{id}','Admin\UserController@createUser')->name('create_user');
+        Route::post('user-store/{id}','Admin\UserController@userStore')->name('user_store');
     });
 });

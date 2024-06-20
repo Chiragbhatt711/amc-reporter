@@ -20,9 +20,9 @@
             <div class="card custom-card">
                 <div class="card-header">
                     <div class="card-title">
-                        {{--  <a class="btn btn-primary btn-block float-end my-2" href="{{ Route('admin.users.create') }}">
+                        <a class="btn btn-primary btn-block float-end my-2" href="{{ Route('admin.create_user',$id) }}">
                             <i class="fa fa-plus" aria-hidden="true"></i>
-                        </a>  --}}
+                        </a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -37,7 +37,7 @@
                                             <th  class="gridjs-th" data-column-id="Email">Email</th>
                                             <th  class="gridjs-th" data-column-id="Mobile No">Mobile No</th>
                                             <th  class="gridjs-th" data-column-id="Role">Role</th>
-                                            <th  class="gridjs-th" data-column-id="Action">Action</th>
+                                            {{--  <th  class="gridjs-th" data-column-id="Action">Action</th>  --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -53,11 +53,10 @@
                                                     <td class="gridjs-td" data-column-id="Email">{{ $value->email }}</td>
                                                     <td class="gridjs-td" data-column-id="Mobile No">{{ $value->mobile_number }}</td>
                                                     <td class="gridjs-td" data-column-id="Role">{{ $value->role }}</td>
-                                                    <td class="gridjs-td" data-column-id="Action">
+                                                    {{--  <td class="gridjs-td" data-column-id="Action">
                                                         <a class="btn btn-sm btn-icon btn-info-light rounded-circle" href="{{Route('admin.users.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                                                         <a class="btn btn-sm btn-icon btn-secondary-light rounded-circle" onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
-                                                        <a class="btn btn-sm btn-icon btn-primary-light rounded-circle" href="{{ route('admin.manage_user',$value->id) }}"> <i class="fa-regular fa-user"></i> </a>
-                                                    </td>
+                                                    </td>  --}}
                                                 </tr>
                                             @endforeach
                                         @endif
