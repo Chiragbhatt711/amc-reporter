@@ -33,6 +33,7 @@
                             <thead  class="">
                                 <tr>
                                   <th scope="col">No</th>
+                                  <th scope="col">AMC No</th>
                                   <th scope="col">Party Name</th>
                                   <th scope="col">Person Name</th>
                                   <th scope="col">City</th>
@@ -64,6 +65,7 @@
                                                 </a>
                                                 {{ $i }}
                                             </td>
+                                            <td data-label="AMC No">{{ $value->amc_no }}</td>
                                             <td data-label="Party Name">{{ $value->party_name }}</td>
                                             <td data-label="Person Name">{{ $value->person_name }}</td>
                                             <td data-label="City">{{ $value->city }}</td>

@@ -179,7 +179,7 @@ function dueAmount()
             success:function(data) {
                 $('#due_amount').val(data.due_amount);
                 $('#total_amount').val(data.due_amount);
-                $('#total_amount_text').html('Total amount:-'+data.total_amount);
+                $('#total_amount_text').html('Total amount: '+data.total_amount);
                 $('#date').val(data.installment_date);
             }
         });

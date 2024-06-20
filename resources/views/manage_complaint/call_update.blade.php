@@ -109,37 +109,37 @@
                     <div class="row my-3">
                         <h4 class="form_sub_title">Used Parts Details</h4>
                         <div class="col-xs-1 col-sm-3 col-md-3">
-                            <strong class="lab_space">Item Name<em class="text-danger">*</em></strong>
+                            <strong class="lab_space">Item Name</strong>
                             <div class="d-flex">
                                 {!! Form::select('item_name', $product , null, ['class' => 'form-select','placeholder' =>'Please Select', 'id'=>'item_name' ]) !!}
                             </div>
                             <div class="text-danger" id="item_name_e"></div>
                         </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3">
-                            <strong class="lab_space">Attend by  <em class="text-danger">*</em></strong>
+                        {{--  <div class="col-xs-3 col-sm-3 col-md-3">
+                            <strong class="lab_space">Attend by  </strong>
                             <div class="d-flex">
                                 {!! Form::select('attend_by', $executive , null, ['class' => 'form-select','placeholder' =>'Please Select', 'id'=>'attend_by' ]) !!}
                             </div>
                             @error('attend_by')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
-                        </div>
+                        </div>  --}}
                         <div class="col-xs-1 col-sm-3 col-md-2">
-                            <strong class="lab_space">Used Qty<em class="text-danger">*</em></strong>
+                            <strong class="lab_space">Used Qty</strong>
                             <div class="d-flex">
                                 {!! Form::text('used_qty', null, ['class' => 'form-control','placeholder' =>'Used Qty','id' => 'used_qty','onkeyup'=>'totalAmount();' ]) !!}
                             </div>
                             <div class="text-danger" id="used_qty_e"></div>
                         </div>
                         <div class="col-xs-1 col-sm-3 col-md-2">
-                            <strong class="lab_space">Rate<em class="text-danger">*</em></strong>
+                            <strong class="lab_space">Rate</strong>
                             <div class="d-flex">
                                 {!! Form::text('rate', null, ['class' => 'form-control','placeholder' =>'Rate','id' => 'rate','onkeyup'=>'totalAmount();' ]) !!}
                             </div>
                             <div class="text-danger" id="rate_e"></div>
                         </div>
                         <div class="col-xs-1 col-sm-3 col-md-2">
-                            <strong class="lab_space">Amount<em class="text-danger">*</em></strong>
+                            <strong class="lab_space">Amount</strong>
                             <div class="d-flex">
                                 {!! Form::text('amount', null, ['class' => 'form-control','placeholder' =>'Amount','id' => 'amount','readonly' ]) !!}
                             </div>
@@ -273,5 +273,19 @@ function item_add()
         });
     }
 }
+
+$('#solution').change(function(){
+    var solution = $('#solution').val();
+    $.ajax({
+        url:"{{ route('get_solution_details') }}",
+        type:'POST',
+        data:{ '_token' : '{{ csrf_token() }}',
+            solution:solution,
+        },
+        success:function(data) {
+            $('#description').val(data.description);
+        }
+    });
+});
 </script>
 @endsection

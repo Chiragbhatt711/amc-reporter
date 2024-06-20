@@ -20,11 +20,11 @@
             <div class="card custom-card">
                 <div class="card-header">
                     <div class="card-title">
-                        @can('product-group-create')
+                        {{--  @can('product-group-create')
                             <a class="btn btn-primary" href="{{ route('users.create') }}">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </a>
-                        @endcan
+                        @endcan  --}}
                     </div>
                 </div>
                 <div class="card-body">

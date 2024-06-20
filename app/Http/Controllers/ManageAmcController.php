@@ -39,7 +39,7 @@ class ManageAmcController extends Controller
         $manageAmc = ManageAmc::where('manage_amcs.admin_id',$admin_id)
             ->join('manage_parties','manage_amcs.party_id','manage_parties.id')
             ->join('manage_taxes','manage_amcs.tax','manage_taxes.id')
-            ->select('manage_amcs.id as id','manage_amcs.amc_type as amc_type','manage_amcs.start_date as start_date','manage_amcs.end_date as end_date','manage_amcs.contract_amount as contract_amount','manage_parties.party_name as party_name','manage_parties.contact_person_name as person_name','manage_parties.city as city','manage_parties.mobile_no as mobile_no','manage_taxes.tax_lable_name as tax')
+            ->select('manage_amcs.id as id','manage_amcs.amc_no','manage_amcs.amc_type as amc_type','manage_amcs.start_date as start_date','manage_amcs.end_date as end_date','manage_amcs.contract_amount as contract_amount','manage_parties.party_name as party_name','manage_parties.contact_person_name as person_name','manage_parties.city as city','manage_parties.mobile_no as mobile_no','manage_taxes.tax_lable_name as tax')
             ->get();
         // dd($manageAmc);
         return view('manage_amc.index',compact('manageAmc'));
@@ -78,7 +78,12 @@ class ManageAmcController extends Controller
         {
             $day +=[$i => $i];
         }
-        return view('manage_amc.create',compact('partyName','products','day','tax'));
+        $amcno=1;
+        $amc = ManageAmc::where('admin_id',$admin_id)->orderBy('id','DESC')->first();
+        if($amc && $amc->amc_no){
+            $amcno = $amc->amc_no + 1;
+        }
+        return view('manage_amc.create',compact('partyName','products','day','tax','amcno'));
     }
 
     /**
@@ -108,6 +113,7 @@ class ManageAmcController extends Controller
         $input = $request->all();
         $admin_id = admin_id();
         $manageAmc = [
+            'amc_no' => $request->amc_no,
             'admin_id' => $admin_id,
             'party_id' => $request->party_id,
             'amc_type' => $request->amc_type,

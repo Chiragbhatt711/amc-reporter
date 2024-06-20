@@ -20,11 +20,11 @@
             <div class="card custom-card">
                 <div class="card-header">
                     <div class="card-title">
-                        @can('manage-executive-create')
+                        {{--  @can('manage-executive-create')
                             <a class="btn btn-primary" href="{{ Route('manage_executive.create') }}">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </a>
-                        @endcan
+                        @endcan  --}}
                     </div>
                 </div>
                 <div class="card-body">
