@@ -13,6 +13,8 @@ class ManageTaxController extends Controller
          $this->middleware('permission:manage-tax-create', ['only' => ['create','store']]);
          $this->middleware('permission:manage-tax-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:manage-tax-delete', ['only' => ['destroy']]);
+
+         $this->middleware('license_validation')->only('create','store','edit','update','destroy');
     }
     /**
      * Display a listing of the resource.

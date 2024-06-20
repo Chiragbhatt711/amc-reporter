@@ -13,6 +13,7 @@ use App\Models\OutwardProduct;
 use App\Models\User;
 use Carbon\Carbon;
 use DB;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -95,6 +96,7 @@ class HomeController extends Controller
 
             // dd(auth()->user()->getPermissionsViaRoles());
         // dd($paymentTicker);
+
         return view('amc_dashboard',compact('day','amcTicker','paymentDay','paymentTicker'));
     }
 

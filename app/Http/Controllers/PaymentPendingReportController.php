@@ -14,6 +14,8 @@ class PaymentPendingReportController extends Controller
          $this->middleware('permission:payment-pending-report-create', ['only' => ['create','store']]);
          $this->middleware('permission:payment-pending-report-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:payment-pending-report-delete', ['only' => ['destroy']]);
+
+         $this->middleware('license_validation')->only('create','store','edit','update','destroy');
     }
 
     public function index()

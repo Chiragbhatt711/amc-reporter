@@ -14,6 +14,8 @@ class ManageProductController extends Controller
          $this->middleware('permission:manage-product-create', ['only' => ['create','store']]);
          $this->middleware('permission:manage-product-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:manage-product-delete', ['only' => ['destroy']]);
+
+         $this->middleware('license_validation')->only('create','store','edit','update','destroy');
     }
     /**
      * Display a listing of the resource.

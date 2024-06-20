@@ -17,6 +17,8 @@ class ContractTypeController extends Controller
          $this->middleware('permission:contract-type-create', ['only' => ['create','store']]);
          $this->middleware('permission:contract-type-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:contract-type-delete', ['only' => ['destroy']]);
+
+         $this->middleware('license_validation')->only('create','store','edit','update','destroy');
     }
     public function index()
     {

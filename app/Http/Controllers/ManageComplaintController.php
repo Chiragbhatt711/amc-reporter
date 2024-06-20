@@ -27,6 +27,8 @@ class ManageComplaintController extends Controller
          $this->middleware('permission:manage-complaint-delete', ['only' => ['destroy']]);
          $this->middleware('permission:call-register-list', ['only' => ['callRegister']]);
          $this->middleware('permission:complaint-summary-list', ['only' => ['complaintSummary']]);
+
+         $this->middleware('license_validation')->only('create','store','edit','update','destroy');
     }
     /**
      * Display a listing of the resource.
@@ -227,6 +229,7 @@ class ManageComplaintController extends Controller
         $admin_id = admin_id();
         if($data->admin_id == $admin_id)
         {
+            $input['handover_date'] = date('Y-m-d',strtotime($request->handover_date));
             $data->update($input);
 
             return redirect()->route('manage_complaint.index')->with('success','complate update successfully');
@@ -459,6 +462,18 @@ class ManageComplaintController extends Controller
         $party = $request->party;
 
         $data = ManageParty::find($party);
+
+        return response()->json($data);
+    }
+
+    public function getSolutionDetails(Request $request)
+    {
+        $id = $request->solution;
+        $data = ManageSolutionTemplate::find($id);
+        $description = '';
+        if($data){
+            $description = $data->description;
+        }
 
         return response()->json($data);
     }

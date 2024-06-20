@@ -67,6 +67,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/country-autocomplete','ManagePartyController@countryAutoComplete')->name('country_autocomplete');
     Route::post('/get-amc-party-details','ManageComplaintController@getAmcPartyDetails')->name('get_amc_party_details');
     Route::post('/license-verify','HomeController@licenseVerify')->name('license_verify');
+    Route::post('/get-solution-details','ManageComplaintController@getSolutionDetails')->name('get_solution_details');
 
     Route::resource('amc', AmcController::class);
     Route::resource('roles', RoleController::class);

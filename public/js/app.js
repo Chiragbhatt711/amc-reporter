@@ -300,6 +300,7 @@ function setSchedulePayment()
         let day = parseInt(totalDays / installment);
         totalAmount = $('#total_amount').val();
         let perInstallmentAmount = totalAmount / installment;
+        perInstallmentAmount = parseFloat(perInstallmentAmount).toFixed(2)
         let date = startDate;
         let html = '';
         html += '<tr>'+

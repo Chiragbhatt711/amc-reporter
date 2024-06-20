@@ -17,6 +17,8 @@ class ManageInwardController extends Controller
          $this->middleware('permission:manage-inward-create', ['only' => ['create','store']]);
          $this->middleware('permission:manage-inward-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:manage-inward-delete', ['only' => ['destroy']]);
+
+         $this->middleware('license_validation')->only('create','store','edit','update','destroy');
     }
 
     public function index()

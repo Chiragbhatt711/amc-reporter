@@ -51,6 +51,15 @@ th {
                     @csrf
                     <div class="row mt-1">
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                            <strong class="lab_space">AMC No  <em class="text-danger">*</em></strong>
+                            <div class="d-flex">
+                                {!! Form::text('amc_no', $amcno, ['class' => 'form-control', 'id'=> 'amc_no','readonly'=>'true' ]) !!}
+                            </div>
+                            @error('amc_no')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                             <strong class="lab_space">party name  <em class="text-danger">*</em></strong>
                             <div class="d-flex">
                                 {!! Form::select('party_id', $partyName , null, ['class' => 'form-select','placeholder' =>'Please Select','id'=>'party_id' ]) !!}

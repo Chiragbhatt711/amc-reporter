@@ -9,6 +9,7 @@ class ManageAmc extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'amc_no',
         'admin_id',
         'party_id',
         'amc_type',
