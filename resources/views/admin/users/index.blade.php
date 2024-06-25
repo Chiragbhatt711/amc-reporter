@@ -29,7 +29,7 @@
                     <div id="grid-pagination">
                         <div role="complementary" class="gridjs gridjs-container" style="width: 100%;">
                             <div class="gridjs-wrapper" style="height: auto;">
-                                <table role="grid" class="gridjs-table" style="height: auto;">
+                                <table id="datatable-basic" role="grid" class="gridjs-table" style="height: auto;">
                                     <thead  class="gridjs-thead">
                                         <tr>
                                             <th  class="gridjs-th" data-column-id="No">No</th>
@@ -40,14 +40,14 @@
                                             <th  class="gridjs-th" data-column-id="Action">Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="gridjs-tbody">
                                         @if(isset($users) && $users)
                                             @php
                                                 $i = 0;
                                             @endphp
                                             @foreach ($users as $value)
                                                 @php $i++;  @endphp
-                                                <tr>
+                                                <tr class="gridjs-tr">
                                                     <td class="gridjs-td" data-column-id="No">{{ $i }}</td>
                                                     <td class="gridjs-td" data-column-id="Name">{{ $value->name }}</td>
                                                     <td class="gridjs-td" data-column-id="Email">{{ $value->email }}</td>
