@@ -372,8 +372,8 @@ $("#toogleBtn").click(function(){
 });
 
 $('.datepicker').datepicker({
-    format: "yyyy-mm-dd",
-    // format: "dd-mm-yyyy",
+    // format: "yyyy-mm-dd",
+    format: "dd-mm-yyyy",
     // startDate: '0d',
     // weekStart: 0,
     // calendarWeeks: true,

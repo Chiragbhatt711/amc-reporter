@@ -96,7 +96,7 @@
                                         @endphp
                                         <tr style="background-color:{{ $bgcolor }}">
                                             {{-- class="col-lg-4 col-sm-12 col-md-4" --}}
-                                            <td data-label="AMC No">{{ $value->amc_id }}</td>
+                                            <td data-label="AMC No">{{ $value->amc_no }}</td>
                                             <td data-label="Company">{{ $value->company_name }}</td>
                                             <td data-label="Person Name">{{ $value->person_name }}</td>
                                             <td data-label="City">{{ $value->city }}</td>

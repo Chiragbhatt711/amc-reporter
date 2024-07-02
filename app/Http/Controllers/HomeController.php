@@ -45,7 +45,7 @@ class HomeController extends Controller
         ->whereDate('manage_amcs.end_date', '>=', $toDay)
         ->whereDate('manage_amcs.end_date', '<=', $endDate)
         ->join('manage_parties','manage_amcs.party_id','=','manage_parties.id','LEFT')
-        ->select('manage_amcs.id','manage_amcs.end_date','manage_parties.party_name as compny','manage_parties.contact_person_name as person_name')
+        ->select('manage_amcs.id','manage_amcs.amc_no','manage_amcs.end_date','manage_parties.party_name as compny','manage_parties.contact_person_name as person_name')
         ->get();
 
         $paymentDay = isset($request->payment_day) && $request->payment_day ? $request->payment_day : 30;
@@ -84,7 +84,8 @@ class HomeController extends Controller
                 ->whereColumn('amc_schedule_payment_details.installment_date', '=', 'manage_receipts.date');
         })
         ->select(
-            'manage_amcs.id as amc_no',
+            'manage_amcs.id',
+            'manage_amcs.amc_no',
             'manage_parties.party_name as company',
             'manage_parties.contact_person_name as person_name',
             'amc_schedule_payment_details.installment_date as due_date',
@@ -121,9 +122,11 @@ class HomeController extends Controller
         $data = ManageComplaint::where('manage_complaints.admin_id',$admin_id)
                     ->whereDate('manage_complaints.service_date', '>=', $today)
                     ->whereDate('manage_complaints.service_date', '<=', $endDate)
-                    ->join('manage_amcs','manage_complaints.amc_no','=','manage_amcs.id','LEFT')
-                    ->join('manage_parties','manage_amcs.party_id','=','manage_parties.id','LEFT')
-                    ->select('manage_complaints.id','manage_amcs.id as amc_id','manage_complaints.service_date as date','manage_parties.party_name as company_name','manage_parties.contact_person_name as person_name','manage_parties.city as city');
+                    ->WhereNull('manage_complaints.status')
+                    // ->where('manage_complaints.status','!=','Completed')
+                    ->leftjoin('manage_amcs','manage_complaints.amc_no','=','manage_amcs.id','LEFT')
+                    ->leftjoin('manage_parties','manage_amcs.party_id','=','manage_parties.id','LEFT')
+                    ->select('manage_complaints.id','manage_amcs.id as amc_id','manage_amcs.amc_no','manage_complaints.service_date as date','manage_parties.party_name as company_name','manage_parties.contact_person_name as person_name','manage_parties.city as city');
         switch ($type) {
             case 'Free Service':
                 $data->where('manage_complaints.is_free',1);

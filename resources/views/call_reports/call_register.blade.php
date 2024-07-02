@@ -14,25 +14,6 @@
 
 <!-- CONTAINER -->
 <div class="main-container container-fluid">
-    <div class="row mt-1">
-        {!! Form::open(array('route' => 'call_register','method'=>'GET')) !!}
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-            <div class="form-group">
-                <strong class="lab_space">Start Date</strong>
-                {!! Form::text('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control datepicker')) !!}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-            <div class="form-group">
-                <strong class="lab_space">End Date</strong>
-                {!! Form::text('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control datepicker')) !!}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-4">
-            <button type="submit" class="btn btn-primary">Search</button>
-        </div>
-        {!! Form::close() !!}
-    </div>
     <!-- Start:: row-2 -->
     <div class="row">
         <div class="col-xl-12">
@@ -41,6 +22,25 @@
                     <div class="card-title">
 
                     </div>
+                    {!! Form::open(array('route' => 'call_register','method'=>'GET')) !!}
+                        <div class="row mt-1">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <strong class="lab_space">Start Date</strong>
+                                    {!! Form::text('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control datepicker')) !!}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <strong class="lab_space">End Date</strong>
+                                    {!! Form::text('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control datepicker')) !!}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </div>
+                        </div>
+                    {!! Form::close() !!}
                 </div>
                 <div class="card-body">
                     <div id="grid-pagination">

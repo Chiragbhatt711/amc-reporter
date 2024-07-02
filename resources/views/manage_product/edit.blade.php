@@ -36,7 +36,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                             <div class="form-group">
-                                <strong class="lab_space">Brand <em class="text-danger">*</em></strong>
+                                <strong class="lab_space">Brand</strong>
                                 {!! Form::text('brand', null, array('placeholder' => 'Brand' ,'class' => 'form-control')) !!}
                                 @error('brand')
                                 <div class="text-danger">{{ $message }}</div>
@@ -45,7 +45,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                             <div class="form-group">
-                                <strong class="lab_space">Model <em class="text-danger">*</em></strong>
+                                <strong class="lab_space">Model</strong>
                                 {!! Form::text('model', null, array('placeholder' => 'Model' ,'class' => 'form-control')) !!}
                                 @error('model')
                                 <div class="text-danger">{{ $message }}</div>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                             <div class="form-group">
-                                <strong class="lab_space">Product Code <em class="text-danger">*</em></strong>
+                                <strong class="lab_space">Product Code</strong>
                                 {!! Form::text('product_code', null, array('placeholder' => 'Model' ,'class' => 'form-control')) !!}
                                 @error('product_code')
                                 <div class="text-danger">{{ $message }}</div>
@@ -81,8 +81,8 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                             <div class="form-group">
-                                <strong class="lab_space">Minimum Qty <em class="text-danger">*</em></strong>
-                                {!! Form::text('min_qty', 1, array('placeholder' => 'Minimum Qty' ,'class' => 'form-control')) !!}
+                                <strong class="lab_space">Minimum Qty </strong>
+                                {!! Form::text('min_qty', null, array('placeholder' => 'Minimum Qty' ,'class' => 'form-control')) !!}
                                 @error('min_qty')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -100,7 +100,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                             <div class="form-group">
                                 <strong class="lab_space">Opening Qty <em class="text-danger">*</em></strong>
-                                {!! Form::text('opening_qty', 0, array('placeholder' => 'Opening Qty' ,'class' => 'form-control')) !!}
+                                {!! Form::text('opening_qty', null, array('placeholder' => 'Opening Qty' ,'class' => 'form-control')) !!}
                                 @error('opening_qty')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror

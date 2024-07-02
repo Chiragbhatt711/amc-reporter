@@ -54,7 +54,7 @@
                                                     <td class="gridjs-td" data-column-id="Mobile No">{{ $value->mobile_number }}</td>
                                                     <td class="gridjs-td" data-column-id="Role">{{ $value->role }}</td>
                                                     <td class="gridjs-td" data-column-id="Action">
-                                                        <a class="btn btn-sm btn-icon btn-info-light rounded-circle" href="{{Route('admin.users.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>
+                                                        {{--  <a class="btn btn-sm btn-icon btn-info-light rounded-circle" href="{{Route('admin.users.edit',$value->id)}}"> <i class="fa fa-pencil" aria-hidden="true"></i> </a>  --}}
                                                         <a class="btn btn-sm btn-icon btn-secondary-light rounded-circle" onclick="deleteFunction( '{{ $value->id }}')"> <i class="fa fa-trash" aria-hidden="true"></i> </a>
                                                         <a class="btn btn-sm btn-icon btn-primary-light rounded-circle" href="{{ route('admin.manage_user',$value->id) }}"> <i class="fa-regular fa-user"></i> </a>
                                                     </td>

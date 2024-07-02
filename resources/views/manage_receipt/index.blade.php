@@ -74,7 +74,7 @@
                                                 @can('manage-receipt-delete')
                                                     <a class="btn btn-sm btn-icon btn-secondary-light rounded-circle" onclick="deleteFunction( '{{ $value->id }}')"> <i class="bi bi-trash" aria-hidden="true"></i> </a>
                                                 @endcan
-                                                <a class="btn btn-sm btn-icon btn-secondary-light rounded-circle" href="{{Route('manage_receipt.show',$value->id)}}"> <i class="bi bi-printer" aria-hidden="true"></i> </a>
+                                                <a class="btn btn-sm btn-icon btn-secondary-light rounded-circle" href="{{Route('manage_receipt.show',$value->id)}}" target="_blank"> <i class="bi bi-printer" aria-hidden="true"></i> </a>
                                             </td>
                                         </tr>
                                     @endforeach

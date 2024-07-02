@@ -88,7 +88,7 @@
                                         @endphp
                                         <tr style="background-color:{{ $bgcolor }}">
                                             {{-- class="col-lg-4 col-sm-12 col-md-4" --}}
-                                            <td data-label="AMC No">{{ $value->id }}</td>
+                                            <td data-label="AMC No">{{ $value->amc_no }}</td>
                                             <td data-label="Company">{{ $value->compny }}</td>
                                             <td data-label="Person Name">{{ $value->person_name }}</td>
                                             <td data-label="End Date">{{ $value->end_date }}</td>

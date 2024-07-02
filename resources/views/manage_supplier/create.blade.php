@@ -54,7 +54,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                             <div class="form-group">
-                                <strong class="lab_space">Address <em class="text-danger">*</em></strong>
+                                <strong class="lab_space">Address</strong>
                                 {!! Form::textarea('address',null, array('placeholder' => 'Address' ,'class' => 'form-control')) !!}
                                 @error('address')
                                 <div class="text-danger">{{ $message }}</div>
@@ -99,7 +99,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                             <div class="form-group">
-                                <strong class="lab_space">Phone No <em class="text-danger">*</em></strong>
+                                <strong class="lab_space">Phone No </strong>
                                 {!! Form::text('phone_no', null, array('placeholder' => 'Phone No' ,'class' => 'form-control')) !!}
                                 @error('phone_no')
                                 <div class="text-danger">{{ $message }}</div>
@@ -108,7 +108,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                             <div class="form-group">
-                                <strong class="lab_space">E-mail <em class="text-danger">*</em></strong>
+                                <strong class="lab_space">E-mail </strong>
                                 {!! Form::text('e_mail', null, array('placeholder' => 'E-mail' ,'class' => 'form-control')) !!}
                                 @error('e_mail')
                                 <div class="text-danger">{{ $message }}</div>

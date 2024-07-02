@@ -40,7 +40,7 @@ class ServiceTaxReportController extends Controller
         ->whereBetween('manage_amcs.start_date',[$startDate,$endDate])
         ->join('manage_taxes','manage_amcs.tax','manage_taxes.id','LEFT')
         ->join('manage_parties','manage_amcs.party_id','manage_parties.id','LEFT')
-        ->select('manage_amcs.id as id','manage_amcs.amc_type as amc_type','manage_amcs.start_date as start_date','manage_amcs.end_date as end_date','manage_amcs.contract_amount as basic_amount','manage_amcs.total_amount','manage_parties.party_name as party_name','manage_parties.contact_person_name as contact_person','manage_parties.city as city',DB::raw('SUM(manage_taxes.tax_percentage_1 + manage_taxes.tax_percentage_2 + manage_taxes.tax_percentage_3 + manage_taxes.tax_percentage_4 + manage_taxes.tax_percentage_5) as tax'))
+        ->select('manage_amcs.id as id','manage_amcs.amc_no','manage_amcs.amc_type as amc_type','manage_amcs.start_date as start_date','manage_amcs.end_date as end_date','manage_amcs.contract_amount as basic_amount','manage_amcs.total_amount','manage_parties.party_name as party_name','manage_parties.contact_person_name as contact_person','manage_parties.city as city',DB::raw('SUM(manage_taxes.tax_percentage_1 + manage_taxes.tax_percentage_2 + manage_taxes.tax_percentage_3 + manage_taxes.tax_percentage_4 + manage_taxes.tax_percentage_5) as tax'))
         ->groupBy('manage_amcs.id')
         ->get();
         // dd($data);
