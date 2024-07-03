@@ -114,9 +114,9 @@
                                 <table class="table">
                                     <thead  class="text-uppercase table-light">
                                         <tr>
-                                            <th scope="col">Group</th>
-                                            <th scope="col">Product Code</th>
                                             <th scope="col">Product Name</th>
+                                            <th scope="col">Product Code</th>
+                                            <th scope="col">Group</th>
                                             <th scope="col">Qty</th>
                                             <th scope="col">Rate</th>
                                             <th scope="col">Amount</th>
@@ -166,7 +166,7 @@
             },
             success:function(data) {
                 data = JSON.parse(data);
-                $('#qty').val(data.min_qty);
+                $('#qty').val(0);
                 $('#rate').val(data.mrp);
                 amountCount();
             }

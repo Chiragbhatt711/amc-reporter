@@ -200,14 +200,14 @@ class ManageInwardController extends Controller
         $uniqId = uniqid();
         $amount = $request->qty * $request->rate;
         $html = '<tr id="row_'.$uniqId.'">
-                <td>'.$product->group.'
-                    <input type="hidden" value="'.$product->group.'" name="group'.$uniqId.'" id="group'.$uniqId.'">
+                <td>'.$product->product_name.'
+                    <input type="hidden" value="'.$request->product_id.'" name="product_id_'.$uniqId.'" id="product_id_'.$uniqId.'">
                 </td>
                 <td>'.$product->product_code.'
                     <input type="hidden" value="'.$product->product_code.'" name="product_code_'.$uniqId.'" id="product_code_'.$uniqId.'">
                 </td>
-                <td>'.$product->product_name.'
-                    <input type="hidden" value="'.$request->product_id.'" name="product_id_'.$uniqId.'" id="product_id_'.$uniqId.'">
+                <td>'.$product->group.'
+                    <input type="hidden" value="'.$product->group.'" name="group'.$uniqId.'" id="group'.$uniqId.'">
                 </td>
                 <td>'.$request->qty.'
                     <input type="hidden" value="'.$request->qty.'" name="qty_'.$uniqId.'" id="qty_'.$uniqId.'">

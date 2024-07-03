@@ -384,7 +384,7 @@ $('.datepicker').datepicker({
 }).dateickepr('setDate', 'today');
 
 $('.monthpicker').datepicker({
-    format: "yyyy-mm",
+    format: "mm-yyyy",
     autoclose: true,
     orientation: "auto",
     minViewMode: 'months',

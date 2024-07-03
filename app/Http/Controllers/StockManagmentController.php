@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ManageProduct;
 use App\Models\OutwardProduct;
+use DateTime;
 use Illuminate\Http\Request;
 use DB;
 
@@ -32,7 +33,10 @@ class StockManagmentController extends Controller
                 ->select(DB::raw('COALESCE(SUM(qty), 0) as outward_qty'))
                 ->groupBy('product_id')
                 ->get();
-            $value['outward_qty'] = $outward[0]->outward_qty;
+            $value['outward_qty'] = 0;
+            if(isset($outward[0]) && $outward[0]){
+                $value['outward_qty'] = $outward[0]->outward_qty;
+            }
             array_push($mainData,$value);
         }
 
@@ -43,8 +47,13 @@ class StockManagmentController extends Controller
     {
         if(isset($request->month))
         {
-            $year = date('Y',strtotime($request->month));
-            $month = date('m',strtotime($request->month));
+            $date = DateTime::createFromFormat('m-Y', $request->month);
+
+            // Check if the date is valid
+            if ($date && $date->format('m-Y') === $request->month) {
+                $year = $date->format('Y');
+                $month = $date->format('m');
+            }
         }
         else
         {

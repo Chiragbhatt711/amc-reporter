@@ -28,7 +28,7 @@
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
                                 <div class="form-group">
                                     <strong class="lab_space">Month</strong>
-                                    {!! Form::text('month', isset($_GET['month']) && $_GET['month'] ? $_GET['month'] : null, array('placeholder' => 'Month' ,'class' => 'form-control monthpicker')) !!}
+                                    {!! Form::text('month', isset($_GET['month']) && $_GET['month'] ? $_GET['month'] : null, array('placeholder' => 'mm-yyyy' ,'class' => 'form-control monthpicker')) !!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-4">
