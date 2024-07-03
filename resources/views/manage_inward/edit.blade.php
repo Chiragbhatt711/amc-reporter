@@ -94,9 +94,9 @@
                                 <table class="table">
                                     <thead  class="text-uppercase table-light">
                                         <tr>
-                                            <th scope="col">Group</th>
-                                            <th scope="col">Product Code</th>
                                             <th scope="col">Product Name</th>
+                                            <th scope="col">Product Code</th>
+                                            <th scope="col">Group</th>
                                             <th scope="col">Qty</th>
                                             <th scope="col">Rate</th>
                                             <th scope="col">Amount</th>
@@ -111,14 +111,14 @@
                                         @if(isset($product) && $product)
                                             @foreach ($product as $data)
                                                 <tr id="row_{{ $uniqId }}">
-                                                        <td>{{ $data->group }}
-                                                            <input type="hidden" value="{{ $data->group }}" name="group{{ $uniqId }}" id="group{{ $uniqId }}">
+                                                        <td>{{ $data->product_name }}
+                                                            <input type="hidden" value="{{ $data->product_id }}" name="product_id_{{ $uniqId }}" id="product_id_{{ $uniqId }}">
                                                         </td>
                                                         <td>{{ $data->product_code }}
                                                             <input type="hidden" value="{{ $data->product_code }}" name="product_code_{{ $uniqId }}" id="product_code_{{ $uniqId }}">
                                                         </td>
-                                                        <td>{{ $data->product_name }}
-                                                            <input type="hidden" value="{{ $data->product_id }}" name="product_id_{{ $uniqId }}" id="product_id_{{ $uniqId }}">
+                                                        <td>{{ $data->group }}
+                                                            <input type="hidden" value="{{ $data->group }}" name="group{{ $uniqId }}" id="group{{ $uniqId }}">
                                                         </td>
                                                         <td>{{ $data->qty }}
                                                             <input type="hidden" value="{{ $data->qty }}" name="qty_{{ $uniqId }}" id="qty_{{ $uniqId }}">
@@ -179,7 +179,7 @@
             },
             success:function(data) {
                 data = JSON.parse(data);
-                $('#qty').val(data.min_qty);
+                $('#qty').val(0);
                 $('#rate').val(data.mrp);
                 amountCount();
             }

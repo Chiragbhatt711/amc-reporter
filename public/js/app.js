@@ -372,8 +372,8 @@ $("#toogleBtn").click(function(){
 });
 
 $('.datepicker').datepicker({
-    format: "yyyy-mm-dd",
-    // format: "dd-mm-yyyy",
+    // format: "yyyy-mm-dd",
+    format: "dd-mm-yyyy",
     // startDate: '0d',
     // weekStart: 0,
     // calendarWeeks: true,
@@ -384,7 +384,7 @@ $('.datepicker').datepicker({
 }).dateickepr('setDate', 'today');
 
 $('.monthpicker').datepicker({
-    format: "yyyy-mm",
+    format: "mm-yyyy",
     autoclose: true,
     orientation: "auto",
     minViewMode: 'months',

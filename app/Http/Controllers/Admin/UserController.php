@@ -77,6 +77,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $admin_id = admin_id();
+        $user = User::find($id);
         $roles = Role::orderBy('id','ASC')->where('admin_id',$admin_id)->get()->pluck('name','id')->toArray();
         return view('admin.users.edit',compact('user','roles'));
     }

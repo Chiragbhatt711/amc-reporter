@@ -14,25 +14,6 @@
 
 <!-- CONTAINER -->
 <div class="main-container container-fluid">
-    <div class="row mt-1">
-        {!! Form::open(array('route' => 'service_tax_report.index','method'=>'GET')) !!}
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                <div class="form-group">
-                    <strong class="lab_space">Start Date</strong>
-                    {!! Form::date('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control')) !!}
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                <div class="form-group">
-                    <strong class="lab_space">End Date</strong>
-                    {!! Form::date('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control')) !!}
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-4">
-                <button type="submit" class="btn btn-primary btn-block float-end my-2">Search</button>
-            </div>
-        {!! Form::close() !!}
-    </div>
     <!-- Start:: row-2 -->
     <div class="row">
         <div class="col-xl-12">
@@ -41,6 +22,25 @@
                     <div class="card-title">
 
                     </div>
+                    {!! Form::open(array('route' => 'service_tax_report.index','method'=>'GET')) !!}
+                        <div class="row mt-1">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <strong class="lab_space">Start Date</strong>
+                                    {!! Form::date('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control')) !!}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <strong class="lab_space">End Date</strong>
+                                    {!! Form::date('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control')) !!}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <button type="submit" class="btn btn-primary btn-block float-end my-2">Search</button>
+                            </div>
+                        </div>
+                    {!! Form::close() !!}
                 </div>
                 <div class="card-body">
                     <div id="grid-pagination">
@@ -75,7 +75,7 @@
                                                     <td class="gridjs-td" data-column-id="Party Name">{{ $value->party_name }}</td>
                                                     <td class="gridjs-td" data-column-id="Contract Person Name">{{ $value->contact_person }}</td>
                                                     <td class="gridjs-td" data-column-id="City">{{ $value->city }}</td>
-                                                    <td class="gridjs-td" data-column-id="AMC No">{{ $value->id }}</td>
+                                                    <td class="gridjs-td" data-column-id="AMC No">{{ $value->amc_no }}</td>
                                                     <td class="gridjs-td" data-column-id="AMC Type">{{ $value->amc_type }}</td>
                                                     <td class="gridjs-td" data-column-id="Start Date">{{ $value->start_date }}</td>
                                                     <td class="gridjs-td" data-column-id="End Date">{{ $value->end_date }}</td>

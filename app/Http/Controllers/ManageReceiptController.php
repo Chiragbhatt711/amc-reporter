@@ -31,7 +31,7 @@ class ManageReceiptController extends Controller
         $receipt = ManageReceipt::where('manage_receipts.admin_id',$admin_id)
             ->join('manage_parties','manage_receipts.party_id','manage_parties.id','LEFT')
             ->join('manage_amcs','manage_receipts.amc_id','manage_amcs.id')
-            ->select('manage_receipts.*','manage_parties.party_name as party_name','manage_parties.contact_person_name as contact_person_name','manage_parties.city as city','manage_amcs.id as amc_no','manage_amcs.amc_type as amc_type')
+            ->select('manage_receipts.*','manage_parties.party_name as party_name','manage_parties.contact_person_name as contact_person_name','manage_parties.city as city','manage_amcs.id','manage_amcs.amc_no','manage_amcs.amc_type as amc_type')
             ->get();
 
         return view('manage_receipt.index',compact('receipt'));
@@ -229,7 +229,7 @@ class ManageReceiptController extends Controller
         $data=[];
         foreach ($amcData as $value)
         {
-            $data += [$value['id'] => $value['id'].', '.$value['amc_type'].', '.$value['start_date'].' To '.$value['end_date']];
+            $data += [$value['id'] => $value['amc_no'].', '.$value['amc_type'].', '.$value['start_date'].' To '.$value['end_date']];
         }
 
         return json_encode($data);

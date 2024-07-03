@@ -55,27 +55,31 @@ class ManageProductController extends Controller
     {
         $this->validate($request, [
             'group_id' => 'required',
-            'brand' => 'required',
-            'model' => 'required',
-            'product_code' => 'required',
+            // 'brand' => 'required',
+            // 'model' => 'required',
+            // 'product_code' => 'required',
             'product_name' => 'required',
             'mrp' => 'required|numeric',
-            'min_qty' => 'required|numeric',
+            'min_qty' => 'nullable|numeric',
             'unit' =>'required',
             'opening_qty' =>'required|numeric',
 
         ],[
             'group_id.required'=> 'Please select group',
-            'brand.required' => 'Please enter brand',
-            'model.required' => 'Please enter model',
-            'product_code.required' => 'Please enter product code',
+            // 'brand.required' => 'Please enter brand',
+            // 'model.required' => 'Please enter model',
+            // 'product_code.required' => 'Please enter product code',
             'product_name.required' => 'Please enter product name',
             'mrp.required' => 'Please enter mrp',
-            'min_qty.required' => 'Please enter minimum qty',
+            'min_qty.numeric' => 'Please enter numeric value',
             'unit.required' => 'Please select unit',
             'opening_qty.required' => 'Please enter opening qty',
         ]);
         $input = $request->all();
+
+        if($input['min_qty'] == ""){
+            $input['min_qty']=0;
+        }
         $input['admin_id'] = admin_id();
 
         $create = ManageProduct::create($input);
@@ -128,12 +132,12 @@ class ManageProductController extends Controller
     {
         $this->validate($request, [
             'group_id' => 'required',
-            'brand' => 'required',
-            'model' => 'required',
-            'product_code' => 'required',
+            // 'brand' => 'required',
+            // 'model' => 'required',
+            // 'product_code' => 'required',
             'product_name' => 'required',
             'mrp' => 'required|numeric',
-            'min_qty' => 'required|numeric',
+            'min_qty' => 'nullable|numeric',
             'unit' =>'required',
             'opening_qty' =>'required|numeric',
 
@@ -144,7 +148,7 @@ class ManageProductController extends Controller
             'product_code.required' => 'Please enter product code',
             'product_name.required' => 'Please enter product name',
             'mrp.required' => 'Please enter mrp',
-            'min_qty.required' => 'Please enter minimum qty',
+            'min_qty.numeric' => 'Please enter numeric value',
             'unit.required' => 'Please select unit',
             'opening_qty.required' => 'Please enter opening qty',
         ]);

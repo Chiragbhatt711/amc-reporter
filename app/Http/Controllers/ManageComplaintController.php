@@ -62,7 +62,7 @@ class ManageComplaintController extends Controller
         ->join('manage_complaint_templates','manage_complaints.complaint_id','=','manage_complaint_templates.id','LEFT')
         ->join('manage_parties as complaint_user','manage_complaints.complaint_by','=','complaint_user.id','LEFT')
         ->join('users as handover','manage_complaints.handover_to','=','handover.id','LEFT')
-        ->select('manage_complaints.id as id','manage_complaints.comp_by_mobile_number as mobile','manage_complaints.description as description','manage_complaints.priority as priority','manage_complaints.handover as handover','manage_complaints.handover_date as handover_date','manage_complaints.handover_time as handover_time','manage_complaints.created_at as created_at','manage_complaints.status as status','manage_complaints.service_date','manage_complaints.is_free','manage_amcs.id as amc_no','manage_amcs.amc_type as amc_type','manage_amcs.start_date as start_date','manage_amcs.end_date as end_date','manage_parties.party_name','manage_parties.contact_person_name','manage_parties.city','manage_complaint_templates.title as complait_title','complaint_user.party_name as complait_by','handover.name as handover');
+        ->select('manage_complaints.id as id','manage_complaints.admin_id','manage_complaints.comp_by_mobile_number as mobile','manage_complaints.description as description','manage_complaints.priority as priority','manage_complaints.handover as handover','manage_complaints.handover_date as handover_date','manage_complaints.handover_time as handover_time','manage_complaints.created_at as created_at','manage_complaints.status as status','manage_complaints.service_date','manage_complaints.is_free','manage_amcs.amc_no','manage_amcs.amc_type as amc_type','manage_amcs.start_date as start_date','manage_amcs.end_date as end_date','manage_parties.party_name','manage_parties.contact_person_name','manage_parties.city','manage_complaint_templates.title as complait_title','complaint_user.party_name as complait_by','handover.name as handover');
         if(isset($request->type) && $request->type)
         {
             switch ($request->type) {
@@ -79,6 +79,7 @@ class ManageComplaintController extends Controller
             }
         }
         $data = $data->get();
+
         return view('manage_complaint.index',compact('data','startDate','endDate'));
     }
 
@@ -98,7 +99,7 @@ class ManageComplaintController extends Controller
         $amc=[];
         foreach ($amcData as $value)
         {
-            $amc += [$value['id'] => $value['id'].', '.$value['party_name'].', '.$value['amc_type']];
+            $amc += [$value['id'] => $value['amc_no'].', '.$value['party_name'].', '.$value['amc_type']];
         }
 
         $parties = ManageParty::where('admin_id',$admin_id)->get()->pluck('party_name','id')->toArray();
@@ -177,7 +178,7 @@ class ManageComplaintController extends Controller
             $amc=[];
             foreach ($amcData as $value)
             {
-                $amc += [$value['id'] => $value['id'].', '.$value['party_name'].', '.$value['amc_type']];
+                $amc += [$value['id'] => $value['amc_no'].', '.$value['party_name'].', '.$value['amc_type']];
             }
 
             $parties = ManageParty::where('admin_id',$admin_id)->get()->pluck('party_name','id')->toArray();
@@ -283,6 +284,7 @@ class ManageComplaintController extends Controller
         ->first();
 
         $admin_id = admin_id();
+
         if($data->admin_id == $admin_id)
         {
             $parties = ManageParty::where('admin_id',$admin_id)->get()->pluck('party_name','id')->toArray();
@@ -411,7 +413,7 @@ class ManageComplaintController extends Controller
         ->join('manage_complaint_templates','manage_complaints.complaint_id','=','manage_complaint_templates.id','LEFT')
         ->join('manage_parties as complaint_user','manage_complaints.complaint_by','=','complaint_user.id','LEFT')
         ->join('users as handover','manage_complaints.handover_to','=','handover.id','LEFT')
-        ->select('manage_complaints.id as id','manage_complaints.comp_by_mobile_number as mobile','manage_complaints.description as description','manage_complaints.priority as priority','manage_complaints.handover as handover','manage_complaints.handover_date as handover_date','manage_complaints.handover_time as handover_time','manage_complaints.created_at as created_at','manage_complaints.status as status','manage_complaints.service_date','manage_complaints.is_free','manage_complaints.update_date','manage_complaints.call_remark','manage_amcs.id as amc_no','manage_amcs.amc_type as amc_type','manage_amcs.start_date as start_date','manage_amcs.end_date as end_date','manage_parties.party_name','manage_parties.contact_person_name','manage_parties.city','manage_parties.mobile_no','manage_complaint_templates.title as complait_title','complaint_user.party_name as complait_by','handover.name as handover')
+        ->select('manage_complaints.id as id','manage_complaints.comp_by_mobile_number as mobile','manage_complaints.description as description','manage_complaints.priority as priority','manage_complaints.handover as handover','manage_complaints.handover_date as handover_date','manage_complaints.handover_time as handover_time','manage_complaints.created_at as created_at','manage_complaints.status as status','manage_complaints.service_date','manage_complaints.is_free','manage_complaints.update_date','manage_complaints.call_remark','manage_amcs.id','manage_amcs.amc_no','manage_amcs.amc_type as amc_type','manage_amcs.start_date as start_date','manage_amcs.end_date as end_date','manage_parties.party_name','manage_parties.contact_person_name','manage_parties.city','manage_parties.mobile_no','manage_complaint_templates.title as complait_title','complaint_user.party_name as complait_by','handover.name as handover')
         ->get();
 
         return view('call_reports.call_register',compact('startDate','endDate','data'));

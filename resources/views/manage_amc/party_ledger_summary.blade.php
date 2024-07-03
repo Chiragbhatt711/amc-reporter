@@ -72,7 +72,7 @@
                                             <td data-label="Party Name">{{ $value->party_name }}</td>
                                             <td data-label="Contact Person Name">{{ $value->contact_person_name }}</td>
                                             <td data-label="City">{{ $value->city }}</td>
-                                            <td data-label="AMC No">{{ $value->id }}</td>
+                                            <td data-label="AMC No">{{ $value->amc_no }}</td>
                                             <td data-label="Opening Balance">{{ $value->opening_balance }}</td>
                                             <td data-label="Debit">{{ $value->total_amount }}</td>
                                             <td data-label="Credit">{{ $value->amount_recieve }}</td>

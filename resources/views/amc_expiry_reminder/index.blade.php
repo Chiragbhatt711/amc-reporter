@@ -14,25 +14,6 @@
 
 <!-- CONTAINER -->
 <div class="main-container container-fluid">
-    <div class="row mt-1">
-        {!! Form::open(array('route' => 'amc_expiry_reminder','method'=>'GET')) !!}
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
-                <div class="form-group">
-                    <strong class="lab_space">Start Date</strong>
-                    {!! Form::text('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control datepicker')) !!}
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
-                <div class="form-group">
-                    <strong class="lab_space">End Date</strong>
-                    {!! Form::text('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control datepicker')) !!}
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-4">
-                <button type="submit" class="btn btn-primary btn-block float-end my-2">Search</button>
-            </div>
-        {!! Form::close() !!}
-    </div>
     <!-- Start:: row-2 -->
     <div class="row">
         <div class="col-xl-12">
@@ -41,6 +22,25 @@
                     <div class="card-title">
 
                     </div>
+                    {!! Form::open(array('route' => 'amc_expiry_reminder','method'=>'GET')) !!}
+                        <div class="row mt-1">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                                <div class="form-group">
+                                    <strong class="lab_space">Start Date</strong>
+                                    {!! Form::text('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control datepicker')) !!}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                                <div class="form-group">
+                                    <strong class="lab_space">End Date</strong>
+                                    {!! Form::text('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control datepicker')) !!}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                                <button type="submit" class="btn btn-primary btn-block float-end my-2">Search</button>
+                            </div>
+                        </div>
+                    {!! Form::close() !!}
                 </div>
                 <div class="card-body">
                     <div id="grid-pagination">
@@ -74,7 +74,7 @@
                                         <td data-label="Contact Person Name">{{ $value->person_name }}</td>
                                         <td data-label="City">{{ $value->city }}</td>
                                         <td data-label="Mobile No">{{ $value->mobile_no }}</td>
-                                        <td data-label="AMC No">{{ $value->id }}</td>
+                                        <td data-label="AMC No">{{ $value->amc_no }}</td>
                                         <td data-label="AMC Type">{{ $value->amc_type }}</td>
                                         <td data-label="Start Date">{{ $value->start_date }}</td>
                                         <td data-label="End Date">{{ $value->end_date }}</td>
