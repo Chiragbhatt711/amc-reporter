@@ -27,7 +27,7 @@
                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <strong class="lab_space">Look In</strong>
-                                    {!! Form::select('look_in', ['Part Wise'=>'Part Wise','AMC Wise'=>'AMC Wise'] , isset($_GET['look_in']) && $_GET['look_in'] ? $_GET['look_in'] : null, ['class' => 'form-select','id'=>'look_in' ]) !!}
+                                    {!! Form::select('look_in', ['Part Wise'=>'Party Wise','AMC Wise'=>'AMC Wise'] , isset($_GET['look_in']) && $_GET['look_in'] ? $_GET['look_in'] : null, ['class' => 'form-select','id'=>'look_in' ]) !!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
