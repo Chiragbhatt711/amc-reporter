@@ -27,16 +27,16 @@
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <div class="form-group">
                                     <strong class="lab_space">Start Date</strong>
-                                    {!! Form::text('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control datepicker')) !!}
+                                    {!! Form::date('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control')) !!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <div class="form-group">
                                     <strong class="lab_space">End Date</strong>
-                                    {!! Form::text('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control datepicker')) !!}
+                                    {!! Form::date('start_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control')) !!}
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-4">
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </div>
                         </div>
@@ -44,33 +44,33 @@
                 </div>
                 <div class="card-body">
                     <div id="grid-pagination">
-                        <div role="complementary" class="gridjs gridjs-container" style="width: 100%;">
-                            <div class="gridjs-wrapper" style="height: auto;">
+                        <div role="complementary" class="gridjs gridjs-container " style="width: 100%;">
+                            <div class="gridjs-wrapper overflow-x: auto" style="height: auto;">
                                 <table role="grid" class="gridjs-table" style="height: auto;">
                                     <thead  class="gridjs-thead">
                                         <tr class="gridjs-tr">
-                                          <th data-column-id="No" class="gridjs-th"><div class="gridjs-th-content">No</div></th>
-                                          <th data-column-id="Call No" class="gridjs-th"><div class="gridjs-th-content">Call No</div></th>
-                                          <th data-column-id="Call Date/Time" class="gridjs-th"><div class="gridjs-th-content">Call Date/Time</div></th>
-                                          <th data-column-id="Call Type" class="gridjs-th"><div class="gridjs-th-content">Call Type</div></th>
-                                          <th data-column-id="Complaint By" class="gridjs-th"><div class="gridjs-th-content">Complaint By</div></th>
-                                          <th data-column-id="Comp.by Contact No" class="gridjs-th"><div class="gridjs-th-content">Comp.by Contact No</div></th>
-                                          <th data-column-id="Complaint" class="gridjs-th"><div class="gridjs-th-content">Complaint</div></th>
-                                          <th data-column-id="Priority" class="gridjs-th"><div class="gridjs-th-content">Priority</div></th>
-                                          <th data-column-id="Status" class="gridjs-th"><div class="gridjs-th-content">Status</div></th>
-                                          <th data-column-id="AMC No" class="gridjs-th"><div class="gridjs-th-content">AMC No</div></th>
-                                          <th data-column-id="AMC Type" class="gridjs-th"><div class="gridjs-th-content">AMC Type</div></th>
-                                          <th data-column-id="Start Date" class="gridjs-th"><div class="gridjs-th-content">Start Date</div></th>
-                                          <th data-column-id="End Date" class="gridjs-th"><div class="gridjs-th-content">End Date</div></th>
-                                          <th data-column-id="Party Name" class="gridjs-th"><div class="gridjs-th-content">Party Name</div></th>
-                                          <th data-column-id="City" class="gridjs-th"><div class="gridjs-th-content">City</div></th>
-                                          <th data-column-id="Mobile No" class="gridjs-th"><div class="gridjs-th-content">Mobile No</div></th>
-                                          <th data-column-id="Handover" class="gridjs-th"><div class="gridjs-th-content">Handover</div></th>
-                                          <th data-column-id="Handover Date/Time" class="gridjs-th"><div class="gridjs-th-content">Handover Date/Time</div></th>
-                                          <th data-column-id="Completed By" class="gridjs-th"><div class="gridjs-th-content">Completed By</div></th>
-                                          <th data-column-id="Date/Time" class="gridjs-th"><div class="gridjs-th-content">Date/Time</div></th>
-                                          <th data-column-id="Description" class="gridjs-th"><div class="gridjs-th-content">Description</div></th>
-                                          <th data-column-id="Remark" class="gridjs-th"><div class="gridjs-th-content">Remark</div></th>
+                                          <th data-column-id="No" class="gridjs-th" style="width: 150px;"><div class="gridjs-th-content">No</div></th>
+                                          <th data-column-id="Call No" class="gridjs-th" style="width: 150px;"><div class="gridjs-th-content">Call No</div></th>
+                                          <th data-column-id="Call Date/Time" class="gridjs-th" style="width: 150px;"><div class="gridjs-th-content">Call Date/Time</div></th>
+                                          <th data-column-id="Call Type" class="gridjs-th" style="width: 150px;"><div class="gridjs-th-content">Call Type</div></th>
+                                          <th data-column-id="Complaint By" class="gridjs-th" style="width: 150px;"><div class="gridjs-th-content">Complaint By</div></th>
+                                          <th data-column-id="Comp.by Contact No" class="gridjs-th" style="width: 150px;"><div class="gridjs-th-content">Comp.by Contact No</div></th>
+                                          <th data-column-id="Complaint" class="gridjs-th" style="width: 150px;"><div class="gridjs-th-content">Complaint</div></th>
+                                          <th data-column-id="Priority" class="gridjs-th" style="width: 150px;"><div class="gridjs-th-content">Priority</div></th>
+                                          <th data-column-id="Status" class="gridjs-th" style="width: 150px;"><div class="gridjs-th-content">Status</div></th>
+                                          <th data-column-id="AMC No" class="gridjs-th" style="width: 150px;"><div class="gridjs-th-content">AMC No</div></th>
+                                          <th data-column-id="AMC Type" class="gridjs-th" style="width: 150px;"><div class="gridjs-th-content">AMC Type</div></th>
+                                          <th data-column-id="Start Date" class="gridjs-th" style="width: 150px;"><div class="gridjs-th-content">Start Date</div></th>
+                                          <th data-column-id="End Date" class="gridjs-th" style="width: 150px;"><div class="gridjs-th-content">End Date</div></th>
+                                          <th data-column-id="Party Name" class="gridjs-th" style="width: 150px;"><div class="gridjs-th-content">Party Name</div></th>
+                                          <th data-column-id="City" class="gridjs-th" style="width: 150px;"><div class="gridjs-th-content">City</div></th>
+                                          <th data-column-id="Mobile No" class="gridjs-th" style="width: 150px;"><div class="gridjs-th-content">Mobile No</div></th>
+                                          <th data-column-id="Handover" class="gridjs-th" style="width: 150px;"><div class="gridjs-th-content">Handover</div></th>
+                                          <th data-column-id="Handover Date/Time" class="gridjs-th" style="width: 150px;"><div class="gridjs-th-content">Handover Date/Time</div></th>
+                                          <th data-column-id="Completed By" class="gridjs-th" style="width: 150px;"><div class="gridjs-th-content">Completed By</div></th>
+                                          <th data-column-id="Date/Time" class="gridjs-th" style="width: 150px;"><div class="gridjs-th-content">Date/Time</div></th>
+                                          <th data-column-id="Description" class="gridjs-th" style="width: 150px;"><div class="gridjs-th-content">Description</div></th>
+                                          <th data-column-id="Remark" class="gridjs-th" style="width: 150px;"><div class="gridjs-th-content">Remark</div></th>
                                         </tr>
                                     </thead>
                                     <tbody class="gridjs-tbody">

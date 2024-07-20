@@ -33,13 +33,13 @@
                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <strong class="lab_space">Start Date</strong>
-                                    {!! Form::text('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control datepicker')) !!}
+                                    {!! Form::date('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control')) !!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <strong class="lab_space">End Date</strong>
-                                    {!! Form::text('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control datepicker')) !!}
+                                    {!! Form::date('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control')) !!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" id="party_div" style="display: block;">

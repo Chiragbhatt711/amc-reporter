@@ -24,16 +24,16 @@
                     </div>
                     {!! Form::open(array('route' => 'amc_expiry_reminder','method'=>'GET')) !!}
                         <div class="row mt-1">
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-5">
                                 <div class="form-group">
                                     <strong class="lab_space">Start Date</strong>
-                                    {!! Form::text('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control datepicker')) !!}
+                                    {!! Form::date('start_date', $startDate, array('placeholder' => 'Start Date' ,'class' => 'form-control')) !!}
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-5">
                                 <div class="form-group">
                                     <strong class="lab_space">End Date</strong>
-                                    {!! Form::text('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control datepicker')) !!}
+                                    {!! Form::date('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control')) !!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">

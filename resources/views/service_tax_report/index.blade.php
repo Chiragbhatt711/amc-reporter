@@ -36,7 +36,7 @@
                                     {!! Form::date('end_date', $endDate, array('placeholder' => 'End Date' ,'class' => 'form-control')) !!}
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3">
                                 <button type="submit" class="btn btn-primary btn-block float-end my-2">Search</button>
                             </div>
                         </div>

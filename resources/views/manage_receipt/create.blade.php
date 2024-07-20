@@ -50,7 +50,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                             <div class="form-group">
                                 <strong class="lab_space">Installment Date <em class="text-danger">*</em></strong>
-                                {!! Form::text('date', date('Y-m-d'), array('placeholder' => 'Date' ,'class' => 'form-control datepicker','id' => 'date')) !!}
+                                {!! Form::date('date', date('Y-m-d'), array('placeholder' => 'Date' ,'class' => 'form-control')) !!}
                                 @error('date')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -90,7 +90,8 @@
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                             <div class="form-group">
                                 <strong class="lab_space">Payment Date <em class="text-danger">*</em></strong>
-                                {!! Form::text('payment_date', date('Y-m-d'), array('placeholder' => 'Payment Date' ,'class' => 'form-control datepicker')) !!}
+
+                                {!! Form::date('payment_date', date('Y-m-d'), array('placeholder' => 'Payment Date' ,'class' => 'form-control')) !!}
                                 @error('payment_date')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
