@@ -75,14 +75,14 @@ th {
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                             <strong class="lab_space">Start Date<em class="text-danger">*</em></strong>
-                            {!! Form::text('start_date', null, array('placeholder' => 'Start date','class' => 'form-control datepicker','disabled')) !!}
+                            {!! Form::date('start_date', null, array('placeholder' => 'Start Date' ,'class' => 'form-control','disabled')) !!}
                             @error('start_date')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                             <strong class="lab_space">End Date<em class="text-danger">*</em></strong>
-                            {!! Form::text('end_date', null, array('placeholder' => 'End date','class' => 'form-control datepicker','disabled')) !!}
+                            {!! Form::date('end_date', null, array('placeholder' => 'End Date' ,'class' => 'form-control','disabled')) !!}
                             @error('end_date')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -97,27 +97,27 @@ th {
                         </div>
                     </div>
 
-                    <div class="row mt-1">
+                    <div class="row mt-5">
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <h4 class="form_sub_title">New AMC detail</h4>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                             <strong class="lab_space">Start Date<em class="text-danger">*</em></strong>
-                            {!! Form::text('start_date', date('Y-m-d', strtotime($manageAmc->end_date." +1 day")), array('placeholder' => 'Start date','class' => 'form-control datepicker','id'=>'start_date')) !!}
+                            {!! Form::date('start_date', date('Y-m-d', strtotime($manageAmc->end_date." +1 day")), array('placeholder' => 'Start Date' ,'class' => 'form-control','id'=>'start_date')) !!}
                             @error('start_date')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                             <strong class="lab_space">End Date<em class="text-danger">*</em></strong>
-                            {!! Form::text('end_date', date('Y-m-d', strtotime($manageAmc->end_date." +366 day")), array('placeholder' => 'End date','class' => 'form-control datepicker','id'=>'end_date')) !!}
+                            {!! Form::date('end_date', date('Y-m-d', strtotime($manageAmc->end_date." +366 day")), array('placeholder' => 'Start Date' ,'class' => 'form-control','disabled','id'=>'end_date')) !!}
                             @error('end_date')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
 
-                    <div class="row mt-2">
+                    <div class="row mt-5">
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <h4 class="form_sub_title">AMC Product detail</h4>
                         </div>
@@ -147,7 +147,7 @@ th {
                             </div>
                         </div>
                         <div class="col-xs-3 col-sm-3 col-md-3">
-                            <a href="javascript:void(0)" class="form_btn" name="add" value="Add" onclick="product_add();">Add</a>
+                            <a href="javascript:void(0)" class="btn btn-primary btn-block float-end my-2" name="add" value="Add" onclick="product_add();">Add</a>
                         </div>
                     </div>
                     <div class="row my-3">
@@ -216,10 +216,10 @@ th {
                                         <span id="serviceE" class="text-danger"></span>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-end">
-                                        <a href="javascript:void(0)" class="form_btn mt-3" name="set_service" value="Set Service" onclick="setService();" id="set_service">Set Service</a>
+                                        <a href="javascript:void(0)" class="btn btn-primary btn-block float-end my-2 mt-3" name="set_service" value="Set Service" onclick="setService();" id="set_service">Set Service</a>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                        <a href="javascript:void(0)" class="form_btn mt-3" name="cleare_service" value="Clear All" onclick="cleareService();">Clear All</a>
+                                        <a href="javascript:void(0)" class="btn btn-primary btn-block float-end my-2 mt-3" name="cleare_service" value="Clear All" onclick="cleareService();">Clear All</a>
                                     </div>
                                     <div class="fixTableHead mt-2">
                                         <table class="table">
@@ -269,10 +269,10 @@ th {
                                         {{ Form::hidden('total_amount', 'secret', array('id' => 'total_amount')) }}
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-end">
-                                        <a href="javascript:void(0)" class="form_btn" name="set" value="Set" id="schedule_payment" onclick="setSchedulePayment();">Set</a>
+                                        <a href="javascript:void(0)" class="btn btn-primary btn-block float-end my-2" name="set" value="Set" id="schedule_payment" onclick="setSchedulePayment();">Set</a>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                                        <a href="javascript:void(0)" class="form_btn" name="schedule_payment" value="Clear All" onclick="cleareSchedulePayment();">Clear All</a>
+                                        <a href="javascript:void(0)" class="btn btn-primary btn-block float-end my-2" name="schedule_payment" value="Clear All" onclick="cleareSchedulePayment();">Clear All</a>
                                     </div>
                                     <div class="fixTableHead mt-3">
                                         <table class="table">

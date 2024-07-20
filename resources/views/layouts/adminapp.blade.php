@@ -45,6 +45,8 @@
         <!-- Choices Css -->
         <link rel="stylesheet" href="{{ asset('dist/assets/libs/choices.js/public/assets/styles/choices.min.css') }}">
 
+        <link rel="stylesheet" href="{{ asset('dist/assets/libs/gridjs/theme/mermaid.min.css') }}">
+
         {{--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" referrerpolicy="no-referrer" />  --}}
         <link rel="stylesheet" href="{{ asset('assets/iconfonts/font-awesome/css/all.min.css') }}" referrerpolicy="no-referrer" />
         <!-- Bootstrap datepicker CSS -->

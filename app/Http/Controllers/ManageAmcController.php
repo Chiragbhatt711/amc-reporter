@@ -454,7 +454,7 @@ class ManageAmcController extends Controller
         }
         else
         {
-            $startDate = Carbon::now()->format('d-m-Y');
+            $startDate = Carbon::now()->format('Y-m-d');
         }
         if(isset($request->end_date) && $request->end_date)
         {
@@ -462,14 +462,12 @@ class ManageAmcController extends Controller
         }
         else
         {
-            $endDate = Carbon::now()->addMonth()->format('d-m-Y');
+            $endDate = Carbon::now()->addMonth()->format('Y-m-d');
         }
-        $start_date = Carbon::createFromFormat('d-m-Y', $startDate)->format('Y-m-d');
-        $end_date = Carbon::createFromFormat('d-m-Y', $endDate)->format('Y-m-d');
         $admin_id = admin_id();
         $data = ManageAmc::where('manage_amcs.admin_id',$admin_id)
-            ->whereDate('manage_amcs.start_date', '>=', $start_date)
-            ->whereDate('manage_amcs.start_date', '<=', $end_date)
+            ->whereDate('manage_amcs.start_date', '>=', $startDate)
+            ->whereDate('manage_amcs.start_date', '<=', $endDate)
             ->leftjoin('manage_parties','manage_amcs.party_id','manage_parties.id')
             ->leftjoin('manage_receipts','manage_amcs.id','manage_receipts.amc_id')
             ->select('manage_amcs.id','manage_amcs.amc_no','manage_parties.party_name','manage_parties.contact_person_name','manage_parties.city','manage_parties.opening_balance','manage_amcs.total_amount',DB::raw('SUM(manage_receipts.amount) as amount_recieve'))
