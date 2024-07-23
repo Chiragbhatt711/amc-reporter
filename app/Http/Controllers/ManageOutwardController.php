@@ -162,11 +162,11 @@ class ManageOutwardController extends Controller
         {
             $inward->delete();
             OutwardProduct::where('outward_id',$id)->delete();
-            return redirect()->route('manage_inward.index')->with('success','Inward delete successfully');
+            return redirect()->route('manage_outward.index')->with('success','Outward delete successfully');
         }
         else
         {
-            return redirect()->route('manage_inward.index')->with('success','Somthing wrong');
+            return redirect()->route('manage_outward.index')->with('success','Somthing wrong');
         }
     }
 
