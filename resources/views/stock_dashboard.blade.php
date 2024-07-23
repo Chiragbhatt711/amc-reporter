@@ -70,7 +70,7 @@
                                             <td data-label="Product Code">{{ $value->product_code }}</td>
                                             <td data-label="Product Name">{{ $value->product_name }}</td>
                                             <td data-label="Minimum Qty">{{ $value->min_qty }}</td>
-                                            <td data-label="Stock Qty">{{ $value->inward_qty - $value->outward_qty }}</td>
+                                            <td data-label="Stock Qty">{{ ($value->opening_qty + $value->inward_qty) - $value->outward_qty }}</td>
                                         </tr>
                                     @endforeach
                                 @endif

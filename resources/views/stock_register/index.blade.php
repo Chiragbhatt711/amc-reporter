@@ -58,7 +58,7 @@
                                                     <td class="gridjs-td" data-column-id="Opening Stock">{{ $value->opening_qty }}</td>
                                                     <td class="gridjs-td" data-column-id="Inward Qty">{{ $value->inward_qty }}</td>
                                                     <td class="gridjs-td" data-column-id="Outward Qty">{{ $value->outward_qty }}</td>
-                                                    <td class="gridjs-td" data-column-id="Balance Qty">{{ $value->inward_qty - $value->outward_qty }}</td>
+                                                    <td class="gridjs-td" data-column-id="Balance Qty">{{ ($value->opening_qty + $value->inward_qty) - $value->outward_qty }}</td>
                                                 </tr>
                                             @endforeach
                                         @endif

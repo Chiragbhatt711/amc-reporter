@@ -14682,6 +14682,8 @@ a.icon:hover {
   -webkit-transition: background-color 0.1s linear;
   -o-transition: background-color 0.1s linear;
   border-radius: 7px;
+  align-items: center;
+  justify-content: center;
 }
 .scrollToTop i {
   padding: 12px 17px;
